@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metal Creativo | Barras Rígidas de Remolque & Estufas a Bioetanol Chile</title>
+    <meta name="description" content="Metal Creativo Chile (@metalcreativo.cl) — Barras rígidas macizas de remolque para transitar seguro y Estufas a Bioetanol de combustión limpia.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Metal Creativo Chile | Remolque Rígido & Bioetanol Ecológico">
+    <meta property="og:description" content="Remolque rígido en carretera y calefacción limpia a bioetanol. Hecho a mano en Chile. Instagram: @metalcreativo.cl">
+    <meta property="og:image" content="./public/images/fogon_bioetanol_madera.jpg">
+    <meta property="og:locale" content="es_CL">
+
+    <!-- Fonts: Inter & Syncopate -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Forja Metálica Styling -->
+    <style>
+        :root {
+            --bg: #07080b;
+            --bg-card: #11141a;
+            --brand-orange: #ff6a00;
+            --brand-gold: #ffaa00;
+            --text-steel: #e2e8f0;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg);
+            color: var(--text-steel);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* --- HERO PANTALLA COMPLETA CINEMÁTICO DE FORJA METÁLICA --- */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(0.4) contrast(1.15) saturate(1.1);
+            transform: scale(1.05);
+            transition: transform 10s ease-out;
+        }
+
+        .hero-overlay-gradient {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(7,8,11,0.85) 80%),
+                linear-gradient(to bottom, rgba(7,8,11,0.6) 0%, transparent 40%, rgba(7,8,11,0.95) 100%);
+            z-index: 1;
+        }
+
+        /* --- TÍTULOS CON GLOW NARANJA AMBIENTAL --- */
+        .section-glow-title {
+            color: #ff8c3b;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 15px rgba(255, 106, 0, 0.4), 0 0 35px rgba(255, 106, 0, 0.15);
+        }
+
+        .brand-fire-text {
+            background: linear-gradient(180deg, #ffcc00 0%, #ff6a00 60%, #e63900 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 10px rgba(255, 106, 0, 0.6));
+        }
+
+        .metal-title-gradient {
+            background: linear-gradient(180deg, #ffffff 0%, #d1d5db 40%, #9ca3af 70%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 20px rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- BOTONES METÁLICOS --- */
+        .btn-metal-primary {
+            background: linear-gradient(180deg, #3a3f47 0%, #1e2229 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-metal-primary:hover {
+            background: linear-gradient(180deg, #4a505b 0%, #282d37 100%);
+            border-color: #ff6a00;
+            box-shadow: 0 0 25px rgba(255, 106, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-metal-orange {
+            background: linear-gradient(180deg, #ff7a14 0%, #d95500 100%);
+            border: 1px solid #ff8c3b;
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(217, 85, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-metal-orange:hover {
+            background: linear-gradient(180deg, #ff8c29 0%, #e66000 100%);
+            border-color: #ffa45c;
+            box-shadow: 0 0 30px rgba(255, 106, 0, 0.7);
+            transform: translateY(-2px);
+        }
+
+        /* --- TARJETAS INDUSTRIALES Y FORMULARIO --- */
+        .metal-card {
+            background: linear-gradient(145deg, #14171d 0%, #0d0f13 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            transition: all 0.3s ease;
+        }
+        .metal-card:hover {
+            border-color: rgba(255, 106, 0, 0.5);
+            box-shadow: 0 0 30px rgba(255, 106, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        /* --- CANVAS DE BRASAS AMBIENTALES FLOTANTES EN PANTALLA COMPLETA --- */
+        #sparkCanvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .whatsapp-float-clean {
+            position: fixed;
+            bottom: 24px; right: 24px;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(34, 197, 94, 0.4);
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float-clean:hover {
+            transform: scale(1.1);
+        }
+
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body x-data="{ activeTab: 'hogar', selectedLogo: 'logo_mc_1' }" class="w-full texture-bg antialiased selection:bg-orange-500 selection:text-white relative">
+
+    <!-- CANVAS DE BRASAS & CHISPAS FLOTANTES (EFECTO FORJA REAL 60 FPS) -->
+    <canvas id="sparkCanvas"></canvas>
+
+    <!-- NAVBAR TRANSPARENTE DESDE EL BORDE SUPERIOR MÁXIMO -->
+    <nav class="absolute top-0 left-0 right-0 z-50 bg-transparent py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="relative w-8 h-8 flex items-center justify-center cursor-pointer">
+                    <canvas id="navFlameCanvas" class="w-full h-full block"></canvas>
+                </div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-black tracking-wider brand-fire-text font-heading uppercase">FORJA METÁLICA</span>
+                </div>
+            </div>
+
+            <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo%20(@metalcreativo.cl),%20quisiera%20cotizar" target="_blank" class="btn-metal-primary px-6 py-2 rounded-lg text-xs sm:text-sm font-bold no-underline">
+                <span>Contacto</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION EN PANTALLA COMPLETA DESDE EL BORDE SUPERIOR ABSOLUTO (TOP:0) -->
+    <section class="hero-section">
+        <!-- Imagen de fondo de forja real con martillo y brasas candentes -->
+        <img src="./public/images/generadas/estufa1_angulo5_quincho.jpg" alt="Forja de Metal y Acero" class="hero-bg-img">
+        <div class="hero-overlay-gradient"></div>
+
+        <div class="relative z-10 text-center max-w-3xl px-4 mx-auto space-y-6 pt-16">
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold metal-title-gradient leading-tight tracking-tight">
+                Forjamos el Futuro en Acero y Hierro
+            </h1>
+            <p class="text-gray-300 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-normal opacity-90">
+                Precisión artesanal, resistencia industrial. Creamos piezas únicas en acero cepillado, estufas decorativas a bioetanol y barras rígidas de remolque para todo Chile.
+            </p>
+            
+            <!-- DOS BOTONES DIRECTOS: UNO PARA LA ESTUFA DE BIOETANOL Y OTRO PARA LA LANZA / REMOLQUE -->
+            <div class="pt-4 flex flex-col sm:flex-row justify-center items-center gap-4">
+                <button @click="activeTab = 'hogar'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="btn-metal-orange px-6 py-3 rounded-lg font-bold text-xs sm:text-sm no-underline flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-fire text-sm"></i>
+                    <span>Estufas a Bioetanol</span>
+                </button>
+                <button @click="activeTab = 'auto'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="btn-metal-primary px-6 py-3 rounded-lg font-bold text-xs sm:text-sm no-underline flex items-center gap-2 cursor-pointer">
+                    <i class="fa-solid fa-shield-halved text-sm"></i>
+                    <span>Barra de Remolque (Lanza)</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENIDO PRINCIPAL FUSIONADO CON PRODUCTOS DEL CLIENTE Y SECCIONES GLOWING -->
+    <main id="showcase" class="py-20 bg-[#07080b] relative z-10 space-y-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+
+            <!-- SECCIÓN: NUESTROS SERVICIOS / PRODUCTOS (CON CARRUSEL DE 7 ÁNGULOS) -->
+            <section class="space-y-10">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <h2 class="text-3xl sm:text-4xl section-glow-title font-heading">Nuestros Servicios & Productos</h2>
+                    <p class="text-gray-400 text-sm">Selecciona una categoría para explorar especificaciones y galería en vivo.</p>
+                </div>
+
+                <!-- Selector de Pestañas -->
+                <div class="flex justify-center items-center gap-4">
+                    <button @click="activeTab = 'hogar'" :class="activeTab === 'hogar' ? 'btn-metal-orange' : 'btn-metal-primary'" class="px-6 py-3 rounded-lg font-bold text-sm cursor-pointer transition-all">
+                        <i class="fa-solid fa-fire mr-2"></i> Bioetanol & Fogones
+                    </button>
+                    <button @click="activeTab = 'auto'" :class="activeTab === 'auto' ? 'btn-metal-orange' : 'btn-metal-primary'" class="px-6 py-3 rounded-lg font-bold text-sm cursor-pointer transition-all">
+                        <i class="fa-solid fa-car-side mr-2"></i> Remolque Rígido Macizo
+                    </button>
+                </div>
+
+                <!-- CATEGORÍA 1: FOGÓN DE MESA & ESTUFAS A BIOETANOL (CARRUSEL AUTOMÁTICO DE 7 ÁNGULOS) -->
+                <div x-show="activeTab === 'hogar'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="metal-card rounded-xl p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="inline-block px-3 py-1 rounded bg-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider">
+                            🔥 CALEFACCIÓN ECOLÓGICA SIN DUCTOS
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Fogón de Mesa & Estufas a Bioetanol</h3>
+                        <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                            Fabricados artesanalmente con quemador de acero inoxidable AISI 304 y bandeja de madera con piedras blancas decorativas. Sin humo, sin olor y sin cañones de evacuación.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-4 py-2 text-xs sm:text-sm">
+                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
+                                <span class="block text-orange-400 text-[11px] font-bold uppercase">INSTALACIÓN</span>
+                                <span class="font-bold text-white">100% Portátil sin ductos</span>
+                            </div>
+                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
+                                <span class="block text-orange-400 text-[11px] font-bold uppercase">AUTONOMÍA</span>
+                                <span class="font-bold text-white">3.5 a 5.5 horas</span>
+                            </div>
+                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
+                                <span class="block text-orange-400 text-[11px] font-bold uppercase">QUEMADOR</span>
+                                <span class="font-bold text-white">Acero Inox AISI 304</span>
+                            </div>
+                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
+                                <span class="block text-orange-400 text-[11px] font-bold uppercase">ACABADO</span>
+                                <span class="font-bold text-orange-400">Piedras + Madera</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex flex-col sm:flex-row items-center gap-6">
+                            <div>
+                                <span class="text-xs text-gray-400 block font-bold uppercase">PRECIO DE LANZAMIENTO</span>
+                                <span class="text-3xl font-black text-white">$149.900 <span class="text-sm font-bold text-gray-400">CLP</span></span>
+                            </div>
+                            <a href="https://wa.me/56912345678?text=Hola!%20Quiero%20cotizar%20el%20Fog%C3%B3n%20de%20Mesa%20a%20Bioetanol" target="_blank" class="btn-metal-orange w-full sm:w-auto px-8 py-3.5 rounded-lg text-white font-bold text-sm flex items-center justify-center gap-3 no-underline">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                                <span>Cotizar por WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- CARRUSEL AUTOMÁTICO DE 7 ÁNGULOS EN GIRO SUAVE -->
+                    <div class="lg:col-span-6 space-y-4" x-data="{
+                        slide: 0,
+                        total: 7,
+                        images: [
+                            { src: './public/images/fogon_bioetanol_madera.jpg', tag: '🔥 Salón / Departamento Interior' },
+                            { src: './public/images/generadas/estufa1_angulo2_playa.jpg', tag: '🏖️ Terraza Exterior en la Playa' },
+                            { src: './public/images/generadas/estufa1_angulo3_terraza.jpg', tag: '🌿 Terraza Rústica' },
+                            { src: './public/images/generadas/estufa1_angulo5_quincho.jpg', tag: '🥩 Quincho / Estar Interior' },
+                            { src: './public/images/generadas/estufa2_angulo5_balcon.jpg', tag: '🏙️ Balcón Urbano Compacto' },
+                            { src: './public/images/fogon_bioetanol_acero50.jpg', tag: '⚙️ Quemador AISI 304 50cm' },
+                            { src: './public/images/estufa_bioetanol.jpg', tag: '🔥 Estufa de Piso 60cm' }
+                        ],
+                        timer: null,
+                        init() {
+                            this.timer = setInterval(() => {
+                                this.slide = (this.slide + 1) % this.total;
+                            }, 2500);
+                        },
+                        next() { this.slide = (this.slide + 1) % this.total; },
+                        prev() { this.slide = (this.slide - 1 + this.total) % this.total; }
+                    }">
+                        <div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 h-80 group">
+                            <template x-for="(item, index) in images" :key="index">
+                                <div x-show="slide === index" x-transition:enter="transition ease-out duration-700 transform opacity-0 scale-95" x-transition:leave="transition ease-in duration-500 transform opacity-0 scale-105" class="absolute inset-0 w-full h-full">
+                                    <img :src="item.src" alt="Bioetanol" class="w-full h-full object-cover">
+                                    <div class="absolute bottom-3 left-3 right-3 bg-black/85 backdrop-blur-sm text-white text-xs px-4 py-2.5 rounded border border-white/10 flex items-center justify-between">
+                                        <span class="font-bold text-white truncate" x-text="item.tag"></span>
+                                        <span class="text-[10px] text-orange-400 font-extrabold ml-2" x-text="`${index + 1} / ${total}`"></span>
+                                    </div>
+                                </div>
+                            </template>
+
+                            <button @click="prev()" class="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/70 hover:bg-orange-600 text-white flex items-center justify-center transition-colors border border-white/20 z-20">
+                                <i class="fa-solid fa-chevron-left text-xs"></i>
+                            </button>
+                            <button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/70 hover:bg-orange-600 text-white flex items-center justify-center transition-colors border border-white/20 z-20">
+                                <i class="fa-solid fa-chevron-right text-xs"></i>
+                            </button>
+                        </div>
+
+                        <!-- Miniaturas de navegación directa -->
+                        <div class="grid grid-cols-7 gap-1.5 pt-1">
+                            <template x-for="(item, index) in images" :key="index">
+                                <button @click="slide = index" :class="slide === index ? 'border-orange-500 ring-1 ring-orange-500 opacity-100' : 'border-white/10 opacity-50 hover:opacity-100'" class="h-12 rounded overflow-hidden border transition-all">
+                                    <img :src="item.src" alt="thumb" class="w-full h-full object-cover">
+                                </button>
+                            </template>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- CATEGORÍA 2: REMOLQUE RÍGIDO (BARRA MACIZA FORJADA) -->
+                <div x-show="activeTab === 'auto'" x-cloak x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="metal-card rounded-xl p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="inline-block px-3 py-1 rounded bg-sky-500/20 text-sky-400 text-xs font-bold uppercase tracking-wider">
+                            🛡️ NORMATIVA VIAL DECRETO 55/2025 MTT
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Barra Rígida de Remolque con Ojal Forjado</h3>
+                        <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                            Barra maciza de acero al carbono con ojales forjados y soldadura de alta penetración TIG/MIG. Conexión rígida segura entre vehículos en carretera.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-4 py-2 text-xs sm:text-sm">
+                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
+                                <span class="block text-sky-400 text-[11px] font-bold uppercase">ESTRUCTURA</span>
+                                <span class="font-bold text-white">Tubo Acero Macizo</span>
+                            </div>
+                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
+                                <span class="block text-sky-400 text-[11px] font-bold uppercase">CAPACIDAD</span>
+                                <span class="font-bold text-white">2.500 a 3.500 kg</span>
+                            </div>
+                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
+                                <span class="block text-sky-400 text-[11px] font-bold uppercase">EXTREMOS</span>
+                                <span class="font-bold text-white">Ojal Forjado + Grillete</span>
+                            </div>
+                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
+                                <span class="block text-sky-400 text-[11px] font-bold uppercase">NORMATIVA</span>
+                                <span class="font-bold text-yellow-400">Decreto 55/2025 MTT</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex flex-col sm:flex-row items-center gap-6">
+                            <div>
+                                <span class="text-xs text-gray-400 block font-bold uppercase">PRECIO DE OFERTA</span>
+                                <span class="text-3xl font-black text-white">$89.900 <span class="text-sm font-bold text-gray-400">CLP</span></span>
+                            </div>
+                            <a href="https://wa.me/56912345678?text=Hola!%20Quiero%20comprar%20la%20Barra%20R%C3%ADgida%20de%20Remolque" target="_blank" class="btn-metal-orange w-full sm:w-auto px-8 py-3.5 rounded-lg text-white font-bold text-sm flex items-center justify-center gap-3 no-underline">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                                <span>Pedir por WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6 space-y-4">
+                        <div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 h-80">
+                            <img src="./public/images/barra_remolque_uso.jpg" alt="Remolque Rígido" class="w-full h-full object-cover">
+                            <div class="absolute bottom-3 left-3 bg-black/90 text-white text-xs px-3.5 py-2 rounded border border-white/10 font-bold">
+                                📌 Remolque directo entre enganche trasero y frontal
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECCIÓN: MATERIALES PREMIUM -->
+            <section class="space-y-10">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <h2 class="text-3xl sm:text-4xl section-glow-title font-heading">Materiales Premium</h2>
+                    <p class="text-gray-400 text-sm">Seleccionamos aleaciones de alta resistencia para garantizar durabilidad de por vida.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="metal-card p-6 rounded-xl space-y-3">
+                        <div class="w-12 h-12 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-cube"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Acero Inoxidable AISI 304</h3>
+                        <p class="text-gray-400 text-xs leading-relaxed">Resistente a la corrosión y altas temperaturas de combustión directa.</p>
+                    </div>
+
+                    <div class="metal-card p-6 rounded-xl space-y-3">
+                        <div class="w-12 h-12 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-hammer"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Hierro & Acero Macizo Forjado</h3>
+                        <p class="text-gray-400 text-xs leading-relaxed">Barras macizas conformadas a fuego directo en la fragua artesanal.</p>
+                    </div>
+
+                    <div class="metal-card p-6 rounded-xl space-y-3">
+                        <div class="w-12 h-12 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-tree"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white">Madera Noble & Piedra Volcánica</h3>
+                        <p class="text-gray-400 text-xs leading-relaxed">Bandejas de madera tratada para alta temperatura y piedras refractarias.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: NUESTRO PROCESO DE FORJA -->
+            <section class="space-y-10">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <h2 class="text-3xl sm:text-4xl section-glow-title font-heading">Nuestro Proceso</h2>
+                    <p class="text-gray-400 text-sm">Desde el plano técnico hasta el tratamiento térmico final.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="metal-card p-6 rounded-xl text-center space-y-3">
+                        <span class="inline-flex w-12 h-12 rounded-full bg-gradient-to-b from-orange-600 to-orange-800 text-white font-black text-lg items-center justify-center">1</span>
+                        <h4 class="text-white font-bold text-base">Diseño & Corte</h4>
+                        <p class="text-gray-400 text-xs">Planos CAD y corte de precisión en plasma/oxicorte.</p>
+                    </div>
+                    <div class="metal-card p-6 rounded-xl text-center space-y-3">
+                        <span class="inline-flex w-12 h-12 rounded-full bg-gradient-to-b from-orange-600 to-orange-800 text-white font-black text-lg items-center justify-center">2</span>
+                        <h4 class="text-white font-bold text-base">Forjado a Fuego</h4>
+                        <p class="text-gray-400 text-xs">Conformado de ojales y curvados en franja candente.</p>
+                    </div>
+                    <div class="metal-card p-6 rounded-xl text-center space-y-3">
+                        <span class="inline-flex w-12 h-12 rounded-full bg-gradient-to-b from-orange-600 to-orange-800 text-white font-black text-lg items-center justify-center">3</span>
+                        <h4 class="text-white font-bold text-base">Soldadura TIG/MIG</h4>
+                        <p class="text-gray-400 text-xs">Cordones continuos de alta resistencia estructural.</p>
+                    </div>
+                    <div class="metal-card p-6 rounded-xl text-center space-y-3">
+                        <span class="inline-flex w-12 h-12 rounded-full bg-gradient-to-b from-orange-600 to-orange-800 text-white font-black text-lg items-center justify-center">4</span>
+                        <h4 class="text-white font-bold text-base">Acabado Satinado</h4>
+                        <p class="text-gray-400 text-xs">Pintura electrostática y sellado térmico.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: GALERÍA DE TRABAJO -->
+            <section class="space-y-10">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <h2 class="text-3xl sm:text-4xl section-glow-title font-heading">Galería de Trabajo</h2>
+                    <p class="text-gray-400 text-sm">Imágenes reales de piezas forjadas en nuestro taller en Chile.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="rounded-xl overflow-hidden border border-white/10 metal-card group">
+                        <img src="./public/images/fogon_bioetanol_madera.jpg" alt="Trabajo 1" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="rounded-xl overflow-hidden border border-white/10 metal-card group">
+                        <img src="./public/images/barra_remolque_uso.jpg" alt="Trabajo 2" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="rounded-xl overflow-hidden border border-white/10 metal-card group">
+                        <img src="./public/images/generadas/estufa1_angulo2_playa.jpg" alt="Trabajo 3" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: LOGOS DE MARCA PARA CLIENTE -->
+            <section class="space-y-8 bg-[#0b0e14] p-8 rounded-2xl border border-white/10">
+                <div class="text-center max-w-2xl mx-auto">
+                    <span class="text-orange-400 font-bold text-xs uppercase tracking-widest">IDENTIDAD DE MARCA OFICIAL</span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Opciones de Logo para @metalcreativo.cl</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div @click="selectedLogo = 'logo_mc_1'" :class="selectedLogo === 'logo_mc_1' ? 'border-orange-500 ring-2 ring-orange-500/50' : 'border-white/10'" class="metal-card p-6 rounded-xl text-center space-y-4 cursor-pointer">
+                        <img src="./public/images/logo_mc_1.jpg" alt="Logo 1" class="w-36 h-36 mx-auto rounded-lg object-cover border border-white/10">
+                        <h4 class="font-bold text-white text-sm">Opción 1: Monograma MC & Llama</h4>
+                    </div>
+
+                    <div @click="selectedLogo = 'logo_mc_2'" :class="selectedLogo === 'logo_mc_2' ? 'border-orange-500 ring-2 ring-orange-500/50' : 'border-white/10'" class="metal-card p-6 rounded-xl text-center space-y-4 cursor-pointer">
+                        <img src="./public/images/logo_mc_2.jpg" alt="Logo 2" class="w-36 h-36 mx-auto rounded-lg object-cover border border-white/10">
+                        <h4 class="font-bold text-white text-sm">Opción 2: Perfil Metálico & Llama Corp</h4>
+                    </div>
+
+                    <div @click="selectedLogo = 'logo_mc_3'" :class="selectedLogo === 'logo_mc_3' ? 'border-orange-500 ring-2 ring-orange-500/50' : 'border-white/10'" class="metal-card p-6 rounded-xl text-center space-y-4 cursor-pointer">
+                        <div class="relative w-36 h-36 mx-auto rounded-lg overflow-hidden border border-white/10 bg-black flex items-center justify-center">
+                            <canvas id="flameLogoCanvas" class="w-full h-full block"></canvas>
+                        </div>
+                        <h4 class="font-bold text-white text-sm">Opción 3: Llama Vectorial Chispeante (Vivo 60 FPS)</h4>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: HABLEMOS DE TU PROYECTO (FORMULARIO EXACTO DE LA IMAGEN) -->
+            <section id="contacto" class="max-w-3xl mx-auto space-y-8 text-center pt-8">
+                <div class="space-y-2">
+                    <h2 class="text-3xl sm:text-4xl section-glow-title font-heading">Hablemos de tu Proyecto</h2>
+                    <p class="text-gray-400 text-sm">Cuéntanos tu idea y te entregamos una cotización sin compromiso.</p>
+                </div>
+
+                <div class="metal-card p-8 rounded-2xl text-left border border-white/10 shadow-2xl space-y-6">
+                    <form @submit.prevent="alert('Gracias por comunicarte con Metal Creativo. Te responderemos a la brevedad por correo o WhatsApp.')" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Nombre</label>
+                                <input type="text" required placeholder="Tu nombre" class="w-full px-4 py-3 rounded-lg bg-[#07080b] border border-white/10 text-white focus:outline-none focus:border-orange-500 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Correo electrónico</label>
+                                <input type="email" required placeholder="tu@correo.com" class="w-full px-4 py-3 rounded-lg bg-[#07080b] border border-white/10 text-white focus:outline-none focus:border-orange-500 text-sm">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Mensaje</label>
+                            <textarea rows="4" required placeholder="Describe las medidas o tipo de producto que necesitas..." class="w-full px-4 py-3 rounded-lg bg-[#07080b] border border-white/10 text-white focus:outline-none focus:border-orange-500 text-sm resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-metal-primary w-full py-4 rounded-lg font-bold text-white text-sm cursor-pointer uppercase tracking-wider">
+                            Enviar Consulta
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER CON RESPLANDOR DE BRASAS AL PIE -->
+    <footer class="py-12 border-t border-white/10 text-gray-500 text-xs bg-[#050608] relative z-10 text-center">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
+            <p class="text-gray-400">&copy; 2026 Metal Creativo Chile (@metalcreativo.cl). Todos los derechos reservados.</p>
+            <p class="text-gray-600">Fabricación artesanal en acero macizo y estufas a bioetanol | Despacho a todo Chile.</p>
+        </div>
+    </footer>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="https://wa.me/56912345678?text=Hola!%20Vengo%20de%20la%20p%C3%A1gina%20web%20de%20Metal%20Creativo" target="_blank" class="whatsapp-float-clean w-14 h-14 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center text-2xl no-underline border border-emerald-400/40">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- SCRIPTS EN VIVO: SISTEMA DE BRASAS AMBIENTALES FLOTANTES & FLAMA VECTORIAL 60 FPS -->
+    <script>
+        // --- 1. MOTOR DE BRASAS Y CHISPAS EN PANTALLA COMPLETA ---
+        const sparkCanvas = document.getElementById('sparkCanvas');
+        const sparkCtx = sparkCanvas ? sparkCanvas.getContext('2d') : null;
+        let particles = [];
+        let ambientEmbers = [];
+
+        function resizeSparkCanvas() {
+            if (!sparkCanvas) return;
+            sparkCanvas.width = window.innerWidth;
+            sparkCanvas.height = window.innerHeight;
+        }
+
+        if (sparkCanvas) {
+            resizeSparkCanvas();
+            window.addEventListener('resize', resizeSparkCanvas);
+
+            // Generación continua de brasas que suben orgánicamente desde abajo
+            for (let i = 0; i < 40; i++) {
+                ambientEmbers.push({
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight,
+                    vx: (Math.random() - 0.5) * 0.6,
+                    vy: -(Math.random() * 1.2 + 0.3),
+                    size: Math.random() * 2 + 0.8,
+                    alpha: Math.random() * 0.7 + 0.2,
+                    color: ['#ff6a00', '#ffaa00', '#ff3300', '#ffd166'][Math.floor(Math.random() * 4)]
+                });
+            }
+
+            // Chispas al mover el mouse
+            window.addEventListener('mousemove', (e) => {
+                for (let i = 0; i < 2; i++) {
+                    particles.push({
+                        x: e.clientX,
+                        y: e.clientY,
+                        vx: (Math.random() - 0.5) * 3,
+                        vy: (Math.random() - 0.5) * 3 - 1,
+                        life: 1.0,
+                        decay: 0.03,
+                        size: Math.random() * 2.5 + 1,
+                        color: Math.random() > 0.4 ? '#ff6a00' : '#ffaa00'
+                    });
+                }
+            });
+
+            // Chispas al hacer clic
+            window.addEventListener('click', (e) => {
+                for (let i = 0; i < 20; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 5 + 1.5;
+                    particles.push({
+                        x: e.clientX,
+                        y: e.clientY,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed - 1,
+                        life: 1.0,
+                        decay: 0.02,
+                        size: Math.random() * 3 + 1,
+                        color: Math.random() > 0.5 ? '#ffffff' : '#ff6a00'
+                    });
+                }
+            });
+        }
+
+        function animateSparks() {
+            if (!sparkCtx || !sparkCanvas) return;
+            sparkCtx.clearRect(0, 0, sparkCanvas.width, sparkCanvas.height);
+
+            // Render Brasas que flotan verticalmente
+            for (let i = 0; i < ambientEmbers.length; i++) {
+                const e = ambientEmbers[i];
+                e.x += e.vx;
+                e.y += e.vy;
+                if (e.y < -10) {
+                    e.y = sparkCanvas.height + 10;
+                    e.x = Math.random() * sparkCanvas.width;
+                }
+                sparkCtx.save();
+                sparkCtx.globalAlpha = e.alpha;
+                sparkCtx.fillStyle = e.color;
+                sparkCtx.shadowColor = e.color;
+                sparkCtx.shadowBlur = 6;
+                sparkCtx.beginPath();
+                sparkCtx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
+                sparkCtx.fill();
+                sparkCtx.restore();
+            }
+
+            // Render Chispas interactivas
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.08;
+                p.life -= p.decay;
+
+                if (p.life <= 0) {
+                    particles.splice(i, 1);
+                    continue;
+                }
+
+                sparkCtx.save();
+                sparkCtx.globalAlpha = Math.max(0, p.life);
+                sparkCtx.fillStyle = p.color;
+                sparkCtx.shadowColor = p.color;
+                sparkCtx.shadowBlur = 8;
+                sparkCtx.beginPath();
+                sparkCtx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+                sparkCtx.fill();
+                sparkCtx.restore();
+            }
+
+            requestAnimationFrame(animateSparks);
+        }
+        if (sparkCanvas) animateSparks();
+
+
+        // --- 2. MOTOR DEL LOGO VIVO CON FLAMA 60 FPS (NAVBAR Y CARD 3) ---
+        const flameCanvas = document.getElementById('flameLogoCanvas');
+        const flameCtx = flameCanvas ? flameCanvas.getContext('2d') : null;
+
+        const navCanvas = document.getElementById('navFlameCanvas');
+        const navCtx = navCanvas ? navCanvas.getContext('2d') : null;
+
+        function drawFlameShape(targetCtx, cx, cy, scale, t) {
+            targetCtx.save();
+            targetCtx.translate(cx, cy);
+            targetCtx.scale(scale, scale);
+
+            const f1 = Math.sin(t * 0.009) * 3;
+            const f2 = Math.cos(t * 0.013) * 4;
+
+            // Capa 1: Rojo Fuego
+            targetCtx.fillStyle = '#EF4444';
+            targetCtx.shadowColor = 'rgba(249, 115, 22, 0.8)';
+            targetCtx.shadowBlur = 10;
+            targetCtx.beginPath();
+            targetCtx.moveTo(0, 30);
+            targetCtx.bezierCurveTo(-25, 30, -30 + f1, 5, -14, -18);
+            targetCtx.bezierCurveTo(-24, -4, -18, -25, 0 + f2, -40);
+            targetCtx.bezierCurveTo(18, -25, 24, -4, 14, -18);
+            targetCtx.bezierCurveTo(30 - f1, 5, 25, 30, 0, 30);
+            targetCtx.closePath();
+            targetCtx.fill();
+
+            // Capa 2: Naranja
+            targetCtx.shadowBlur = 0;
+            targetCtx.fillStyle = '#F97316';
+            targetCtx.beginPath();
+            targetCtx.moveTo(0, 24);
+            targetCtx.bezierCurveTo(-18, 24, -22 - f2, 6, -10, -12);
+            targetCtx.bezierCurveTo(-18, -1, -12, -18, 0 - f1, -30);
+            targetCtx.bezierCurveTo(12, -18, 18, -1, 10, -12);
+            targetCtx.bezierCurveTo(22 + f2, 6, 18, 24, 0, 24);
+            targetCtx.closePath();
+            targetCtx.fill();
+
+            // Capa 3: Amarillo Incandescente
+            targetCtx.fillStyle = '#FFD166';
+            targetCtx.beginPath();
+            targetCtx.moveTo(0, 18);
+            targetCtx.bezierCurveTo(-11, 18, -13, 4, -5, -7);
+            targetCtx.bezierCurveTo(-11, 0, -7, -11, 0 + f1, -20);
+            targetCtx.bezierCurveTo(7, -11, 11, 0, 5, -7);
+            targetCtx.bezierCurveTo(17, 4, 14, 18, 0, 18);
+            targetCtx.closePath();
+            targetCtx.fill();
+
+            // Capa 4: Blanco Puro
+            targetCtx.fillStyle = '#FFFFFF';
+            targetCtx.beginPath();
+            targetCtx.moveTo(0, 12);
+            targetCtx.bezierCurveTo(-5, 12, -6, 3, 0, -10);
+            targetCtx.bezierCurveTo(6, 3, 5, 12, 0, 12);
+            targetCtx.closePath();
+            targetCtx.fill();
+
+            targetCtx.restore();
+        }
+
+        function animateFlameLogo(timestamp) {
+            const t = timestamp || 0;
+
+            if (navCtx && navCanvas) {
+                navCtx.clearRect(0, 0, navCanvas.width, navCanvas.height);
+                drawFlameShape(navCtx, navCanvas.width / 2, navCanvas.height / 2 + 1, 0.45, t);
+            }
+
+            if (flameCtx && flameCanvas) {
+                flameCtx.clearRect(0, 0, flameCanvas.width, flameCanvas.height);
+                drawFlameShape(flameCtx, flameCanvas.width / 2, flameCanvas.height / 2 + 2, 1.1, t);
+            }
+
+            requestAnimationFrame(animateFlameLogo);
+        }
+        requestAnimationFrame(animateFlameLogo);
+    </script>
+</body>
+</html>

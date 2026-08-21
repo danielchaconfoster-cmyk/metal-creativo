@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metal Creativo | Hub de Contexto & Assets de Marketing para IA (Canva / Claude)</title>
+    <meta name="robots" content="noindex, nofollow"> <!-- Página oculta para buscadores pero accesible vía enlace directo -->
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #0A0E17;
+            --ember-orange: #F97316;
+            --ember-red: #EF4444;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: #F3F4F6;
+        }
+        h1, h2, h3, .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body x-data="marketingHub()" x-init="init()" class="antialiased selection:bg-orange-500 selection:text-white pb-20">
+
+    <!-- HEADER / HERO HUB -->
+    <header class="border-b border-gray-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center font-black text-white shadow-lg shadow-orange-500/20">
+                    MC
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-white flex items-center gap-2">
+                        Metal Creativo Chile <span class="text-xs bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded-full border border-orange-500/30">Hub de Marketing & IA</span>
+                    </h1>
+                    <p class="text-xs text-gray-400">@metalcreativo.cl • Repositorio Oficial de Assets & Prompt Context</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3 w-full md:w-auto">
+                <button @click="copyAllContext()" class="w-full md:w-auto bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center justify-center gap-2 transition shadow-lg shadow-orange-500/25">
+                    <i class="fa-solid fa-copy"></i>
+                    <span x-text="copiedAll ? '¡Contexto Copiado!' : 'Copiar Contexto Completo para Claude / Canva'"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-12">
+
+        <!-- INTRO & AVISO PARA IA -->
+        <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-orange-950/40 border border-orange-500/30 rounded-2xl p-6 shadow-2xl">
+            <div class="flex items-start gap-4">
+                <div class="p-3 bg-orange-500/10 rounded-xl border border-orange-500/20 text-orange-400 shrink-0">
+                    <i class="fa-solid fa-robot text-2xl"></i>
+                </div>
+                <div class="space-y-2">
+                    <h2 class="text-lg font-bold text-white">¿Cómo usar esta página con Claude Code, Canva o IA de Marketing?</h2>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Esta página sirve como <strong>fuente centralizada de conocimiento y banco de imágenes públicas</strong> para Metal Creativo Chile. Puedes copiar la URL de esta página o copiar el bloque de prompt inferior y pegarlo en Claude, ChatGPT, Canva Magic Studio o cualquier herramienta publicitaria. Todas las imágenes están alojadas en enlaces HTTP directos en Vercel/GitHub.
+                    </p>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="text-xs bg-slate-800 text-gray-300 px-3 py-1 rounded-lg border border-gray-700"><i class="fa-solid fa-link text-orange-400 mr-1"></i> URLs de imágenes públicas directas</span>
+                        <span class="text-xs bg-slate-800 text-gray-300 px-3 py-1 rounded-lg border border-gray-700"><i class="fa-solid fa-gavel text-orange-400 mr-1"></i> Decreto Supremo N° 55/2025 Ley de Tránsito</span>
+                        <span class="text-xs bg-slate-800 text-gray-300 px-3 py-1 rounded-lg border border-gray-700"><i class="fa-solid fa-bullhorn text-orange-400 mr-1"></i> 5 Ángulos de Venta Probados</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 1: PRODUCTO BARRA RÍGIDA DE REMOLQUE -->
+        <section class="space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-800 pb-4 gap-2">
+                <div>
+                    <span class="text-xs font-bold text-orange-400 tracking-wider uppercase">Línea Automotriz & Seguridad</span>
+                    <h2 class="text-2xl font-black text-white">🚗 Barra Rígida de Remolque con Ojal Forjado</h2>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-gray-400 block">Precio Oferta Directo</span>
+                    <span class="text-2xl font-black text-orange-400">$89.900 CLP</span>
+                </div>
+            </div>
+
+            <!-- DOSSIER TÉCNICO COMPLETO DE BARRA -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-900/80 border border-gray-800 rounded-xl p-5 space-y-3">
+                    <h3 class="font-bold text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-orange-400"></i> Ficha Técnica & Especificaciones
+                    </h3>
+                    <ul class="text-xs text-gray-300 space-y-2 list-disc list-inside">
+                        <li><strong>Estructura</strong>: Tubo de acero al carbono de alta resistencia (diámetro 45-50 mm, espesor de pared 3.5-4.0 mm).</li>
+                        <li><strong>Terminales</strong>: Ojales forjados soldados de penetración profunda para conexión mediante grilletes metálicos pasantes.</li>
+                        <li><strong>Capacidad de Arrastre</strong>: 2.500 kg a 3.500 kg de arrastre directo en línea recta.</li>
+                        <li><strong>Longitud Extendida</strong>: 1.60 metros a 1.80 metros (distancia óptima de seguridad vial).</li>
+                        <li><strong>Acabado</strong>: Pintura anticorrosiva de alta durabilidad (Rojo Vial / Acero Industrial).</li>
+                        <li><strong>Accesorios incluidos</strong>: Bandera roja de seguridad reglamentaria.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-900/80 border border-gray-800 rounded-xl p-5 space-y-3">
+                    <h3 class="font-bold text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-scale-balanced text-orange-400"></i> Marco Legal Chile (Decreto Sup. N° 55/2025 MTT)
+                    </h3>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Entra en vigencia el <strong>7 de agosto de 2026</strong>. Prohíbe estrictamente el uso de cuerdas, piolas, tirantes de género, cables o cadenas para remolcar vehículos particulares. Exige obligatoriamente un acople metálico rígido entre vehículos. Sanción: Infracción grave de tránsito y retención del vehículo.
+                    </p>
+                    <div class="bg-orange-500/10 border border-orange-500/20 rounded-lg p-3 text-xs text-orange-300">
+                        <strong>Ángulo Ganador de Anuncios:</strong> "No arriesgues multas ni choques por usar cadenas. Cumple el Decreto N° 55/2025 con la Barra Rígida Maciza de Metal Creativo."
+                    </div>
+                </div>
+            </div>
+
+            <!-- GALERÍA DE IMÁGENES BARRA -->
+            <div>
+                <h3 class="font-bold text-white mb-3 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-images text-orange-400"></i> Imágenes Disponibles para Flyers / Canva (Haz clic para copiar URL directa)
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <template x-for="img in barraImages" :key="img.url">
+                        <div class="bg-slate-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-orange-500/50 transition">
+                            <div class="aspect-square bg-slate-950 relative overflow-hidden">
+                                <img :src="img.url" :alt="img.name" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                <div class="absolute top-2 right-2 bg-slate-950/80 px-2 py-1 rounded text-[10px] font-mono text-gray-300">
+                                    <span x-text="img.label"></span>
+                                </div>
+                            </div>
+                            <div class="p-3 space-y-2">
+                                <p class="text-xs font-bold text-white truncate" x-text="img.title"></p>
+                                <p class="text-[11px] text-gray-400 line-clamp-2" x-text="img.desc"></p>
+                                <button @click="copyUrl(img.url)" class="w-full bg-slate-800 hover:bg-orange-500 hover:text-white text-gray-300 text-xs font-semibold py-1.5 px-3 rounded-lg border border-gray-700 transition flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-link text-[10px]"></i>
+                                    <span>Copiar Enlace Directo</span>
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: PRODUCTO FOGONES Y ESTUFAS A BIOETANOL -->
+        <section class="space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-800 pb-4 gap-2">
+                <div>
+                    <span class="text-xs font-bold text-orange-400 tracking-wider uppercase">Línea Hogar & Terrazas</span>
+                    <h2 class="text-2xl font-black text-white">🔥 Estufas & Fogones a Bioetanol Ecológico</h2>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-gray-400 block">Precio Promocional</span>
+                    <span class="text-2xl font-black text-orange-400">$149.900 CLP</span>
+                </div>
+            </div>
+
+            <!-- DOSSIER TÉCNICO COMPLETO DE BIOETANOL -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-900/80 border border-gray-800 rounded-xl p-5 space-y-3">
+                    <h3 class="font-bold text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-fire-flame-curved text-orange-400"></i> Ficha Técnica & Ventajas
+                    </h3>
+                    <ul class="text-xs text-gray-300 space-y-2 list-disc list-inside">
+                        <li><strong>Combustible</strong>: Bioetanol / Alcohol desnaturalizado 96° (combustión 100% limpia).</li>
+                        <li><strong>Sin Obras</strong>: NO requiere ductos, ni chimenea, ni cañón de ventilación, ni instalaciones.</li>
+                        <li><strong>Estructura</strong>: Acero al carbono con pintura ignífuga resistente a 600°C + cristal templado de seguridad 6mm.</li>
+                        <li><strong>Quemador Premium</strong>: Acero inoxidable AISI 304 quirúrgico anti-vuelco con fibra cerámica retenedora.</li>
+                        <li><strong>Autonomía</strong>: 3.5 a 5.5 horas continuas por carga (1.5 a 2.5 litros de capacidad).</li>
+                        <li><strong>Potencia Térmica</strong>: 2.5 kW a 3.5 kW (cobertura ambiente 25 m² a 45 m²).</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-900/80 border border-gray-800 rounded-xl p-5 space-y-3">
+                    <h3 class="font-bold text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-couch text-orange-400"></i> Modelos Disponibles & Usos
+                    </h3>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        1. <strong>Fogón de Sobremesa Decorativo</strong>: Bandeja rústica de madera noble tratada con cuarzo blanco decorativo.<br>
+                        2. <strong>Estufa de Piso/Terraza (50-60cm)</strong>: Diseño arquitectónico moderno para balcones, quinchos o livings.
+                    </p>
+                    <div class="bg-orange-500/10 border border-orange-500/20 rounded-lg p-3 text-xs text-orange-300">
+                        <strong>Ángulo Ganador de Anuncios:</strong> "Fuego real en tu departamento o terraza sin humo ni cenizas. Enciende tu estufa a bioetanol en 2 minutos y disfruta la calidez."
+                    </div>
+                </div>
+            </div>
+
+            <!-- GALERÍA DE IMÁGENES BIOETANOL -->
+            <div>
+                <h3 class="font-bold text-white mb-3 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-images text-orange-400"></i> Imágenes Disponibles para Flyers / Canva (Haz clic para copiar URL directa)
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <template x-for="img in bioetanolImages" :key="img.url">
+                        <div class="bg-slate-900 border border-gray-800 rounded-xl overflow-hidden group hover:border-orange-500/50 transition">
+                            <div class="aspect-square bg-slate-950 relative overflow-hidden">
+                                <img :src="img.url" :alt="img.name" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                <div class="absolute top-2 right-2 bg-slate-950/80 px-2 py-1 rounded text-[10px] font-mono text-gray-300">
+                                    <span x-text="img.label"></span>
+                                </div>
+                            </div>
+                            <div class="p-3 space-y-2">
+                                <p class="text-xs font-bold text-white truncate" x-text="img.title"></p>
+                                <p class="text-[11px] text-gray-400 line-clamp-2" x-text="img.desc"></p>
+                                <button @click="copyUrl(img.url)" class="w-full bg-slate-800 hover:bg-orange-500 hover:text-white text-gray-300 text-xs font-semibold py-1.5 px-3 rounded-lg border border-gray-700 transition flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-link text-[10px]"></i>
+                                    <span>Copiar Enlace Directo</span>
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: LOGOS Y RECURSOS DE MARCA -->
+        <section class="space-y-6">
+            <div class="border-b border-gray-800 pb-4">
+                <span class="text-xs font-bold text-orange-400 tracking-wider uppercase">Identidad de Marca</span>
+                <h2 class="text-2xl font-black text-white">🎨 Logos & Gráficos de Metal Creativo</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                <template x-for="logo in brandLogos" :key="logo.url">
+                    <div class="bg-slate-900 border border-gray-800 rounded-xl p-3 text-center space-y-2">
+                        <div class="h-20 bg-slate-950 rounded-lg flex items-center justify-center p-2">
+                            <img :src="logo.url" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <p class="text-[11px] font-bold text-gray-300 truncate" x-text="logo.title"></p>
+                        <button @click="copyUrl(logo.url)" class="w-full bg-slate-800 hover:bg-orange-500 hover:text-white text-gray-300 text-[10px] font-semibold py-1 px-2 rounded border border-gray-700 transition">
+                            Copiar URL
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </section>
+
+        <!-- BLOQUE DE TEXTO RAW / JSON PARA COPIAR A CLAUDE -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-4">
+                <div>
+                    <h2 class="text-xl font-bold text-white">📋 Bloque de Prompt Completo (Texto Copiable)</h2>
+                    <p class="text-xs text-gray-400">Copia esto y pégalo directamente en Claude Code o Canva Magic Studio</p>
+                </div>
+                <button @click="copyAllContext()" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold px-4 py-2 rounded-lg border border-gray-700">
+                    <i class="fa-solid fa-copy mr-1"></i> Copiar Texto
+                </button>
+            </div>
+
+            <textarea readonly x-text="generateFullPromptText()" class="w-full h-80 bg-slate-950 border border-gray-800 rounded-xl p-4 font-mono text-xs text-emerald-400 focus:outline-none focus:border-orange-500 select-all"></textarea>
+        </section>
+
+    </main>
+
+    <!-- TOAST NOTIFICATION -->
+    <div x-show="toast.show" x-transition x-cloak class="fixed bottom-6 right-6 bg-orange-500 text-white px-5 py-3 rounded-xl font-bold text-sm shadow-2xl z-50 flex items-center gap-2">
+        <i class="fa-solid fa-check-circle text-lg"></i>
+        <span x-text="toast.message"></span>
+    </div>
+
+    <script>
+        function marketingHub() {
+            return {
+                origin: '',
+                copiedAll: false,
+                toast: { show: false, message: '' },
+                barraImages: [],
+                bioetanolImages: [],
+                brandLogos: [],
+                
+                init() {
+                    this.origin = window.location.origin;
+                    
+                    this.barraImages = [
+                        { url: `${this.origin}/public/images/barra_remolque_real.jpg`, title: 'Barra Real Instalada', desc: 'Demostración de enganche entre vehículos con grillete', label: 'Uso Real', name: 'barra_remolque_real.jpg' },
+                        { url: `${this.origin}/public/images/barra_remolque.jpg`, title: 'Barra Maciza Vista Completa', desc: 'Estructura de tubo de acero al carbono con ojales forjados', label: 'Producto', name: 'barra_remolque.jpg' },
+                        { url: `${this.origin}/public/images/barra_remolque_uso.jpg`, title: 'Barra en Arrastre Vial', desc: 'Fotografía en carretera demostrando solidez', label: 'Carretera', name: 'barra_remolque_uso.jpg' },
+                        { url: `${this.origin}/public/images/ad_barra.jpg`, title: 'Banner Publicitario Decreto 55/2025', desc: 'Gráfica con llamado a evitar multas', label: 'Banner Ad', name: 'ad_barra.jpg' },
+                        { url: `${this.origin}/public/images/ref_remolque_1.jpg`, title: 'Detalle de Ojal Forjado #1', desc: 'Enfoque en soldadura y resistencia de ojal', label: 'Detalle', name: 'ref_remolque_1.jpg' },
+                        { url: `${this.origin}/public/images/ref_remolque_2.jpg`, title: 'Detalle de Ojal Forjado #2', desc: 'Terminal metálico estructural', label: 'Detalle', name: 'ref_remolque_2.jpg' },
+                        { url: `${this.origin}/public/images/ref_remolque_3.jpg`, title: 'Detalle de Ojal Forjado #3', desc: 'Acoplamiento con grillete metálico pasante', label: 'Detalle', name: 'ref_remolque_3.jpg' }
+                    ];
+
+                    this.bioetanolImages = [
+                        { url: `${this.origin}/public/images/fogon_bioetanol_madera.jpg`, title: 'Fogón Sobremesa Madera Noble', desc: 'Bandeja rústica de madera con cuarzo blanco decorativo', label: 'Sobremesa', name: 'fogon_bioetanol_madera.jpg' },
+                        { url: `${this.origin}/public/images/fogon_bioetanol_acero50.jpg`, title: 'Estufa de Piso 50-60cm', desc: 'Estructura ignífuga negra con cristales templados 6mm', label: 'Estufa Piso', name: 'fogon_bioetanol_acero50.jpg' },
+                        { url: `${this.origin}/public/images/estufa_bioetanol.jpg`, title: 'Estufa Bioetanol en Ambiente', desc: 'Fotografía de ambiente acogedor en terraza', label: 'Ambiente', name: 'estufa_bioetanol.jpg' },
+                        { url: `${this.origin}/public/images/ad_fogon.jpg`, title: 'Banner Publicitario Fuego Ecológico', desc: 'Gráfica publicitaria para balcón / departamento', label: 'Banner Ad', name: 'ad_fogon.jpg' },
+                        { url: `${this.origin}/public/images/fogon_etanhol_50.jpg`, title: 'Quemador Inox AISI 304', desc: 'Vista en detalle del quemador quirúrgico con fibra cerámica', label: 'Quemador', name: 'fogon_etanhol_50.jpg' }
+                    ];
+
+                    this.brandLogos = [
+                        { url: `${this.origin}/public/images/logo_mc_1.jpg`, title: 'Logo Principal MC' },
+                        { url: `${this.origin}/public/images/logo_mc_2.jpg`, title: 'Logo MC Variante Dark' },
+                        { url: `${this.origin}/public/images/logo_mc_3.jpg`, title: 'Logo MC Isotipo' },
+                        { url: `${this.origin}/public/images/logo_vector_1.jpg`, title: 'Logo Vectorial 1' },
+                        { url: `${this.origin}/public/images/logo_vector_2.jpg`, title: 'Logo Vectorial 2' },
+                        { url: `${this.origin}/public/images/logo_vector_3.jpg`, title: 'Logo Vectorial 3' }
+                    ];
+                },
+
+                copyUrl(url) {
+                    navigator.clipboard.writeText(url);
+                    this.showToast('¡Enlace directo copiado al portapapeles!');
+                },
+
+                showToast(msg) {
+                    this.toast.message = msg;
+                    this.toast.show = true;
+                    setTimeout(() => { this.toast.show = false; }, 2500);
+                },
+
+                copyAllContext() {
+                    const text = this.generateFullPromptText();
+                    navigator.clipboard.writeText(text);
+                    this.copiedAll = true;
+                    this.showToast('¡Todo el contexto y URLs de imágenes copiados!');
+                    setTimeout(() => { this.copiedAll = false; }, 3000);
+                },
+
+                generateFullPromptText() {
+                    return `=====================================================
+CONTEXTO DE PRODUCTOS Y RECURSOS DE MARCA — METAL CREATIVO CHILE
+=====================================================
+Instagram Oficial: @metalcreativo.cl | Chile
+Página Web Hub: ${this.origin}/marketing-assets.html
+
+-----------------------------------------------------
+PRODUCTO 1: BARRA RÍGIDA DE REMOLQUE CON OJAL FORJADO
+-----------------------------------------------------
+- Precio Oferta: $89.900 CLP
+- Marco Legal: Decreto Supremo N° 55/2025 del Ministerio de Transportes (Chile), obligatorio desde 7 de agosto de 2026. Prohíbe tirantes de género, cuerdas, piolas o cadenas. Exige acople metálico rígido.
+- Especificaciones: Tubo acero al carbono (diámetro 45-50 mm, espesor 3.5-4.0 mm). Arrastre directo de 2.500 a 3.500 kg. Longitud 1.60m a 1.80m. Ojales forjados pasantes con grilletes de seguridad. Incluye bandera roja reglamentaria.
+- Ángulos de Venta:
+  1. Cero Multas & Cumplimiento Ley Decreto 55/2025
+  2. Seguridad Vial Familiar (Evita choques por alcance al frenar)
+  3. Acero Macizo de Maestranza Chilena Indestructible
+  4. Accesorio Indispensable en la Maletera para Viajes
+  5. Solución Profesional para Talleres y Auxilio Mecánico
+
+IMÁGENES DIRECTAS PUBLICAS PARA FLYERS/CANVA:
+- Barra Real en Vehículo: ${this.origin}/public/images/barra_remolque_real.jpg
+- Producto Completo Macizo: ${this.origin}/public/images/barra_remolque.jpg
+- Barra en Carretera / Uso: ${this.origin}/public/images/barra_remolque_uso.jpg
+- Banner Publicitario Ley: ${this.origin}/public/images/ad_barra.jpg
+- Detalle Ojal Forjado 1: ${this.origin}/public/images/ref_remolque_1.jpg
+- Detalle Ojal Forjado 2: ${this.origin}/public/images/ref_remolque_2.jpg
+- Detalle Ojal Forjado 3: ${this.origin}/public/images/ref_remolque_3.jpg
+
+-----------------------------------------------------
+PRODUCTO 2: ESTUFAS Y FOGONES A BIOETANOL ECOLÓGICO
+-----------------------------------------------------
+- Precio Promocional: $149.900 CLP
+- Modelos: Fogón de Sobremesa (Bandeja rústica de madera noble + cuarzo blanco) & Estufa de Piso/Terraza 50-60cm.
+- Especificaciones: Combustión limpia a bioetanol 96°. Sin humo, sin olor, sin cenizas. NO requiere ductos ni chimenea. Quemador quirúrgico Acero Inox AISI 304 anti-vuelco con fibra cerámica. Estructura de acero con pintura ignífuga (600°C) y cristal templado 6mm. Autonomía 3.5 a 5.5 hrs. Cobertura 25 m² a 45 m².
+- Ángulos de Venta:
+  1. Calidez & Estilo de Vida en Departamentos/Balcones
+  2. Cero Instalación (Sin chimenea, sin obras, listo para usar)
+  3. Anfitrión Perfecto (Reuniones en quinchos y terrazas)
+  4. Regalo de Exclusividad & Alto Valor (Matrimonio/Casa Nueva)
+  5. Calefacción Limpia & Ecológica
+
+IMÁGENES DIRECTAS PUBLICAS PARA FLYERS/CANVA:
+- Fogón Sobremesa Madera: ${this.origin}/public/images/fogon_bioetanol_madera.jpg
+- Estufa de Piso 50-60cm: ${this.origin}/public/images/fogon_bioetanol_acero50.jpg
+- Estufa en Ambiente Terraza: ${this.origin}/public/images/estufa_bioetanol.jpg
+- Banner Publicitario Fuego: ${this.origin}/public/images/ad_fogon.jpg
+- Quemador Inox AISI 304: ${this.origin}/public/images/fogon_etanhol_50.jpg
+
+-----------------------------------------------------
+LOGOS & IDENTIDAD VISUAL:
+- Logo Principal: ${this.origin}/public/images/logo_mc_1.jpg
+- Logo Variante Dark: ${this.origin}/public/images/logo_mc_2.jpg
+- Isotipo MC: ${this.origin}/public/images/logo_mc_3.jpg
+- Logo Vectorial 1: ${this.origin}/public/images/logo_vector_1.jpg
+- Logo Vectorial 2: ${this.origin}/public/images/logo_vector_2.jpg
+- Logo Vectorial 3: ${this.origin}/public/images/logo_vector_3.jpg
+=====================================================`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
