@@ -195,10 +195,10 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION EN PANTALLA COMPLETA DESDE EL BORDE SUPERIOR ABSOLUTO (TOP:0) -->
+    <!-- HERO SECTION EN PANTALLA COMPLETA -->
     <section class="hero-section">
-        <!-- Imagen de fondo de forja real con martillo y brasas candentes -->
-        <img src="./images/generadas/estufa1_angulo5_quincho.jpg" alt="Forja de Metal y Acero" class="hero-bg-img">
+        <!-- Imagen de fondo principal -->
+        <img src="./images/fogon_bioetanol_madera.jpg" alt="Metal Creativo Chile" class="hero-bg-img">
         <div class="hero-overlay-gradient"></div>
 
         <div class="relative z-10 text-center max-w-3xl px-4 mx-auto space-y-6 pt-16">
@@ -209,7 +209,7 @@
                 Precisión artesanal, resistencia industrial. Creamos piezas únicas en acero cepillado, estufas decorativas a bioetanol y barras rígidas de remolque para todo Chile.
             </p>
             
-            <!-- DOS BOTONES DIRECTOS: UNO PARA LA ESTUFA DE BIOETANOL Y OTRO PARA LA LANZA / REMOLQUE -->
+            <!-- DOS BOTONES DIRECTOS -->
             <div class="pt-4 flex flex-col sm:flex-row justify-center items-center gap-4">
                 <button @click="activeTab = 'hogar'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="btn-metal-orange px-6 py-3 rounded-lg font-bold text-xs sm:text-sm no-underline flex items-center gap-2 cursor-pointer">
                     <i class="fa-solid fa-fire text-sm"></i>
@@ -223,15 +223,15 @@
         </div>
     </section>
 
-    <!-- CONTENIDO PRINCIPAL FUSIONADO CON PRODUCTOS DEL CLIENTE Y SECCIONES GLOWING -->
+    <!-- CONTENIDO PRINCIPAL -->
     <main id="showcase" class="py-20 bg-[#07080b] relative z-10 space-y-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
 
-            <!-- SECCIÓN: NUESTROS SERVICIOS / PRODUCTOS (CON CARRUSEL DE 7 ÁNGULOS) -->
+            <!-- SECCIÓN: NUESTROS SERVICIOS / PRODUCTOS -->
             <section class="space-y-10">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
                     <h2 class="text-3xl sm:text-4xl section-glow-title font-heading">Nuestros Servicios & Productos</h2>
-                    <p class="text-gray-400 text-sm">Selecciona una categoría para explorar especificaciones y galería en vivo.</p>
+                    <p class="text-gray-400 text-sm">Selecciona una categoría para explorar especificaciones.</p>
                 </div>
 
                 <!-- Selector de Pestañas -->
@@ -244,7 +244,7 @@
                     </button>
                 </div>
 
-                <!-- CATEGORÍA 1: FOGÓN DE MESA & ESTUFAS A BIOETANOL (CARRUSEL AUTOMÁTICO DE 7 ÁNGULOS) -->
+                <!-- CATEGORÍA 1: FOGÓN DE MESA & ESTUFAS A BIOETANOL -->
                 <div x-show="activeTab === 'hogar'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="metal-card rounded-xl p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     
                     <div class="lg:col-span-6 space-y-6">
@@ -268,50 +268,10 @@
                         </div>
                     </div>
 
-                    <!-- CARRUSEL AUTOMÁTICO DE 7 ÁNGULOS EN GIRO SUAVE (IMÁGENES LIMPIAS) -->
-                    <div class="lg:col-span-6 space-y-4" x-data="{
-                        slide: 0,
-                        total: 7,
-                        images: [
-                            './images/fogon_bioetanol_madera.jpg',
-                            './images/generadas/estufa1_angulo2_playa.jpg',
-                            './images/generadas/estufa1_angulo3_terraza.jpg',
-                            './images/generadas/estufa1_angulo5_quincho.jpg',
-                            './images/generadas/estufa2_angulo5_balcon.jpg',
-                            './images/fogon_bioetanol_acero50.jpg',
-                            './images/estufa_bioetanol.jpg'
-                        ],
-                        timer: null,
-                        init() {
-                            this.timer = setInterval(() => {
-                                this.slide = (this.slide + 1) % this.total;
-                            }, 2500);
-                        },
-                        next() { this.slide = (this.slide + 1) % this.total; },
-                        prev() { this.slide = (this.slide - 1 + this.total) % this.total; }
-                    }">
-                        <div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 h-80 group">
-                            <template x-for="(src, index) in images" :key="index">
-                                <div x-show="slide === index" x-transition:enter="transition ease-out duration-700 transform opacity-0 scale-95" x-transition:leave="transition ease-in duration-500 transform opacity-0 scale-105" class="absolute inset-0 w-full h-full">
-                                    <img :src="src" alt="Estufa Bioetanol" class="w-full h-full object-cover">
-                                </div>
-                            </template>
-
-                            <button @click="prev()" class="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/70 hover:bg-orange-600 text-white flex items-center justify-center transition-colors border border-white/20 z-20">
-                                <i class="fa-solid fa-chevron-left text-xs"></i>
-                            </button>
-                            <button @click="next()" class="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/70 hover:bg-orange-600 text-white flex items-center justify-center transition-colors border border-white/20 z-20">
-                                <i class="fa-solid fa-chevron-right text-xs"></i>
-                            </button>
-                        </div>
-
-                        <!-- Miniaturas de navegación directa limpia -->
-                        <div class="grid grid-cols-7 gap-1.5 pt-1">
-                            <template x-for="(src, index) in images" :key="index">
-                                <button @click="slide = index" :class="slide === index ? 'border-orange-500 ring-1 ring-orange-500 opacity-100' : 'border-white/10 opacity-50 hover:opacity-100'" class="h-12 rounded overflow-hidden border transition-all">
-                                    <img :src="src" alt="thumb" class="w-full h-full object-cover">
-                                </button>
-                            </template>
+                    <!-- FOTO PRINCIPAL LIMPIA BIOETANOL -->
+                    <div class="lg:col-span-6">
+                        <div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 h-80">
+                            <img src="./images/fogon_bioetanol_madera.jpg" alt="Fogón a Bioetanol Metal Creativo" class="w-full h-full object-cover">
                         </div>
                     </div>
 
@@ -341,9 +301,10 @@
                         </div>
                     </div>
 
-                    <div class="lg:col-span-6 space-y-4">
+                    <!-- FOTO PRINCIPAL LIMPIA REMOLQUE -->
+                    <div class="lg:col-span-6">
                         <div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 h-80">
-                            <img src="./images/barra_remolque_uso.jpg" alt="Remolque Rígido" class="w-full h-full object-cover">
+                            <img src="./images/barra_remolque_uso.jpg" alt="Remolque Rígido Metal Creativo" class="w-full h-full object-cover">
                         </div>
                     </div>
 
@@ -415,29 +376,7 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN: GALERÍA DE TRABAJO -->
-            <section class="space-y-10">
-                <div class="text-center max-w-2xl mx-auto space-y-2">
-                    <h2 class="text-3xl sm:text-4xl section-glow-title font-heading">Galería de Trabajo</h2>
-                    <p class="text-gray-400 text-sm">Imágenes reales de piezas forjadas en nuestro taller en Chile.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="rounded-xl overflow-hidden border border-white/10 metal-card group">
-                        <img src="./images/fogon_bioetanol_madera.jpg" alt="Trabajo 1" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="rounded-xl overflow-hidden border border-white/10 metal-card group">
-                        <img src="./images/barra_remolque_uso.jpg" alt="Trabajo 2" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="rounded-xl overflow-hidden border border-white/10 metal-card group">
-                        <img src="./images/generadas/estufa1_angulo2_playa.jpg" alt="Trabajo 3" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                </div>
-            </section>
-
-
-
-            <!-- SECCIÓN: HABLEMOS DE TU PROYECTO (FORMULARIO EXACTO DE LA IMAGEN) -->
+            <!-- SECCIÓN: HABLEMOS DE TU PROYECTO -->
             <section id="contacto" class="max-w-3xl mx-auto space-y-8 text-center pt-8">
                 <div class="space-y-2">
                     <h2 class="text-3xl sm:text-4xl section-glow-title font-heading">Hablemos de tu Proyecto</h2>
