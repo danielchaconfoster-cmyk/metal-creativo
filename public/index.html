@@ -9,7 +9,7 @@
     <!-- Open Graph -->
     <meta property="og:title" content="Metal Creativo Chile | Remolque Rígido & Bioetanol Ecológico">
     <meta property="og:description" content="Remolque rígido en carretera y calefacción limpia a bioetanol. Hecho a mano en Chile. Instagram: @metalcreativo.cl">
-    <meta property="og:image" content="./public/images/fogon_bioetanol_madera.jpg">
+    <meta property="og:image" content="./images/fogon_bioetanol_madera.jpg">
     <meta property="og:locale" content="es_CL">
 
     <!-- Fonts: Inter & Syncopate -->
@@ -75,12 +75,20 @@
             z-index: 1;
         }
 
-        /* --- TÍTULOS CON GLOW NARANJA AMBIENTAL --- */
+        /* --- TÍTULOS CON GLOW NARANJA AMBIENTAL Y GRADIENTES --- */
         .section-glow-title {
             color: #ff8c3b;
             font-weight: 800;
             letter-spacing: -0.02em;
             text-shadow: 0 0 15px rgba(255, 106, 0, 0.4), 0 0 35px rgba(255, 106, 0, 0.15);
+        }
+
+        .metal-creativo-title {
+            background: linear-gradient(180deg, #ff2a00 0%, #ff6a00 30%, #9aa0a6 65%, #3d434a 88%, #121518 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.9));
         }
 
         .brand-fire-text {
@@ -171,16 +179,17 @@
     <!-- NAVBAR TRANSPARENTE DESDE EL BORDE SUPERIOR MÁXIMO -->
     <nav class="absolute top-0 left-0 right-0 z-50 bg-transparent py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="relative w-8 h-8 flex items-center justify-center cursor-pointer">
+            <div class="flex items-center gap-3.5 cursor-pointer">
+                <!-- LOGO VIVO DE FLAMA EN CHISPAS 60 FPS (OPCIÓN 3 OFICIAL) -->
+                <div class="relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center shrink-0 rounded-lg bg-black/40 border border-white/10 p-1 shadow-lg shadow-orange-950/30">
                     <canvas id="navFlameCanvas" class="w-full h-full block"></canvas>
                 </div>
                 <div>
-                    <span class="text-xl sm:text-2xl font-black tracking-wider brand-fire-text font-heading uppercase">FORJA METÁLICA</span>
+                    <span class="text-xl sm:text-3xl font-black tracking-wider metal-creativo-title font-heading uppercase leading-none block">METAL CREATIVO</span>
                 </div>
             </div>
 
-            <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo%20(@metalcreativo.cl),%20quisiera%20cotizar" target="_blank" class="btn-metal-primary px-6 py-2 rounded-lg text-xs sm:text-sm font-bold no-underline">
+            <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo%20(@metalcreativo.cl),%20quisiera%20cotizar" target="_blank" class="btn-metal-primary px-6 py-2.5 rounded-lg text-xs sm:text-sm font-bold no-underline">
                 <span>Contacto</span>
             </a>
         </div>
@@ -189,7 +198,7 @@
     <!-- HERO SECTION EN PANTALLA COMPLETA DESDE EL BORDE SUPERIOR ABSOLUTO (TOP:0) -->
     <section class="hero-section">
         <!-- Imagen de fondo de forja real con martillo y brasas candentes -->
-        <img src="./public/images/generadas/estufa1_angulo5_quincho.jpg" alt="Forja de Metal y Acero" class="hero-bg-img">
+        <img src="./images/generadas/estufa1_angulo5_quincho.jpg" alt="Forja de Metal y Acero" class="hero-bg-img">
         <div class="hero-overlay-gradient"></div>
 
         <div class="relative z-10 text-center max-w-3xl px-4 mx-auto space-y-6 pt-16">
@@ -240,31 +249,12 @@
                     
                     <div class="lg:col-span-6 space-y-6">
                         <span class="inline-block px-3 py-1 rounded bg-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider">
-                            🔥 CALEFACCIÓN ECOLÓGICA SIN DUCTOS
+                            🔥 CALEFACCIÓN ECOLÓGICA DECORATIVA
                         </span>
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Fogón de Mesa & Estufas a Bioetanol</h3>
                         <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
-                            Fabricados artesanalmente con quemador de acero inoxidable AISI 304 y bandeja de madera con piedras blancas decorativas. Sin humo, sin olor y sin cañones de evacuación.
+                            Fogones decorativos fabricados artesanalmente en acero macizo con quemador de acero inoxidable y bandeja de madera con piedras decorativas. Combustión limpia para departamentos, salones y terrazas.
                         </p>
-
-                        <div class="grid grid-cols-2 gap-4 py-2 text-xs sm:text-sm">
-                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
-                                <span class="block text-orange-400 text-[11px] font-bold uppercase">INSTALACIÓN</span>
-                                <span class="font-bold text-white">100% Portátil sin ductos</span>
-                            </div>
-                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
-                                <span class="block text-orange-400 text-[11px] font-bold uppercase">AUTONOMÍA</span>
-                                <span class="font-bold text-white">3.5 a 5.5 horas</span>
-                            </div>
-                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
-                                <span class="block text-orange-400 text-[11px] font-bold uppercase">QUEMADOR</span>
-                                <span class="font-bold text-white">Acero Inox AISI 304</span>
-                            </div>
-                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
-                                <span class="block text-orange-400 text-[11px] font-bold uppercase">ACABADO</span>
-                                <span class="font-bold text-orange-400">Piedras + Madera</span>
-                            </div>
-                        </div>
 
                         <div class="pt-4 flex flex-col sm:flex-row items-center gap-6">
                             <div>
@@ -278,18 +268,18 @@
                         </div>
                     </div>
 
-                    <!-- CARRUSEL AUTOMÁTICO DE 7 ÁNGULOS EN GIRO SUAVE -->
+                    <!-- CARRUSEL AUTOMÁTICO DE 7 ÁNGULOS EN GIRO SUAVE (IMÁGENES LIMPIAS) -->
                     <div class="lg:col-span-6 space-y-4" x-data="{
                         slide: 0,
                         total: 7,
                         images: [
-                            { src: './public/images/fogon_bioetanol_madera.jpg', tag: '🔥 Salón / Departamento Interior' },
-                            { src: './public/images/generadas/estufa1_angulo2_playa.jpg', tag: '🏖️ Terraza Exterior en la Playa' },
-                            { src: './public/images/generadas/estufa1_angulo3_terraza.jpg', tag: '🌿 Terraza Rústica' },
-                            { src: './public/images/generadas/estufa1_angulo5_quincho.jpg', tag: '🥩 Quincho / Estar Interior' },
-                            { src: './public/images/generadas/estufa2_angulo5_balcon.jpg', tag: '🏙️ Balcón Urbano Compacto' },
-                            { src: './public/images/fogon_bioetanol_acero50.jpg', tag: '⚙️ Quemador AISI 304 50cm' },
-                            { src: './public/images/estufa_bioetanol.jpg', tag: '🔥 Estufa de Piso 60cm' }
+                            './images/fogon_bioetanol_madera.jpg',
+                            './images/generadas/estufa1_angulo2_playa.jpg',
+                            './images/generadas/estufa1_angulo3_terraza.jpg',
+                            './images/generadas/estufa1_angulo5_quincho.jpg',
+                            './images/generadas/estufa2_angulo5_balcon.jpg',
+                            './images/fogon_bioetanol_acero50.jpg',
+                            './images/estufa_bioetanol.jpg'
                         ],
                         timer: null,
                         init() {
@@ -301,13 +291,9 @@
                         prev() { this.slide = (this.slide - 1 + this.total) % this.total; }
                     }">
                         <div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 h-80 group">
-                            <template x-for="(item, index) in images" :key="index">
+                            <template x-for="(src, index) in images" :key="index">
                                 <div x-show="slide === index" x-transition:enter="transition ease-out duration-700 transform opacity-0 scale-95" x-transition:leave="transition ease-in duration-500 transform opacity-0 scale-105" class="absolute inset-0 w-full h-full">
-                                    <img :src="item.src" alt="Bioetanol" class="w-full h-full object-cover">
-                                    <div class="absolute bottom-3 left-3 right-3 bg-black/85 backdrop-blur-sm text-white text-xs px-4 py-2.5 rounded border border-white/10 flex items-center justify-between">
-                                        <span class="font-bold text-white truncate" x-text="item.tag"></span>
-                                        <span class="text-[10px] text-orange-400 font-extrabold ml-2" x-text="`${index + 1} / ${total}`"></span>
-                                    </div>
+                                    <img :src="src" alt="Estufa Bioetanol" class="w-full h-full object-cover">
                                 </div>
                             </template>
 
@@ -319,11 +305,11 @@
                             </button>
                         </div>
 
-                        <!-- Miniaturas de navegación directa -->
+                        <!-- Miniaturas de navegación directa limpia -->
                         <div class="grid grid-cols-7 gap-1.5 pt-1">
-                            <template x-for="(item, index) in images" :key="index">
+                            <template x-for="(src, index) in images" :key="index">
                                 <button @click="slide = index" :class="slide === index ? 'border-orange-500 ring-1 ring-orange-500 opacity-100' : 'border-white/10 opacity-50 hover:opacity-100'" class="h-12 rounded overflow-hidden border transition-all">
-                                    <img :src="item.src" alt="thumb" class="w-full h-full object-cover">
+                                    <img :src="src" alt="thumb" class="w-full h-full object-cover">
                                 </button>
                             </template>
                         </div>
@@ -331,36 +317,17 @@
 
                 </div>
 
-                <!-- CATEGORÍA 2: REMOLQUE RÍGIDO (BARRA MACIZA FORJADA) -->
+                <!-- CATEGORÍA 2: REMOLQUE RÍGIDO (BARRA MACIZA FORJADA / LANZA) -->
                 <div x-show="activeTab === 'auto'" x-cloak x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="metal-card rounded-xl p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                     
                     <div class="lg:col-span-6 space-y-6">
                         <span class="inline-block px-3 py-1 rounded bg-sky-500/20 text-sky-400 text-xs font-bold uppercase tracking-wider">
-                            🛡️ NORMATIVA VIAL DECRETO 55/2025 MTT
+                            🛡️ FABRICACIÓN EN ACERO MACIZO
                         </span>
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Barra Rígida de Remolque con Ojal Forjado</h3>
                         <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
-                            Barra maciza de acero al carbono con ojales forjados y soldadura de alta penetración TIG/MIG. Conexión rígida segura entre vehículos en carretera.
+                            Barra maciza de acero al carbono con ojales forjados y soldadura de alta penetración TIG/MIG. Conexión rígida segura entre vehículos para transitar seguro por todo Chile.
                         </p>
-
-                        <div class="grid grid-cols-2 gap-4 py-2 text-xs sm:text-sm">
-                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
-                                <span class="block text-sky-400 text-[11px] font-bold uppercase">ESTRUCTURA</span>
-                                <span class="font-bold text-white">Tubo Acero Macizo</span>
-                            </div>
-                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
-                                <span class="block text-sky-400 text-[11px] font-bold uppercase">CAPACIDAD</span>
-                                <span class="font-bold text-white">2.500 a 3.500 kg</span>
-                            </div>
-                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
-                                <span class="block text-sky-400 text-[11px] font-bold uppercase">EXTREMOS</span>
-                                <span class="font-bold text-white">Ojal Forjado + Grillete</span>
-                            </div>
-                            <div class="p-3.5 rounded bg-black/60 border border-white/10">
-                                <span class="block text-sky-400 text-[11px] font-bold uppercase">NORMATIVA</span>
-                                <span class="font-bold text-yellow-400">Decreto 55/2025 MTT</span>
-                            </div>
-                        </div>
 
                         <div class="pt-4 flex flex-col sm:flex-row items-center gap-6">
                             <div>
@@ -376,10 +343,7 @@
 
                     <div class="lg:col-span-6 space-y-4">
                         <div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 h-80">
-                            <img src="./public/images/barra_remolque_uso.jpg" alt="Remolque Rígido" class="w-full h-full object-cover">
-                            <div class="absolute bottom-3 left-3 bg-black/90 text-white text-xs px-3.5 py-2 rounded border border-white/10 font-bold">
-                                📌 Remolque directo entre enganche trasero y frontal
-                            </div>
+                            <img src="./images/barra_remolque_uso.jpg" alt="Remolque Rígido" class="w-full h-full object-cover">
                         </div>
                     </div>
 
@@ -460,43 +424,18 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="rounded-xl overflow-hidden border border-white/10 metal-card group">
-                        <img src="./public/images/fogon_bioetanol_madera.jpg" alt="Trabajo 1" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="./images/fogon_bioetanol_madera.jpg" alt="Trabajo 1" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="rounded-xl overflow-hidden border border-white/10 metal-card group">
-                        <img src="./public/images/barra_remolque_uso.jpg" alt="Trabajo 2" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="./images/barra_remolque_uso.jpg" alt="Trabajo 2" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="rounded-xl overflow-hidden border border-white/10 metal-card group">
-                        <img src="./public/images/generadas/estufa1_angulo2_playa.jpg" alt="Trabajo 3" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="./images/generadas/estufa1_angulo2_playa.jpg" alt="Trabajo 3" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                 </div>
             </section>
 
-            <!-- SECCIÓN: LOGOS DE MARCA PARA CLIENTE -->
-            <section class="space-y-8 bg-[#0b0e14] p-8 rounded-2xl border border-white/10">
-                <div class="text-center max-w-2xl mx-auto">
-                    <span class="text-orange-400 font-bold text-xs uppercase tracking-widest">IDENTIDAD DE MARCA OFICIAL</span>
-                    <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Opciones de Logo para @metalcreativo.cl</h3>
-                </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div @click="selectedLogo = 'logo_mc_1'" :class="selectedLogo === 'logo_mc_1' ? 'border-orange-500 ring-2 ring-orange-500/50' : 'border-white/10'" class="metal-card p-6 rounded-xl text-center space-y-4 cursor-pointer">
-                        <img src="./public/images/logo_mc_1.jpg" alt="Logo 1" class="w-36 h-36 mx-auto rounded-lg object-cover border border-white/10">
-                        <h4 class="font-bold text-white text-sm">Opción 1: Monograma MC & Llama</h4>
-                    </div>
-
-                    <div @click="selectedLogo = 'logo_mc_2'" :class="selectedLogo === 'logo_mc_2' ? 'border-orange-500 ring-2 ring-orange-500/50' : 'border-white/10'" class="metal-card p-6 rounded-xl text-center space-y-4 cursor-pointer">
-                        <img src="./public/images/logo_mc_2.jpg" alt="Logo 2" class="w-36 h-36 mx-auto rounded-lg object-cover border border-white/10">
-                        <h4 class="font-bold text-white text-sm">Opción 2: Perfil Metálico & Llama Corp</h4>
-                    </div>
-
-                    <div @click="selectedLogo = 'logo_mc_3'" :class="selectedLogo === 'logo_mc_3' ? 'border-orange-500 ring-2 ring-orange-500/50' : 'border-white/10'" class="metal-card p-6 rounded-xl text-center space-y-4 cursor-pointer">
-                        <div class="relative w-36 h-36 mx-auto rounded-lg overflow-hidden border border-white/10 bg-black flex items-center justify-center">
-                            <canvas id="flameLogoCanvas" class="w-full h-full block"></canvas>
-                        </div>
-                        <h4 class="font-bold text-white text-sm">Opción 3: Llama Vectorial Chispeante (Vivo 60 FPS)</h4>
-                    </div>
-                </div>
-            </section>
 
             <!-- SECCIÓN: HABLEMOS DE TU PROYECTO (FORMULARIO EXACTO DE LA IMAGEN) -->
             <section id="contacto" class="max-w-3xl mx-auto space-y-8 text-center pt-8">
@@ -665,12 +604,42 @@
         if (sparkCanvas) animateSparks();
 
 
-        // --- 2. MOTOR DEL LOGO VIVO CON FLAMA 60 FPS (NAVBAR Y CARD 3) ---
-        const flameCanvas = document.getElementById('flameLogoCanvas');
-        const flameCtx = flameCanvas ? flameCanvas.getContext('2d') : null;
-
+        // --- 2. MOTOR DEL LOGO VIVO CON FLAMA 60 FPS EN ALTA DEFINICIÓN (OPCIÓN 3 OFICIAL) ---
         const navCanvas = document.getElementById('navFlameCanvas');
         const navCtx = navCanvas ? navCanvas.getContext('2d') : null;
+
+        let navW = 44, navH = 44;
+        let miniSparks = [];
+
+        function initNavFlameCanvas() {
+            if (!navCanvas || !navCtx) return;
+            const dpr = Math.max(window.devicePixelRatio || 1, 2);
+            const parent = navCanvas.parentElement;
+            navW = parent.clientWidth || 44;
+            navH = parent.clientHeight || 44;
+
+            navCanvas.width = Math.round(navW * dpr);
+            navCanvas.height = Math.round(navH * dpr);
+            navCanvas.style.width = navW + 'px';
+            navCanvas.style.height = navH + 'px';
+
+            navCtx.setTransform(1, 0, 0, 1, 0, 0);
+            navCtx.scale(dpr, dpr);
+
+            miniSparks = [];
+            for (let i = 0; i < 20; i++) {
+                miniSparks.push({
+                    x: navW / 2 + (Math.random() - 0.5) * 12,
+                    y: navH / 2 + (Math.random() - 0.5) * 12,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: -(Math.random() * 0.7 + 0.3),
+                    size: Math.random() * 1.4 + 0.6,
+                    alpha: Math.random() * 0.8 + 0.2,
+                    decay: Math.random() * 0.015 + 0.005,
+                    color: ['#FFFFFF', '#FFD166', '#F97316', '#EF4444'][Math.floor(Math.random() * 4)]
+                });
+            }
+        }
 
         function drawFlameShape(targetCtx, cx, cy, scale, t) {
             targetCtx.save();
@@ -732,18 +701,38 @@
             const t = timestamp || 0;
 
             if (navCtx && navCanvas) {
-                navCtx.clearRect(0, 0, navCanvas.width, navCanvas.height);
-                drawFlameShape(navCtx, navCanvas.width / 2, navCanvas.height / 2 + 1, 0.45, t);
-            }
-
-            if (flameCtx && flameCanvas) {
-                flameCtx.clearRect(0, 0, flameCanvas.width, flameCanvas.height);
-                drawFlameShape(flameCtx, flameCanvas.width / 2, flameCanvas.height / 2 + 2, 1.1, t);
+                navCtx.clearRect(0, 0, navW, navH);
+                drawFlameShape(navCtx, navW / 2, navH / 2 + 1, 0.45, t);
+                for (let i = 0; i < miniSparks.length; i++) {
+                    const s = miniSparks[i];
+                    s.x += s.vx;
+                    s.y += s.vy;
+                    s.alpha -= s.decay;
+                    if (s.alpha <= 0 || s.y < 2) {
+                        s.x = navW / 2 + (Math.random() - 0.5) * 12;
+                        s.y = navH / 2 + 6;
+                        s.alpha = Math.random() * 0.8 + 0.2;
+                    }
+                    navCtx.save();
+                    navCtx.globalAlpha = Math.max(0, s.alpha);
+                    navCtx.fillStyle = s.color;
+                    navCtx.shadowColor = s.color;
+                    navCtx.shadowBlur = 4;
+                    navCtx.beginPath();
+                    navCtx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+                    navCtx.fill();
+                    navCtx.restore();
+                }
             }
 
             requestAnimationFrame(animateFlameLogo);
         }
-        requestAnimationFrame(animateFlameLogo);
+
+        window.addEventListener('resize', initNavFlameCanvas);
+        document.fonts.ready.then(() => {
+            initNavFlameCanvas();
+            requestAnimationFrame(animateFlameLogo);
+        });
     </script>
 </body>
 </html>
