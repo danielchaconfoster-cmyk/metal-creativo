@@ -42,16 +42,29 @@
             overflow-x: hidden;
         }
 
-        /* --- HERO PANTALLA COMPLETA CINEMÁTICO DE FORJA METÁLICA --- */
+        /* --- HERO PANTALLA COMPLETA CINEMÁTICO DE FORJA METÁLICA RESPONSIVE --- */
         .hero-section {
             position: relative;
             width: 100%;
-            height: 100vh;
-            min-height: 650px;
+            min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 640px) {
+            .hero-section {
+                min-height: 520px;
+                padding-top: 4.5rem;
+                padding-bottom: 3rem;
+            }
         }
 
         .hero-bg-img {
@@ -177,14 +190,14 @@
     <canvas id="sparkCanvas"></canvas>
 
     <!-- NAVBAR TRANSPARENTE DESDE EL BORDE SUPERIOR MÁXIMO -->
-    <nav class="absolute top-0 left-0 right-0 z-50 bg-transparent py-6">
+    <nav class="absolute top-0 left-0 right-0 z-50 bg-transparent py-3 sm:py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <div class="flex items-center cursor-pointer">
-                <!-- LOGO OFICIAL DE MARCA (SOLO LA GRÁFICA) -->
-                <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-16 sm:h-20 md:h-24 w-auto object-contain filter drop-shadow-2xl hover:scale-105 transition-transform duration-300">
+                <!-- LOGO OFICIAL DE MARCA (SOLO LA GRÁFICA RESPONSIVE) -->
+                <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-10 sm:h-16 md:h-20 w-auto object-contain filter drop-shadow-2xl hover:scale-105 transition-transform duration-300">
             </div>
 
-            <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo%20(@metalcreativo.cl),%20quisiera%20cotizar" target="_blank" class="btn-metal-primary px-6 py-2.5 rounded-lg text-xs sm:text-sm font-bold no-underline">
+            <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo%20(@metalcreativo.cl),%20quisiera%20cotizar" target="_blank" class="btn-metal-primary px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-bold no-underline">
                 <span>Contacto</span>
             </a>
         </div>
@@ -217,27 +230,27 @@
         <div class="hero-overlay-gradient"></div>
 
         <!-- Puntos Indicadores del Slider -->
-        <div class="absolute bottom-6 z-20 flex items-center justify-center gap-2">
+        <div class="absolute bottom-4 sm:bottom-6 z-20 flex items-center justify-center gap-2">
             <template x-for="(imgSrc, idx) in slides" :key="idx">
-                <button @click="currentSlide = idx" :class="currentSlide === idx ? 'bg-orange-500 w-8' : 'bg-white/40 w-2 hover:bg-white/70'" class="h-2 rounded-full transition-all duration-500 cursor-pointer border-none"></button>
+                <button @click="currentSlide = idx" :class="currentSlide === idx ? 'bg-orange-500 w-6 sm:w-8' : 'bg-white/40 w-2 hover:bg-white/70'" class="h-1.5 sm:h-2 rounded-full transition-all duration-500 cursor-pointer border-none"></button>
             </template>
         </div>
 
-        <div class="relative z-10 text-center max-w-3xl px-4 mx-auto space-y-6 pt-16">
-            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold metal-title-gradient leading-tight tracking-tight">
+        <div class="relative z-10 text-center max-w-3xl px-4 sm:px-6 mx-auto space-y-4 sm:space-y-6 pt-16 sm:pt-24 pb-8">
+            <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold metal-title-gradient leading-tight tracking-tight">
                 Forjamos el Futuro en Acero y Hierro
             </h1>
-            <p class="text-gray-300 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-normal opacity-90">
+            <p class="text-gray-300 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-normal opacity-90 px-2">
                 Precisión artesanal, resistencia industrial. Creamos piezas únicas en acero cepillado, estufas decorativas a bioetanol y barras rígidas de remolque para todo Chile.
             </p>
             
             <!-- DOS BOTONES DIRECTOS -->
-            <div class="pt-4 flex flex-col sm:flex-row justify-center items-center gap-4">
-                <button @click="activeTab = 'hogar'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="btn-metal-orange px-6 py-3 rounded-lg font-bold text-xs sm:text-sm no-underline flex items-center gap-2 cursor-pointer">
+            <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none mx-auto">
+                <button @click="activeTab = 'hogar'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="btn-metal-orange w-full sm:w-auto px-5 sm:px-6 py-3 rounded-lg font-bold text-xs sm:text-sm no-underline flex items-center justify-center gap-2 cursor-pointer">
                     <i class="fa-solid fa-fire text-sm"></i>
                     <span>Estufas a Bioetanol</span>
                 </button>
-                <button @click="activeTab = 'auto'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="btn-metal-primary px-6 py-3 rounded-lg font-bold text-xs sm:text-sm no-underline flex items-center gap-2 cursor-pointer">
+                <button @click="activeTab = 'auto'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="btn-metal-primary w-full sm:w-auto px-5 sm:px-6 py-3 rounded-lg font-bold text-xs sm:text-sm no-underline flex items-center justify-center gap-2 cursor-pointer">
                     <i class="fa-solid fa-shield-halved text-sm"></i>
                     <span>Barra de Remolque (Lanza)</span>
                 </button>
@@ -257,34 +270,34 @@
                 </div>
 
                 <!-- Selector de Pestañas -->
-                <div class="flex justify-center items-center gap-4">
-                    <button @click="activeTab = 'hogar'" :class="activeTab === 'hogar' ? 'btn-metal-orange' : 'btn-metal-primary'" class="px-6 py-3 rounded-lg font-bold text-sm cursor-pointer transition-all">
+                <div class="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-4 px-4 w-full max-w-md sm:max-w-none mx-auto">
+                    <button @click="activeTab = 'hogar'" :class="activeTab === 'hogar' ? 'btn-metal-orange' : 'btn-metal-primary'" class="w-full sm:w-auto px-5 sm:px-6 py-3 rounded-lg font-bold text-xs sm:text-sm cursor-pointer transition-all text-center">
                         <i class="fa-solid fa-fire mr-2"></i> Bioetanol & Fogones
                     </button>
-                    <button @click="activeTab = 'auto'" :class="activeTab === 'auto' ? 'btn-metal-orange' : 'btn-metal-primary'" class="px-6 py-3 rounded-lg font-bold text-sm cursor-pointer transition-all">
+                    <button @click="activeTab = 'auto'" :class="activeTab === 'auto' ? 'btn-metal-orange' : 'btn-metal-primary'" class="w-full sm:w-auto px-5 sm:px-6 py-3 rounded-lg font-bold text-xs sm:text-sm cursor-pointer transition-all text-center">
                         <i class="fa-solid fa-car-side mr-2"></i> Remolque Rígido Macizo
                     </button>
                 </div>
 
                 <!-- CATEGORÍA 1: FOGÓN DE MESA & ESTUFAS A BIOETANOL -->
-                <div x-show="activeTab === 'hogar'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="metal-card rounded-xl p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div x-show="activeTab === 'hogar'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="metal-card rounded-xl p-5 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                     
-                    <div class="lg:col-span-6 space-y-6">
+                    <div class="lg:col-span-6 space-y-4 sm:space-y-6">
                         <span class="inline-block px-3 py-1 rounded bg-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider">
                             🔥 CALEFACCIÓN ECOLÓGICA DECORATIVA
                         </span>
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Fogón de Mesa & Estufas a Bioetanol</h3>
-                        <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                        <p class="text-gray-400 text-xs sm:text-sm md:text-base leading-relaxed">
                             Fogones decorativos fabricados artesanalmente en acero macizo con quemador de acero inoxidable y bandeja de madera con piedras decorativas. Combustión limpia para departamentos, salones y terrazas.
                         </p>
 
-                        <div class="pt-4 flex flex-col sm:flex-row items-center gap-6">
+                        <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6">
                             <div>
                                 <span class="text-xs text-gray-400 block font-bold uppercase">PRECIO DE LANZAMIENTO</span>
-                                <span class="text-3xl font-black text-white">$149.900 <span class="text-sm font-bold text-gray-400">CLP</span></span>
+                                <span class="text-2xl sm:text-3xl font-black text-white">$149.900 <span class="text-xs sm:text-sm font-bold text-gray-400">CLP</span></span>
                             </div>
-                            <a href="https://wa.me/56912345678?text=Hola!%20Quiero%20cotizar%20el%20Fog%C3%B3n%20de%20Mesa%20a%20Bioetanol" target="_blank" class="btn-metal-orange w-full sm:w-auto px-8 py-3.5 rounded-lg text-white font-bold text-sm flex items-center justify-center gap-3 no-underline">
-                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <a href="https://wa.me/56912345678?text=Hola!%20Quiero%20cotizar%20el%20Fog%C3%B3n%20de%20Mesa%20a%20Bioetanol" target="_blank" class="btn-metal-orange w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 rounded-lg text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-3 no-underline">
+                                <i class="fa-brands fa-whatsapp text-base sm:text-lg"></i>
                                 <span>Cotizar por WhatsApp</span>
                             </a>
                         </div>
@@ -292,7 +305,7 @@
 
                     <!-- FOTO PRINCIPAL LIMPIA BIOETANOL -->
                     <div class="lg:col-span-6">
-                        <div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 h-80">
+                        <div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 h-56 sm:h-72 md:h-80 lg:h-96 w-full">
                             <img src="./images/fogon_bioetanol_madera.jpg" alt="Fogón a Bioetanol Metal Creativo" class="w-full h-full object-cover">
                         </div>
                     </div>
@@ -300,24 +313,24 @@
                 </div>
 
                 <!-- CATEGORÍA 2: REMOLQUE RÍGIDO (BARRA MACIZA FORJADA / LANZA) -->
-                <div x-show="activeTab === 'auto'" x-cloak x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="metal-card rounded-xl p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div x-show="activeTab === 'auto'" x-cloak x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="metal-card rounded-xl p-5 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
                     
-                    <div class="lg:col-span-6 space-y-6">
+                    <div class="lg:col-span-6 space-y-4 sm:space-y-6">
                         <span class="inline-block px-3 py-1 rounded bg-sky-500/20 text-sky-400 text-xs font-bold uppercase tracking-wider">
                             🛡️ FABRICACIÓN EN ACERO MACIZO
                         </span>
                         <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Barra Rígida de Remolque con Ojal Forjado</h3>
-                        <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                        <p class="text-gray-400 text-xs sm:text-sm md:text-base leading-relaxed">
                             Barra maciza de acero al carbono con ojales forjados y soldadura de alta penetración TIG/MIG. Conexión rígida segura entre vehículos para transitar seguro por todo Chile.
                         </p>
 
-                        <div class="pt-4 flex flex-col sm:flex-row items-center gap-6">
+                        <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6">
                             <div>
                                 <span class="text-xs text-gray-400 block font-bold uppercase">PRECIO DE OFERTA</span>
-                                <span class="text-3xl font-black text-white">$89.900 <span class="text-sm font-bold text-gray-400">CLP</span></span>
+                                <span class="text-2xl sm:text-3xl font-black text-white">$89.900 <span class="text-xs sm:text-sm font-bold text-gray-400">CLP</span></span>
                             </div>
-                            <a href="https://wa.me/56912345678?text=Hola!%20Quiero%20comprar%20la%20Barra%20R%C3%ADgida%20de%20Remolque" target="_blank" class="btn-metal-orange w-full sm:w-auto px-8 py-3.5 rounded-lg text-white font-bold text-sm flex items-center justify-center gap-3 no-underline">
-                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <a href="https://wa.me/56912345678?text=Hola!%20Quiero%20comprar%20la%20Barra%20R%C3%ADgida%20de%20Remolque" target="_blank" class="btn-metal-orange w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 rounded-lg text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-3 no-underline">
+                                <i class="fa-brands fa-whatsapp text-base sm:text-lg"></i>
                                 <span>Pedir por WhatsApp</span>
                             </a>
                         </div>
@@ -325,7 +338,7 @@
 
                     <!-- FOTO PRINCIPAL LIMPIA REMOLQUE -->
                     <div class="lg:col-span-6">
-                        <div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 h-80">
+                        <div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 h-56 sm:h-72 md:h-80 lg:h-96 w-full">
                             <img src="./images/barra_remolque_uso.jpg" alt="Remolque Rígido Metal Creativo" class="w-full h-full object-cover">
                         </div>
                     </div>
@@ -458,25 +471,25 @@
                     <p class="text-gray-400 text-sm">Cuéntanos tu idea y te entregamos una cotización sin compromiso.</p>
                 </div>
 
-                <div class="metal-card p-8 rounded-2xl text-left border border-white/10 shadow-2xl space-y-6">
+                <div class="metal-card p-5 sm:p-8 rounded-xl sm:rounded-2xl text-left border border-white/10 shadow-2xl space-y-4 sm:space-y-6">
                     <form @submit.prevent="alert('Gracias por comunicarte con Metal Creativo. Te responderemos a la brevedad por correo o WhatsApp.')" class="space-y-4">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Nombre</label>
-                                <input type="text" required placeholder="Tu nombre" class="w-full px-4 py-3 rounded-lg bg-[#07080b] border border-white/10 text-white focus:outline-none focus:border-orange-500 text-sm">
+                                <input type="text" required placeholder="Tu nombre" class="w-full px-4 py-3 rounded-lg bg-[#07080b] border border-white/10 text-white focus:outline-none focus:border-orange-500 text-xs sm:text-sm">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Correo electrónico</label>
-                                <input type="email" required placeholder="tu@correo.com" class="w-full px-4 py-3 rounded-lg bg-[#07080b] border border-white/10 text-white focus:outline-none focus:border-orange-500 text-sm">
+                                <input type="email" required placeholder="tu@correo.com" class="w-full px-4 py-3 rounded-lg bg-[#07080b] border border-white/10 text-white focus:outline-none focus:border-orange-500 text-xs sm:text-sm">
                             </div>
                         </div>
 
                         <div>
                             <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Mensaje</label>
-                            <textarea rows="4" required placeholder="Describe las medidas o tipo de producto que necesitas..." class="w-full px-4 py-3 rounded-lg bg-[#07080b] border border-white/10 text-white focus:outline-none focus:border-orange-500 text-sm resize-none"></textarea>
+                            <textarea rows="4" required placeholder="Describe las medidas o tipo de producto que necesitas..." class="w-full px-4 py-3 rounded-lg bg-[#07080b] border border-white/10 text-white focus:outline-none focus:border-orange-500 text-xs sm:text-sm resize-none"></textarea>
                         </div>
 
-                        <button type="submit" class="btn-metal-primary w-full py-4 rounded-lg font-bold text-white text-sm cursor-pointer uppercase tracking-wider">
+                        <button type="submit" class="btn-metal-primary w-full py-3.5 sm:py-4 rounded-lg font-bold text-white text-xs sm:text-sm cursor-pointer uppercase tracking-wider">
                             Enviar Consulta
                         </button>
                     </form>
@@ -487,9 +500,9 @@
     </main>
 
     <!-- FOOTER CON RESPLANDOR DE BRASAS AL PIE -->
-    <footer class="py-12 border-t border-white/10 text-gray-500 text-xs bg-[#050608] relative z-10 text-center">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center space-y-4">
-            <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-16 sm:h-20 w-auto object-contain opacity-90 filter drop-shadow">
+    <footer class="py-8 sm:py-12 border-t border-white/10 text-gray-500 text-xs bg-[#050608] relative z-10 text-center">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center space-y-3 sm:space-y-4">
+            <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-12 sm:h-16 md:h-20 w-auto object-contain opacity-90 filter drop-shadow">
             <div class="space-y-1">
                 <p class="text-gray-400">&copy; 2026 Metal Creativo Chile (@metalcreativo.cl). Todos los derechos reservados.</p>
                 <p class="text-gray-600">Fabricación artesanal en acero macizo y estufas a bioetanol | Despacho a todo Chile.</p>
@@ -501,7 +514,7 @@
     </footer>
 
     <!-- BOTÓN FLOTANTE DE WHATSAPP -->
-    <a href="https://wa.me/56912345678?text=Hola!%20Vengo%20de%20la%20p%C3%A1gina%20web%20de%20Metal%20Creativo" target="_blank" class="whatsapp-float-clean w-14 h-14 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center text-2xl no-underline border border-emerald-400/40">
+    <a href="https://wa.me/56912345678?text=Hola!%20Vengo%20de%20la%20p%C3%A1gina%20web%20de%20Metal%20Creativo" target="_blank" class="whatsapp-float-clean w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center text-xl sm:text-2xl no-underline border border-emerald-400/40">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
