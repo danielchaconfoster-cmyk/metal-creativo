@@ -193,11 +193,37 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION EN PANTALLA COMPLETA -->
-    <section class="hero-section">
-        <!-- Imagen de fondo principal -->
-        <img src="./images/fogon_bioetanol_madera.jpg" alt="Metal Creativo Chile" class="hero-bg-img">
+    <!-- HERO SECTION EN PANTALLA COMPLETA CON SLIDER AUTOMÁTICO 4s DE DERECHA A IZQUIERDA -->
+    <section class="hero-section" x-data="{
+        currentSlide: 0,
+        slides: [
+            './images/fogon_bioetanol_madera.jpg',
+            './images/hero_remolque_slide.png'
+        ],
+        init() {
+            setInterval(() => {
+                this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+            }, 4000);
+        }
+    }">
+        <!-- Carro de Imágenes en Desplazamiento Suave de Derecha a Izquierda -->
+        <div class="absolute inset-0 w-full h-full overflow-hidden">
+            <div class="w-full h-full flex transition-transform duration-1000 ease-in-out" :style="`transform: translateX(-${currentSlide * 100}%)`">
+                <template x-for="(imgSrc, idx) in slides" :key="idx">
+                    <div class="w-full h-full shrink-0 relative">
+                        <img :src="imgSrc" alt="Metal Creativo Chile Hero" class="hero-bg-img">
+                    </div>
+                </template>
+            </div>
+        </div>
         <div class="hero-overlay-gradient"></div>
+
+        <!-- Puntos Indicadores del Slider -->
+        <div class="absolute bottom-6 z-20 flex items-center justify-center gap-2">
+            <template x-for="(imgSrc, idx) in slides" :key="idx">
+                <button @click="currentSlide = idx" :class="currentSlide === idx ? 'bg-orange-500 w-8' : 'bg-white/40 w-2 hover:bg-white/70'" class="h-2 rounded-full transition-all duration-500 cursor-pointer border-none"></button>
+            </template>
+        </div>
 
         <div class="relative z-10 text-center max-w-3xl px-4 mx-auto space-y-6 pt-16">
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold metal-title-gradient leading-tight tracking-tight">
