@@ -180,10 +180,8 @@
     <nav class="absolute top-0 left-0 right-0 z-50 bg-transparent py-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <div class="flex items-center gap-3.5 cursor-pointer">
-                <!-- LOGO VIVO DE FLAMA EN CHISPAS 60 FPS (OPCIÓN 3 OFICIAL) -->
-                <div class="relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center shrink-0 rounded-lg bg-black/40 border border-white/10 p-1 shadow-lg shadow-orange-950/30">
-                    <canvas id="navFlameCanvas" class="w-full h-full block"></canvas>
-                </div>
+                <!-- LOGO OFICIAL DE MARCA -->
+                <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-10 sm:h-12 w-auto object-contain drop-shadow">
                 <div>
                     <span class="text-xl sm:text-3xl font-black tracking-wider metal-creativo-title font-heading uppercase leading-none block">METAL CREATIVO</span>
                 </div>
@@ -376,6 +374,49 @@
                 </div>
             </section>
 
+            <!-- SECCIÓN: FOLLETOS & PUBLICACIONES INSTAGRAM (@metalcreativo.cl) -->
+            <section class="space-y-10">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="inline-block px-3 py-1 rounded bg-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider">
+                        📸 INSTAGRAM @METALCREATIVO.CL
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl section-glow-title font-heading">Folletos & Catálogo Oficial</h2>
+                    <p class="text-gray-400 text-sm">Explora nuestras gráficas de catálogo y piezas promocionales oficiales.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="metal-card rounded-2xl overflow-hidden border border-white/10 group hover:border-orange-500/50 transition duration-300">
+                        <div class="aspect-square bg-black overflow-hidden relative">
+                            <img src="./images/folleto_1.png" alt="Folleto Instagram 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-4 text-center">
+                            <h4 class="text-white font-bold text-sm">Catálogo Oficial #1</h4>
+                            <p class="text-gray-400 text-xs mt-1">Diseño promocional de marca</p>
+                        </div>
+                    </div>
+
+                    <div class="metal-card rounded-2xl overflow-hidden border border-white/10 group hover:border-orange-500/50 transition duration-300">
+                        <div class="aspect-square bg-black overflow-hidden relative">
+                            <img src="./images/folleto_3.png" alt="Folleto Instagram 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-4 text-center">
+                            <h4 class="text-white font-bold text-sm">Catálogo Oficial #2</h4>
+                            <p class="text-gray-400 text-xs mt-1">Diseño promocional de marca</p>
+                        </div>
+                    </div>
+
+                    <div class="metal-card rounded-2xl overflow-hidden border border-white/10 group hover:border-orange-500/50 transition duration-300">
+                        <div class="aspect-square bg-black overflow-hidden relative">
+                            <img src="./images/folleto_4.png" alt="Folleto Instagram 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-4 text-center">
+                            <h4 class="text-white font-bold text-sm">Catálogo Oficial #3</h4>
+                            <p class="text-gray-400 text-xs mt-1">Diseño promocional de marca</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- SECCIÓN: HABLEMOS DE TU PROYECTO -->
             <section id="contacto" class="max-w-3xl mx-auto space-y-8 text-center pt-8">
                 <div class="space-y-2">
@@ -413,9 +454,15 @@
 
     <!-- FOOTER CON RESPLANDOR DE BRASAS AL PIE -->
     <footer class="py-12 border-t border-white/10 text-gray-500 text-xs bg-[#050608] relative z-10 text-center">
-        <div class="max-w-7xl mx-auto px-4 space-y-2">
-            <p class="text-gray-400">&copy; 2026 Metal Creativo Chile (@metalcreativo.cl). Todos los derechos reservados.</p>
-            <p class="text-gray-600">Fabricación artesanal en acero macizo y estufas a bioetanol | Despacho a todo Chile.</p>
+        <div class="max-w-7xl mx-auto px-4 flex flex-col items-center space-y-4">
+            <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-12 w-auto object-contain opacity-80">
+            <div class="space-y-1">
+                <p class="text-gray-400">&copy; 2026 Metal Creativo Chile (@metalcreativo.cl). Todos los derechos reservados.</p>
+                <p class="text-gray-600">Fabricación artesanal en acero macizo y estufas a bioetanol | Despacho a todo Chile.</p>
+                <a href="./marketing-assets.html" class="inline-block text-orange-500 hover:text-orange-400 font-semibold underline transition-colors pt-1">
+                    <i class="fa-solid fa-robot mr-1"></i> Hub de Marketing & Assets IA (Canva / Claude)
+                </a>
+            </div>
         </div>
     </footer>
 
