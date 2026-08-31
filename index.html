@@ -236,24 +236,57 @@
             </template>
         </div>
 
-        <div class="relative z-10 text-center max-w-3xl px-4 sm:px-6 mx-auto space-y-4 sm:space-y-6 pt-16 sm:pt-24 pb-8">
-            <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold metal-title-gradient leading-tight tracking-tight">
-                Forjamos el Futuro en Acero y Hierro
+        <div class="relative z-10 text-center max-w-4xl px-4 sm:px-6 mx-auto space-y-6 pt-16 sm:pt-24 pb-8">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-400 text-xs font-extrabold uppercase tracking-widest backdrop-blur-sm">
+                <i class="fa-solid fa-hammer text-orange-400"></i> FORJA ARTESANAL & METALURGIA CHILENA
+            </span>
+
+            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold metal-title-gradient leading-tight tracking-tight">
+                Forjamos el Futuro en Acero Macizo
             </h1>
-            <p class="text-gray-300 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-normal opacity-90 px-2">
-                Precisión artesanal, resistencia industrial. Creamos piezas únicas en acero cepillado, estufas decorativas a bioetanol y barras rígidas de remolque para todo Chile.
+            <p class="text-gray-300 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed font-normal opacity-90 px-2">
+                Ingeniería metálica de precisión y fabricación artesanal en Chile. Dos líneas de producto con un solo estándar: <strong class="text-white">resistencia industrial insuperable</strong>.
             </p>
-            
-            <!-- DOS BOTONES DIRECTOS -->
-            <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none mx-auto">
-                <button @click="activeTab = 'hogar'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="btn-metal-orange w-full sm:w-auto px-5 sm:px-6 py-3 rounded-lg font-bold text-xs sm:text-sm no-underline flex items-center justify-center gap-2 cursor-pointer">
-                    <i class="fa-solid fa-fire text-sm"></i>
-                    <span>Estufas a Bioetanol</span>
-                </button>
-                <button @click="activeTab = 'auto'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="btn-metal-primary w-full sm:w-auto px-5 sm:px-6 py-3 rounded-lg font-bold text-xs sm:text-sm no-underline flex items-center justify-center gap-2 cursor-pointer">
-                    <i class="fa-solid fa-shield-halved text-sm"></i>
-                    <span>Barra de Remolque (Lanza)</span>
-                </button>
+
+            <!-- SELECTOR DUAL VISUAL DE PRODUCTOS (HERO SPLIT CARDS) -->
+            <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto text-left">
+                <!-- TARJETA DUAL 1: BIOETANOL -->
+                <div @click="activeTab = 'hogar'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="group cursor-pointer p-4 sm:p-5 rounded-xl bg-gradient-to-br from-neutral-900/90 to-neutral-950/90 border border-orange-500/30 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-300 relative overflow-hidden backdrop-blur-md">
+                    <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-orange-500/10 rounded-full blur-xl group-hover:bg-orange-500/25 transition-all"></div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-orange-500/20 border border-orange-500/40 text-orange-400 flex items-center justify-center text-lg shrink-0">
+                            <i class="fa-solid fa-fire"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-black uppercase text-orange-400 tracking-wider">Línea Hogar & Terrazas</span>
+                            <h3 class="text-base sm:text-lg font-extrabold text-white group-hover:text-orange-400 transition-colors">Bioetanol & Fogones</h3>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed mb-3">Estufas decorativas en acero macizo e inóx. Combustión ecológica limpia sin humo ni cañón.</p>
+                    <div class="flex items-center justify-between text-xs font-bold text-orange-400 group-hover:translate-x-1 transition-transform">
+                        <span>Explorar Fogones desde $149.900</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <!-- TARJETA DUAL 2: BARRA REMOLQUE -->
+                <div @click="activeTab = 'auto'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="group cursor-pointer p-4 sm:p-5 rounded-xl bg-gradient-to-br from-neutral-900/90 to-neutral-950/90 border border-sky-500/30 hover:border-sky-400 hover:shadow-2xl hover:shadow-sky-500/20 transition-all duration-300 relative overflow-hidden backdrop-blur-md">
+                    <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-sky-500/10 rounded-full blur-xl group-hover:bg-sky-500/25 transition-all"></div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-10 h-10 rounded-lg bg-sky-500/20 border border-sky-500/40 text-sky-400 flex items-center justify-center text-lg shrink-0">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-black uppercase text-sky-400 tracking-wider">Línea Automotriz Ley 2026</span>
+                            <h3 class="text-base sm:text-lg font-extrabold text-white group-hover:text-sky-400 transition-colors">Barra Rígida de Remolque</h3>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed mb-3">Conexión metálica maciza forjada. Exigencia legal Ley DS N° 55/2025 MTT (3.500 kg arrastre).</p>
+                    <div class="flex items-center justify-between text-xs font-bold text-sky-400 group-hover:translate-x-1 transition-transform">
+                        <span>Ver Especificación $89.900</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -280,133 +313,207 @@
                 </div>
 
                 <!-- CATEGORÍA 1: FOGÓN DE MESA & ESTUFAS A BIOETANOL -->
-                <div x-show="activeTab === 'hogar'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="metal-card rounded-xl p-5 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                <div x-show="activeTab === 'hogar'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="metal-card rounded-2xl p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-orange-500/30">
                     
-                    <div class="lg:col-span-6 space-y-4 sm:space-y-6">
-                        <span class="inline-block px-3 py-1 rounded bg-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider">
-                            🔥 CALEFACCIÓN ECOLÓGICA DECORATIVA
-                        </span>
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Fogón de Mesa & Estufas a Bioetanol</h3>
-                        <p class="text-gray-400 text-xs sm:text-sm md:text-base leading-relaxed">
-                            Fogones decorativos fabricados artesanalmente en acero macizo con quemador de acero inoxidable y bandeja de madera con piedras decorativas. Combustión limpia para departamentos, salones y terrazas.
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/30 text-orange-400 text-xs font-black uppercase tracking-wider">
+                                🔥 CALEFACCIÓN ECOLÓGICA DECORATIVA
+                            </span>
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-black uppercase tracking-wider">
+                                🌿 APTO DEPARTAMENTOS & TERRAZAS
+                            </span>
+                        </div>
+
+                        <h3 class="text-2xl sm:text-4xl font-extrabold text-white">Fogón de Mesa & Estufas a Bioetanol</h3>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            Diseño contemporáneo fabricado artesanalmente en acero macizo. Diseñado para brindar la calidez del fuego real en ambientes interiores y exteriores <strong class="text-orange-400">sin producir humo, olores ni residuos de ceniza</strong>.
                         </p>
 
-                        <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6">
-                            <div>
-                                <span class="text-xs text-gray-400 block font-bold uppercase">PRECIO DE LANZAMIENTO</span>
-                                <span class="text-2xl sm:text-3xl font-black text-white">$149.900 <span class="text-xs sm:text-sm font-bold text-gray-400">CLP</span></span>
+                        <!-- LISTA TÉCNICA DE PUNTOS CLAVE -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
+                                <i class="fa-solid fa-circle-check text-orange-400 mt-0.5"></i>
+                                <span><strong>Quemador Quirúrgico AISI 304</strong> anti-vuelco con fibra cerámica de retención.</span>
                             </div>
-                            <a href="https://wa.me/56912345678?text=Hola!%20Quiero%20cotizar%20el%20Fog%C3%B3n%20de%20Mesa%20a%20Bioetanol" target="_blank" class="btn-metal-orange w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 rounded-lg text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-3 no-underline">
-                                <i class="fa-brands fa-whatsapp text-base sm:text-lg"></i>
+                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
+                                <i class="fa-solid fa-circle-check text-orange-400 mt-0.5"></i>
+                                <span><strong>Autonomía 3.5h a 5.5h</strong> por carga (cobertura térmica 25 m² a 45 m²).</span>
+                            </div>
+                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
+                                <i class="fa-solid fa-circle-check text-orange-400 mt-0.5"></i>
+                                <span><strong>Madera Noble & Cuarzo</strong>: Bandeja tratada e incrustación de piedras decorativas.</span>
+                            </div>
+                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
+                                <i class="fa-solid fa-circle-check text-orange-400 mt-0.5"></i>
+                                <span><strong>Sin Instalaciones Complejas</strong>: No requiere ductos de ventilación ni cañón.</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-white/10">
+                            <div>
+                                <span class="text-xs text-gray-400 block font-bold uppercase tracking-wider">PRECIO OFICIAL DE LANZAMIENTO</span>
+                                <span class="text-3xl font-black text-white">$149.900 <span class="text-xs font-bold text-orange-400">CLP</span></span>
+                            </div>
+                            <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo!%20Quiero%20cotizar%20el%20Fog%C3%B3n%20a%20Bioetanol%20($149.900%20CLP).%20%C2%BFTienen%20disponibilidad%20para%20despacho?" target="_blank" class="btn-metal-orange px-8 py-3.5 rounded-xl text-white font-extrabold text-sm flex items-center justify-center gap-3 no-underline shadow-lg shadow-orange-500/20">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
                                 <span>Cotizar por WhatsApp</span>
                             </a>
                         </div>
                     </div>
 
                     <!-- FOTO PRINCIPAL LIMPIA BIOETANOL -->
-                    <div class="lg:col-span-6">
-                        <div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 h-56 sm:h-72 md:h-80 lg:h-96 w-full">
-                            <img src="./images/fogon_bioetanol_madera.jpg" alt="Fogón a Bioetanol Metal Creativo" class="w-full h-full object-cover">
+                    <div class="lg:col-span-5">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 h-64 sm:h-80 lg:h-[400px] w-full group">
+                            <img src="./images/fogon_bioetanol_madera.jpg" alt="Fogón a Bioetanol Metal Creativo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-[11px] text-gray-200 flex items-center gap-2">
+                                <i class="fa-solid fa-fire text-orange-400"></i> Fuego Real 100% Ecológico
+                            </div>
                         </div>
                     </div>
 
                 </div>
 
                 <!-- CATEGORÍA 2: REMOLQUE RÍGIDO (BARRA MACIZA FORJADA / LANZA) -->
-                <div x-show="activeTab === 'auto'" x-cloak x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="metal-card rounded-xl p-5 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                <div x-show="activeTab === 'auto'" x-cloak x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="metal-card rounded-2xl p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-sky-500/30">
                     
-                    <div class="lg:col-span-6 space-y-4 sm:space-y-6">
-                        <span class="inline-block px-3 py-1 rounded bg-sky-500/20 text-sky-400 text-xs font-bold uppercase tracking-wider">
-                            🛡️ FABRICACIÓN EN ACERO MACIZO
-                        </span>
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Barra Rígida de Remolque con Ojal Forjado</h3>
-                        <p class="text-gray-400 text-xs sm:text-sm md:text-base leading-relaxed">
-                            Barra maciza de acero al carbono con ojales forjados y soldadura de alta penetración TIG/MIG. Conexión rígida segura entre vehículos para transitar seguro por todo Chile.
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="px-3 py-1 rounded-full bg-sky-500/20 border border-sky-500/30 text-sky-400 text-xs font-black uppercase tracking-wider">
+                                🛡️ EXIGENCIA LEGAL CHILE 2026
+                            </span>
+                            <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-black uppercase tracking-wider">
+                                ⚖️ DECRETO SUPREMO N° 55/2025 MTT
+                            </span>
+                        </div>
+
+                        <!-- ALERTA DE LEY DE TRÁNSITO EN CHILE -->
+                        <div class="p-3.5 rounded-xl bg-gradient-to-r from-amber-950/60 to-red-950/60 border border-amber-500/40 text-xs text-amber-200 space-y-1">
+                            <div class="font-extrabold flex items-center gap-2 text-amber-300">
+                                <i class="fa-solid fa-triangle-exclamation text-amber-400"></i>
+                                <span>Norma Obligatoria de Remolque Particular en Chile:</span>
+                            </div>
+                            <p class="leading-relaxed opacity-95">
+                                Prohíbe estrictamente el uso de cuerdas, piolas, cables o cadenas entre particulares. Exige <strong class="text-white underline">acople metálico rígido</strong>. Evita infracción grave de tránsito y retención del vehículo.
+                            </p>
+                        </div>
+
+                        <h3 class="text-2xl sm:text-4xl font-extrabold text-white">Barra Rígida de Remolque con Ojal Forjado</h3>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            Fabricada en acero al carbono de alta resistencia con terminales forjados a fuego directo y cordón de soldadura estructural continuo TIG/MIG.
                         </p>
 
-                        <div class="pt-2 sm:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6">
-                            <div>
-                                <span class="text-xs text-gray-400 block font-bold uppercase">PRECIO DE OFERTA</span>
-                                <span class="text-2xl sm:text-3xl font-black text-white">$89.900 <span class="text-xs sm:text-sm font-bold text-gray-400">CLP</span></span>
+                        <!-- LISTA TÉCNICA DE PUNTOS CLAVE -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
+                                <i class="fa-solid fa-shield-halved text-sky-400 mt-0.5"></i>
+                                <span><strong>Capacidad de Arrastre</strong>: 2.500 kg a 3.500 kg directo en línea recta.</span>
                             </div>
-                            <a href="https://wa.me/56912345678?text=Hola!%20Quiero%20comprar%20la%20Barra%20R%C3%ADgida%20de%20Remolque" target="_blank" class="btn-metal-orange w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 rounded-lg text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-3 no-underline">
-                                <i class="fa-brands fa-whatsapp text-base sm:text-lg"></i>
+                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
+                                <i class="fa-solid fa-shield-halved text-sky-400 mt-0.5"></i>
+                                <span><strong>Estructura Rígida Maciza</strong>: Tubo 45-50 mm con pared de 3.5-4.0 mm.</span>
+                            </div>
+                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
+                                <i class="fa-solid fa-shield-halved text-sky-400 mt-0.5"></i>
+                                <span><strong>Accesorios Incluidos</strong>: Bandera roja de seguridad colgante de norma.</span>
+                            </div>
+                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
+                                <i class="fa-solid fa-shield-halved text-sky-400 mt-0.5"></i>
+                                <span><strong>Largo de Seguridad</strong>: 1.60 m a 1.80 m (distancia óptima auto tractor-remolque).</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-white/10">
+                            <div>
+                                <span class="text-xs text-gray-400 block font-bold uppercase tracking-wider">PRECIO DE LANZAMIENTO</span>
+                                <span class="text-3xl font-black text-white">$89.900 <span class="text-xs font-bold text-sky-400">CLP</span></span>
+                            </div>
+                            <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo!%20Quiero%20pedir%20la%20Barra%20R%C3%ADgida%20de%20Remolque%20Ley%2055/2025%20($89.900%20CLP).%20%C2%BFHacen%20env%C3%ADos%20a%20regiones?" target="_blank" class="btn-metal-orange px-8 py-3.5 rounded-xl text-white font-extrabold text-sm flex items-center justify-center gap-3 no-underline shadow-lg shadow-sky-500/20">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
                                 <span>Pedir por WhatsApp</span>
                             </a>
                         </div>
                     </div>
 
                     <!-- FOTO PRINCIPAL LIMPIA REMOLQUE -->
-                    <div class="lg:col-span-6">
-                        <div class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 h-56 sm:h-72 md:h-80 lg:h-96 w-full">
-                            <img src="./images/barra_remolque_uso.jpg" alt="Remolque Rígido Metal Creativo" class="w-full h-full object-cover">
+                    <div class="lg:col-span-5">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 h-64 sm:h-80 lg:h-[400px] w-full group">
+                            <img src="./images/barra_remolque_uso.jpg" alt="Remolque Rígido Metal Creativo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-[11px] text-gray-200 flex items-center gap-2">
+                                <i class="fa-solid fa-shield-halved text-sky-400"></i> Acople Metálico Rígido Homologado
+                            </div>
                         </div>
                     </div>
 
                 </div>
             </section>
 
-            <!-- SECCIÓN: MATERIALES PREMIUM -->
-            <section class="space-y-10">
-                <div class="text-center max-w-2xl mx-auto space-y-2">
-                    <h2 class="text-3xl sm:text-4xl section-glow-title font-heading">Materiales Premium</h2>
-                    <p class="text-gray-400 text-sm">Seleccionamos aleaciones de alta resistencia para garantizar durabilidad de por vida.</p>
+            <!-- SECCIÓN: LA BASE DEL NEGOCIO / MATERIALES PREMIUM & FORJA ARTESANAL -->
+            <section class="space-y-12">
+                <div class="text-center max-w-3xl mx-auto space-y-3">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 text-xs font-black uppercase tracking-widest border border-orange-500/30">
+                        <i class="fa-solid fa-industry"></i> LA BASE DEL NEGOCIO
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl section-glow-title font-heading">Forja & Metalurgia en Acero Macizo</h2>
+                    <p class="text-gray-400 text-xs sm:text-sm md:text-base leading-relaxed">
+                        Tanto nuestras estufas como las barras de remolque comparten el mismo ADN técnico: aleaciones certificadas, soldadura estructural continua y acabado artesanal para garantizar durabilidad de por vida.
+                    </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="metal-card p-6 rounded-xl space-y-3">
-                        <div class="w-12 h-12 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center text-xl">
+                    <div class="metal-card p-6 rounded-2xl space-y-3 border border-white/10 hover:border-orange-500/40">
+                        <div class="w-12 h-12 rounded-xl bg-orange-500/20 border border-orange-500/30 text-orange-400 flex items-center justify-center text-xl">
                             <i class="fa-solid fa-cube"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-white">Acero Inoxidable AISI 304</h3>
-                        <p class="text-gray-400 text-xs leading-relaxed">Resistente a la corrosión y altas temperaturas de combustión directa.</p>
+                        <h3 class="text-lg font-extrabold text-white">Acero Inoxidable AISI 304</h3>
+                        <p class="text-gray-400 text-xs leading-relaxed">Grado quirúrgico resistente a la corrosión y a temperaturas extremas de combustión directa sin deformación.</p>
                     </div>
 
-                    <div class="metal-card p-6 rounded-xl space-y-3">
-                        <div class="w-12 h-12 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center text-xl">
+                    <div class="metal-card p-6 rounded-2xl space-y-3 border border-white/10 hover:border-orange-500/40">
+                        <div class="w-12 h-12 rounded-xl bg-orange-500/20 border border-orange-500/30 text-orange-400 flex items-center justify-center text-xl">
                             <i class="fa-solid fa-hammer"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-white">Hierro & Acero Macizo Forjado</h3>
-                        <p class="text-gray-400 text-xs leading-relaxed">Barras macizas conformadas a fuego directo en la fragua artesanal.</p>
+                        <h3 class="text-lg font-extrabold text-white">Acero Macizo al Carbono</h3>
+                        <p class="text-gray-400 text-xs leading-relaxed">Barras macizas conformadas a fuego directo en fragua artesanal con ojales forjados sin uniones débiles.</p>
                     </div>
 
-                    <div class="metal-card p-6 rounded-xl space-y-3">
-                        <div class="w-12 h-12 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center text-xl">
-                            <i class="fa-solid fa-tree"></i>
+                    <div class="metal-card p-6 rounded-2xl space-y-3 border border-white/10 hover:border-orange-500/40">
+                        <div class="w-12 h-12 rounded-xl bg-orange-500/20 border border-orange-500/30 text-orange-400 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-shield"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-white">Madera Noble & Piedra Volcánica</h3>
-                        <p class="text-gray-400 text-xs leading-relaxed">Bandejas de madera tratada para alta temperatura y piedras refractarias.</p>
+                        <h3 class="text-lg font-extrabold text-white">Soldadura TIG/MIG & Pintura Electrostática</h3>
+                        <p class="text-gray-400 text-xs leading-relaxed">Cordones continuos de alta penetración estructural y recubrimiento anticorrosivo / ignífugo hasta 600°C.</p>
                     </div>
                 </div>
-            </section>
 
-            <!-- SECCIÓN: NUESTRO PROCESO DE FORJA -->
-            <section class="space-y-10">
-                <div class="text-center max-w-2xl mx-auto space-y-2">
-                    <h2 class="text-3xl sm:text-4xl section-glow-title font-heading">Nuestro Proceso</h2>
-                    <p class="text-gray-400 text-sm">Desde el plano técnico hasta el tratamiento térmico final.</p>
-                </div>
+                <!-- NUESTRO PROCESO TÉCNICO -->
+                <div class="pt-6 space-y-8">
+                    <div class="text-center max-w-xl mx-auto">
+                        <h3 class="text-2xl font-extrabold text-white">Nuestro Proceso de Fabricación</h3>
+                        <p class="text-xs text-gray-400">Del plano CAD a la entrega final en todo Chile.</p>
+                    </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div class="metal-card p-6 rounded-xl text-center space-y-3">
-                        <span class="inline-flex w-12 h-12 rounded-full bg-gradient-to-b from-orange-600 to-orange-800 text-white font-black text-lg items-center justify-center">1</span>
-                        <h4 class="text-white font-bold text-base">Diseño & Corte</h4>
-                        <p class="text-gray-400 text-xs">Planos CAD y corte de precisión en plasma/oxicorte.</p>
-                    </div>
-                    <div class="metal-card p-6 rounded-xl text-center space-y-3">
-                        <span class="inline-flex w-12 h-12 rounded-full bg-gradient-to-b from-orange-600 to-orange-800 text-white font-black text-lg items-center justify-center">2</span>
-                        <h4 class="text-white font-bold text-base">Forjado a Fuego</h4>
-                        <p class="text-gray-400 text-xs">Conformado de ojales y curvados en franja candente.</p>
-                    </div>
-                    <div class="metal-card p-6 rounded-xl text-center space-y-3">
-                        <span class="inline-flex w-12 h-12 rounded-full bg-gradient-to-b from-orange-600 to-orange-800 text-white font-black text-lg items-center justify-center">3</span>
-                        <h4 class="text-white font-bold text-base">Soldadura TIG/MIG</h4>
-                        <p class="text-gray-400 text-xs">Cordones continuos de alta resistencia estructural.</p>
-                    </div>
-                    <div class="metal-card p-6 rounded-xl text-center space-y-3">
-                        <span class="inline-flex w-12 h-12 rounded-full bg-gradient-to-b from-orange-600 to-orange-800 text-white font-black text-lg items-center justify-center">4</span>
-                        <h4 class="text-white font-bold text-base">Acabado Satinado</h4>
-                        <p class="text-gray-400 text-xs">Pintura electrostática y sellado térmico.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                        <div class="metal-card p-6 rounded-2xl text-center space-y-3 border border-white/10">
+                            <span class="inline-flex w-12 h-12 rounded-full bg-gradient-to-b from-orange-500 to-orange-700 text-white font-black text-lg items-center justify-center shadow-lg shadow-orange-500/30">1</span>
+                            <h4 class="text-white font-extrabold text-sm">Corte & CAD</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed">Planos técnicos y corte CNC plasma / oxicorte de precisión mm a mm.</p>
+                        </div>
+                        <div class="metal-card p-6 rounded-2xl text-center space-y-3 border border-white/10">
+                            <span class="inline-flex w-12 h-12 rounded-full bg-gradient-to-b from-orange-500 to-orange-700 text-white font-black text-lg items-center justify-center shadow-lg shadow-orange-500/30">2</span>
+                            <h4 class="text-white font-extrabold text-sm">Forjado a Fuego</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed">Conformado de terminales y ojales en franja candente a alta temperatura.</p>
+                        </div>
+                        <div class="metal-card p-6 rounded-2xl text-center space-y-3 border border-white/10">
+                            <span class="inline-flex w-12 h-12 rounded-full bg-gradient-to-b from-orange-500 to-orange-700 text-white font-black text-lg items-center justify-center shadow-lg shadow-orange-500/30">3</span>
+                            <h4 class="text-white font-extrabold text-sm">Soldadura TIG/MIG</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed">Cordones estructurales probados para soportar alto estrés y tracción.</p>
+                        </div>
+                        <div class="metal-card p-6 rounded-2xl text-center space-y-3 border border-white/10">
+                            <span class="inline-flex w-12 h-12 rounded-full bg-gradient-to-b from-orange-500 to-orange-700 text-white font-black text-lg items-center justify-center shadow-lg shadow-orange-500/30">4</span>
+                            <h4 class="text-white font-extrabold text-sm">Sellado Térmico</h4>
+                            <p class="text-gray-400 text-xs leading-relaxed">Tratamiento de pintura anticorrosiva o ignífuga y control de calidad final.</p>
+                        </div>
                     </div>
                 </div>
             </section>
