@@ -26,7 +26,7 @@ Este documento contiene las respuestas rápidas que debes guardar en tu WhatsApp
 > - Tubo de acero al carbono estructural con ojales forjados soldados.
 > - Se engancha mediante grilletes de seguridad entre ambos vehículos.
 > 
-> 💰 **Precio de Oferta**: **$89.900 CLP** (Normal $120.000 CLP en tiendas).  
+> 💰 **Precio de Oferta**: **$65.000 CLP** (Normal $89.900 CLP en tiendas).  
 > 📦 **Envíos**: Despacho a todo Chile.
 > 
 > ¿Para qué auto o camioneta la necesitas?"*

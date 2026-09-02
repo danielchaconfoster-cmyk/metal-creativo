@@ -1,0 +1,36 @@
+{
+  "company": "Metal Creativo Chile",
+  "currency": "CLP",
+  "products": {
+    "lanza_remolque": {
+      "id": "lanza_remolque",
+      "nombre_oficial": "Barra Rígida de Remolque Maciza",
+      "normativa": "Decreto Supremo N° 55/2025 MTT",
+      "precio_oficial": 65000,
+      "precio_formateado": "$65.000 CLP",
+      "especificaciones": [
+        "Estructura en acero al carbono macizo",
+        "Ojales forjados en fragua candente",
+        "Soldadura estructural TIG/MIG",
+        "Capacidad de arrastre directo 2.500 kg a 3.500 kg",
+        "Huincha reflectante reglamentaria DOT-C2 roja/blanca",
+        "Desmontable en 3 partes con pasadores de seguridad"
+      ],
+      "foto_oficial": "images/lanza_real_uso_oficial.jpg"
+    },
+    "fogon_bioetanol": {
+      "id": "fogon_bioetanol",
+      "nombre_oficial": "Fogón de Mesa & Estufas a Bioetanol",
+      "normativa": "Calefacción Ecológica sin Humo",
+      "precio_oficial": 149900,
+      "precio_formateado": "$149.900 CLP",
+      "especificaciones": [
+        "Quemador quirúrgico AISI 304 anti-vuelco",
+        "Fibra cerámica de retención",
+        "Autonomía 3.5h a 5.5h",
+        "Madera tratada y piedras decorativas de cuarzo"
+      ],
+      "foto_oficial": "images/fogon_bioetanol_madera.jpg"
+    }
+  }
+}

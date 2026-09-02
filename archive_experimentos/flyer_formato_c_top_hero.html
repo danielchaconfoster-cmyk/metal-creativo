@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formato C: Top Hero & Center Focus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1080px;
+            height: 1080px;
+            background: #090D15;
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 44px;
+        }
+
+        .bg-gradient {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 50% 0%, rgba(220, 38, 38, 0.2) 0%, transparent 60%),
+                linear-gradient(180deg, #0D1322 0%, #06090F 100%);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-solo {
+            height: 60px;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
+        }
+
+        .mtt-pill {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 18px;
+            border-radius: 12px;
+        }
+
+        .mtt-flag {
+            width: 12px;
+            height: 32px;
+            border-radius: 2px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .mtt-flag .blue { background: #0033A0; height: 50%; width: 100%; }
+        .mtt-flag .red { background: #DA291C; height: 50%; width: 100%; }
+
+        .mtt-info-c {
+            display: flex;
+            flex-direction: column;
+        }
+        .mtt-info-c .lbl1 { font-size: 10px; font-weight: 900; color: #FFFFFF; text-transform: uppercase; }
+        .mtt-info-c .lbl2 { font-size: 11px; font-weight: 800; color: #F59E0B; }
+
+        /* TITULAR ARRIBA CENTRADO */
+        .top-title-block {
+            text-align: center;
+            margin: 6px 0;
+        }
+
+        .hook-red {
+            background: #DC2626;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .title-huge {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 82px;
+            line-height: 0.9;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .title-huge span {
+            color: #F59E0B;
+        }
+
+        /* FOTO REAL CENTRADA APAISADA */
+        .center-photo-frame {
+            height: 410px;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .center-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 38%;
+        }
+
+        .badge-live-photo {
+            position: absolute;
+            bottom: 14px;
+            left: 14px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            color: #25D366;
+        }
+
+        /* FILA DE 3 BENEFICIOS PERSUASIVOS */
+        .benefits-triad {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin: 10px 0;
+        }
+
+        .triad-card {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 12px 14px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .triad-title {
+            font-size: 14px;
+            font-weight: 900;
+            color: #F59E0B;
+            margin-bottom: 2px;
+        }
+
+        .triad-desc {
+            font-size: 11px;
+            font-weight: 600;
+            color: #94A3B8;
+        }
+
+        /* FOOTER */
+        .footer-action-c {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 16px 30px;
+        }
+
+        .price-text-c {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 76px;
+            line-height: 0.85;
+            color: #FFFFFF;
+        }
+
+        .price-text-c span {
+            font-size: 20px;
+            color: #F59E0B;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+        }
+
+        .btn-cta-c {
+            background: #25D366;
+            color: #FFFFFF;
+            font-size: 20px;
+            font-weight: 900;
+            padding: 18px 36px;
+            border-radius: 14px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.45);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+
+    <div class="content">
+        <!-- HEADER: SOLO LOGO + LOGO MTT -->
+        <header class="header">
+            <img src="./public/images/logo_transparent.png" alt="Logo" class="logo-solo">
+            
+            <div class="mtt-pill">
+                <div class="mtt-flag">
+                    <div class="blue"></div>
+                    <div class="red"></div>
+                </div>
+                <div class="mtt-info-c">
+                    <span class="lbl1">Gobierno de Chile</span>
+                    <span class="lbl2">Decreto Supremo N° 55/2025 MTT</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- TITULAR SUPERIOR CENTRADO -->
+        <div class="top-title-block">
+            <div class="hook-red">EVITA PARTES GRAVES E INMOVILIZACIÓN</div>
+            <h1 class="title-huge">BARRA RÍGIDA <span>DE REMOLQUE</span></h1>
+        </div>
+
+        <!-- FOTO REAL EN EL CENTRO -->
+        <div class="center-photo-frame">
+            <img src="./public/images/lanza_real_uso_oficial.jpg" alt="Lanza de Remolque Real">
+            <div class="badge-live-photo">● Foto Real en Uso • Patente RC·CT·14</div>
+        </div>
+
+        <!-- 3 BENEFICIOS PERSUASIVOS PARA EL CLIENTE -->
+        <div class="benefits-triad">
+            <div class="triad-card">
+                <div class="triad-title">Arrastre 3.500 KG</div>
+                <div class="triad-desc">Para autos, SUV y camionetas</div>
+            </div>
+            <div class="triad-card">
+                <div class="triad-title">Cero Choques</div>
+                <div class="triad-desc">No se doblan ni dañan el auto</div>
+            </div>
+            <div class="triad-card">
+                <div class="triad-title">Despacho a Regiones</div>
+                <div class="triad-desc">Envío rápido a todo Chile</div>
+            </div>
+        </div>
+
+        <!-- FOOTER: PRECIO $65.000 Y CTA -->
+        <footer class="footer-action-c">
+            <div>
+                <span style="font-size: 11px; font-weight: 800; color: #94A3B8; letter-spacing: 2px; text-transform: uppercase; display: block;">PRECIO DE FÁBRICA</span>
+                <div class="price-text-c">$65.000 <span>CLP</span></div>
+            </div>
+
+            <div class="btn-cta-c">
+                PEDIR POR WHATSAPP
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

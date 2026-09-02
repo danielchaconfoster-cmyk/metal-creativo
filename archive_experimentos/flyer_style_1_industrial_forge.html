@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estilo 1: Industrial Forge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Chakra+Petch:wght@600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1080px;
+            height: 1080px;
+            background: #08090C;
+            color: #FFFFFF;
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* FONDO FORJA & TEXTURA DE METAL */
+        .forge-bg {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 90% 20%, rgba(245, 158, 11, 0.22) 0%, transparent 45%),
+                radial-gradient(circle at 10% 90%, rgba(220, 38, 38, 0.25) 0%, transparent 45%),
+                linear-gradient(135deg, #0A0D14 0%, #050608 100%);
+            z-index: 1;
+        }
+
+        /* FRANJA DE ADVERTENCIA INDUSTRIAL */
+        .hazard-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: repeating-linear-gradient(45deg, #F59E0B, #F59E0B 15px, #000000 15px, #000000 30px);
+            z-index: 20;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* HEADER INDUSTRIAL */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(245, 158, 11, 0.3);
+            padding-bottom: 16px;
+        }
+
+        .brand-stamp {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-stamp h2 {
+            font-family: 'Anton', sans-serif;
+            font-size: 32px;
+            letter-spacing: 3px;
+            color: #FFFFFF;
+        }
+
+        .badge-metal {
+            background: #F59E0B;
+            color: #000000;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 6px 14px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+        }
+
+        .law-alert {
+            background: rgba(220, 38, 38, 0.15);
+            border: 1px solid #DC2626;
+            color: #F87171;
+            font-size: 13px;
+            font-weight: 800;
+            padding: 8px 16px;
+            border-radius: 6px;
+            letter-spacing: 1.5px;
+        }
+
+        /* CUERPO */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .title-group h1 {
+            font-family: 'Anton', sans-serif;
+            font-size: 96px;
+            line-height: 0.88;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .title-group h1 span {
+            color: #F59E0B;
+            display: block;
+        }
+
+        .sub-tag {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #DC2626;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        /* TARJETAS DE ESPECIFICACIONES FORJA */
+        .forge-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .forge-card {
+            background: rgba(18, 22, 31, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 5px solid #F59E0B;
+            padding: 12px 18px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .forge-card span {
+            font-weight: 800;
+            font-size: 17px;
+            color: #E2E8F0;
+        }
+
+        .forge-card small {
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            color: #F59E0B;
+            letter-spacing: 1px;
+        }
+
+        /* IMAGEN DEL HERO */
+        .product-frame {
+            position: relative;
+            height: 480px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid rgba(245, 158, 11, 0.4);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+        }
+
+        .product-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 40%;
+        }
+
+        .seal-over-image {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #DC2626;
+            color: #FFFFFF;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 800;
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.6);
+        }
+
+        /* FOOTER FORJA */
+        .footer {
+            background: rgba(14, 18, 26, 0.95);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 14px;
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-tag-big {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .price-num {
+            font-family: 'Anton', sans-serif;
+            font-size: 80px;
+            line-height: 0.9;
+            color: #FFFFFF;
+            letter-spacing: 2px;
+        }
+
+        .price-currency {
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            color: #F59E0B;
+        }
+
+        .btn-forge-cta {
+            background: #25D366;
+            color: #FFFFFF;
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            padding: 18px 36px;
+            border-radius: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="hazard-bar"></div>
+    <div class="forge-bg"></div>
+
+    <div class="content">
+        <header class="header">
+            <div class="brand-stamp">
+                <h2>METAL CREATIVO</h2>
+                <div class="badge-metal">MAESTRANZA CHILE</div>
+            </div>
+            <div class="law-alert">DECRETO SUPREMO 55/2025 MTT</div>
+        </header>
+
+        <main class="main-layout">
+            <div class="title-group">
+                <span class="sub-tag">ACOPLE METÁLICO RÍGIDO OBLIGATORIO</span>
+                <h1>BARRA RÍGIDA <span>DE REMOLQUE</span></h1>
+
+                <div class="forge-cards">
+                    <div class="forge-card">
+                        <span>01 • Acero Macizo Forjado en Fragua</span>
+                        <small>ALTO IMPACTO</small>
+                    </div>
+                    <div class="forge-card" style="border-left-color: #DC2626;">
+                        <span>02 • Soldadura Continua TIG/MIG</span>
+                        <small>ESTRUCTURAL</small>
+                    </div>
+                    <div class="forge-card" style="border-left-color: #2563EB;">
+                        <span>03 • Arrastre 2.500 a 3.500 kg Directo</span>
+                        <small>3.5 TON</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-frame">
+                <img src="./public/images/lanza_real_uso_oficial.jpg" alt="Lanza Real Metal Creativo">
+                <div class="seal-over-image">100% HOMOLOGADA</div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div>
+                <span style="font-size: 12px; font-weight: 700; color: #94A3B8; letter-spacing: 2px; text-transform: uppercase; display: block;">Precio Oficial de Fábrica</span>
+                <div class="price-tag-big">
+                    <div class="price-num">$65.000</div>
+                    <div class="price-currency">CLP</div>
+                </div>
+            </div>
+            <div class="btn-forge-cta">PEDIR POR WHATSAPP</div>
+        </footer>
+    </div>
+</body>
+</html>

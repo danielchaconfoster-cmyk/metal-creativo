@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flyer Barra de Remolque $65.000 CLP</title>
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 1080px;
+            height: 1080px;
+            background-color: #07090E;
+            color: #FFFFFF;
+            font-family: 'Space Grotesk', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* FONDO CINEMÁTICO */
+        .bg-glow {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 85% 15%, rgba(220, 38, 38, 0.18) 0%, transparent 50%),
+                radial-gradient(circle at 15% 85%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
+                linear-gradient(180deg, #0A0D15 0%, #06070B 100%);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+            padding-bottom: 20px;
+        }
+
+        .brand-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 38px;
+            letter-spacing: 3px;
+            color: #FFFFFF;
+        }
+
+        .badge-law {
+            background-color: #DC2626;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            padding: 8px 20px;
+            border-radius: 8px;
+            text-transform: uppercase;
+        }
+
+        /* MAIN BODY GRID */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 40px;
+            align-items: center;
+            margin: 24px 0;
+        }
+
+        .headline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 82px;
+            line-height: 0.92;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .headline span {
+            color: #F59E0B;
+        }
+
+        .specs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .spec-item {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-left: 6px solid #DC2626;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .spec-item.accent-blue {
+            border-left-color: #2563EB;
+        }
+
+        .spec-item.accent-gold {
+            border-left-color: #F59E0B;
+        }
+
+        /* IMAGE CONTAINER */
+        .image-card {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 35%;
+        }
+
+        .image-badge {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            right: 16px;
+            background: rgba(7, 9, 14, 0.88);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            color: #F59E0B;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* FOOTER / PRICE & CTA */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 24px 36px;
+            border-radius: 20px;
+        }
+
+        .price-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-label {
+            font-size: 14px;
+            font-weight: 800;
+            color: #94A3B8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .price-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 78px;
+            line-height: 0.9;
+            color: #FFFFFF;
+            letter-spacing: 2px;
+        }
+
+        .price-value span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            color: #F59E0B;
+            font-weight: 800;
+        }
+
+        .btn-cta {
+            background-color: #25D366;
+            color: #FFFFFF;
+            font-size: 24px;
+            font-weight: 900;
+            padding: 20px 40px;
+            border-radius: 14px;
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <div class="content">
+        <!-- HEADER -->
+        <header class="header">
+            <div class="brand-title">METAL CREATIVO CHILE</div>
+            <div class="badge-law">LEY DS N° 55/2025 MTT</div>
+        </header>
+
+        <!-- MAIN GRID -->
+        <main class="main-grid">
+            <!-- COLUMNA IZQUIERDA: TEXTO Y ESPECIFICACIONES -->
+            <div>
+                <h1 class="headline">
+                    BARRA RÍGIDA <br>
+                    <span>DE REMOLQUE</span>
+                </h1>
+
+                <div class="specs-list">
+                    <div class="spec-item">
+                        <span>01 • Acero Macizo con Ojales Forjados en Fragua</span>
+                    </div>
+                    <div class="spec-item accent-blue">
+                        <span>02 • Soldadura Estructural TIG/MIG Certificada</span>
+                    </div>
+                    <div class="spec-item accent-gold">
+                        <span>03 • Arrastre Directo 2.500 kg a 3.500 kg</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: FOTOGRAFÍA REAL DEL PRODUCTO -->
+            <div class="image-card">
+                <img src="./public/images/lanza_real_uso_oficial.jpg" alt="Barra Rígida Real Metal Creativo">
+                <div class="image-badge">
+                    Conexión Homologada • Huincha DOT-C2
+                </div>
+            </div>
+        </main>
+
+        <!-- FOOTER: PRECIO OFICIAL $65.000 Y CTA WHATSAPP -->
+        <footer class="footer">
+            <div class="price-box">
+                <span class="price-label">Precio Oficial de Fábrica</span>
+                <div class="price-value">$65.000 <span>CLP</span></div>
+            </div>
+
+            <div class="btn-cta">
+                PEDIR POR WHATSAPP
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

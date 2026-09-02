@@ -6,7 +6,7 @@
 
 ## 📌 1. RESUMEN DE MARCA Y POSICIONAMIENTO
 
-**Metal Creativo** es una marca chilena dedicada al diseño y fabricación artesanal en acero macizo de dos líneas de productos principales:
+**Metal Creativo** es una marca chilena dedicada al diseño y fabricación en acero macizo de dos líneas de productos principales:
 1. **Línea Hogar & Terrazas**: Fogones decorativos de sobremesa y estufas de piso a bioetanol.
 2. **Línea Automotriz & Seguridad**: Barras rígidas de remolque con ojal forjado para vehículos.
 
@@ -27,7 +27,7 @@
 * **Norma Exigida**: Prohíbe estrictamente el uso de cuerdas, piolas, tirantes de género, cables o cadenas para el remolque de vehículos particulares.
 * **Exigencia**: Es obligatorio el uso de acople metálico rígido entre vehículos.
 * **Sanción**: Infracción grave de tránsito y retención del vehículo en caso de accidente o fiscalización por Carabineros / Inspectores de Transportes.
-* **Precio de Mercado en Chile**: $89.900 CLP (Metal Creativo).
+* **Precio de Mercado en Chile**: $65.000 CLP (Metal Creativo).
 
 ---
 

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garantía Legal 6 Meses y Política de Devoluciones | Metal Creativo Chile</title>
+    <meta name="description" content="Conoce la garantía legal de 6 meses (SERNAC Ley 19.496), cambios, retracto y soporte técnico en Metal Creativo Chile.">
+    <link rel="canonical" href="https://metalcreativo.cl/devoluciones-garantia.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Garantía Legal 6 Meses y Política de Devoluciones | Metal Creativo Chile">
+    <meta property="og:description" content="Conoce la garantía legal de 6 meses (SERNAC Ley 19.496), cambios, retracto y soporte técnico en Metal Creativo Chile.">
+    <meta property="og:image" content="https://metalcreativo.cl/images/barra_remolque_uso.jpg">
+    <meta property="og:url" content="https://metalcreativo.cl/devoluciones-garantia.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Metal Creativo Chile">
+    <meta property="og:locale" content="es_CL">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #07080b;
+            --bg-card: #11141a;
+            --brand-orange: #ff6a00;
+        }
+        body {
+            background-color: var(--bg);
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        .metal-card {
+            background: linear-gradient(145deg, #14171d 0%, #0d0f13 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        }
+        .btn-metal-orange {
+            background: linear-gradient(180deg, #ff7a14 0%, #d95500 100%);
+            border: 1px solid #ff8c3b;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .btn-metal-orange:hover {
+            box-shadow: 0 0 25px rgba(255, 106, 0, 0.6);
+            transform: translateY(-2px);
+        }
+        .btn-metal-primary {
+            background: linear-gradient(180deg, #3a3f47 0%, #1e2229 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .btn-metal-primary:hover {
+            border-color: #ff6a00;
+            box-shadow: 0 0 20px rgba(255, 106, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body x-data="cartStore()" class="min-h-screen flex flex-col selection:bg-orange-500 selection:text-white">
+
+    <!-- NAVBAR COMÚN -->
+    <nav class="sticky top-0 z-50 bg-[#07080b]/95 backdrop-blur-md border-b border-white/10 py-3.5 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-10 sm:h-12 w-auto object-contain group-hover:scale-105 transition-transform">
+            </a>
+
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-300">
+                <a href="index.html#showcase" class="hover:text-orange-400 transition-colors">Catálogo</a>
+                <a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors">Preguntas Frecuentes</a>
+                <a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors">Garantía 6 Meses</a>
+                <a href="contacto.html" class="hover:text-orange-400 transition-colors">Contacto</a>
+                <a href="https://instagram.com/metalcreativo.cl" target="_blank" class="hover:text-orange-400 flex items-center gap-1.5 text-orange-400 font-semibold bg-orange-500/10 border border-orange-500/30 px-3 py-1 rounded-full text-xs">
+                    <i class="fa-brands fa-instagram text-sm"></i> @metalcreativo.cl
+                </a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <!-- BOTÓN CARRITO CON CONTADOR REACTIVO -->
+                <button @click="cartOpen = true" class="relative p-2.5 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer shadow-lg" title="Ver Carrito de Compras">
+                    <i class="fa-solid fa-cart-shopping text-base text-orange-400"></i>
+                    <span x-show="totalItems > 0" x-text="totalItems" class="absolute -top-1.5 -right-1.5 bg-orange-600 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center border-2 border-[#07080b]"></span>
+                </button>
+                <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo%20(@metalcreativo.cl),%20quisiera%20hacer%20una%20consulta" target="_blank" class="btn-metal-orange px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2 shadow-lg shadow-orange-500/20">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                    <span class="hidden sm:inline">WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="py-12 bg-gradient-to-b from-[#11141a] to-[#07080b] border-b border-white/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-3">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 text-xs font-extrabold uppercase tracking-widest border border-orange-500/30">
+                <i class="fa-solid fa-scale-balanced"></i> LEY N° 19.496 DEL CONSUMIDOR (CHILE)
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Garantía Legal 6 Meses & Devoluciones</h1>
+            <p class="text-gray-400 text-sm sm:text-base">Tu compra está 100% protegida. Transparencia, respaldo técnico de taller y cumplimiento del estándar SERNAC.</p>
+        </div>
+    </header>
+
+    <main class="flex-grow py-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
+            
+            <!-- GARANTIA SERNAC -->
+            <div class="metal-card p-6 sm:p-8 rounded-2xl border-l-4 border-orange-500 space-y-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-bold text-white">Garantía Legal de 6 Meses (Norma SERNAC Chile)</h2>
+                        <p class="text-xs sm:text-sm text-gray-400">Válida para todos nuestros productos desde el momento de la entrega.</p>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-300 leading-relaxed">
+                    Conforme a la legislación chilena (Ley N° 19.496), todos los productos fabricados por Metal Creativo cuentan con una garantía legal de <strong>6 meses</strong> ante fallas de fabricación, defectos en soldaduras estructurales o vicios de material. En caso de falla técnica, el cliente tiene derecho a optar libremente entre:
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                    <div class="p-4 bg-black/40 rounded-xl border border-white/5 text-xs text-gray-300">
+                        <strong class="text-orange-400 block mb-1 text-sm"><i class="fa-solid fa-wrench mr-1"></i> 1. Reparación Gratuita</strong>
+                        Ajuste y refuerzo inmediato en nuestro taller especializado.
+                    </div>
+                    <div class="p-4 bg-black/40 rounded-xl border border-white/5 text-xs text-gray-300">
+                        <strong class="text-orange-400 block mb-1 text-sm"><i class="fa-solid fa-arrows-rotate mr-1"></i> 2. Cambio Inmediato</strong>
+                        Reemplazo por una unidad completamente nueva sin cobro alguno.
+                    </div>
+                    <div class="p-4 bg-black/40 rounded-xl border border-white/5 text-xs text-gray-300">
+                        <strong class="text-orange-400 block mb-1 text-sm"><i class="fa-solid fa-money-bill-transfer mr-1"></i> 3. Devolución 100%</strong>
+                        Reembolso total del dinero abonado si el producto presenta desperfecto de fábrica.
+                    </div>
+                </div>
+            </div>
+
+            <!-- RETRACTO Y CAMBIOS -->
+            <div class="metal-card p-6 sm:p-8 rounded-2xl space-y-4">
+                <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-rotate-left text-orange-400"></i> Derecho a Retracto y Compras a Distancia
+                </h3>
+                <p class="text-sm text-gray-300 leading-relaxed">
+                    Para compras electrónicas realizadas a través de nuestro sitio web o catálogo digital, el cliente dispone de <strong>10 días corridos</strong> desde la recepción para solicitar la devolución por satisfacción:
+                </p>
+                <ul class="list-disc pl-5 text-xs sm:text-sm text-gray-300 space-y-2 leading-relaxed">
+                    <li>El producto debe encontrarse sin uso, en su embalaje original y con la totalidad de sus pasadores de seguridad, chavetas y accesorios.</li>
+                    <li>En devoluciones por retracto voluntario, los costos de transporte y despacho corren por cuenta del comprador. En caso de fallas técnicas o errores de despacho, Metal Creativo asume el 100% del costo de transporte.</li>
+                    <li><strong>Proyectos Especiales:</strong> Los pedidos con medidas o cortes personalizados a pedido del cliente no admiten retracto una vez iniciada la faena de corte.</li>
+                </ul>
+            </div>
+
+            <!-- PROCESO DE ATENCIÓN -->
+            <div class="metal-card p-6 sm:p-8 rounded-2xl space-y-4">
+                <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-orange-400"></i> ¿Cómo Solicitar Asistencia o Garantía?
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="p-4 bg-neutral-900/80 rounded-xl border border-white/5 space-y-2">
+                        <span class="w-6 h-6 rounded-full bg-orange-500 text-white font-black flex items-center justify-center">1</span>
+                        <strong class="text-white block">Contacto Inmediato</strong>
+                        <p class="text-gray-400">Envíanos un mensaje vía WhatsApp o al correo garantias@metalcreativo.cl indicando tu número de pedido.</p>
+                    </div>
+                    <div class="p-4 bg-neutral-900/80 rounded-xl border border-white/5 space-y-2">
+                        <span class="w-6 h-6 rounded-full bg-orange-500 text-white font-black flex items-center justify-center">2</span>
+                        <strong class="text-white block">Diagnóstico Visual</strong>
+                        <p class="text-gray-400">Adjunta fotos o video del producto para evaluar la situación con nuestros maestros metalúrgicos.</p>
+                    </div>
+                    <div class="p-4 bg-neutral-900/80 rounded-xl border border-white/5 space-y-2">
+                        <span class="w-6 h-6 rounded-full bg-orange-500 text-white font-black flex items-center justify-center">3</span>
+                        <strong class="text-white block">Solución en 48h</strong>
+                        <p class="text-gray-400">Coordinamos el cambio de producto o la devolución inmediata de los fondos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center pt-2">
+                <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo,%20necesito%20asistencia%20con%20la%20garant%C3%ADa%20de%20mi%20producto" target="_blank" class="btn-metal-orange inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-sm shadow-xl shadow-orange-500/20">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Contactar a Soporte Post-Venta</span>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER PROFESIONAL DE 4 COLUMNAS -->
+    <footer class="bg-[#050608] border-t border-white/10 pt-14 pb-8 text-xs text-gray-400 mt-auto relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+            <!-- COLUMNA 1: MARCA Y REDES -->
+            <div class="space-y-4">
+                <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-12 w-auto object-contain">
+                <p class="text-gray-400 text-xs leading-relaxed">
+                    Fabricación en acero y calefacción limpia a bioetanol. Taller metalúrgico chileno especializado en alta resistencia y soldadura estructural.
+                </p>
+                <div class="space-y-1.5 text-gray-300 font-medium text-xs">
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-orange-400"></i> Santiago, Chile (Despachos a todo el país)</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-envelope text-orange-400"></i> ventas@metalcreativo.cl</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-phone text-orange-400"></i> +56 9 1234 5678</p>
+                </div>
+                <div class="flex items-center gap-3 pt-2">
+                    <a href="https://instagram.com/metalcreativo.cl" target="_blank" class="w-9 h-9 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500 text-orange-400 flex items-center justify-center transition-colors" title="Instagram @metalcreativo.cl">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </a>
+                    <a href="https://wa.me/56912345678" target="_blank" class="w-9 h-9 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center transition-colors" title="WhatsApp Oficial">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </a>
+                    <a href="mailto:ventas@metalcreativo.cl" class="w-9 h-9 rounded-xl bg-neutral-900 border border-white/10 hover:border-sky-500 text-sky-400 flex items-center justify-center transition-colors" title="Correo Corporativo">
+                        <i class="fa-solid fa-envelope text-base"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- COLUMNA 2: PRODUCTOS -->
+            <div class="space-y-3">
+                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-orange-400"></i> Catálogo Oficial
+                </h4>
+                <ul class="space-y-2.5 text-xs">
+                    <li><a href="index.html#showcase" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-car-side text-sky-400 text-[10px]"></i> Barra Rígida Remolque ($65.000)</a></li>
+                    <li><a href="index.html#showcase" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-fire text-orange-400 text-[10px]"></i> Fogón a Bioetanol Ecológico ($149.900)</a></li>
+                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-hammer text-amber-400 text-[10px]"></i> Proyectos & Forja a Medida</a></li>
+                    <li><a href="checkout.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-emerald-400 text-[10px]"></i> Pasarela E-Commerce & Carrito</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMNA 3: LEGAL & SOPORTE -->
+            <div class="space-y-3">
+                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-scale-balanced text-orange-400"></i> Soporte & Legal
+                </h4>
+                <ul class="space-y-2.5 text-xs">
+                    <li><a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-shield-halved text-orange-400 text-[10px]"></i> Garantía Legal 6 Meses SERNAC</a></li>
+                    <li><a href="terminos-condiciones.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-file-contract text-gray-400 text-[10px]"></i> Términos & Condiciones de Compra</a></li>
+                    <li><a href="privacidad.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-lock text-gray-400 text-[10px]"></i> Política de Privacidad (Ley 19.628)</a></li>
+                    <li><a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-circle-question text-gray-400 text-[10px]"></i> Preguntas Frecuentes (FAQ)</a></li>
+                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-headset text-gray-400 text-[10px]"></i> Centro de Contacto & Cotización</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMNA 4: PAGOS & SEGURIDAD -->
+            <div class="space-y-3">
+                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-shield-check text-emerald-400"></i> Medios de Pago & Envíos
+                </h4>
+                <p class="text-xs text-gray-400 leading-relaxed">Compra con total seguridad. Pagos protegidos con certificado SSL de 256 bits y respaldo de garantía SERNAC.</p>
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-credit-card text-sky-400"></i> Webpay Plus
+                    </div>
+                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-building-columns text-emerald-400"></i> Transferencia
+                    </div>
+                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-truck-fast text-orange-400"></i> Starken
+                    </div>
+                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-box text-amber-400"></i> Chilexpress
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-gray-500">
+            <p>&copy; 2026 Metal Creativo Chile (@metalcreativo.cl). Todos los derechos reservados.</p>
+            <p class="text-center sm:text-right">Cumple con Ley N° 19.496 del Consumidor y Decreto Supremo MTT N° 55/2025.</p>
+        </div>
+    </footer>
+
+    <!-- DRAWER DEL CARRITO LATERAL SLIDE-OVER -->
+    <div x-cloak x-show="cartOpen" class="fixed inset-0 z-50 overflow-hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" @click="cartOpen = false"></div>
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-[#0e1117] border-l border-white/10 p-6 flex flex-col shadow-2xl">
+                <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-orange-400"></i> Tu Carrito de Compras
+                    </h2>
+                    <button @click="cartOpen = false" class="text-gray-400 hover:text-white p-1 cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
+                </div>
+                
+                <div class="flex-grow overflow-y-auto py-4 space-y-4">
+                    <template x-if="items.length === 0">
+                        <div class="text-center py-12 space-y-3">
+                            <i class="fa-solid fa-cart-flatbed text-4xl text-gray-600"></i>
+                            <p class="text-gray-400 text-sm">Tu carrito está vacío actualmente.</p>
+                            <a href="index.html#showcase" @click="cartOpen = false" class="btn-metal-orange inline-block px-4 py-2 rounded-xl text-xs font-bold">Explorar Catálogo</a>
+                        </div>
+                    </template>
+                    <template x-for="(item, index) in items" :key="item.id">
+                        <div class="flex gap-4 p-3.5 bg-black/40 rounded-xl border border-white/5 items-center">
+                            <img :src="item.image" :alt="item.name" class="w-16 h-16 object-cover rounded-lg border border-white/10">
+                            <div class="flex-grow">
+                                <h4 class="text-xs font-bold text-white" x-text="item.name"></h4>
+                                <span class="text-xs text-orange-400 font-bold" x-text="'$' + formatPrice(item.price) + ' CLP'"></span>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <button @click="decreaseQty(index)" class="w-6 h-6 rounded bg-neutral-800 text-white text-xs flex items-center justify-center cursor-pointer hover:bg-neutral-700">-</button>
+                                    <span class="text-xs font-bold text-white" x-text="item.qty"></span>
+                                    <button @click="increaseQty(index)" class="w-6 h-6 rounded bg-neutral-800 text-white text-xs flex items-center justify-center cursor-pointer hover:bg-neutral-700">+</button>
+                                    <button @click="removeItem(index)" class="ml-auto text-red-400 text-xs hover:text-red-300 cursor-pointer" title="Eliminar producto"><i class="fa-regular fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div x-show="items.length > 0" class="pt-4 border-t border-white/10 space-y-3">
+                    <div class="flex justify-between text-sm font-bold">
+                        <span class="text-gray-300">Subtotal:</span>
+                        <span class="text-orange-400 text-lg" x-text="'$' + formatPrice(totalAmount) + ' CLP'"></span>
+                    </div>
+                    <p class="text-[11px] text-gray-400 flex items-center gap-1.5">
+                        <i class="fa-solid fa-truck-fast text-sky-400"></i> Despachos rápidos a todo Chile por Starken / Chilexpress.
+                    </p>
+                    <a href="checkout.html" class="btn-metal-orange w-full py-3.5 rounded-xl font-bold text-center block text-sm shadow-lg shadow-orange-500/20">
+                        Proceder al Checkout Seguro <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT CARRITO GLOBAL PERSISTENTE -->
+    <script>
+        function cartStore() {
+            return {
+                cartOpen: false,
+                items: JSON.parse(localStorage.getItem('mc_cart') || '[]'),
+                get totalItems() {
+                    return this.items.reduce((acc, item) => acc + item.qty, 0);
+                },
+                get totalAmount() {
+                    return this.items.reduce((acc, item) => acc + (item.price * item.qty), 0);
+                },
+                formatPrice(val) {
+                    return new Intl.NumberFormat('es-CL').format(val);
+                },
+                saveCart() {
+                    localStorage.setItem('mc_cart', JSON.stringify(this.items));
+                },
+                addItem(id, name, price, image) {
+                    const existing = this.items.find(i => i.id === id);
+                    if (existing) {
+                        existing.qty++;
+                    } else {
+                        this.items.push({ id, name, price, image, qty: 1 });
+                    }
+                    this.saveCart();
+                    this.cartOpen = true;
+                },
+                buyNow(id, name, price, image) {
+                    const existing = this.items.find(i => i.id === id);
+                    if (!existing) {
+                        this.items.push({ id, name, price, image, qty: 1 });
+                    }
+                    this.saveCart();
+                    window.location.href = 'checkout.html';
+                },
+                increaseQty(idx) {
+                    this.items[idx].qty++;
+                    this.saveCart();
+                },
+                decreaseQty(idx) {
+                    if (this.items[idx].qty > 1) {
+                        this.items[idx].qty--;
+                    } else {
+                        this.items.splice(idx, 1);
+                    }
+                    this.saveCart();
+                },
+                removeItem(idx) {
+                    this.items.splice(idx, 1);
+                    this.saveCart();
+                }
+            }
+        }
+    </script>
+</body></html>

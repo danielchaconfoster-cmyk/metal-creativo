@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estilo 3: Tactical Overland 4x4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&family=Teko:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1080px;
+            height: 1080px;
+            background: #0E1015;
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* FONDO OFFROAD DIAGONAL CON CORTE EN CUÑA */
+        .tactical-bg {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 87, 34, 0.2) 0%, transparent 45%),
+                linear-gradient(135deg, #131722 0%, #0A0C10 100%);
+            z-index: 1;
+        }
+
+        .slash-orange {
+            position: absolute;
+            top: -100px;
+            left: 450px;
+            width: 25px;
+            height: 1400px;
+            background: #FF5722;
+            transform: rotate(-25deg);
+            z-index: 2;
+            box-shadow: 0 0 40px rgba(255, 87, 34, 0.8);
+        }
+
+        .slash-carbon {
+            position: absolute;
+            top: -100px;
+            left: 490px;
+            width: 600px;
+            height: 1400px;
+            background: #181C26;
+            transform: rotate(-25deg);
+            z-index: 1;
+            box-shadow: -15px 0 50px rgba(0,0,0,0.8);
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-overland {
+            font-family: 'Teko', sans-serif;
+            font-size: 42px;
+            letter-spacing: 2px;
+            color: #FFFFFF;
+            line-height: 1;
+        }
+
+        .brand-overland span {
+            color: #FF5722;
+        }
+
+        .badge-4x4 {
+            background: #FF5722;
+            color: #FFFFFF;
+            font-size: 13px;
+            font-weight: 900;
+            padding: 8px 18px;
+            border-radius: 6px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.5);
+        }
+
+        /* HERO LAYOUT */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .headline-overland {
+            font-family: 'Teko', sans-serif;
+            font-size: 110px;
+            line-height: 0.85;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .headline-overland span {
+            color: #FF5722;
+        }
+
+        .overland-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .badge-item {
+            background: rgba(24, 28, 38, 0.9);
+            border-left: 6px solid #FF5722;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        /* IMAGEN */
+        .image-frame-overland {
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 3px solid #FF5722;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+            position: relative;
+        }
+
+        .image-frame-overland img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 38%;
+        }
+
+        .chip-plate {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            background: #000000;
+            border: 1px solid #FF5722;
+            color: #FFFFFF;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        /* FOOTER */
+        .footer-overland {
+            background: #181C26;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-text {
+            font-family: 'Teko', sans-serif;
+            font-size: 85px;
+            line-height: 0.85;
+            color: #FFFFFF;
+        }
+
+        .btn-overland {
+            background: #25D366;
+            color: #FFFFFF;
+            font-size: 20px;
+            font-weight: 900;
+            padding: 20px 36px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.45);
+        }
+    </style>
+</head>
+<body>
+    <div class="tactical-bg"></div>
+    <div class="slash-orange"></div>
+    <div class="slash-carbon"></div>
+
+    <div class="content">
+        <header class="header">
+            <div class="brand-overland">METAL <span>CREATIVO</span> 4X4</div>
+            <div class="badge-4x4">DECRETO 55/2025 MTT</div>
+        </header>
+
+        <main class="hero-section">
+            <div>
+                <h1 class="headline-overland">BARRA RÍGIDA <br><span>DE REMOLQUE</span></h1>
+
+                <div class="overland-badges">
+                    <div class="badge-item">ARRATRE: 3.500 KG RESISTENCIA TOTAL</div>
+                    <div class="badge-item">OJALES MACIZOS FORJADOS A FUEGO</div>
+                    <div class="badge-item">DESMONTABLE EN 3 PARTES (MALETERO)</div>
+                </div>
+            </div>
+
+            <div class="image-frame-overland">
+                <img src="./public/images/lanza_real_uso_oficial.jpg" alt="Lanza 4x4">
+                <div class="chip-plate">PATENTE RC·CT·14 • CHILE</div>
+            </div>
+        </main>
+
+        <footer class="footer-overland">
+            <div>
+                <span style="font-size: 11px; font-weight: 800; color: #FF5722; letter-spacing: 2px; text-transform: uppercase; display: block;">OFERTA DIRECTA TALLER</span>
+                <div class="price-text">$65.000 <span style="font-size: 24px; color: #94A3B8; font-family: 'Montserrat', sans-serif;">CLP</span></div>
+            </div>
+            <div class="btn-overland">PEDIR POR WHATSAPP</div>
+        </footer>
+    </div>
+</body>
+</html>

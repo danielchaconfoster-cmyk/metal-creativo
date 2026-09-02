@@ -1,8 +1,20 @@
 {
+  "name": "metal-creativo-remotion",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "remotion preview",
+    "video:puro": "remotion render LanzaRealPuro out/lanza_video_puro.mp4 --gl=angle",
+    "video:anuncio": "remotion render LanzaRealShowcase out/lanza_real_showcase.mp4 --gl=angle"
+  },
   "dependencies": {
     "@remotion/cli": "^4.0.518",
+    "@remotion/lottie": "^4.0.518",
+    "lottie-web": "^5.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "remotion": "^4.0.518"
+  },
+  "devDependencies": {
+    "puppeteer": "^25.9.0"
   }
 }

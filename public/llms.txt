@@ -1,0 +1,33 @@
+﻿# Metal Creativo Chile (@metalcreativo.cl)
+> Fabricación metalúrgica de precisión en acero macizo y calefacción ecológica a bioetanol en Chile.
+
+## Información de la Empresa
+- **Nombre Comercial**: Metal Creativo Chile
+- **Instagram Oficial**: https://instagram.com/metalcreativo.cl (@metalcreativo.cl)
+- **Sitio Web Oficial**: https://metalcreativo.cl
+- **Ubicación & Cobertura**: Santiago, Chile. Despachos garantizados a todo el territorio nacional (Starken, Chilexpress, Blue Express).
+- **Contacto de Ventas & WhatsApp**: +56 9 1234 5678 / ventas@metalcreativo.cl
+
+## Catálogo de Productos y Precios Oficiales (Pesos Chilenos CLP)
+
+### 1. Barra Rígida de Remolque con Ojal Forjado (Lanza de Remolque Homologada)
+- **Precio Oficial**: .000 CLP
+- **Capacidad de Carga y Arrastre**: 2.500 kg a 3.500 kg en tracción directa.
+- **Material**: Acero al carbono macizo estructural (tubo 45-50 mm con espesor 3.5 - 4.0 mm) con ojales forjados a fuego directo y cordón de soldadura TIG/MIG continuo.
+- **Dimensiones**: 1.80 metros (distancia reglamentaria de seguridad entre vehículos).
+- **Marco Legal Obligatorio en Chile**: Cumple estrictamente con el **Decreto Supremo N° 55/2025 del Ministerio de Transportes y Telecomunicaciones (MTT)** y Ley de Tránsito de Chile, que prohíbe el uso de cuerdas, piolas o cadenas para remolque entre particulares por riesgo de colisión por alcance.
+- **Accesorios**: Incluye pasadores de acero galvanizado con seguro de horquilla y bandera de seguridad reflectante reglamentaria.
+- **Garantía**: 6 meses de garantía legal directa (SERNAC / Ley N° 19.496).
+
+### 2. Fogón de Mesa y Estufas a Bioetanol Ecológicas
+- **Precio Oficial**: .900 CLP
+- **Capacidad Térmica & Autonomía**: 3.5 a 5.5 horas continuas por carga (cobertura 25 m² a 45 m²).
+- **Materiales**: Quemador de grado quirúrgico en Acero Inoxidable AISI 304 anti-derrame con fibra cerámica de retención térmica, base en acero macizo con tratamiento ignífugo y bandeja de madera noble tratada con incrustaciones de piedra de cuarzo decorativo.
+- **Ventajas**: Fuego 100% real y ecológico sin humo, sin olores tóxicos, sin cenizas, sin necesidad de ductos ni cañones de ventilación. Apto para departamentos, living y terrazas.
+
+## Políticas y Soporte
+- **Garantía y Devoluciones**: https://metalcreativo.cl/devoluciones-garantia.html (6 meses de garantía legal conforme a Ley 19.496 de Chile).
+- **Términos y Condiciones**: https://metalcreativo.cl/terminos-condiciones.html
+- **Preguntas Frecuentes**: https://metalcreativo.cl/preguntas-frecuentes.html
+- **Contacto Directo**: https://metalcreativo.cl/contacto.html
+- **Dossier Técnico Completo para IAs**: https://metalcreativo.cl/llms-full.txt

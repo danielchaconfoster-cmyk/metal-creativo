@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flyer Impacto Metal Creativo $65.000 CLP</title>
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@700&family=Montserrat:ital,wght@0,800;0,900;1,900&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 1080px;
+            height: 1080px;
+            background-color: #0B0E14;
+            color: #FFFFFF;
+            font-family: 'Space Grotesk', sans-serif;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 48px;
+        }
+
+        /* ===== FONDO DINÁMICO DIAGONAL (ESTILO TAVASCI & NIKE AIR) ===== */
+        .bg-stripes {
+            position: absolute;
+            inset: -200px;
+            background: #0B0E14;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* FRANJA DIAGONAL DE ALTO IMPACTO */
+        .stripe-primary {
+            position: absolute;
+            top: -150px;
+            right: -100px;
+            width: 750px;
+            height: 1500px;
+            background: linear-gradient(135deg, #18202F 0%, #0F141E 50%, #080A0E 100%);
+            transform: rotate(-32deg);
+            box-shadow: -20px 0 60px rgba(0,0,0,0.8);
+            border-left: 2px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stripe-accent-red {
+            position: absolute;
+            top: -100px;
+            right: 560px;
+            width: 16px;
+            height: 1500px;
+            background: #DC2626;
+            transform: rotate(-32deg);
+            box-shadow: 0 0 35px rgba(220, 38, 38, 0.7);
+        }
+
+        .stripe-accent-silver {
+            position: absolute;
+            top: -100px;
+            right: 590px;
+            width: 4px;
+            height: 1500px;
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(-32deg);
+        }
+
+        .ambient-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.22) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+            z-index: 2;
+        }
+
+        /* ===== CONTENEDOR PRINCIPAL ===== */
+        .wrapper {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
+        }
+
+        /* ===== HEADER DE MARCA ===== */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 12px 24px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .brand-dot {
+            width: 14px;
+            height: 14px;
+            background: #DC2626;
+            border-radius: 50%;
+            box-shadow: 0 0 12px #DC2626;
+        }
+
+        .brand-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 20px;
+            letter-spacing: 2px;
+            color: #FFFFFF;
+        }
+
+        .law-tag {
+            background: linear-gradient(90deg, #DC2626 0%, #B91C1C 100%);
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 15px;
+            letter-spacing: 2px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.45);
+        }
+
+        /* ===== CUERPO PRINCIPAL ===== */
+        .main-hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 30px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        /* TIPOGRAFÍA DE IMPACTO (TIPO CAR HAULER + NIKE) */
+        .title-block {
+            position: relative;
+        }
+
+        .big-watermark {
+            position: absolute;
+            top: -55px;
+            left: -20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 160px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            line-height: 0.8;
+            pointer-events: none;
+            z-index: -1;
+            user-select: none;
+        }
+
+        .headline-giant {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 104px;
+            line-height: 0.88;
+            letter-spacing: 1px;
+            color: #FFFFFF;
+            text-transform: uppercase;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.9);
+        }
+
+        .headline-highlight {
+            color: #F59E0B;
+            display: block;
+        }
+
+        /* TEXTO SCRIPT / CALLIGRAPHY ROJO DINÁMICO (ESTILO RENTA Y VENTA) */
+        .script-accent {
+            font-family: 'Caveat', cursive;
+            font-size: 54px;
+            font-weight: 700;
+            color: #EF4444;
+            transform: rotate(-5deg) translateY(-12px);
+            display: inline-block;
+            text-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+        }
+
+        /* MODULAR STATS CARDS (ESTILO NIKE UI) */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .stat-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 14px 18px;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: #2563EB;
+        }
+
+        .stat-card.gold::before {
+            background: #F59E0B;
+        }
+
+        .stat-card.red::before {
+            background: #DC2626;
+        }
+
+        .stat-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            color: #FFFFFF;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #94A3B8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== CONTENEDOR HERO DEL PRODUCTO (ESTILO FLOTANTE NIKE / TAVASCI) ===== */
+        .hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-card-frame {
+            width: 100%;
+            height: 100%;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.22);
+            box-shadow: 
+                0 30px 70px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(220, 38, 38, 0.2);
+            position: relative;
+            background: #11151F;
+        }
+
+        .hero-card-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 40%;
+            filter: contrast(1.15) brightness(1.05);
+        }
+
+        /* FLOATING PILL BADGE */
+        .floating-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(11, 14, 20, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 18px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .badge-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .badge-tagline {
+            font-size: 11px;
+            font-weight: 800;
+            color: #F59E0B;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .badge-vehicle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 900;
+            color: #FFFFFF;
+        }
+
+        .badge-pill-chip {
+            background: #2563EB;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 6px 12px;
+            border-radius: 8px;
+            letter-spacing: 1px;
+        }
+
+        /* ===== FOOTER DE ALTA CONVERSIÓN (PRECIO + CTA) ===== */
+        .footer-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(16px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            padding: 22px 36px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+        }
+
+        .price-section {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .price-prefix {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-sub {
+            font-size: 13px;
+            font-weight: 800;
+            color: #94A3B8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .price-amount {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 88px;
+            line-height: 0.85;
+            color: #FFFFFF;
+            letter-spacing: 2px;
+        }
+
+        .price-currency {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: #F59E0B;
+        }
+
+        /* BOTÓN CTA CON EFECTO GLOW INTENSO */
+        .cta-button {
+            background: linear-gradient(135deg, #25D366 0%, #16A34A 100%);
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 22px;
+            padding: 22px 42px;
+            border-radius: 18px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 
+                0 12px 35px rgba(37, 211, 102, 0.45),
+                0 0 25px rgba(37, 211, 102, 0.2);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- FONDO DE FRANJAS DIAGONALES METAL/NEGRO (ESTILO TAVASCI) -->
+    <div class="bg-stripes">
+        <div class="stripe-primary"></div>
+        <div class="stripe-accent-red"></div>
+        <div class="stripe-accent-silver"></div>
+        <div class="ambient-glow"></div>
+    </div>
+
+    <!-- CONTENIDO SUPERIOR -->
+    <div class="wrapper">
+        <!-- HEADER -->
+        <header class="header">
+            <div class="brand-logo-badge">
+                <div class="brand-dot"></div>
+                <div class="brand-text">METAL CREATIVO</div>
+            </div>
+            <div class="law-tag">
+                LEY TRANSITO DS N° 55/2025
+            </div>
+        </header>
+
+        <!-- HERO PRINCIPAL -->
+        <main class="main-hero">
+            <!-- COLUMNA IZQUIERDA: TITULAR + SCRIPT ROJO + STATS TIPO NIKE -->
+            <div class="title-block">
+                <div class="big-watermark">2026</div>
+
+                <div class="script-accent">
+                    Acople Metálico Rígido
+                </div>
+
+                <h1 class="headline-giant">
+                    BARRA RÍGIDA <br>
+                    <span class="headline-highlight">DE REMOLQUE</span>
+                </h1>
+
+                <!-- TARJETAS MODULARES DE ESPECIFICACIONES -->
+                <div class="stats-grid">
+                    <div class="stat-card red">
+                        <span class="stat-value">3.500 KG</span>
+                        <span class="stat-label">Capacidad Arrastre</span>
+                    </div>
+                    <div class="stat-card gold">
+                        <span class="stat-value">FRAGUA DIRECTA</span>
+                        <span class="stat-label">Ojales Macizos</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">SOLDADURA TIG</span>
+                        <span class="stat-label">Acero Estructural</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">NORMA DOT-C2</span>
+                        <span class="stat-label">Huincha Reflectante</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: FOTOGRAFÍA HERO REAL CON FLOTANTES -->
+            <div class="hero-image-wrapper">
+                <div class="hero-card-frame">
+                    <img src="./public/images/lanza_real_uso_oficial.jpg" alt="Lanza de Remolque Real en Chile">
+                    
+                    <div class="floating-badge">
+                        <div class="badge-left">
+                            <span class="badge-tagline">100% Homologada</span>
+                            <span class="badge-vehicle">PATENTE RC·CT·14</span>
+                        </div>
+                        <div class="badge-pill-chip">
+                            CHILE
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- FOOTER: PRECIO $65.000 Y CTA GLOW -->
+        <footer class="footer-action">
+            <div class="price-section">
+                <div class="price-prefix">
+                    <span class="price-sub">PRECIO OFICIAL TALLER</span>
+                    <div class="price-amount">$65.000</div>
+                </div>
+                <div class="price-currency">CLP</div>
+            </div>
+
+            <div class="cta-button">
+                PEDIR POR WHATSAPP
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

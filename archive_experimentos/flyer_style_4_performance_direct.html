@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estilo 4: Performance Conversion Beast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1080px;
+            height: 1080px;
+            background: #090D16;
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow: hidden;
+            padding: 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* FONDO CONTRASTE ALTO */
+        .perf-bg {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 85% 15%, rgba(220, 38, 38, 0.25) 0%, transparent 45%),
+                radial-gradient(circle at 15% 85%, rgba(37, 99, 235, 0.2) 0%, transparent 45%),
+                linear-gradient(180deg, #0E1524 0%, #06090F 100%);
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* HEADER LEGAL ALERTA */
+        .alert-top {
+            background: #DC2626;
+            padding: 12px 24px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.5);
+        }
+
+        .alert-title {
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .alert-badge {
+            background: #000000;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 900;
+            padding: 4px 12px;
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+
+        /* HERO LAYOUT */
+        .hero-split {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 28px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .headline-perf {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 96px;
+            line-height: 0.88;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .headline-perf span {
+            color: #F59E0B;
+        }
+
+        /* SELLO CIRCULAR FLOTANTE */
+        .trust-stamps {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .stamp-card {
+            flex: 1;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 12px 14px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stamp-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            color: #F59E0B;
+            line-height: 1;
+        }
+
+        .stamp-text {
+            font-size: 11px;
+            font-weight: 800;
+            color: #CBD5E1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        /* IMAGEN */
+        .image-card-perf {
+            height: 480px;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.85);
+            position: relative;
+        }
+
+        .image-card-perf img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 36%;
+        }
+
+        .floating-pill {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: #2563EB;
+            color: #FFFFFF;
+            font-size: 12px;
+            font-weight: 900;
+            padding: 8px 14px;
+            border-radius: 8px;
+            letter-spacing: 1px;
+        }
+
+        /* FOOTER PRECIO GIGANTE */
+        .footer-perf {
+            background: rgba(15, 23, 42, 0.95);
+            border: 2px solid rgba(245, 158, 11, 0.4);
+            border-radius: 20px;
+            padding: 18px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-box-perf {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .price-digits {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 88px;
+            line-height: 0.85;
+            color: #FFFFFF;
+        }
+
+        .btn-cta-perf {
+            background: #25D366;
+            color: #FFFFFF;
+            font-size: 22px;
+            font-weight: 900;
+            padding: 20px 40px;
+            border-radius: 16px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="perf-bg"></div>
+
+    <div class="content">
+        <header class="alert-top">
+            <div class="alert-title">PROHIBIDO REMOLCAR CON PIOLA O CUERDA</div>
+            <div class="alert-badge">LEY DS 55/2025 MTT</div>
+        </header>
+
+        <main class="hero-split">
+            <div>
+                <div style="font-size: 13px; font-weight: 900; color: #DC2626; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px;">
+                    FABRICACIÓN DIRECTA EN CHILE
+                </div>
+                <h1 class="headline-perf">BARRA RÍGIDA <br><span>DE REMOLQUE</span></h1>
+
+                <div class="trust-stamps">
+                    <div class="stamp-card" style="border-top: 4px solid #DC2626;">
+                        <div class="stamp-number">3.500 KG</div>
+                        <div class="stamp-text">Arrastre Macizo</div>
+                    </div>
+                    <div class="stamp-card" style="border-top: 4px solid #F59E0B;">
+                        <div class="stamp-number">FRAGUA</div>
+                        <div class="stamp-text">Ojales Soldados</div>
+                    </div>
+                    <div class="stamp-card" style="border-top: 4px solid #2563EB;">
+                        <div class="stamp-number">DOT-C2</div>
+                        <div class="stamp-text">Huincha Norma</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="image-card-perf">
+                <img src="./public/images/lanza_real_uso_oficial.jpg" alt="Barra Real">
+                <div class="floating-pill">DESPACHO A TODO CHILE</div>
+            </div>
+        </main>
+
+        <footer class="footer-perf">
+            <div>
+                <span style="font-size: 11px; font-weight: 800; color: #F59E0B; letter-spacing: 2px; text-transform: uppercase; display: block;">PRECIO OFICIAL DE LANZAMIENTO</span>
+                <div class="price-box-perf">
+                    <div class="price-digits">$65.000</div>
+                    <span style="font-size: 22px; color: #94A3B8; font-weight: 900;">CLP</span>
+                </div>
+            </div>
+            <div class="btn-cta-perf">PEDIR POR WHATSAPP</div>
+        </footer>
+    </div>
+</body>
+</html>

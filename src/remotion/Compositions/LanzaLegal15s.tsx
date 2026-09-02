@@ -2,6 +2,7 @@ import React from 'react';
 import {
 	AbsoluteFill,
 	Audio,
+	Easing,
 	Img,
 	interpolate,
 	Sequence,
@@ -15,116 +16,82 @@ export const LanzaLegal15s: React.FC = () => {
 	const frame = useCurrentFrame();
 	const { fps, durationInFrames } = useVideoConfig();
 
-	// Barra de progreso del video en la parte inferior
+	// Barra de progreso del video
 	const progressWidth = interpolate(frame, [0, durationInFrames], [0, 100], {
 		extrapolateRight: 'clamp',
 	});
 
-	// --- ANIMACIONES ESCENA 1 (0 a 110 frames / 0 - 3.6s) ---
-	const scaleScene1 = interpolate(frame, [0, 110], [1.0, 1.15], {
+	// --- ESCENA 1: EL HOOK LEGAL (0 a 110 frames / 0 - 3.6s) ---
+	const scaleBg1 = interpolate(frame, [0, 110], [1.0, 1.12], {
+		easing: Easing.bezier(0.16, 1, 0.3, 1),
 		extrapolateRight: 'clamp',
 	});
-	const springTitle1 = spring({
-		frame,
-		fps,
-		config: { damping: 10, mass: 0.5 },
+	
+	// Animaciones Kinetic desfasadas para el texto de la Escena 1
+	const title1Y = interpolate(frame, [5, 25], [60, 0], {
+		easing: Easing.bezier(0.16, 1, 0.3, 1),
+		extrapolateLeft: 'clamp',
+		extrapolateRight: 'clamp',
+	});
+	const title1Opacity = interpolate(frame, [5, 20], [0, 1], {
+		extrapolateLeft: 'clamp',
+		extrapolateRight: 'clamp',
 	});
 
-	// --- ANIMACIONES ESCENA 2 (100 a 240 frames / 3.3 - 8s) ---
-	const opacityScene2 = interpolate(frame, [100, 120], [0, 1], {
+	const sub1Y = interpolate(frame, [18, 38], [40, 0], {
+		easing: Easing.bezier(0.16, 1, 0.3, 1),
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
-	const scaleScene2 = interpolate(frame, [100, 240], [1.12, 1.0], {
+	const sub1Opacity = interpolate(frame, [18, 33], [0, 1], {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
-	});
-	const springTitle2 = spring({
-		frame: frame - 105,
-		fps,
-		config: { damping: 12, mass: 0.6 },
 	});
 
-	// --- ANIMACIONES ESCENA 3 (230 a 350 frames / 7.6 - 11.6s) ---
-	const opacityScene3 = interpolate(frame, [230, 250], [0, 1], {
+	// --- ESCENA 2: DECRETO SUPREMO 55/2025 (100 a 240 frames / 3.3 - 8s) ---
+	const opacityScene2 = interpolate(frame, [100, 115], [0, 1], {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
-	const scaleScene3 = interpolate(frame, [230, 350], [1.0, 1.15], {
+	const scaleBg2 = interpolate(frame, [100, 240], [1.1, 1.0], {
+		easing: Easing.bezier(0.16, 1, 0.3, 1),
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
-	const springTitle3 = spring({
-		frame: frame - 235,
-		fps,
-		config: { damping: 12, mass: 0.6 },
+	const title2Y = interpolate(frame, [110, 130], [50, 0], {
+		easing: Easing.bezier(0.16, 1, 0.3, 1),
+		extrapolateLeft: 'clamp',
+		extrapolateRight: 'clamp',
 	});
 
-	// --- ANIMACIONES ESCENA 4 (340 a 450 frames / 11.3 - 15s) ---
-	const opacityScene4 = interpolate(frame, [340, 360], [0, 1], {
+	// --- ESCENA 3: ACERO MACIZO ESTRUCTURAL (230 a 350 frames / 7.6 - 11.6s) ---
+	const opacityScene3 = interpolate(frame, [230, 245], [0, 1], {
+		extrapolateLeft: 'clamp',
+		extrapolateRight: 'clamp',
+	});
+	const scaleBg3 = interpolate(frame, [230, 350], [1.0, 1.15], {
+		easing: Easing.bezier(0.16, 1, 0.3, 1),
+		extrapolateLeft: 'clamp',
+		extrapolateRight: 'clamp',
+	});
+
+	// --- ESCENA 4: PRECIO Y CTA WHATSAPP (340 a 450 frames / 11.3 - 15s) ---
+	const opacityScene4 = interpolate(frame, [340, 355], [0, 1], {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
 	const springCta = spring({
-		frame: frame - 350,
+		frame: frame - 355,
 		fps,
-		config: { damping: 9, mass: 0.5 },
+		config: { damping: 18, stiffness: 200, mass: 0.4 },
 	});
-	const pulseCta = Math.sin((frame - 350) * 0.18) * 0.04 + 1;
 
 	return (
-		<AbsoluteFill style={{ backgroundColor: '#090b10', fontFamily: 'Montserrat, Syncopate, sans-serif' }}>
-			{/* IMPORTACIÓN DE TIPOGRAFÍAS GOOGLE FONTS DE IMPACTO METÁLICO */}
-			<style>
-				{`
-					@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Syncopate:wght@700;800&display=swap');
+		<AbsoluteFill style={{ backgroundColor: '#050608', fontFamily: "'Inter', system-ui, sans-serif" }}>
+			{/* MÚSICA DE FONDO */}
+			<Audio src={staticFile('audio/musica_fondo.wav')} volume={0.7} />
 
-					.text-chrome-3d {
-						font-family: 'Syncopate', sans-serif;
-						font-weight: 800;
-						background: linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 35%, #94A3B8 50%, #475569 65%, #1E293B 100%);
-						-webkit-background-clip: text;
-						-webkit-text-fill-color: transparent;
-						filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.95));
-						text-shadow: 
-							0 1px 0 #CBD5E1,
-							0 2px 0 #94A3B8,
-							0 3px 0 #64748B,
-							0 4px 0 #475569,
-							0 5px 0 #334155,
-							0 8px 25px rgba(0,0,0,0.9);
-					}
-
-					.text-red-chrome-3d {
-						font-family: 'Syncopate', sans-serif;
-						font-weight: 800;
-						background: linear-gradient(180deg, #FFFFFF 0%, #FF8A8A 30%, #EF4444 50%, #991B1B 70%, #450A0A 100%);
-						-webkit-background-clip: text;
-						-webkit-text-fill-color: transparent;
-						filter: drop-shadow(0px 10px 20px rgba(220,38,38,0.8));
-						text-shadow: 
-							0 1px 0 #FCA5A5,
-							0 2px 0 #EF4444,
-							0 3px 0 #DC2626,
-							0 4px 0 #991B1B,
-							0 6px 20px rgba(0,0,0,0.9);
-					}
-
-					.text-gold-3d {
-						font-family: 'Montserrat', sans-serif;
-						font-weight: 900;
-						background: linear-gradient(180deg, #FFF 0%, #FDE047 35%, #EAB308 55%, #CA8A04 75%, #713F12 100%);
-						-webkit-background-clip: text;
-						-webkit-text-fill-color: transparent;
-						filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.9));
-					}
-				`}
-			</style>
-
-			{/* PISTA DE MÚSICA DE FONDO SYNCD */}
-			<Audio src={staticFile('audio/musica_fondo.wav')} volume={0.8} />
-
-			{/* ================= ESCENA 1: EL HOOK LEGAL SIN CAJAS (0 - 110) ================= */}
+			{/* ================= ESCENA 1: HOOK LEGAL (0 - 110) ================= */}
 			<Sequence from={0} durationInFrames={110}>
 				<AbsoluteFill style={{ overflow: 'hidden' }}>
 					<Img
@@ -133,57 +100,87 @@ export const LanzaLegal15s: React.FC = () => {
 							width: '100%',
 							height: '100%',
 							objectFit: 'cover',
-							transform: `scale(${scaleScene1})`,
+							transform: `scale(${scaleBg1})`,
+							filter: 'brightness(0.35) contrast(1.2)',
 						}}
 					/>
+					{/* Gradiente cinemático oscuro */}
 					<AbsoluteFill
 						style={{
-							background: 'linear-gradient(to bottom, rgba(9,11,16,0.85) 0%, rgba(9,11,16,0.15) 50%, rgba(9,11,16,0.9) 100%)',
+							background: 'radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(5,6,8,0.92) 85%)',
 						}}
 					/>
-					
-					{/* TÍTULO LIBRE METÁLICO 3D SIN CAJAS */}
+
 					<div
 						style={{
 							position: 'absolute',
-							top: 180,
-							left: 30,
-							right: 30,
+							top: 240,
+							left: 48,
+							right: 48,
 							display: 'flex',
 							flexDirection: 'column',
 							alignItems: 'center',
-							transform: `scale(${springTitle1})`,
+							textAlign: 'center',
 						}}
 					>
+						{/* BADGE DE ALERTA ALTA VISIBILIDAD */}
 						<div
-							className="text-red-chrome-3d"
 							style={{
-								fontSize: 54,
-								textAlign: 'center',
-								lineHeight: 1.1,
-								letterSpacing: 2,
+								backgroundColor: '#FF2A2A',
+								color: '#FFFFFF',
+								fontSize: 18,
+								fontWeight: 900,
+								letterSpacing: 4,
+								padding: '8px 24px',
+								borderRadius: 100,
+								textTransform: 'uppercase',
+								marginBottom: 28,
+								opacity: title1Opacity,
+								transform: `translateY(${title1Y}px)`,
+								boxShadow: '0 0 30px rgba(255, 42, 42, 0.6)',
 							}}
 						>
-							PROHIBIDO POR LEY
+							INFRACCIÓN GRAVE DE TRÁNSITO
 						</div>
 
-						<div
-							className="text-gold-3d"
+						{/* TÍTULO PRINCIPAL KINETIC */}
+						<h1
 							style={{
-								marginTop: 30,
-								fontSize: 34,
-								textAlign: 'center',
-								letterSpacing: 1,
-								textShadow: '0 4px 15px rgba(0,0,0,0.9)',
+								color: '#FFFFFF',
+								fontSize: 64,
+								fontWeight: 900,
+								lineHeight: 1.05,
+								letterSpacing: -2,
+								margin: 0,
+								opacity: title1Opacity,
+								transform: `translateY(${title1Y}px)`,
+								textTransform: 'uppercase',
 							}}
 						>
-							REMOLCAR CON PIOLA O CUERDA ES ILEGAL EN CHILE ⚠️
-						</div>
+							PROHIBIDO <br />
+							<span style={{ color: '#FF2A2A' }}>REMOLCAR CON PIOLA</span>
+						</h1>
+
+						{/* SUBTÍTULO LIMPIO Y LEGIBLE */}
+						<p
+							style={{
+								color: '#D1D5DB',
+								fontSize: 26,
+								fontWeight: 500,
+								marginTop: 32,
+								lineHeight: 1.4,
+								maxWidth: 800,
+								opacity: sub1Opacity,
+								transform: `translateY(${sub1Y}px)`,
+							}}
+						>
+							El uso de cuerdas o piolas arriesga multas graves e inmovilización del vehículo en Chile.
+						</p>
 					</div>
 				</AbsoluteFill>
 			</Sequence>
 
-			{/* ================= ESCENA 2: DECRETO SUPREMO 55/2025 MTT LIBRE (100 - 240) ================= */}
+			{/* ================= ESCENA 2: DECRETO SUPREMO N° 55/2025 (100 - 240) ================= */}
 			<Sequence from={100} durationInFrames={140}>
 				<AbsoluteFill style={{ opacity: opacityScene2, overflow: 'hidden' }}>
 					<Img
@@ -192,97 +189,75 @@ export const LanzaLegal15s: React.FC = () => {
 							width: '100%',
 							height: '100%',
 							objectFit: 'cover',
-							transform: `scale(${scaleScene2})`,
+							transform: `scale(${scaleBg2})`,
+							filter: 'brightness(0.3) contrast(1.2)',
 						}}
 					/>
 					<AbsoluteFill
 						style={{
-							background: 'linear-gradient(to bottom, rgba(9,11,16,0.85) 0%, rgba(9,11,16,0.2) 50%, rgba(9,11,16,0.92) 100%)',
+							background: 'radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(5,6,8,0.95) 85%)',
 						}}
 					/>
 
-					{/* TEXTOS METÁLICOS 3D LIBRES SIN CAJAS */}
 					<div
 						style={{
 							position: 'absolute',
-							top: 150,
-							left: 30,
-							right: 30,
+							top: 220,
+							left: 48,
+							right: 48,
 							display: 'flex',
 							flexDirection: 'column',
 							alignItems: 'center',
-							transform: `scale(${springTitle2})`,
+							textAlign: 'center',
+							transform: `translateY(${title2Y}px)`,
 						}}
 					>
-						<div
+						<span
 							style={{
-								color: '#38bdf8',
-								fontSize: 24,
-								fontWeight: 900,
+								color: '#38BDF8',
+								fontSize: 16,
+								fontWeight: 800,
 								letterSpacing: 4,
 								textTransform: 'uppercase',
-								textShadow: '0 2px 10px rgba(0,0,0,0.9)',
+								marginBottom: 16,
 							}}
 						>
-							🇨🇱 GOBIERNO DE CHILE • MTT
-						</div>
+							DECRETO SUPREMO N° 55/2025 MTT
+						</span>
 
-						<div
-							className="text-chrome-3d"
+						<h2
 							style={{
-								fontSize: 48,
-								textAlign: 'center',
-								lineHeight: 1.15,
-								marginTop: 16,
-							}}
-						>
-							DECRETO SUPREMO N° 55/2025
-						</div>
-
-						<div
-							style={{
-								fontSize: 30,
+								color: '#FFFFFF',
+								fontSize: 56,
 								fontWeight: 900,
-								color: '#ffffff',
-								textAlign: 'center',
-								marginTop: 20,
-								textShadow: '0 4px 20px rgba(0,0,0,0.9)',
-								lineHeight: 1.3,
+								lineHeight: 1.1,
+								letterSpacing: -1,
+								margin: 0,
+								textTransform: 'uppercase',
 							}}
 						>
-							EXIGE <span style={{ color: '#ffb300' }}>ACOPLE METÁLICO RÍGIDO</span> ENTRE VEHÍCULOS
-						</div>
-					</div>
+							EXIGE ACOPLE METÁLICO RÍGIDO
+						</h2>
 
-					{/* TEXTO DE MARCA LIBRE ABAJO */}
-					<div
-						style={{
-							position: 'absolute',
-							bottom: 160,
-							left: 30,
-							right: 30,
-							textAlign: 'center',
-						}}
-					>
-						<div className="text-gold-3d" style={{ fontSize: 38 }}>
-							LANZA RÍGIDA DE REMOLQUE
-						</div>
 						<div
 							style={{
-								fontSize: 26,
-								fontWeight: 800,
-								color: '#ffffff',
-								marginTop: 8,
-								textShadow: '0 4px 15px rgba(0,0,0,0.9)',
+								marginTop: 36,
+								padding: '24px 32px',
+								backgroundColor: 'rgba(255,255,255,0.05)',
+								border: '1px solid rgba(255,255,255,0.15)',
+								borderRadius: 20,
+								backdropFilter: 'blur(10px)',
 							}}
 						>
-							Acero Macizo de Maestranza Chilena
+							<p style={{ color: '#F3F4F6', fontSize: 24, fontWeight: 700, margin: 0, lineHeight: 1.4 }}>
+								🛡️ Solución metálica continua <strong style={{ color: '#38BDF8' }}>sin riesgo de choque por alcance</strong>.
+							</p>
 						</div>
 					</div>
 				</AbsoluteFill>
 			</Sequence>
 
-			{/* ================= ESCENA 3: CALIDAD Y PASADOR LIBRE (230 - 350) ================= */}
+			{/* ================= ESCENA 3: FICHA TÉCNICA E INGENIERÍA (230 - 350) ================= */}
 			<Sequence from={230} durationInFrames={120}>
 				<AbsoluteFill style={{ opacity: opacityScene3, overflow: 'hidden' }}>
 					<Img
@@ -291,54 +266,95 @@ export const LanzaLegal15s: React.FC = () => {
 							width: '100%',
 							height: '100%',
 							objectFit: 'cover',
-							transform: `scale(${scaleScene3})`,
+							transform: `scale(${scaleBg3})`,
+							filter: 'brightness(0.3) contrast(1.2)',
 						}}
 					/>
 					<AbsoluteFill
 						style={{
-							background: 'linear-gradient(to bottom, rgba(9,11,16,0.85) 0%, rgba(9,11,16,0.2) 40%, rgba(9,11,16,0.9) 100%)',
+							background: 'radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(5,6,8,0.95) 85%)',
 						}}
 					/>
+
 					<div
 						style={{
 							position: 'absolute',
-							top: 160,
-							left: 30,
-							right: 30,
+							top: 200,
+							left: 48,
+							right: 48,
 							display: 'flex',
 							flexDirection: 'column',
 							alignItems: 'center',
-							transform: `scale(${springTitle3})`,
 						}}
 					>
-						<div className="text-chrome-3d" style={{ fontSize: 44, textAlign: 'center' }}>
-							INGENIERÍA EN ACERO
-						</div>
-
-						<div
+						<span
 							style={{
-								marginTop: 30,
-								display: 'flex',
-								flexDirection: 'column',
-								gap: 16,
-								alignItems: 'center',
+								color: '#FF6A00',
+								fontSize: 16,
+								fontWeight: 800,
+								letterSpacing: 4,
+								textTransform: 'uppercase',
+								marginBottom: 16,
 							}}
 						>
-							<div style={{ fontSize: 30, fontWeight: 900, color: '#ffffff', textShadow: '0 4px 15px rgba(0,0,0,0.9)' }}>
-								⚙️ OJALES FORJADOS EN ACERO
+							METAL CREATIVO CHILE
+						</span>
+
+						<h2 style={{ color: '#FFFFFF', fontSize: 52, fontWeight: 900, margin: 0, letterSpacing: -1, textAlign: 'center' }}>
+							ACERO MACIZO ESTRUCTURAL
+						</h2>
+
+						<div style={{ marginTop: 40, display: 'flex', flexDirection: 'column', gap: 20, width: '100%' }}>
+							<div
+								style={{
+									display: 'flex',
+									alignItems: 'center',
+									gap: 16,
+									backgroundColor: 'rgba(17,24,39,0.85)',
+									padding: '20px 24px',
+									borderRadius: 16,
+									border: '1px solid rgba(255,255,255,0.1)',
+								}}
+							>
+								<div style={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#FF6A00' }} />
+								<span style={{ color: '#FFFFFF', fontSize: 22, fontWeight: 800 }}>Ojales Forjados en Fragua Candente</span>
 							</div>
-							<div style={{ fontSize: 30, fontWeight: 900, color: '#ffffff', textShadow: '0 4px 15px rgba(0,0,0,0.9)' }}>
-								⚙️ PASADORES MECÁNICOS PASANTES
+
+							<div
+								style={{
+									display: 'flex',
+									alignItems: 'center',
+									gap: 16,
+									backgroundColor: 'rgba(17,24,39,0.85)',
+									padding: '20px 24px',
+									borderRadius: 16,
+									border: '1px solid rgba(255,255,255,0.1)',
+								}}
+							>
+								<div style={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#FF6A00' }} />
+								<span style={{ color: '#FFFFFF', fontSize: 22, fontWeight: 800 }}>Soldadura Estructural TIG / MIG</span>
 							</div>
-							<div className="text-gold-3d" style={{ fontSize: 32 }}>
-								⚙️ 3.500 KG ARRASTRE DIRECTO
+
+							<div
+								style={{
+									display: 'flex',
+									alignItems: 'center',
+									gap: 16,
+									backgroundColor: 'rgba(17,24,39,0.85)',
+									padding: '20px 24px',
+									borderRadius: 16,
+									border: '1px solid rgba(255,255,255,0.1)',
+								}}
+							>
+								<div style={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#38BDF8' }} />
+								<span style={{ color: '#FFFFFF', fontSize: 22, fontWeight: 800 }}>Arrastre Directo: 2.500 kg a 3.500 kg</span>
 							</div>
 						</div>
 					</div>
 				</AbsoluteFill>
 			</Sequence>
 
-			{/* ================= ESCENA 4: PRECIO Y CIERRE LIBRE (340 - 450) ================= */}
+			{/* ================= ESCENA 4: PRECIO Y CTA WHATSAPP (340 - 450) ================= */}
 			<Sequence from={340} durationInFrames={110}>
 				<AbsoluteFill style={{ opacity: opacityScene4, overflow: 'hidden' }}>
 					<Img
@@ -347,99 +363,86 @@ export const LanzaLegal15s: React.FC = () => {
 							width: '100%',
 							height: '100%',
 							objectFit: 'cover',
+							filter: 'brightness(0.25) contrast(1.2)',
 						}}
 					/>
 					<AbsoluteFill
 						style={{
-							background: 'linear-gradient(to bottom, rgba(9,11,16,0.92) 0%, rgba(9,11,16,0.6) 40%, rgba(9,11,16,0.95) 100%)',
+							background: 'radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(5,6,8,0.95) 85%)',
 						}}
 					/>
+
 					<div
 						style={{
 							position: 'absolute',
-							top: 150,
-							left: 30,
-							right: 30,
+							top: 220,
+							left: 48,
+							right: 48,
 							display: 'flex',
 							flexDirection: 'column',
 							alignItems: 'center',
+							textAlign: 'center',
 						}}
 					>
-						<div
-							style={{
-								fontSize: 34,
-								fontWeight: 900,
-								color: '#ffffff',
-								textShadow: '0 4px 20px rgba(0,0,0,0.9)',
-								letterSpacing: 2,
-							}}
-						>
-							🧰 DESMONTABLE EN 3 PARTES
+						<span style={{ color: '#9CA3AF', fontSize: 16, fontWeight: 800, letterSpacing: 4, textTransform: 'uppercase' }}>
+							DESMONTABLE EN 3 PARTES PARA MALETERA
+						</span>
+
+						<div style={{ marginTop: 24, fontSize: 80, fontWeight: 900, color: '#FFFFFF', letterSpacing: -2 }}>
+							$89.900 <span style={{ fontSize: 28, color: '#9CA3AF', fontWeight: 700 }}>CLP</span>
 						</div>
 
-						<div
-							className="text-red-chrome-3d"
-							style={{
-								marginTop: 30,
-								fontSize: 68,
-								textAlign: 'center',
-							}}
-						>
-							$89.900 CLP
-						</div>
-						
-						<div className="text-gold-3d" style={{ fontSize: 30, marginTop: 16 }}>
-							📦 DESPACHO RÁPIDO A TODO CHILE
-						</div>
+						<p style={{ color: '#38BDF8', fontSize: 22, fontWeight: 700, marginTop: 12 }}>
+							🚚 Despacho rápido a todo Chile por Starken / Chilexpress
+						</p>
 					</div>
 
-					{/* BOTÓN LIBRE DE WHATSAPP SIN CAJA PESADA */}
+					{/* BOTÓN CTA SLIM & MODERNO */}
 					<div
 						style={{
 							position: 'absolute',
-							bottom: 140,
-							left: 30,
-							right: 30,
+							bottom: 160,
+							left: 48,
+							right: 48,
 							display: 'flex',
 							justifyContent: 'center',
-							transform: `scale(${springCta * pulseCta})`,
+							transform: `scale(${springCta})`,
 						}}
 					>
 						<div
 							style={{
 								backgroundColor: '#25D366',
-								color: '#ffffff',
-								fontSize: 38,
+								color: '#FFFFFF',
+								fontSize: 26,
 								fontWeight: 900,
-								padding: '22px 36px',
+								padding: '20px 40px',
 								borderRadius: 100,
 								display: 'flex',
 								alignItems: 'center',
 								justifyContent: 'center',
-								gap: 16,
-								boxShadow: '0 15px 45px rgba(37,211,102,0.85)',
+								gap: 12,
+								boxShadow: '0 10px 40px rgba(37,211,102,0.5)',
 								width: '100%',
-								textAlign: 'center',
 								textTransform: 'uppercase',
-								letterSpacing: 1,
+								letterSpacing: 2,
 							}}
 						>
-							📲 PEDIR EN WHATSAPP
+							<span>PEDIR POR WHATSAPP</span>
 						</div>
 					</div>
 				</AbsoluteFill>
 			</Sequence>
 
-			{/* BARRA DE PROGRESO INFERIOR */}
+			{/* BARRA DE PROGRESO */}
 			<div
 				style={{
 					position: 'absolute',
 					bottom: 0,
 					left: 0,
 					width: `${progressWidth}%`,
-					height: 10,
-					backgroundColor: '#ff6600',
-					boxShadow: '0 0 15px #ff6600',
+					height: 6,
+					backgroundColor: '#FF6A00',
+					boxShadow: '0 0 10px #FF6A00',
 				}}
 			/>
 		</AbsoluteFill>

@@ -1,0 +1,27 @@
+﻿User-agent: *
+Allow: /
+
+# Motores de Búsqueda de Inteligencia Artificial (AEO / GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemap Oficial
+Sitemap: https://metalcreativo.cl/sitemap.xml

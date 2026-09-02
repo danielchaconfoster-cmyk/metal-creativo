@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas Frecuentes (FAQ) | Metal Creativo Chile</title>
+    <meta name="description" content="Respuestas sobre la Barra Rígida de Remolque Ley 55/2025 MTT, Fogones a Bioetanol, Envíos a Regiones y Medios de Pago.">
+    <link rel="canonical" href="https://metalcreativo.cl/preguntas-frecuentes.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Preguntas Frecuentes (FAQ) | Metal Creativo Chile">
+    <meta property="og:description" content="Respuestas sobre la Barra Rígida de Remolque Ley 55/2025 MTT, Fogones a Bioetanol, Envíos a Regiones y Medios de Pago.">
+    <meta property="og:image" content="https://metalcreativo.cl/images/barra_remolque_uso.jpg">
+    <meta property="og:url" content="https://metalcreativo.cl/preguntas-frecuentes.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Metal Creativo Chile">
+    <meta property="og:locale" content="es_CL">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #07080b;
+            --bg-card: #11141a;
+            --brand-orange: #ff6a00;
+        }
+        body {
+            background-color: var(--bg);
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        .metal-card {
+            background: linear-gradient(145deg, #14171d 0%, #0d0f13 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        }
+        .btn-metal-orange {
+            background: linear-gradient(180deg, #ff7a14 0%, #d95500 100%);
+            border: 1px solid #ff8c3b;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .btn-metal-orange:hover {
+            box-shadow: 0 0 25px rgba(255, 106, 0, 0.6);
+            transform: translateY(-2px);
+        }
+        .btn-metal-primary {
+            background: linear-gradient(180deg, #3a3f47 0%, #1e2229 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .btn-metal-primary:hover {
+            border-color: #ff6a00;
+            box-shadow: 0 0 20px rgba(255, 106, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body x-data="cartStore()" class="min-h-screen flex flex-col selection:bg-orange-500 selection:text-white">
+
+    <!-- NAVBAR COMÚN -->
+    <nav class="sticky top-0 z-50 bg-[#07080b]/95 backdrop-blur-md border-b border-white/10 py-3.5 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group">
+                <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-10 sm:h-12 w-auto object-contain group-hover:scale-105 transition-transform">
+            </a>
+
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-300">
+                <a href="index.html#showcase" class="hover:text-orange-400 transition-colors">Catálogo</a>
+                <a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors">Preguntas Frecuentes</a>
+                <a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors">Garantía 6 Meses</a>
+                <a href="contacto.html" class="hover:text-orange-400 transition-colors">Contacto</a>
+                <a href="https://instagram.com/metalcreativo.cl" target="_blank" class="hover:text-orange-400 flex items-center gap-1.5 text-orange-400 font-semibold bg-orange-500/10 border border-orange-500/30 px-3 py-1 rounded-full text-xs">
+                    <i class="fa-brands fa-instagram text-sm"></i> @metalcreativo.cl
+                </a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <!-- BOTÓN CARRITO CON CONTADOR REACTIVO -->
+                <button @click="cartOpen = true" class="relative p-2.5 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer shadow-lg" title="Ver Carrito de Compras">
+                    <i class="fa-solid fa-cart-shopping text-base text-orange-400"></i>
+                    <span x-show="totalItems > 0" x-text="totalItems" class="absolute -top-1.5 -right-1.5 bg-orange-600 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center border-2 border-[#07080b]"></span>
+                </button>
+                <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo%20(@metalcreativo.cl),%20quisiera%20hacer%20una%20consulta" target="_blank" class="btn-metal-orange px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2 shadow-lg shadow-orange-500/20">
+                    <i class="fa-brands fa-whatsapp text-sm"></i>
+                    <span class="hidden sm:inline">WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SCHEMA FAQPAGE JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Por qué es obligatoria la barra rígida de remolque en Chile?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La Ley de Tránsito y el Decreto Supremo N° 55/2025 del Ministerio de Transportes y Telecomunicaciones (MTT) prohíben expresamente el uso de cuerdas, piolas, cables o cadenas para remolcar vehículos particulares en vías públicas y autopistas debido al peligro de colisión por alcance. Es obligatorio usar un acople metálico rígido."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué capacidad de carga y arrastre tiene la barra de Metal Creativo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La barra rígida de Metal Creativo está fabricada en acero macizo al carbono con tubo de 45-50 mm y soldadura estructural TIG/MIG, soportando de 2.500 kg a 3.500 kg de arrastre directo en línea recta."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El fogón a bioetanol produce humo o malos olores?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No produce humo, cenizas ni olores molestos. El bioetanol al 96% realiza una combustión 100% limpia que solo libera vapor de agua y trazas mínimas de CO2, siendo completamente seguro para departamentos, living y terrazas sin necesidad de ductos ni cañones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hacen envíos a todas las regiones de Chile?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, realizamos envíos a todo Chile a través de Starken, Chilexpress y Blue Express con entrega a domicilio o retiro en sucursal con número de seguimiento en tiempo real."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <header class="py-12 bg-gradient-to-b from-[#11141a] to-[#07080b] border-b border-white/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-3">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/20 text-orange-400 text-xs font-extrabold uppercase tracking-widest border border-orange-500/30">
+                <i class="fa-solid fa-circle-question"></i> CENTRO DE AYUDA & RESOLUCIÓN
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">Preguntas Frecuentes (FAQ)</h1>
+            <p class="text-gray-400 text-sm sm:text-base">Encuentra respuestas inmediatas sobre normativa legal, compatibilidad de vehículos, fogones y despachos.</p>
+        </div>
+    </header>
+
+    <main class="flex-grow py-12" x-data="{
+        selectedCat: 'all',
+        searchQuery: '',
+        openFaq: null,
+        faqs: [
+            {
+                id: 1,
+                cat: 'remolque',
+                q: '¿Por qué es obligatoria la barra rígida de remolque en Chile?',
+                a: 'El Decreto Supremo N° 55/2025 del MTT y la Ley de Tránsito prohíben estrictamente el remolque con cuerdas elásticas, piolas o lazos de nylon entre particulares. Al frenar el vehículo delantero, la cuerda pierde tensión y provoca choque por alcance. La barra rígida mantiene fija la distancia de seguridad de 1.80 metros e impide colisiones.'
+            },
+            {
+                id: 2,
+                cat: 'remolque',
+                q: '¿Cuánto peso y qué tipo de vehículos soporta la barra?',
+                a: 'Nuestra barra soporta entre 2.500 kg y 3.500 kg de arrastre directo. Es apta para vehículos livianos, sedanes, hatchbacks, SUVs, camionetas 4x4 y furgones comerciales.'
+            },
+            {
+                id: 3,
+                cat: 'remolque',
+                q: '¿La barra es desmontable? ¿Cabe en el maletero?',
+                a: 'Sí, está diseñada con un sistema modular seccionable de 3 piezas unidas por pasadores de acero de alta resistencia y chavetas de seguridad. Desarmada ocupa menos de 65 cm, guardándose fácilmente en el maletero.'
+            },
+            {
+                id: 4,
+                cat: 'fogon',
+                q: '¿El fogón a bioetanol necesita cañón o ventilación especial?',
+                a: 'No requiere cañones ni obras de albañilería. El bioetanol realiza una combustión ecológica de llama real sin humo, sin cenizas y sin olor. Es ideal para departamentos cerrados y terrazas.'
+            },
+            {
+                id: 5,
+                cat: 'fogon',
+                q: '¿Cuánto dura una carga de bioetanol y qué área calienta?',
+                a: 'El quemador de acero inoxidable AISI 304 otorga una autonomía continua de 3.5 a 5.5 horas por carga (1.2 a 1.5 litros), cubriendo un ambiente de 25 m² a 45 m² con un calor envolvente.'
+            },
+            {
+                id: 6,
+                cat: 'envios',
+                q: '¿Cómo y cuándo despachan mi pedido a regiones?',
+                a: 'Los despachos se realizan de lunes a viernes vía Starken o Chilexpress. Se entrega número de seguimiento en cuanto el paquete es recepcionado por la empresa de courier (tiempo habitual de llegada: 24h a 72h).'
+            },
+            {
+                id: 7,
+                cat: 'pagos',
+                q: '¿Cuáles son las opciones de pago disponibles?',
+                a: 'Aceptamos Webpay Plus (Tarjetas de Crédito en cuotas y Débito), Transferencia Bancaria electrónica y Mercado Pago. Toda compra cuenta con boleta o factura legal.'
+            },
+            {
+                id: 8,
+                cat: 'garantia',
+                q: '¿Qué cubre la garantía de 6 meses?',
+                a: 'Cubre cualquier falla en la estructura metálica, soldaduras o defectos de fabricación bajo el estándar legal del SERNAC (Ley 19.496).'
+            }
+        ],
+        matches(faq) {
+            const matchesCat = this.selectedCat === 'all' || faq.cat === this.selectedCat;
+            const matchesQuery = !this.searchQuery || faq.q.toLowerCase().includes(this.searchQuery.toLowerCase()) || faq.a.toLowerCase().includes(this.searchQuery.toLowerCase());
+            return matchesCat && matchesQuery;
+        }
+    }">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
+            
+            <!-- BUSCADOR EN VIVO Y FILTROS -->
+            <div class="space-y-4">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" x-model="searchQuery" placeholder="Buscar preguntas (ej: ley MTT, maletero, bioetanol, Starken)..." class="w-full pl-12 pr-4 py-3.5 rounded-xl bg-neutral-900 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 text-sm">
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    <button @click="selectedCat = 'all'" :class="selectedCat === 'all' ? 'btn-metal-orange' : 'btn-metal-primary'" class="px-4 py-2 rounded-lg text-xs font-bold cursor-pointer">Todas</button>
+                    <button @click="selectedCat = 'remolque'" :class="selectedCat === 'remolque' ? 'btn-metal-orange' : 'btn-metal-primary'" class="px-4 py-2 rounded-lg text-xs font-bold cursor-pointer"><i class="fa-solid fa-car-side mr-1"></i> Barra Remolque Ley MTT</button>
+                    <button @click="selectedCat = 'fogon'" :class="selectedCat === 'fogon' ? 'btn-metal-orange' : 'btn-metal-primary'" class="px-4 py-2 rounded-lg text-xs font-bold cursor-pointer"><i class="fa-solid fa-fire mr-1"></i> Fogones Bioetanol</button>
+                    <button @click="selectedCat = 'envios'" :class="selectedCat === 'envios' ? 'btn-metal-orange' : 'btn-metal-primary'" class="px-4 py-2 rounded-lg text-xs font-bold cursor-pointer"><i class="fa-solid fa-truck mr-1"></i> Despachos & Pagos</button>
+                </div>
+            </div>
+
+            <!-- LISTA DE ACORDEONES FAQ -->
+            <div class="space-y-3">
+                <template x-for="faq in faqs" :key="faq.id">
+                    <div x-show="matches(faq)" class="metal-card rounded-xl overflow-hidden border border-white/10 transition-all">
+                        <button @click="openFaq = (openFaq === faq.id ? null : faq.id)" class="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-white text-sm sm:text-base hover:text-orange-400 transition-colors cursor-pointer">
+                            <span x-text="faq.q"></span>
+                            <i class="fa-solid text-orange-400 transition-transform duration-300" :class="openFaq === faq.id ? 'fa-chevron-up rotate-180' : 'fa-chevron-down'"></i>
+                        </button>
+                        <div x-show="openFaq === faq.id" x-collapse class="px-5 pb-5 text-xs sm:text-sm text-gray-300 border-t border-white/5 pt-3 leading-relaxed" x-text="faq.a"></div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- NO RESULTS -->
+            <div class="text-center py-8 space-y-3 text-gray-400" x-show="faqs.filter(f => matches(f)).length === 0">
+                <p>No encontramos preguntas que coincidan con tu búsqueda.</p>
+                <a href="contacto.html" class="btn-metal-orange inline-block px-4 py-2 rounded-lg text-xs font-bold">Hacer Consulta Directa</a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER PROFESIONAL DE 4 COLUMNAS -->
+    <footer class="bg-[#050608] border-t border-white/10 pt-14 pb-8 text-xs text-gray-400 mt-auto relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+            <!-- COLUMNA 1: MARCA Y REDES -->
+            <div class="space-y-4">
+                <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-12 w-auto object-contain">
+                <p class="text-gray-400 text-xs leading-relaxed">
+                    Fabricación en acero y calefacción limpia a bioetanol. Taller metalúrgico chileno especializado en alta resistencia y soldadura estructural.
+                </p>
+                <div class="space-y-1.5 text-gray-300 font-medium text-xs">
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-orange-400"></i> Santiago, Chile (Despachos a todo el país)</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-envelope text-orange-400"></i> ventas@metalcreativo.cl</p>
+                    <p class="flex items-center gap-2"><i class="fa-solid fa-phone text-orange-400"></i> +56 9 1234 5678</p>
+                </div>
+                <div class="flex items-center gap-3 pt-2">
+                    <a href="https://instagram.com/metalcreativo.cl" target="_blank" class="w-9 h-9 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500 text-orange-400 flex items-center justify-center transition-colors" title="Instagram @metalcreativo.cl">
+                        <i class="fa-brands fa-instagram text-lg"></i>
+                    </a>
+                    <a href="https://wa.me/56912345678" target="_blank" class="w-9 h-9 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center transition-colors" title="WhatsApp Oficial">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                    </a>
+                    <a href="mailto:ventas@metalcreativo.cl" class="w-9 h-9 rounded-xl bg-neutral-900 border border-white/10 hover:border-sky-500 text-sky-400 flex items-center justify-center transition-colors" title="Correo Corporativo">
+                        <i class="fa-solid fa-envelope text-base"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- COLUMNA 2: PRODUCTOS -->
+            <div class="space-y-3">
+                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-orange-400"></i> Catálogo Oficial
+                </h4>
+                <ul class="space-y-2.5 text-xs">
+                    <li><a href="index.html#showcase" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-car-side text-sky-400 text-[10px]"></i> Barra Rígida Remolque ($65.000)</a></li>
+                    <li><a href="index.html#showcase" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-fire text-orange-400 text-[10px]"></i> Fogón a Bioetanol Ecológico ($149.900)</a></li>
+                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-hammer text-amber-400 text-[10px]"></i> Proyectos & Forja a Medida</a></li>
+                    <li><a href="checkout.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-emerald-400 text-[10px]"></i> Pasarela E-Commerce & Carrito</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMNA 3: LEGAL & SOPORTE -->
+            <div class="space-y-3">
+                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-scale-balanced text-orange-400"></i> Soporte & Legal
+                </h4>
+                <ul class="space-y-2.5 text-xs">
+                    <li><a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-shield-halved text-orange-400 text-[10px]"></i> Garantía Legal 6 Meses SERNAC</a></li>
+                    <li><a href="terminos-condiciones.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-file-contract text-gray-400 text-[10px]"></i> Términos & Condiciones de Compra</a></li>
+                    <li><a href="privacidad.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-lock text-gray-400 text-[10px]"></i> Política de Privacidad (Ley 19.628)</a></li>
+                    <li><a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-circle-question text-gray-400 text-[10px]"></i> Preguntas Frecuentes (FAQ)</a></li>
+                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-headset text-gray-400 text-[10px]"></i> Centro de Contacto & Cotización</a></li>
+                </ul>
+            </div>
+
+            <!-- COLUMNA 4: PAGOS & SEGURIDAD -->
+            <div class="space-y-3">
+                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-shield-check text-emerald-400"></i> Medios de Pago & Envíos
+                </h4>
+                <p class="text-xs text-gray-400 leading-relaxed">Compra con total seguridad. Pagos protegidos con certificado SSL de 256 bits y respaldo de garantía SERNAC.</p>
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-credit-card text-sky-400"></i> Webpay Plus
+                    </div>
+                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-building-columns text-emerald-400"></i> Transferencia
+                    </div>
+                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-truck-fast text-orange-400"></i> Starken
+                    </div>
+                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-box text-amber-400"></i> Chilexpress
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-gray-500">
+            <p>&copy; 2026 Metal Creativo Chile (@metalcreativo.cl). Todos los derechos reservados.</p>
+            <p class="text-center sm:text-right">Cumple con Ley N° 19.496 del Consumidor y Decreto Supremo MTT N° 55/2025.</p>
+        </div>
+    </footer>
+
+    <!-- DRAWER DEL CARRITO LATERAL SLIDE-OVER -->
+    <div x-cloak x-show="cartOpen" class="fixed inset-0 z-50 overflow-hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" @click="cartOpen = false"></div>
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-[#0e1117] border-l border-white/10 p-6 flex flex-col shadow-2xl">
+                <div class="flex items-center justify-between pb-4 border-b border-white/10">
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-orange-400"></i> Tu Carrito de Compras
+                    </h2>
+                    <button @click="cartOpen = false" class="text-gray-400 hover:text-white p-1 cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
+                </div>
+                
+                <div class="flex-grow overflow-y-auto py-4 space-y-4">
+                    <template x-if="items.length === 0">
+                        <div class="text-center py-12 space-y-3">
+                            <i class="fa-solid fa-cart-flatbed text-4xl text-gray-600"></i>
+                            <p class="text-gray-400 text-sm">Tu carrito está vacío actualmente.</p>
+                            <a href="index.html#showcase" @click="cartOpen = false" class="btn-metal-orange inline-block px-4 py-2 rounded-xl text-xs font-bold">Explorar Catálogo</a>
+                        </div>
+                    </template>
+                    <template x-for="(item, index) in items" :key="item.id">
+                        <div class="flex gap-4 p-3.5 bg-black/40 rounded-xl border border-white/5 items-center">
+                            <img :src="item.image" :alt="item.name" class="w-16 h-16 object-cover rounded-lg border border-white/10">
+                            <div class="flex-grow">
+                                <h4 class="text-xs font-bold text-white" x-text="item.name"></h4>
+                                <span class="text-xs text-orange-400 font-bold" x-text="'$' + formatPrice(item.price) + ' CLP'"></span>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <button @click="decreaseQty(index)" class="w-6 h-6 rounded bg-neutral-800 text-white text-xs flex items-center justify-center cursor-pointer hover:bg-neutral-700">-</button>
+                                    <span class="text-xs font-bold text-white" x-text="item.qty"></span>
+                                    <button @click="increaseQty(index)" class="w-6 h-6 rounded bg-neutral-800 text-white text-xs flex items-center justify-center cursor-pointer hover:bg-neutral-700">+</button>
+                                    <button @click="removeItem(index)" class="ml-auto text-red-400 text-xs hover:text-red-300 cursor-pointer" title="Eliminar producto"><i class="fa-regular fa-trash-can"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div x-show="items.length > 0" class="pt-4 border-t border-white/10 space-y-3">
+                    <div class="flex justify-between text-sm font-bold">
+                        <span class="text-gray-300">Subtotal:</span>
+                        <span class="text-orange-400 text-lg" x-text="'$' + formatPrice(totalAmount) + ' CLP'"></span>
+                    </div>
+                    <p class="text-[11px] text-gray-400 flex items-center gap-1.5">
+                        <i class="fa-solid fa-truck-fast text-sky-400"></i> Despachos rápidos a todo Chile por Starken / Chilexpress.
+                    </p>
+                    <a href="checkout.html" class="btn-metal-orange w-full py-3.5 rounded-xl font-bold text-center block text-sm shadow-lg shadow-orange-500/20">
+                        Proceder al Checkout Seguro <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT CARRITO GLOBAL PERSISTENTE -->
+    <script>
+        function cartStore() {
+            return {
+                cartOpen: false,
+                items: JSON.parse(localStorage.getItem('mc_cart') || '[]'),
+                get totalItems() {
+                    return this.items.reduce((acc, item) => acc + item.qty, 0);
+                },
+                get totalAmount() {
+                    return this.items.reduce((acc, item) => acc + (item.price * item.qty), 0);
+                },
+                formatPrice(val) {
+                    return new Intl.NumberFormat('es-CL').format(val);
+                },
+                saveCart() {
+                    localStorage.setItem('mc_cart', JSON.stringify(this.items));
+                },
+                addItem(id, name, price, image) {
+                    const existing = this.items.find(i => i.id === id);
+                    if (existing) {
+                        existing.qty++;
+                    } else {
+                        this.items.push({ id, name, price, image, qty: 1 });
+                    }
+                    this.saveCart();
+                    this.cartOpen = true;
+                },
+                buyNow(id, name, price, image) {
+                    const existing = this.items.find(i => i.id === id);
+                    if (!existing) {
+                        this.items.push({ id, name, price, image, qty: 1 });
+                    }
+                    this.saveCart();
+                    window.location.href = 'checkout.html';
+                },
+                increaseQty(idx) {
+                    this.items[idx].qty++;
+                    this.saveCart();
+                },
+                decreaseQty(idx) {
+                    if (this.items[idx].qty > 1) {
+                        this.items[idx].qty--;
+                    } else {
+                        this.items.splice(idx, 1);
+                    }
+                    this.saveCart();
+                },
+                removeItem(idx) {
+                    this.items.splice(idx, 1);
+                    this.saveCart();
+                }
+            }
+        }
+    </script>
+</body></html>

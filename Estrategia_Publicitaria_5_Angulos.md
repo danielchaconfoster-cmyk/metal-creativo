@@ -11,7 +11,7 @@ Antes de crear un anuncio, debemos entender **por qué la gente saca la tarjeta 
 
 ---
 
-### 🚗 LÍNEA 1: BARRAS RÍGIDAS DE REMOLQUE ($89.900 CLP)
+### 🚗 LÍNEA 1: BARRAS RÍGIDAS DE REMOLQUE ($65.000 CLP)
 
 #### 🔴 DOLORES PROFUNDOS (Lo que el cliente quiere evitar a toda costa):
 1. **Miedo al Castigo Legal y Financiero**: El Decreto Supremo N° 55/2025 del Ministerio de Transportes prohíbe cuerdas, cadenas y tirantes de género. El cliente teme un parte grave de Carabineros, retención del vehículo en aparcadero municipal y pagar $100.000+ en grúa comercial.
@@ -70,7 +70,7 @@ Antes de crear un anuncio, debemos entender **por qué la gente saca la tarjeta 
   > ✅ Incluye bandera de seguridad exigida por norma.  
   > ✅ Se arma en 30 segundos y se guarda en la maletera.  
   > 
-  > 💰 **Precio Oferta**: **$89.900 CLP** (Envío a todo Chile).  
+  > 💰 **Precio Oferta**: **$65.000 CLP** (Envío a todo Chile).  
   > 📲 **Haz clic en "Enviar Mensaje" y coordina tu pedido directo en WhatsApp.**
 
 ---
