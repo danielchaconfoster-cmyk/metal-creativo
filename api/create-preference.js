@@ -1,11 +1,31 @@
 // Vercel Serverless Function: api/create-preference.js
-// Ciberseguridad: Calculo inmutable de precios en servidor y registro en Supabase
+// Ciberseguridad FinTech: Anti-Carding Rate Limiting, Forense de IP/User-Agent y Precios Inmutables
 
 const { MercadoPagoConfig, Preference } = require('mercadopago');
 const { createClient } = require('@supabase/supabase-js');
 
-// Catalogo de precios oficial en el servidor (Fuente de Verdad)
-// NUNCA confiar en los precios que envia el navegador del usuario
+// 1. SISTEMA DE RATE LIMITING EN MEMORIA (Proteccion Anti-Carding Bot)
+// Bloquea robots que prueben cientos de tarjetas robadas por minuto
+const ipRequestHistory = new Map();
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutos
+const MAX_REQUESTS_PER_WINDOW = 6; // Max 6 intentos por IP
+
+function checkRateLimit(ip) {
+  const now = Date.now();
+  const history = ipRequestHistory.get(ip) || [];
+  // Filtrar intentos fuera de la ventana
+  const recentHistory = history.filter(time => (now - time) < RATE_LIMIT_WINDOW_MS);
+
+  if (recentHistory.length >= MAX_REQUESTS_PER_WINDOW) {
+    return false; // Bloqueado
+  }
+
+  recentHistory.push(now);
+  ipRequestHistory.set(ip, recentHistory);
+  return true;
+}
+
+// 2. LISTA DE PRECIOS OFICIALES INMUTABLES
 const OFFICIAL_PRICES = {
   'barra_remolque': {
     name: 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)',
@@ -20,20 +40,29 @@ const OFFICIAL_PRICES = {
 };
 
 module.exports = async (req, res) => {
-  // Solo permitir metodo POST
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Metodo no permitido' });
+  }
+
+  const clientIp = req.headers['x-forwarded-for']?.split(',')[0].trim() || req.socket.remoteAddress || 'unknown';
+  const userAgent = req.headers['user-agent'] || 'unknown';
+
+  // CHEQUEO ANTI-CARDING RATE LIMIT
+  if (!checkRateLimit(clientIp)) {
+    console.warn(`[CIBERSEGURIDAD] Bloqueo por exceso de intentos desde IP: ${clientIp}`);
+    return res.status(429).json({
+      error: 'Demasiadas solicitudes desde este dispositivo. Por favor espera unos minutos o contacta a soporte.'
+    });
   }
 
   try {
     const { customer, items, shipping_cost = 0, shipping_method = 'starken' } = req.body;
 
-    // Validacion de datos minimos del cliente
     if (!customer || !customer.rut || !customer.email || !customer.phone || !items || !items.length) {
       return res.status(400).json({ error: 'Datos incompletos para procesar la orden' });
     }
 
-    // 1. RECALCULAR TOTAL EN EL SERVIDOR (Previene manipulacion de precios por atacantes)
+    // Calculo inmutable en servidor
     let validatedItems = [];
     let serverTotal = 0;
 
@@ -43,8 +72,8 @@ module.exports = async (req, res) => {
         return res.status(400).json({ error: `Producto invalido: ${item.id}` });
       }
       const qty = parseInt(item.qty, 10);
-      if (isNaN(qty) || qty <= 0) {
-        return res.status(400).json({ error: 'Cantidad invalida' });
+      if (isNaN(qty) || qty <= 0 || qty > 10) {
+        return res.status(400).json({ error: 'Cantidad no permitida' });
       }
 
       const itemTotal = product.unit_price * qty;
@@ -61,7 +90,7 @@ module.exports = async (req, res) => {
 
     serverTotal += Number(shipping_cost);
 
-    // 2. CONECTAR CON SUPABASE (Con Service Role Key segura en variables de entorno)
+    // Registro seguro en Supabase con IP y User-Agent (Prueba de Entrega Anti-Contracargo)
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
     let orderId = null;
@@ -69,8 +98,7 @@ module.exports = async (req, res) => {
     if (supabaseUrl && supabaseKey) {
       const supabase = createClient(supabaseUrl, supabaseKey);
 
-      // Crear o actualizar cliente
-      const { data: customerData, error: custError } = await supabase
+      const { data: customerData } = await supabase
         .from('customers')
         .insert([{
           rut: customer.rut,
@@ -86,12 +114,7 @@ module.exports = async (req, res) => {
         .select()
         .single();
 
-      if (custError) {
-        console.error('Error al guardar cliente en Supabase:', custError);
-      }
-
-      // Crear Orden Inicial con estado 'pending'
-      const { data: orderData, error: orderError } = await supabase
+      const { data: orderData } = await supabase
         .from('orders')
         .insert([{
           customer_id: customerData ? customerData.id : null,
@@ -99,15 +122,15 @@ module.exports = async (req, res) => {
           total_amount: serverTotal,
           shipping_method: shipping_method,
           shipping_cost: shipping_cost,
-          payment_method: 'mercadopago'
+          payment_method: 'mercadopago',
+          ip_address: clientIp,
+          user_agent: userAgent
         }])
         .select()
         .single();
 
-      if (!orderError && orderData) {
+      if (orderData) {
         orderId = orderData.id;
-
-        // Guardar items de la orden
         const orderItemsRows = validatedItems.map(i => ({
           order_id: orderId,
           product_id: i.id,
@@ -119,7 +142,7 @@ module.exports = async (req, res) => {
       }
     }
 
-    // 3. GENERAR PREFERENCIA EN MERCADO PAGO
+    // Crear Preferencia en Mercado Pago
     const mpAccessToken = process.env.MERCADOPAGO_ACCESS_TOKEN;
     if (!mpAccessToken) {
       return res.status(500).json({ error: 'Configuracion de Mercado Pago pendiente en Vercel' });
@@ -128,7 +151,6 @@ module.exports = async (req, res) => {
     const client = new MercadoPagoConfig({ accessToken: mpAccessToken });
     const preference = new Preference(client);
 
-    // Agregar costo de envio a Mercado Pago si aplica
     if (shipping_cost > 0) {
       validatedItems.push({
         id: 'shipping_fee',
@@ -163,24 +185,20 @@ module.exports = async (req, res) => {
       }
     });
 
-    // Guardar preference_id en Supabase
     if (orderId && supabaseUrl && supabaseKey) {
       const supabase = createClient(supabaseUrl, supabaseKey);
-      await supabase
-        .from('orders')
-        .update({ preference_id: prefResult.id })
-        .eq('id', orderId);
+      await supabase.from('orders').update({ preference_id: prefResult.id }).eq('id', orderId);
     }
 
     return res.status(200).json({
       success: true,
       preference_id: prefResult.id,
-      init_point: prefResult.init_point, // Redireccion para produccion
-      sandbox_init_point: prefResult.sandbox_init_point // Redireccion para pruebas
+      init_point: prefResult.init_point,
+      sandbox_init_point: prefResult.sandbox_init_point
     });
 
   } catch (err) {
-    console.error('Error al crear preferencia de Mercado Pago:', err);
-    return res.status(500).json({ error: 'Error interno de pasarela de pago' });
+    console.error('Error interno en create-preference:', err);
+    return res.status(500).json({ error: 'Error interno de pasarela' });
   }
 };

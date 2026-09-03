@@ -1,12 +1,12 @@
 -- ==============================================================================
 -- METAL CREATIVO CHILE - SCHEMA OFICIAL DE BASE DE DATOS SUPABASE (POSTGRESQL)
--- Arquitectura de Ciberseguridad con Row Level Security (RLS) & Auditoria
+-- Arquitectura de Ciberseguridad Avanzada (FinTech Level): RLS, Anti-Fraude & Trazabilidad
 -- ==============================================================================
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 DO $$ BEGIN
-    CREATE TYPE order_status AS ENUM ('pending', 'paid', 'preparing', 'shipped', 'delivered', 'cancelled');
+    CREATE TYPE order_status AS ENUM ('pending', 'paid', 'preparing', 'shipped', 'delivered', 'cancelled', 'disputed');
 EXCEPTION
     WHEN duplicate_object THEN null;
 END $$;
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS public.customers (
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- 3. TABLA DE PEDIDOS (ORDERS)
+-- 3. TABLA DE PEDIDOS (ORDERS) CON EVIDENCIA ANTI-CONTRACARGO
 CREATE TABLE IF NOT EXISTS public.orders (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     order_number SERIAL UNIQUE,
@@ -45,7 +45,9 @@ CREATE TABLE IF NOT EXISTS public.orders (
     payment_method payment_gateway NOT NULL,
     payment_id VARCHAR(100) UNIQUE, -- Idempotencia ante reintentos de webhook
     preference_id VARCHAR(100),     -- ID de Checkout Pro Mercado Pago
-    tracking_number VARCHAR(100),   -- Codigo de seguimiento Starken/Chilexpress
+    tracking_number VARCHAR(100),   -- Codigo de flete Starken/Chilexpress
+    ip_address VARCHAR(50),         -- Evidencia forense de compra (Anti-Contracargo)
+    user_agent TEXT,                -- Dispositivo del comprador
     notes TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
@@ -63,7 +65,7 @@ CREATE TABLE IF NOT EXISTS public.order_items (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- 5. TABLA DE LOGS DE WEBHOOKS (Auditoria Criptografica y Trazabilidad)
+-- 5. TABLA DE AUDITORIA CRIPTOGRAFICA DE WEBHOOKS
 CREATE TABLE IF NOT EXISTS public.payment_webhook_logs (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     gateway VARCHAR(50) DEFAULT 'mercadopago' NOT NULL,
@@ -75,44 +77,43 @@ CREATE TABLE IF NOT EXISTS public.payment_webhook_logs (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- 6. INDICES
+-- 6. TABLA DE EVENTOS DE CIBERSEGURIDAD Y DETECCION DE AMENAZAS (SIEM LIVIANO)
+CREATE TABLE IF NOT EXISTS public.security_audit_events (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    event_type VARCHAR(100) NOT NULL, -- 'rate_limit_exceeded', 'invalid_signature', 'suspicious_rut'
+    ip_address VARCHAR(50) NOT NULL,
+    user_agent TEXT,
+    details JSONB,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 7. INDICES
 CREATE INDEX IF NOT EXISTS idx_orders_customer ON public.orders(customer_id);
 CREATE INDEX IF NOT EXISTS idx_orders_payment_id ON public.orders(payment_id);
 CREATE INDEX IF NOT EXISTS idx_orders_status ON public.orders(status);
 CREATE INDEX IF NOT EXISTS idx_customers_rut ON public.customers(rut);
 CREATE INDEX IF NOT EXISTS idx_order_items_order ON public.order_items(order_id);
+CREATE INDEX IF NOT EXISTS idx_security_ip ON public.security_audit_events(ip_address);
 
--- 7. CIBERSEGURIDAD: ROW LEVEL SECURITY (RLS) ESTRICTO
+-- 8. ROW LEVEL SECURITY (RLS) ESTRICTO EN TODAS LAS TABLAS
 ALTER TABLE public.customers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.order_items ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.payment_webhook_logs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.security_audit_events ENABLE ROW LEVEL SECURITY;
 
--- Politicas RLS para SERVICE_ROLE (Backend seguro en Vercel)
+-- Politicas RLS para SERVICE_ROLE (Backend Vercel)
 DROP POLICY IF EXISTS "Service role full access on customers" ON public.customers;
-CREATE POLICY "Service role full access on customers"
-ON public.customers FOR ALL
-TO service_role
-USING (true)
-WITH CHECK (true);
+CREATE POLICY "Service role full access on customers" ON public.customers FOR ALL TO service_role USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Service role full access on orders" ON public.orders;
-CREATE POLICY "Service role full access on orders"
-ON public.orders FOR ALL
-TO service_role
-USING (true)
-WITH CHECK (true);
+CREATE POLICY "Service role full access on orders" ON public.orders FOR ALL TO service_role USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Service role full access on order_items" ON public.order_items;
-CREATE POLICY "Service role full access on order_items"
-ON public.order_items FOR ALL
-TO service_role
-USING (true)
-WITH CHECK (true);
+CREATE POLICY "Service role full access on order_items" ON public.order_items FOR ALL TO service_role USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Service role full access on webhook logs" ON public.payment_webhook_logs;
-CREATE POLICY "Service role full access on webhook logs"
-ON public.payment_webhook_logs FOR ALL
-TO service_role
-USING (true)
-WITH CHECK (true);
+CREATE POLICY "Service role full access on webhook logs" ON public.payment_webhook_logs FOR ALL TO service_role USING (true) WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Service role full access on security logs" ON public.security_audit_events;
+CREATE POLICY "Service role full access on security logs" ON public.security_audit_events FOR ALL TO service_role USING (true) WITH CHECK (true);
