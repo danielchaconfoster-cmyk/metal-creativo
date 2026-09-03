@@ -1,6 +1,7 @@
 // Vercel Serverless Function: api/webhook.js
 // Ciberseguridad: Validacion Criptografica de Firma HMAC SHA-256 e Idempotencia
 
+try { require('dotenv').config(); } catch (_) {}
 const crypto = require('crypto');
 const { MercadoPagoConfig, Payment } = require('mercadopago');
 const { createClient } = require('@supabase/supabase-js');

@@ -249,16 +249,13 @@
                     this.processStep = 'Redirigiendo a pasarela bancaria...';
                     window.location.href = result.init_point;
                 } else {
-                    // Si las credenciales aun no estan configuradas en Vercel, respaldo seguro
-                    localStorage.setItem('last_order', JSON.stringify(orderData));
-                    localStorage.removeItem('mc_cart');
-                    window.location.href = `checkout-success.html?order=${orderId}&method=pending`;
+                    alert('Aviso Mercado Pago: ' + (result.error || 'No se pudo generar el enlace de pago. Por favor intenta de nuevo o selecciona Transferencia Bancaria.'));
+                    this.processing = false;
                 }
             } catch (err) {
                 console.error('Error al conectar con pasarela:', err);
-                localStorage.setItem('last_order', JSON.stringify(orderData));
-                localStorage.removeItem('mc_cart');
-                window.location.href = `checkout-success.html?order=${orderId}&method=pending`;
+                alert('Hubo un problema de conexión al iniciar el pago. Puedes intentar nuevamente o coordinar por Transferencia / WhatsApp.');
+                this.processing = false;
             }
         }
     }">

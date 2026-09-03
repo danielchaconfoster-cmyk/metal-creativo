@@ -1,6 +1,7 @@
 // Vercel Serverless Function: api/create-preference.js
 // Ciberseguridad FinTech: Anti-Carding Rate Limiting, Forense de IP/User-Agent y Precios Inmutables
 
+try { require('dotenv').config(); } catch (_) {}
 const { MercadoPagoConfig, Preference } = require('mercadopago');
 const { createClient } = require('@supabase/supabase-js');
 
@@ -162,28 +163,36 @@ module.exports = async (req, res) => {
     }
 
     const host = req.headers.host || 'metalcreativo.cl';
-    const protocol = host.includes('localhost') ? 'http' : 'https';
+    const isLocal = host.includes('localhost') || host.includes('127.0.0.1');
+    const baseUrl = isLocal ? 'https://metalcreativo.cl' : `https://${host}`;
 
-    const prefResult = await preference.create({
-      body: {
-        items: validatedItems,
-        payer: {
-          name: customer.full_name,
-          email: customer.email,
-          phone: { number: customer.phone },
-          identification: { type: 'RUT', number: customer.rut }
-        },
-        external_reference: orderId || `MC-${Date.now()}`,
-        back_urls: {
-          success: `${protocol}://${host}/checkout-success.html?status=approved`,
-          failure: `${protocol}://${host}/checkout.html?status=rejected`,
-          pending: `${protocol}://${host}/checkout-success.html?status=pending`
-        },
-        auto_return: 'approved',
-        notification_url: `${protocol}://${host}/api/webhook`,
-        statement_descriptor: 'METAL CREATIVO'
-      }
-    });
+    const cleanPhone = String(customer.phone || '').replace(/\D/g, '');
+    const cleanRut = String(customer.rut || '').replace(/[^0-9kK]/g, '').toUpperCase();
+
+    const preferenceBody = {
+      items: validatedItems,
+      payer: {
+        name: customer.full_name,
+        email: customer.email,
+        phone: { number: cleanPhone },
+        identification: { type: 'RUT', number: cleanRut }
+      },
+      external_reference: orderId ? String(orderId) : `MC-${Date.now()}`,
+      back_urls: {
+        success: `${baseUrl}/checkout-success.html?status=approved`,
+        failure: `${baseUrl}/checkout.html?status=rejected`,
+        pending: `${baseUrl}/checkout-success.html?status=pending`
+      },
+      auto_return: 'approved',
+      statement_descriptor: 'METAL CREATIVO'
+    };
+
+    // Mercado Pago exige HTTPS y dominio publico para webhooks
+    if (!isLocal) {
+      preferenceBody.notification_url = `${baseUrl}/api/webhook`;
+    }
+
+    const prefResult = await preference.create({ body: preferenceBody });
 
     if (orderId && supabaseUrl && supabaseKey) {
       const supabase = createClient(supabaseUrl, supabaseKey);
@@ -199,6 +208,6 @@ module.exports = async (req, res) => {
 
   } catch (err) {
     console.error('Error interno en create-preference:', err);
-    return res.status(500).json({ error: 'Error interno de pasarela' });
+    return res.status(500).json({ error: err.message || 'Error interno de pasarela' });
   }
 };
