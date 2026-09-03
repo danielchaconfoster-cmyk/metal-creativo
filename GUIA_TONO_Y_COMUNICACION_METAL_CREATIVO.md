@@ -1,5 +1,5 @@
 # 📖 GUÍA MAESTRA DE TONO, COMUNICACIÓN Y COPYWRITING
-## Marca: Metal Creativo Chile (@metalcreativo.cl)
+## Marca: Metal Creativo Chile (@nico_parfum_store)
 *Fuente oficial para la página web, anuncios publicitarios, videos de Remotion y atención por WhatsApp.*
 
 ---

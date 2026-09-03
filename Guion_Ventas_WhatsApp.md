@@ -1,5 +1,5 @@
 # 📲 GUIONES DE VENTA Y AUTOMATIZACIÓN DE WHATSAPP
-## Metal Creativo Chile (@metalcreativo.cl) — Atención Rápida a Clientes
+## Metal Creativo Chile (@nico_parfum_store) — Atención Rápida a Clientes
 
 Este documento contiene las respuestas rápidas que debes guardar en tu WhatsApp Business para atender consultas en menos de 2 minutos y cerrar ventas rápido.
 
@@ -7,7 +7,7 @@ Este documento contiene las respuestas rápidas que debes guardar en tu WhatsApp
 
 ### 1. Mensaje de Bienvenida Automático
 
-> *"¡Hola! 👋 Bienvenido a **Metal Creativo Chile** (@metalcreativo.cl).  
+> *"¡Hola! 👋 Bienvenido a **Metal Creativo Chile** (@nico_parfum_store).  
 > Somos fabricantes de **Barras Rígidas de Remolque** (cumpliendo el Decreto N° 55/2025 de la Ley de Tránsito) y **Estufas a Bioetanol Ecológico** para departamento y terrazas.  
 > 
 > ¿Por cuál de los productos te gustaría cotizar hoy?  
