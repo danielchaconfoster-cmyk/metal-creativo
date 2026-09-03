@@ -10,7 +10,7 @@
     <!-- Open Graph / Redes Sociales -->
     <meta property="og:title" content="Metal Creativo Chile | Soluciones en Acero para tu Auto y tu Hogar">
     <meta property="og:description" content="Barras de remolque desarmables que cumplen con la Ley de Tránsito MTT en Chile y fogones a bioetanol sin humo. Fabricación nacional con 6 meses de garantía.">
-    <meta property="og:image" content="https://metalcreativo.cl/images/auto_remolque_real.jpeg">
+    <meta property="og:image" content="https://metalcreativo.cl/images/lanza_carretera_pro.jpg">
     <meta property="og:url" content="https://metalcreativo.cl/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Metal Creativo Chile">
@@ -25,8 +25,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine.js CDN -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <!-- FontAwesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Schemas Estructurados JSON-LD para Google e Inteligencias Artificiales -->
     <script type="application/ld+json">
@@ -56,7 +54,7 @@
           "@type": "Product",
           "@id": "https://metalcreativo.cl/#lanza-remolque",
           "name": "Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)",
-          "image": "https://metalcreativo.cl/images/auto_remolque_real.jpeg",
+          "image": "https://metalcreativo.cl/images/lanza_carretera_pro.jpg",
           "description": "Lanza de remolque para autos de 1.8 metros, desarmable en 3 tramos de menos de 65 cm. Tubo de acero reforzado de 5 mm y capacidad de arrastre de 3.500 kg.",
           "brand": { "@type": "Brand", "name": "Metal Creativo Chile" },
           "offers": {
@@ -105,8 +103,8 @@
         .hero-section {
             position: relative;
             width: 100%;
-            min-height: 88vh;
-            min-height: 88dvh;
+            min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -120,7 +118,7 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            filter: brightness(0.68) contrast(1.1);
+            filter: brightness(0.65) contrast(1.1);
             transform: scale(1.03);
             transition: transform 8s ease-out;
         }
@@ -129,8 +127,8 @@
             position: absolute;
             inset: 0;
             background: 
-                radial-gradient(circle at center, rgba(0,0,0,0.25) 0%, rgba(7,8,11,0.85) 85%),
-                linear-gradient(to bottom, rgba(7,8,11,0.5) 0%, transparent 45%, rgba(7,8,11,0.95) 100%);
+                radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(7,8,11,0.85) 85%),
+                linear-gradient(to bottom, rgba(7,8,11,0.6) 0%, transparent 45%, rgba(7,8,11,0.98) 100%);
             z-index: 1;
         }
 
@@ -148,7 +146,7 @@
             background-clip: text;
         }
 
-        /* EFECTO MAGNET BUTTON DE REACT BITS */
+        /* EFECTO MAGNET BUTTON */
         .btn-magnet {
             transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s ease;
             will-change: transform;
@@ -175,7 +173,7 @@
             box-shadow: 0 0 30px rgba(255, 106, 0, 0.7);
         }
 
-        /* EFECTO SPOTLIGHT CARD INTERACTIVO EN TIEMPO REAL (REACT BITS) */
+        /* SPOTLIGHT CARD INTERACTIVO */
         .spotlight-card {
             background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 106, 0, 0.12), transparent 40%),
                         linear-gradient(145deg, #14171d 0%, #0d0f13 100%);
@@ -190,7 +188,7 @@
             box-shadow: 0 0 35px rgba(255, 106, 0, 0.25);
         }
 
-        /* EFECTO SHINY TEXT DE REACT BITS */
+        /* SHINY TEXT EFFECT */
         .shiny-text {
             background: linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.4) 100%);
             background-size: 200% 100%;
@@ -203,52 +201,57 @@
             100% { background-position: 200% 0; }
         }
 
-        #sparkCanvas {
+        #emberCanvas {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 2;
         }
 
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body x-data="cartStore()" class="w-full min-h-screen flex flex-col antialiased selection:bg-orange-500 selection:text-white relative">
+<body x-data="cartStore()" class="w-full min-h-screen flex flex-col antialiased selection:bg-orange-500 selection:text-white relative bg-[#07080b]">
 
-    <!-- CANVAS PARA CHISPAS DE SOLDADURA AL CLIC (CLICK SPARK EFFECT) -->
-    <canvas id="sparkCanvas"></canvas>
+    <!-- CANVAS PARA BRASAS / FUEGO ASCENDENTE EN VIVO -->
+    <canvas id="emberCanvas"></canvas>
 
-    <!-- NAVBAR TRANSPARENTE / GLASS -->
-    <nav class="sticky top-0 z-50 bg-[#07080b]/95 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl">
+    <!-- NAVBAR TRANSPARENTE FLOTANDO SOBRE LA IMAGEN SUPERIOR -->
+    <header class="absolute top-0 left-0 w-full z-50 bg-gradient-to-b from-black/80 via-black/30 to-transparent py-4 border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-3 group">
                 <img src="./images/logo_official.png" alt="Metal Creativo Chile" class="h-11 sm:h-14 w-auto object-contain group-hover:scale-105 transition-transform">
             </a>
 
-            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-300">
+            <!-- ENLACES ULTRA LIMPIOS -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-200">
                 <a href="#showcase" class="hover:text-orange-400 transition-colors">Catálogo</a>
-                <a href="#galeria-real" class="hover:text-orange-400 transition-colors">Fotos en Acción</a>
-                <a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors">Preguntas Frecuentes</a>
-                <a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors">Garantía 6 Meses</a>
+                <a href="#galeria-real" class="hover:text-orange-400 transition-colors">Fotos Reales</a>
                 <a href="contacto.html" class="hover:text-orange-400 transition-colors">Contacto</a>
-            </div>
+            </nav>
 
-            <div class="flex items-center gap-3">
-                <!-- BOTÓN CARRITO CON CONTADOR REACTIVO -->
-                <button @click="cartOpen = true" class="btn-magnet relative p-2.5 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer shadow-lg" title="Ver Carrito de Compras">
-                    <i class="fa-solid fa-cart-shopping text-base text-orange-400"></i>
+            <div class="flex items-center gap-4">
+                <!-- BOTÓN CARRITO -->
+                <button @click="cartOpen = true" class="btn-magnet relative p-2.5 rounded-xl bg-neutral-900/80 backdrop-blur-md border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer shadow-lg" title="Ver Carrito de Compras">
+                    <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
                     <span x-show="totalItems > 0" x-text="totalItems" class="absolute -top-1.5 -right-1.5 bg-orange-600 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center border-2 border-[#07080b]"></span>
                 </button>
+                
+                <!-- BOTÓN WHATSAPP OFICIAL -->
                 <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo,%20quisiera%20hacer%20una%20consulta" target="_blank" class="btn-magnet btn-metal-orange px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2 shadow-lg shadow-orange-500/20">
-                    <i class="fa-brands fa-whatsapp text-sm"></i>
-                    <span class="hidden sm:inline">WhatsApp</span>
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                    </svg>
+                    <span>WhatsApp</span>
                 </a>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- HERO SECTION CON SLIDER DE FOTOS REALES -->
+    <!-- HERO SECTION DE PANTALLA COMPLETA HASTA EL TOPE -->
     <section class="hero-section" x-data="{
         currentSlide: 0,
         slides: [
@@ -274,105 +277,54 @@
         <div class="hero-overlay-gradient"></div>
 
         <!-- Indicadores del Slider -->
-        <div class="absolute bottom-4 sm:bottom-6 z-20 flex items-center justify-center gap-2">
+        <div class="absolute bottom-6 z-20 flex items-center justify-center gap-2">
             <template x-for="(imgSrc, idx) in slides" :key="idx">
-                <button @click="currentSlide = idx" :class="currentSlide === idx ? 'bg-orange-500 w-6 sm:w-8' : 'bg-white/40 w-2 hover:bg-white/70'" class="h-1.5 sm:h-2 rounded-full transition-all duration-500 cursor-pointer border-none"></button>
+                <button @click="currentSlide = idx" :class="currentSlide === idx ? 'bg-orange-500 w-8' : 'bg-white/40 w-2 hover:bg-white/70'" class="h-2 rounded-full transition-all duration-500 cursor-pointer border-none"></button>
             </template>
         </div>
 
-        <div class="relative z-10 text-center max-w-4xl px-4 sm:px-6 mx-auto space-y-6 pt-16 sm:pt-20 pb-10">
-            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-400 text-xs font-extrabold uppercase tracking-widest backdrop-blur-sm shiny-text">
-                <i class="fa-solid fa-hammer text-orange-400"></i> FABRICACIÓN NACIONAL & SOLUCIONES EN ACERO
+        <div class="relative z-10 text-center max-w-4xl px-4 sm:px-6 mx-auto space-y-6 pt-24 sm:pt-28 pb-12">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-400 text-xs font-bold uppercase tracking-widest backdrop-blur-sm shiny-text">
+                FABRICACIÓN NACIONAL & SOLUCIONES EN ACERO
             </span>
 
             <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold metal-title-gradient leading-tight tracking-tight">
                 Soluciones Prácticas en Acero para tu Auto y tu Hogar
             </h1>
-            <p class="text-gray-300 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed font-normal opacity-95 px-2">
-                En Metal Creativo fabricamos productos resistentes, fáciles de usar y bien pensados. Fabricación chilena con 6 meses de garantía y envíos rápidos a todo el país.
+            <p class="text-gray-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-normal opacity-95">
+                Fabricamos productos resistentes, fáciles de usar y bien pensados. Fabricación chilena con 6 meses de garantía legal y envíos rápidos a todo el país.
             </p>
 
-            <!-- SELECTOR DUAL DE PRODUCTOS -->
-            <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto text-left">
-                <!-- TARJETA 1: BIOETANOL -->
-                <div @click="activeTab = 'hogar'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="spotlight-card group cursor-pointer p-4 sm:p-5 rounded-xl border border-orange-500/30 hover:border-orange-500 transition-all duration-300 relative overflow-hidden backdrop-blur-md">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="w-10 h-10 rounded-lg bg-orange-500/20 border border-orange-500/40 text-orange-400 flex items-center justify-center text-lg shrink-0">
-                            <i class="fa-solid fa-fire"></i>
-                        </div>
-                        <div>
-                            <span class="text-[10px] font-black uppercase text-orange-400 tracking-wider">Línea Hogar & Terrazas</span>
-                            <h3 class="text-base sm:text-lg font-extrabold text-white group-hover:text-orange-400 transition-colors">Fogón a Bioetanol Ecológico</h3>
-                        </div>
-                    </div>
-                    <p class="text-xs text-gray-400 leading-relaxed mb-3">Fuego real sin humo, sin cenizas y sin cañón. Acero con base de madera y piedras de cuarzo para tu terraza o living.</p>
-                    <div class="flex items-center justify-between text-xs font-bold text-orange-400 group-hover:translate-x-1 transition-transform">
-                        <span>Ver Fogones ($149.900 CLP)</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </div>
-                </div>
-
-                <!-- TARJETA 2: BARRA REMOLQUE -->
-                <div @click="activeTab = 'auto'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="spotlight-card group cursor-pointer p-4 sm:p-5 rounded-xl border border-sky-500/30 hover:border-sky-400 transition-all duration-300 relative overflow-hidden backdrop-blur-md">
-                    <div class="flex items-center gap-3 mb-2">
-                        <div class="w-10 h-10 rounded-lg bg-sky-500/20 border border-sky-500/40 text-sky-400 flex items-center justify-center text-lg shrink-0">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </div>
-                        <div>
-                            <span class="text-[10px] font-black uppercase text-sky-400 tracking-wider">Línea Automotriz Ley MTT</span>
-                            <h3 class="text-base sm:text-lg font-extrabold text-white group-hover:text-sky-400 transition-colors">Barra de Remolque Desarmable</h3>
-                        </div>
-                    </div>
-                    <p class="text-xs text-gray-400 leading-relaxed mb-3">Tubo de acero reforzado de 5 mm. Cabe en el maletero (&lt;65 cm) y es obligatoria por Ley de Tránsito (soporta 3.500 kg).</p>
-                    <div class="flex items-center justify-between text-xs font-bold text-sky-400 group-hover:translate-x-1 transition-transform">
-                        <span>Ver Barra de Remolque ($65.000 CLP)</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </div>
-                </div>
+            <!-- BOTONES PRINCIPALES LIMPIOS -->
+            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+                <a href="#showcase" @click="activeTab = 'auto'" class="btn-magnet btn-metal-orange w-full sm:w-auto px-7 py-3.5 rounded-xl font-extrabold text-sm text-center shadow-lg shadow-orange-500/20 block">
+                    Barra de Remolque ($65.000)
+                </a>
+                <a href="#showcase" @click="activeTab = 'hogar'" class="btn-magnet btn-metal-primary w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-sm text-center block">
+                    Fogón a Bioetanol ($149.900)
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- BARRA DE CONFIANZA Y NÚMEROS REALES (COUNT UP INTERACTIVO) -->
-    <div class="bg-[#0c0e13] border-y border-white/10 py-6" id="stats-section">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div class="space-y-1">
-                <span class="text-2xl sm:text-3xl font-black text-orange-400 count-up" data-target="1200">+1.200</span>
-                <p class="text-xs text-gray-400 font-medium">Productos Despachados</p>
-            </div>
-            <div class="space-y-1">
-                <span class="text-2xl sm:text-3xl font-black text-white count-up" data-target="3500">3.500 kg</span>
-                <p class="text-xs text-gray-400 font-medium">Capacidad de Arrastre</p>
-            </div>
-            <div class="space-y-1">
-                <span class="text-2xl sm:text-3xl font-black text-sky-400 count-up" data-target="5">5 mm</span>
-                <p class="text-xs text-gray-400 font-medium">Tubo de Acero Reforzado</p>
-            </div>
-            <div class="space-y-1">
-                <span class="text-2xl sm:text-3xl font-black text-emerald-400 count-up" data-target="6">6 Meses</span>
-                <p class="text-xs text-gray-400 font-medium">Garantía Legal SERNAC</p>
-            </div>
-        </div>
-    </div>
-
     <!-- CONTENIDO PRINCIPAL: CATÁLOGO Y COMPRA DIRECTA -->
-    <main id="showcase" class="py-16 bg-[#07080b] relative z-10 space-y-20">
+    <main id="showcase" class="py-20 bg-[#07080b] relative z-10 space-y-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
 
             <!-- SECCIÓN: NUESTROS PRODUCTOS -->
-            <section class="space-y-8">
+            <section class="space-y-10">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
                     <h2 class="text-3xl sm:text-4xl section-glow-title">Nuestros Productos Oficiales</h2>
-                    <p class="text-gray-400 text-sm">Elige una categoría para revisar medidas y comprar directo con despacho a tu puerta.</p>
+                    <p class="text-gray-400 text-sm">Selecciona una categoría para revisar medidas y comprar online con despacho a domicilio.</p>
                 </div>
 
                 <!-- Selector de Pestañas -->
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 max-w-md mx-auto">
                     <button @click="activeTab = 'auto'" :class="activeTab === 'auto' ? 'btn-metal-orange' : 'btn-metal-primary'" class="btn-magnet w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs sm:text-sm cursor-pointer transition-all text-center">
-                        <i class="fa-solid fa-car-side mr-2"></i> Barra de Remolque Desarmable ($65.000)
+                        Barra de Remolque Desarmable ($65.000)
                     </button>
                     <button @click="activeTab = 'hogar'" :class="activeTab === 'hogar' ? 'btn-metal-orange' : 'btn-metal-primary'" class="btn-magnet w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs sm:text-sm cursor-pointer transition-all text-center">
-                        <i class="fa-solid fa-fire mr-2"></i> Fogón a Bioetanol ($149.900)
+                        Fogón a Bioetanol ($149.900)
                     </button>
                 </div>
 
@@ -380,46 +332,45 @@
                 <div x-show="activeTab === 'auto'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="spotlight-card rounded-2xl p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-sky-500/30">
                     <div class="lg:col-span-7 space-y-5">
                         <div class="flex flex-wrap items-center gap-2">
-                            <span class="px-3 py-1 rounded-full bg-sky-500/20 border border-sky-500/30 text-sky-400 text-xs font-black uppercase tracking-wider">
-                                🛡️ OBLIGATORIA POR LEY DE TRÁNSITO
+                            <span class="px-3 py-1 rounded-full bg-sky-500/20 border border-sky-500/30 text-sky-400 text-xs font-bold uppercase tracking-wider">
+                                OBLIGATORIA POR LEY DE TRÁNSITO
                             </span>
-                            <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-black uppercase tracking-wider shiny-text">
-                                ⚖️ DECRETO SUPREMO N° 55/2025 MTT
+                            <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider shiny-text">
+                                DECRETO SUPREMO N° 55/2025 MTT
                             </span>
                         </div>
 
-                        <div class="p-3.5 rounded-xl bg-amber-950/40 border border-amber-500/30 text-xs text-amber-200 space-y-1">
-                            <div class="font-extrabold flex items-center gap-2 text-amber-300">
-                                <i class="fa-solid fa-triangle-exclamation text-amber-400"></i>
-                                <span>Evita multas de Carabineros y viaja tranquilo:</span>
+                        <div class="p-4 rounded-xl bg-amber-950/40 border border-amber-500/30 text-xs text-amber-200 space-y-1">
+                            <div class="font-bold text-amber-300">
+                                Evita multas de Carabineros y viaja tranquilo:
                             </div>
                             <p class="leading-relaxed opacity-95">
-                                En Chile está estrictamente prohibido tirar un auto con cuerdas, piolas o cadenas. La ley exige una barra metálica fija para evitar choques por alcance al frenar.
+                                En Chile está prohibido remolcar vehículos con cuerdas, piolas o cadenas. La ley exige una barra metálica fija para evitar choques por alcance al frenar.
                             </p>
                         </div>
 
                         <h3 class="text-2xl sm:text-4xl font-extrabold text-white">Barra de Remolque Desarmable (1.8m)</h3>
                         <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-                            Construida en tubo de acero reforzado de 5 mm de espesor con pasadores y ojales macizos. Mantiene la distancia fija de 1.8 metros para que el auto de adelante y el de atrás frenen sin golpes.
+                            Construida en tubo de acero reforzado de 5 mm de espesor con pasadores y ojales macizos. Mantiene la distancia fija de 1.8 metros para que el auto de adelante y el de atrás frenen sin tirones ni golpes.
                         </p>
 
-                        <!-- PUNTOS CLAVE -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
-                                <i class="fa-solid fa-circle-check text-sky-400 mt-0.5"></i>
-                                <span><strong>Arrastre hasta 3.500 kg</strong>: Apta para autos, SUV y camionetas.</span>
+                        <!-- ESPECIFICACIONES TÉCNICAS INTEGRADAS -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs text-gray-300">
+                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
+                                <strong class="text-white block mb-0.5">Arrastre hasta 3.500 kg</strong>
+                                <span>Apta para autos, SUV y camionetas.</span>
                             </div>
-                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
-                                <i class="fa-solid fa-circle-check text-sky-400 mt-0.5"></i>
-                                <span><strong>Tubo Reforzado de 5 mm</strong>: Gran resistencia pero liviana de armar.</span>
+                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
+                                <strong class="text-white block mb-0.5">Tubo Reforzado de 5 mm</strong>
+                                <span>Gran resistencia mecánica y liviana de armar.</span>
                             </div>
-                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
-                                <i class="fa-solid fa-circle-check text-sky-400 mt-0.5"></i>
-                                <span><strong>Desarmable en 3 partes</strong>: Mide menos de 65 cm para el maletero.</span>
+                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
+                                <strong class="text-white block mb-0.5">Desarmable en 3 partes</strong>
+                                <span>Mide menos de 65 cm para guardar en el maletero.</span>
                             </div>
-                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
-                                <i class="fa-solid fa-circle-check text-sky-400 mt-0.5"></i>
-                                <span><strong>Kit Completo Incluido</strong>: Pasadores de seguridad y bandera reflectante.</span>
+                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
+                                <strong class="text-white block mb-0.5">Kit Completo Incluido</strong>
+                                <span>Pasadores de seguridad y bandera reflectante.</span>
                             </div>
                         </div>
 
@@ -430,15 +381,15 @@
                             </div>
                             <div class="flex flex-wrap items-center gap-2">
                                 <button @click="addItem('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-magnet btn-metal-primary px-4 py-3 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
-                                    <i class="fa-solid fa-cart-plus text-sky-400"></i>
                                     <span>Añadir al Carrito</span>
                                 </button>
                                 <button @click="buyNow('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-magnet btn-metal-orange px-6 py-3 rounded-xl text-white font-extrabold text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-sky-500/20">
-                                    <i class="fa-solid fa-bolt"></i>
                                     <span>Comprar Ahora</span>
                                 </button>
                                 <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo,%20quiero%20pedir%20la%20Barra%20de%20Remolque%20($65.000%20CLP)" target="_blank" class="btn-magnet p-3 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center text-sm" title="Pedir por WhatsApp">
-                                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                                    </svg>
                                 </a>
                             </div>
                         </div>
@@ -448,8 +399,8 @@
                     <div class="lg:col-span-5">
                         <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 h-64 sm:h-80 lg:h-[400px] w-full group">
                             <img src="./images/lanza_real_armada.jpeg" alt="Lanza de Remolque Real Armada Metal Creativo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                            <div class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-[11px] text-gray-200 flex items-center gap-2">
-                                <i class="fa-solid fa-shield-halved text-sky-400"></i> Foto Real: Lanza Armada Completa
+                            <div class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-[11px] text-gray-200">
+                                Foto Real: Lanza Armada Completa
                             </div>
                         </div>
                     </div>
@@ -459,11 +410,11 @@
                 <div x-show="activeTab === 'hogar'" x-cloak x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="spotlight-card rounded-2xl p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-orange-500/30">
                     <div class="lg:col-span-7 space-y-5">
                         <div class="flex flex-wrap items-center gap-2">
-                            <span class="px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/30 text-orange-400 text-xs font-black uppercase tracking-wider">
-                                🔥 CALEFACCIÓN LIMPIA & SIN HUMO
+                            <span class="px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider">
+                                CALEFACCIÓN LIMPIA & SIN HUMO
                             </span>
-                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-black uppercase tracking-wider">
-                                🌿 APTO DEPARTAMENTOS & TERRAZAS
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                                APTO DEPARTAMENTOS & TERRAZAS
                             </span>
                         </div>
 
@@ -472,23 +423,23 @@
                             Brinda la calidez y belleza del fuego real en tus espacios de terraza o living, <strong class="text-orange-400">sin generar humo, olor ni cenizas</strong>. No necesita cañón, chimenea ni remodelaciones.
                         </p>
 
-                        <!-- PUNTOS CLAVE -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
-                                <i class="fa-solid fa-circle-check text-orange-400 mt-0.5"></i>
-                                <span><strong>Quemador de Acero Inoxidable</strong> con fibra térmica para un fuego parejo y seguro.</span>
+                        <!-- ESPECIFICACIONES TÉCNICAS INTEGRADAS -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs text-gray-300">
+                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
+                                <strong class="text-white block mb-0.5">Quemador de Acero Inoxidable</strong>
+                                <span>Fibra térmica para un fuego parejo y seguro.</span>
                             </div>
-                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
-                                <i class="fa-solid fa-circle-check text-orange-400 mt-0.5"></i>
-                                <span><strong>Autonomía de 3.5h a 5.5h</strong> por carga (tempera entre 25 m² y 45 m²).</span>
+                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
+                                <strong class="text-white block mb-0.5">Autonomía 3.5h a 5.5h</strong>
+                                <span>Tempera entre 25 m² y 45 m² de superficie.</span>
                             </div>
-                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
-                                <i class="fa-solid fa-circle-check text-orange-400 mt-0.5"></i>
-                                <span><strong>Madera Noble & Cuarzo</strong>: Bandeja decorativa con piedras de cuarzo incluidas.</span>
+                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
+                                <strong class="text-white block mb-0.5">Madera Noble & Cuarzo</strong>
+                                <span>Bandeja decorativa con piedras de cuarzo incluidas.</span>
                             </div>
-                            <div class="flex items-start gap-2.5 text-xs text-gray-300">
-                                <i class="fa-solid fa-circle-check text-orange-400 mt-0.5"></i>
-                                <span><strong>Listo para Usar</strong>: Llega armado a tu casa, solo agregar bioetanol y encender.</span>
+                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
+                                <strong class="text-white block mb-0.5">Listo para Usar</strong>
+                                <span>Llega armado a tu casa, solo agregar bioetanol y encender.</span>
                             </div>
                         </div>
 
@@ -499,15 +450,15 @@
                             </div>
                             <div class="flex flex-wrap items-center gap-2">
                                 <button @click="addItem('fogon', 'Fogón de Mesa a Bioetanol', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-magnet btn-metal-primary px-4 py-3 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
-                                    <i class="fa-solid fa-cart-plus text-orange-400"></i>
                                     <span>Añadir al Carrito</span>
                                 </button>
                                 <button @click="buyNow('fogon', 'Fogón de Mesa a Bioetanol', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-magnet btn-metal-orange px-6 py-3 rounded-xl text-white font-extrabold text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-orange-500/20">
-                                    <i class="fa-solid fa-bolt"></i>
                                     <span>Comprar Ahora</span>
                                 </button>
                                 <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo,%20quiero%20cotizar%20el%20Fog%C3%B3n%20a%20Bioetanol%20($149.900%20CLP)" target="_blank" class="btn-magnet p-3 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center text-sm" title="Cotizar por WhatsApp">
-                                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                                    </svg>
                                 </a>
                             </div>
                         </div>
@@ -517,26 +468,26 @@
                     <div class="lg:col-span-5">
                         <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 h-64 sm:h-80 lg:h-[400px] w-full group">
                             <img src="./images/fogon_bioetanol_madera.jpg" alt="Fogón a Bioetanol Metal Creativo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                            <div class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-[11px] text-gray-200 flex items-center gap-2">
-                                <i class="fa-solid fa-fire text-orange-400"></i> Fuego Real 100% Ecológico
+                            <div class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-[11px] text-gray-200">
+                                Fuego Real 100% Ecológico
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- SECCIÓN: GALERÍA DE FOTOS Y VIDEOS REALES (EN RUTA Y EN EL TALLER) -->
+            <!-- SECCIÓN: GALERÍA DE FOTOS REALES EN ACCIÓN (SIN EMOJIS, SIN VIDEOS ARTIFICIALES) -->
             <section id="galeria-real" class="space-y-10">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
-                    <span class="inline-block px-3 py-1 rounded bg-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider">
-                        📸 FOTOS Y VIDEOS REALES EN ACCIÓN
+                    <span class="inline-block px-3.5 py-1 rounded bg-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider">
+                        FOTOS REALES EN ACCIÓN
                     </span>
                     <h2 class="text-3xl sm:text-4xl section-glow-title">Nuestros Productos en Situaciones Reales</h2>
-                    <p class="text-gray-400 text-sm">Fotos reales tomadas en ruta, en el maletero y en terrazas de clientes en Chile.</p>
+                    <p class="text-gray-400 text-sm">Fotografías reales tomadas en ruta, en el maletero y en terrazas de clientes en Chile.</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- FOTO REAL 1: AUTO REMOLCANDO LIMPIA -->
+                    <!-- FOTO REAL 1: AUTO REMOLCANDO -->
                     <div class="spotlight-card rounded-2xl overflow-hidden border border-white/10 group">
                         <div class="aspect-square bg-black overflow-hidden relative">
                             <img src="./images/lanza_carretera_pro.jpg" alt="Auto Remolcando con Lanza Metal Creativo" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -580,99 +531,92 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- VIDEO REAL DE REMOLQUE CON CAMIONETA -->
-                <div class="spotlight-card rounded-2xl p-6 sm:p-8 border border-white/10 max-w-4xl mx-auto space-y-4">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
-                        <div>
-                            <span class="text-[11px] text-orange-400 font-bold uppercase tracking-wider">Demostración en Video</span>
-                            <h3 class="text-lg sm:text-xl font-extrabold text-white">Prueba de Arrastre en Ruta</h3>
-                        </div>
-                        <span class="text-xs text-gray-400 flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-check text-emerald-400"></i> Acople Rígido Seguro
-                        </span>
-                    </div>
-
-                    <div class="relative rounded-xl overflow-hidden bg-black aspect-video max-h-[420px] w-full border border-white/10">
-                        <video controls preload="metadata" class="w-full h-full object-cover">
-                            <source src="./videos/pickup_tow.mp4" type="video/mp4">
-                            Tu navegador no soporta reproducción de video HTML5.
-                        </video>
-                    </div>
-                    <p class="text-xs text-gray-400 text-center">
-                        Observa cómo la barra mantiene la distancia constante y absorbe las desaceleraciones sin tirones peligrosos.
-                    </p>
-                </div>
             </section>
 
         </div>
     </main>
 
-    <!-- FOOTER CORPORATIVO ULTRA PROFESIONAL -->
+    <!-- FOOTER CORPORATIVO OFICIAL CON LOGOS VECTORIALES -->
     <footer class="bg-[#050608] border-t border-white/10 pt-14 pb-8 text-xs text-gray-400 mt-auto relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+            
+            <!-- COLUMNA 1: MARCA Y CONTACTO DIRECTO -->
             <div class="space-y-4">
                 <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-12 w-auto object-contain">
                 <p class="text-gray-400 text-xs leading-relaxed">
                     Taller chileno de diseño y fabricación en acero estructural y calefacción ecológica a bioetanol. Soluciones prácticas, seguras y duraderas.
                 </p>
                 <div class="space-y-1.5 text-gray-300 font-medium text-xs">
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-orange-400"></i> Santiago, Chile (Despachos a todo el país)</p>
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-envelope text-orange-400"></i> ventas@metalcreativo.cl</p>
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-phone text-orange-400"></i> +56 9 1234 5678</p>
+                    <p class="flex items-center gap-2">Santiago, Chile (Despachos a todo el país)</p>
+                    <p class="flex items-center gap-2 text-orange-400 font-bold">ventas@metalcreativo.cl</p>
+                    <p class="flex items-center gap-2">+56 9 1234 5678</p>
                 </div>
                 <div class="flex items-center gap-3 pt-2">
-                    <a href="https://instagram.com/metalcreativo.cl" target="_blank" class="w-9 h-9 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500 text-orange-400 flex items-center justify-center transition-colors" title="Instagram Oficial @metalcreativo.cl">
-                        <i class="fa-brands fa-instagram text-lg"></i>
+                    <!-- LOGO INSTAGRAM OFICIAL -->
+                    <a href="https://instagram.com/metalcreativo.cl" target="_blank" class="w-10 h-10 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500 text-orange-400 flex items-center justify-center transition-colors shadow" title="Instagram Oficial @metalcreativo.cl">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
                     </a>
-                    <a href="https://wa.me/56912345678" target="_blank" class="w-9 h-9 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center transition-colors" title="WhatsApp Oficial">
-                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <!-- LOGO WHATSAPP OFICIAL -->
+                    <a href="https://wa.me/56912345678" target="_blank" class="w-10 h-10 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center transition-colors shadow" title="WhatsApp Oficial">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                        </svg>
                     </a>
                 </div>
             </div>
 
+            <!-- COLUMNA 2: CATÁLOGO OFICIAL -->
             <div class="space-y-3">
-                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-box text-orange-400"></i> Catálogo Oficial
+                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider">
+                    Catálogo Oficial
                 </h4>
                 <ul class="space-y-2.5 text-xs">
-                    <li><a href="#showcase" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-car-side text-sky-400 text-[10px]"></i> Barra de Remolque Desarmable ($65.000)</a></li>
-                    <li><a href="#showcase" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-fire text-orange-400 text-[10px]"></i> Fogón de Mesa a Bioetanol ($149.900)</a></li>
-                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-hammer text-amber-400 text-[10px]"></i> Proyectos y Forja a Medida</a></li>
-                    <li><a href="checkout.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-emerald-400 text-[10px]"></i> Carrito & Pasarela Segura</a></li>
+                    <li><a href="#showcase" class="hover:text-orange-400 transition-colors">Barra de Remolque Desarmable ($65.000)</a></li>
+                    <li><a href="#showcase" class="hover:text-orange-400 transition-colors">Fogón de Mesa a Bioetanol ($149.900)</a></li>
+                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors">Proyectos y Forja a Medida</a></li>
+                    <li><a href="checkout.html" class="hover:text-orange-400 transition-colors">Carrito & Pasarela Segura</a></li>
                 </ul>
             </div>
 
+            <!-- COLUMNA 3: GARANTÍAS Y LEGALIDAD -->
             <div class="space-y-3">
-                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-scale-balanced text-orange-400"></i> Garantías & Legalidad
+                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider">
+                    Garantías & Legalidad
                 </h4>
                 <ul class="space-y-2.5 text-xs">
-                    <li><a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-shield-halved text-orange-400 text-[10px]"></i> Garantía Legal 6 Meses SERNAC</a></li>
-                    <li><a href="terminos-condiciones.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-file-contract text-gray-400 text-[10px]"></i> Términos & Condiciones de Compra</a></li>
-                    <li><a href="privacidad.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-lock text-gray-400 text-[10px]"></i> Política de Privacidad (Ley 19.628)</a></li>
-                    <li><a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-circle-question text-gray-400 text-[10px]"></i> Preguntas Frecuentes (FAQ)</a></li>
-                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-headset text-gray-400 text-[10px]"></i> Contacto Directo con Taller</a></li>
+                    <li><a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors">Garantía Legal 6 Meses SERNAC</a></li>
+                    <li><a href="terminos-condiciones.html" class="hover:text-orange-400 transition-colors">Términos & Condiciones de Compra</a></li>
+                    <li><a href="privacidad.html" class="hover:text-orange-400 transition-colors">Política de Privacidad (Ley 19.628)</a></li>
+                    <li><a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors">Preguntas Frecuentes (FAQ)</a></li>
+                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors">Contacto Directo con Taller</a></li>
                 </ul>
             </div>
 
+            <!-- COLUMNA 4: LOGOS OFICIALES DE PAGO Y ENVÍO -->
             <div class="space-y-3">
-                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-shield-check text-emerald-400"></i> Pago Seguro & Envíos
+                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider">
+                    Pago Seguro & Envíos
                 </h4>
                 <p class="text-xs text-gray-400 leading-relaxed">Paga con total seguridad mediante Webpay Plus o Transferencia Bancaria. Envíos con número de seguimiento a todo Chile.</p>
+                
                 <div class="grid grid-cols-2 gap-2 pt-1">
-                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-credit-card text-sky-400"></i> Webpay Plus
+                    <!-- LOGO WEBPAY PLUS -->
+                    <div class="p-2.5 rounded-lg bg-neutral-900/90 border border-white/10 text-center font-bold text-gray-200 text-xs flex items-center justify-center gap-1.5 shadow-sm">
+                        <span class="text-sky-400 font-extrabold">Webpay</span><span class="text-orange-400 font-extrabold">Plus</span>
                     </div>
-                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-building-columns text-emerald-400"></i> Transferencia
+                    <!-- LOGO TRANSFERENCIA -->
+                    <div class="p-2.5 rounded-lg bg-neutral-900/90 border border-white/10 text-center font-bold text-gray-200 text-xs flex items-center justify-center gap-1.5 shadow-sm">
+                        <span class="text-emerald-400 font-extrabold">Transferencia</span>
                     </div>
-                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-truck-fast text-orange-400"></i> Starken
+                    <!-- LOGO STARKEN -->
+                    <div class="p-2.5 rounded-lg bg-neutral-900/90 border border-white/10 text-center font-bold text-gray-200 text-xs flex items-center justify-center gap-1.5 shadow-sm">
+                        <span class="text-orange-400 font-black tracking-wider">STARKEN</span>
                     </div>
-                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-box text-amber-400"></i> Chilexpress
+                    <!-- LOGO CHILEXPRESS -->
+                    <div class="p-2.5 rounded-lg bg-neutral-900/90 border border-white/10 text-center font-bold text-gray-200 text-xs flex items-center justify-center gap-1.5 shadow-sm">
+                        <span class="text-amber-400 font-black tracking-wider">Chilexpress</span>
                     </div>
                 </div>
             </div>
@@ -690,16 +634,13 @@
         <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
             <div class="w-screen max-w-md bg-[#0e1117] border-l border-white/10 p-6 flex flex-col shadow-2xl">
                 <div class="flex items-center justify-between pb-4 border-b border-white/10">
-                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-cart-shopping text-orange-400"></i> Tu Carrito de Compras
-                    </h2>
-                    <button @click="cartOpen = false" class="text-gray-400 hover:text-white p-1 cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
+                    <h2 class="text-lg font-bold text-white">Tu Carrito de Compras</h2>
+                    <button @click="cartOpen = false" class="text-gray-400 hover:text-white p-1 cursor-pointer text-xl font-bold">&times;</button>
                 </div>
                 
                 <div class="flex-grow overflow-y-auto py-4 space-y-4">
                     <template x-if="items.length === 0">
                         <div class="text-center py-12 space-y-3">
-                            <i class="fa-solid fa-cart-flatbed text-4xl text-gray-600"></i>
                             <p class="text-gray-400 text-sm">Tu carrito está vacío actualmente.</p>
                             <a href="#showcase" @click="cartOpen = false" class="btn-metal-orange inline-block px-4 py-2 rounded-xl text-xs font-bold">Ver Catálogo</a>
                         </div>
@@ -714,7 +655,7 @@
                                     <button @click="decreaseQty(index)" class="w-6 h-6 rounded bg-neutral-800 text-white text-xs flex items-center justify-center cursor-pointer hover:bg-neutral-700">-</button>
                                     <span class="text-xs font-bold text-white" x-text="item.qty"></span>
                                     <button @click="increaseQty(index)" class="w-6 h-6 rounded bg-neutral-800 text-white text-xs flex items-center justify-center cursor-pointer hover:bg-neutral-700">+</button>
-                                    <button @click="removeItem(index)" class="ml-auto text-red-400 text-xs hover:text-red-300 cursor-pointer" title="Eliminar"><i class="fa-regular fa-trash-can"></i></button>
+                                    <button @click="removeItem(index)" class="ml-auto text-red-400 text-xs hover:text-red-300 cursor-pointer" title="Eliminar">Eliminar</button>
                                 </div>
                             </div>
                         </div>
@@ -726,11 +667,11 @@
                         <span class="text-gray-300">Subtotal:</span>
                         <span class="text-orange-400 text-lg" x-text="'$' + formatPrice(totalAmount) + ' CLP'"></span>
                     </div>
-                    <p class="text-[11px] text-gray-400 flex items-center gap-1.5">
-                        <i class="fa-solid fa-truck-fast text-sky-400"></i> Envíos garantizados a todo Chile por Starken / Chilexpress.
+                    <p class="text-[11px] text-gray-400">
+                        Envíos garantizados a todo Chile por Starken / Chilexpress.
                     </p>
                     <a href="checkout.html" class="btn-metal-orange w-full py-3.5 rounded-xl font-bold text-center block text-sm shadow-lg shadow-orange-500/20">
-                        Proceder al Checkout Seguro <i class="fa-solid fa-arrow-right ml-2"></i>
+                        Proceder al Checkout Seguro &rarr;
                     </a>
                 </div>
             </div>
@@ -793,12 +734,13 @@
             }
         }
 
-        // 1. MOTOR DE CHISPAS AL CLIC (CLICK SPARK EFFECT - REACT BITS)
+        // 1. ANIMACIÓN DE FUEGO Y BRASAS ASCENDENTES CONTINUAS (AMBIENT SPARKS/EMBERS)
         (function() {
-            const canvas = document.getElementById('sparkCanvas');
+            const canvas = document.getElementById('emberCanvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
-            let sparks = [];
+            let embers = [];
+            const maxEmbers = 45;
 
             function resize() {
                 canvas.width = window.innerWidth;
@@ -807,41 +749,72 @@
             window.addEventListener('resize', resize);
             resize();
 
+            function createEmber(initial = false) {
+                return {
+                    x: Math.random() * canvas.width,
+                    y: initial ? Math.random() * canvas.height : canvas.height + 10,
+                    size: Math.random() * 2.2 + 0.8,
+                    vy: -(Math.random() * 1.2 + 0.6), // sube hacia arriba
+                    vx: (Math.random() - 0.5) * 0.6,
+                    alpha: Math.random() * 0.7 + 0.3,
+                    decay: Math.random() * 0.003 + 0.002,
+                    oscSpeed: Math.random() * 0.02 + 0.01,
+                    oscOffset: Math.random() * Math.PI * 2,
+                    color: Math.random() > 0.3 ? '#ff7a14' : '#ffb366'
+                };
+            }
+
+            for (let i = 0; i < maxEmbers; i++) {
+                embers.push(createEmber(true));
+            }
+
+            // Chispas adicionales al hacer clic
             window.addEventListener('click', (e) => {
-                const count = 14;
-                for (let i = 0; i < count; i++) {
+                for (let i = 0; i < 12; i++) {
                     const angle = Math.random() * Math.PI * 2;
-                    const speed = Math.random() * 4.5 + 2.5;
-                    sparks.push({
+                    const speed = Math.random() * 4 + 2;
+                    embers.push({
                         x: e.clientX,
                         y: e.clientY,
-                        vx: Math.cos(angle) * speed,
-                        vy: Math.sin(angle) * speed,
                         size: Math.random() * 2.5 + 1.2,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed - 1.5,
                         alpha: 1,
                         decay: Math.random() * 0.03 + 0.02,
-                        color: Math.random() > 0.35 ? '#ff8c3b' : '#ffffff'
+                        oscSpeed: 0,
+                        oscOffset: 0,
+                        color: Math.random() > 0.3 ? '#ff8c3b' : '#ffffff'
                     });
                 }
             });
 
+            let frame = 0;
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                for (let i = sparks.length - 1; i >= 0; i--) {
-                    const s = sparks[i];
-                    s.x += s.vx;
-                    s.y += s.vy;
-                    s.vy += 0.12;
-                    s.alpha -= s.decay;
-                    if (s.alpha <= 0) {
-                        sparks.splice(i, 1);
+                frame++;
+
+                for (let i = embers.length - 1; i >= 0; i--) {
+                    const e = embers[i];
+                    e.y += e.vy;
+                    e.x += e.vx + Math.sin(frame * e.oscSpeed + e.oscOffset) * 0.3;
+                    e.alpha -= e.decay;
+
+                    if (e.alpha <= 0 || e.y < -10) {
+                        if (embers.length <= maxEmbers) {
+                            embers[i] = createEmber(false);
+                        } else {
+                            embers.splice(i, 1);
+                        }
                         continue;
                     }
+
                     ctx.save();
-                    ctx.globalAlpha = s.alpha;
-                    ctx.fillStyle = s.color;
+                    ctx.globalAlpha = Math.max(0, e.alpha);
+                    ctx.fillStyle = e.color;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = e.color;
                     ctx.beginPath();
-                    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+                    ctx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
                     ctx.fill();
                     ctx.restore();
                 }
@@ -850,7 +823,7 @@
             animate();
         })();
 
-        // 2. SPOTLIGHT CARD DINÁMICO EN TIEMPO REAL (REACT BITS)
+        // 2. SPOTLIGHT CARD DINÁMICO EN TIEMPO REAL
         document.querySelectorAll('.spotlight-card').forEach(card => {
             card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
@@ -861,51 +834,18 @@
             });
         });
 
-        // 3. MAGNET BUTTON EFFECT (REACT BITS)
+        // 3. MAGNET BUTTON EFFECT
         document.querySelectorAll('.btn-magnet').forEach(btn => {
             btn.addEventListener('mousemove', e => {
                 const rect = btn.getBoundingClientRect();
                 const x = e.clientX - (rect.left + rect.width / 2);
                 const y = e.clientY - (rect.top + rect.height / 2);
-                btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+                btn.style.transform = `translate(${x * 0.22}px, ${y * 0.22}px)`;
             });
             btn.addEventListener('mouseleave', () => {
                 btn.style.transform = 'translate(0px, 0px)';
             });
         });
-
-        // 4. COUNT UP EFFECT AL HACER SCROLL (REACT BITS)
-        const statsSection = document.getElementById('stats-section');
-        if (statsSection) {
-            let started = false;
-            const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting && !started) {
-                    started = true;
-                    document.querySelectorAll('.count-up').forEach(counter => {
-                        const target = +counter.getAttribute('data-target');
-                        let current = 0;
-                        const increment = target / 40;
-                        const update = () => {
-                            current += increment;
-                            if (current < target) {
-                                if (target === 1200) counter.innerText = '+' + Math.ceil(current).toLocaleString('es-CL');
-                                else if (target === 3500) counter.innerText = Math.ceil(current).toLocaleString('es-CL') + ' kg';
-                                else if (target === 5) counter.innerText = Math.ceil(current) + ' mm';
-                                else if (target === 6) counter.innerText = Math.ceil(current) + ' Meses';
-                                requestAnimationFrame(update);
-                            } else {
-                                if (target === 1200) counter.innerText = '+1.200';
-                                else if (target === 3500) counter.innerText = '3.500 kg';
-                                else if (target === 5) counter.innerText = '5 mm';
-                                else if (target === 6) counter.innerText = '6 Meses';
-                            }
-                        };
-                        update();
-                    });
-                }
-            }, { threshold: 0.3 });
-            observer.observe(statsSection);
-        }
     </script>
 </body>
 </html>
