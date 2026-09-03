@@ -137,13 +137,26 @@
                     </div>
                 </div>
 
+                <!-- NOTIFICACION AUTOMATICA EN SISTEMA -->
+                <div class="p-4 bg-emerald-950/40 border border-emerald-500/30 rounded-xl text-left flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">
+                        ✓
+                    </div>
+                    <div class="space-y-1 text-xs">
+                        <strong class="text-emerald-300 font-bold block">Notificación Automática del Sistema</strong>
+                        <p class="text-emerald-200/90 leading-relaxed">
+                            No es necesario que nos contactes para avisar tu compra: nuestro sistema ya registró el pago e ingresó tu orden al taller. Recibirás automáticamente por correo y WhatsApp las actualizaciones de preparación y el código de seguimiento de Starken o Chilexpress una vez enviado.
+                        </p>
+                    </div>
+                </div>
+
                 <!-- BOTONES DE ACCION -->
                 <div class="pt-4 flex flex-col sm:flex-row gap-3">
-                    <button @click="contactWhatsApp()" class="btn-metal-orange flex-1 py-3.5 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-orange-500/20">
-                        <span>Avisar Despacho por WhatsApp</span>
+                    <button onclick="window.print()" class="btn-metal-orange flex-1 py-3.5 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-orange-500/20">
+                        <span>Descargar / Imprimir Comprobante</span>
                     </button>
                     <a href="index.html" class="px-6 py-3.5 rounded-xl bg-neutral-900 border border-white/10 text-white font-bold text-xs sm:text-sm hover:border-white/30 flex items-center justify-center transition-colors">
-                        Volver al Catálogo
+                        Volver a la Tienda
                     </a>
                 </div>
             </div>
