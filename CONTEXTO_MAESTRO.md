@@ -37,5 +37,5 @@
 ## 📲 3. CANALES DE VENTA
 - **Web Oficial con E-Commerce & Checkout**: https://metalcreativo.cl
 - **Instagram**: Metal Creativo Chile (#)
-- **WhatsApp**: +56 9 1234 5678 (Venta directa y transferencias)
+- **WhatsApp**: +56 9 5492 2608 (Venta directa y transferencias)
 - **Despachos**: A todo Chile por Starken y Chilexpress.

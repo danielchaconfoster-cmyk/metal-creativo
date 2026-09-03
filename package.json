@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "remotion preview",
+    "video:reel30s": "remotion render ReelViralLanza30s out/reel_viral_lanza_30s.mp4 --gl=angle",
     "video:puro": "remotion render LanzaRealPuro out/lanza_video_puro.mp4 --gl=angle",
     "video:anuncio": "remotion render LanzaRealShowcase out/lanza_real_showcase.mp4 --gl=angle"
   },

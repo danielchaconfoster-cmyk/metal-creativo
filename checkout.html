@@ -209,7 +209,7 @@
                 const resumenItems = this.cart.map(i => `${i.qty}x ${i.name}`).join(', ');
                 const despachoTexto = this.isRM && this.tipoDespacho === 'rm_express' ? 'Express Santiago ($4.990)' : 'Starken Regional (Por Pagar)';
                 const msg = encodeURIComponent(`Hola Metal Creativo! 🛠️\nQuiero coordinar la compra de mi orden:\n- Orden: #${orderId}\n- Productos: ${resumenItems}\n- Total: $${this.formatPrice(this.grandTotal)} CLP\n- Comprador: ${this.nombre} (RUT: ${this.rut})\n- Teléfono: ${this.telefono}\n- Despacho: ${this.direccion}, ${this.comuna} (${this.region})\n- Modalidad: ${despachoTexto}\n\nPor favor confirmar recepción para coordinar.`);
-                window.location.href = `https://wa.me/56912345678?text=${msg}`;
+                window.location.href = `https://wa.me/56954922608?text=${msg}`;
                 return;
             }
 

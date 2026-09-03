@@ -8,10 +8,19 @@ import { LanzaLegal15s } from './Compositions/LanzaLegal15s';
 import { AnuncioPickupTow } from './Compositions/AnuncioPickupTow';
 import { LanzaRealShowcase } from './Compositions/LanzaRealShowcase';
 import { LanzaRealPuro } from './Compositions/LanzaRealPuro';
+import { ReelViralLanza30s } from './Compositions/ReelViralLanza30s';
 
 export const RemotionRoot: React.FC = () => {
 	return (
 		<>
+			<Composition
+				id="ReelViralLanza30s"
+				component={ReelViralLanza30s}
+				durationInFrames={900}
+				fps={30}
+				width={1080}
+				height={1920}
+			/>
 			<Composition
 				id="LanzaRealPuro"
 				component={LanzaRealPuro}
