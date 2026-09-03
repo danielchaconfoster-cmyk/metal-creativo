@@ -65,33 +65,95 @@
 
     <main class="flex-grow py-16" x-data="{
         order: JSON.parse(localStorage.getItem('last_order') || '{}'),
-        mpStatus: new URLSearchParams(window.location.search).get('collection_status') || new URLSearchParams(window.location.search).get('status'),
-        paymentId: new URLSearchParams(window.location.search).get('payment_id'),
+        urlMethod: new URLSearchParams(window.location.search).get('method'),
+        urlStatus: new URLSearchParams(window.location.search).get('status') || new URLSearchParams(window.location.search).get('collection_status'),
+        copied: false,
+
+        get isTransfer() {
+            return (this.order.paymentMethod === 'transferencia') || (this.urlMethod === 'transferencia');
+        },
 
         formatPrice(val) {
             return new Intl.NumberFormat('es-CL').format(val || 0);
         },
-        contactWhatsApp() {
+
+        copyBankDetails() {
             const id = this.order.orderId || 'MC-2026';
-            const msg = encodeURIComponent(`Hola Metal Creativo! Acabo de registrar mi orden #${id}. Quisiera confirmar la recepción y tiempos de despacho.`);
+            const total = this.formatPrice(this.order.total || 65000);
+            const text = `DATOS DE TRANSFERENCIA METAL CREATIVO CHILE:
+Banco: BancoEstado
+Tipo: Cuenta Vista / Chequera Electrónica
+N° Cuenta: 00-76842190-5
+RUT: 76.842.190-5
+Titular: Metal Creativo Chile SpA
+Email: transferencias@metalcreativo.cl
+Monto: $${total} CLP
+Asunto/Glosa obligatoria: ${id}`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                this.copied = true;
+                setTimeout(() => { this.copied = false; }, 3000);
+            });
+        },
+
+        sendProofWhatsApp() {
+            const id = this.order.orderId || 'MC-2026';
+            const total = this.formatPrice(this.order.total || 65000);
+            const msg = encodeURIComponent(`Hola Metal Creativo! Adjunto el comprobante de transferencia bancaria para la Orden #${id} por un total de $${total} CLP.`);
             window.open(`https://wa.me/56912345678?text=${msg}`, '_blank');
         }
     }">
         <div class="max-w-3xl mx-auto px-4 sm:px-6">
             
-            <div class="metal-card p-8 sm:p-10 rounded-2xl border border-emerald-500/40 text-center space-y-6 shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-emerald-500 via-orange-500 to-sky-500"></div>
+            <div class="metal-card p-8 sm:p-10 rounded-2xl border text-center space-y-6 shadow-2xl relative overflow-hidden" :class="isTransfer ? 'border-amber-500/40' : 'border-emerald-500/40'">
+                <div class="absolute top-0 left-0 right-0 h-2" :class="isTransfer ? 'bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600' : 'bg-gradient-to-r from-emerald-500 via-orange-500 to-sky-500'"></div>
 
-                <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center text-3xl border border-emerald-500/40">
-                    ✓
+                <!-- ICONO CONDICIONAL -->
+                <div class="w-16 h-16 rounded-full mx-auto flex items-center justify-center text-3xl border" :class="isTransfer ? 'bg-amber-500/20 text-amber-400 border-amber-500/40' : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'">
+                    <span x-text="isTransfer ? '⏳' : '✓'"></span>
                 </div>
 
+                <!-- TITULOS -->
                 <div class="space-y-2">
-                    <span class="px-3.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider">
-                        ORDEN REGISTRADA EXITOSAMENTE
+                    <span class="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider" :class="isTransfer ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'" x-text="isTransfer ? 'ORDEN REGISTRADA - PENDIENTE DE TRANSFERENCIA' : 'ORDEN CONFIRMADA EXITOSAMENTE'">
                     </span>
-                    <h1 class="text-2xl sm:text-4xl font-black text-white">¡Muchas Gracias por tu Compra!</h1>
-                    <p class="text-xs sm:text-sm text-gray-400">Tu pedido ha sido registrado en nuestro taller y se encuentra en etapa de preparación para despacho.</p>
+                    <h1 class="text-2xl sm:text-4xl font-black text-white" x-text="isTransfer ? '¡Tu Orden Está Registrada!' : '¡Muchas Gracias por tu Compra!'"></h1>
+                    <p class="text-xs sm:text-sm text-gray-400" x-text="isTransfer ? 'Para iniciar la preparación y despacho de tu producto, realiza la transferencia con los datos a continuación:' : 'Tu pedido ha sido registrado en nuestro taller y se encuentra en etapa de preparación para despacho.'"></p>
+                </div>
+
+                <!-- TARJETA EXCLUSIVA DE DATOS BANCARIOS (SOLO SI ELIGE TRANSFERENCIA) -->
+                <div x-show="isTransfer" class="p-5 bg-black/80 rounded-xl border border-amber-500/30 text-left text-xs space-y-3 shadow-inner">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                        <strong class="text-amber-400 uppercase tracking-wider text-xs flex items-center gap-1.5">
+                            Datos Bancarios Oficiales de Metal Creativo
+                        </strong>
+                        <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold text-[10px]">Cuenta Empresa</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-gray-300">
+                        <p><strong class="text-gray-400">Banco:</strong> BancoEstado</p>
+                        <p><strong class="text-gray-400">Tipo de Cuenta:</strong> Cuenta Vista / Chequera Electrónica</p>
+                        <p><strong class="text-gray-400">N° de Cuenta:</strong> 00-76842190-5</p>
+                        <p><strong class="text-gray-400">RUT Titular:</strong> 76.842.190-5</p>
+                        <p class="sm:col-span-2"><strong class="text-gray-400">Nombre / Razón Social:</strong> Metal Creativo Chile SpA</p>
+                        <p class="sm:col-span-2"><strong class="text-gray-400">Correo Comprobantes:</strong> <span class="text-orange-400 font-bold">transferencias@metalcreativo.cl</span></p>
+                    </div>
+
+                    <div class="p-3 bg-amber-950/30 border border-amber-500/20 rounded-lg flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-amber-300 uppercase block font-bold">Asunto / Glosa Obligatoria:</span>
+                            <strong class="text-white font-mono text-sm" x-text="order.orderId || '#MC-2026-OFICIAL'"></strong>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-[10px] text-gray-400 uppercase block">Monto a Transferir:</span>
+                            <strong class="text-orange-400 text-base font-extrabold" x-text="'$' + formatPrice(order.total) + ' CLP'"></strong>
+                        </div>
+                    </div>
+
+                    <!-- BOTON COPIAR DATOS -->
+                    <button type="button" @click="copyBankDetails()" class="w-full py-2.5 rounded-lg bg-neutral-900 border border-amber-500/40 text-amber-300 hover:bg-neutral-800 font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer">
+                        <span x-text="copied ? '✓ ¡Datos Copiados al Portapapeles!' : 'Copiar Todos los Datos Bancarios'"></span>
+                    </button>
                 </div>
 
                 <!-- DETALLES DE LA ORDEN -->
@@ -109,8 +171,8 @@
                         <span class="text-white font-medium" x-text="order.shipping ? (order.shipping.direccion + ', ' + order.shipping.comuna) : 'Santiago, Chile'"></span>
                     </div>
                     <div class="flex justify-between items-center">
-                        <span class="text-gray-400">Método de Pago:</span>
-                        <span class="text-sky-400 font-bold" x-text="order.paymentMethod === 'mercadopago' ? 'Mercado Pago (Checkout Pro)' : (order.paymentMethod === 'transferencia' ? 'Transferencia Electrónica' : 'Coordinación por WhatsApp')"></span>
+                        <span class="text-gray-400">Método Seleccionado:</span>
+                        <span class="text-sky-400 font-bold" x-text="isTransfer ? 'Transferencia Bancaria' : (order.paymentMethod === 'mercadopago' ? 'Mercado Pago' : 'WhatsApp')"></span>
                     </div>
                     <div class="flex justify-between items-center border-t border-white/10 pt-2 text-sm font-black">
                         <span class="text-white">Total:</span>
@@ -118,43 +180,28 @@
                     </div>
                 </div>
 
-                <!-- PASOS DE ENTREGA -->
-                <div class="text-left space-y-3 pt-2">
-                    <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Próximos Pasos:</h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                        <div class="p-3 bg-neutral-900 rounded-lg border border-emerald-500/30">
-                            <span class="text-emerald-400 font-bold block mb-1">1. Registro</span>
-                            <p class="text-gray-400 text-[11px]">Orden confirmada e ingresada a nuestro sistema.</p>
-                        </div>
-                        <div class="p-3 bg-neutral-900 rounded-lg border border-orange-500/30">
-                            <span class="text-orange-400 font-bold block mb-1">2. Taller y Embalaje</span>
-                            <p class="text-gray-400 text-[11px]">Control de calidad y embalaje de alta resistencia.</p>
-                        </div>
-                        <div class="p-3 bg-neutral-900 rounded-lg border border-sky-500/30">
-                            <span class="text-sky-400 font-bold block mb-1">3. Despacho Courier</span>
-                            <p class="text-gray-400 text-[11px]">Entrega a Starken / Chilexpress con número de seguimiento.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- NOTIFICACION AUTOMATICA EN SISTEMA -->
+                <!-- NOTIFICACION AUTOMATICA DEL SISTEMA -->
                 <div class="p-4 bg-emerald-950/40 border border-emerald-500/30 rounded-xl text-left flex items-start gap-3">
                     <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 text-xs font-bold mt-0.5">
                         ✓
                     </div>
                     <div class="space-y-1 text-xs">
-                        <strong class="text-emerald-300 font-bold block">Notificación Automática del Sistema</strong>
-                        <p class="text-emerald-200/90 leading-relaxed">
-                            No es necesario que nos contactes para avisar tu compra: nuestro sistema ya registró el pago e ingresó tu orden al taller. Recibirás automáticamente por correo y WhatsApp las actualizaciones de preparación y el código de seguimiento de Starken o Chilexpress una vez enviado.
+                        <strong class="text-emerald-300 font-bold block">Trazabilidad en Tiempo Real</strong>
+                        <p class="text-emerald-200/90 leading-relaxed" x-text="isTransfer ? 'Una vez transferido, validamos el abono en minutos y te enviaremos la confirmación oficial junto con el número de flete de Starken o Chilexpress a tu correo.' : 'Tu orden ingresó al taller. Recibirás automáticamente por correo y WhatsApp las actualizaciones de preparación y el código de seguimiento de Starken o Chilexpress una vez enviado.'">
                         </p>
                     </div>
                 </div>
 
                 <!-- BOTONES DE ACCION -->
                 <div class="pt-4 flex flex-col sm:flex-row gap-3">
-                    <button onclick="window.print()" class="btn-metal-orange flex-1 py-3.5 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-orange-500/20">
+                    <button x-show="isTransfer" type="button" @click="sendProofWhatsApp()" class="btn-metal-orange flex-1 py-3.5 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-orange-500/20">
+                        <span>Avisar Transferencia por WhatsApp</span>
+                    </button>
+
+                    <button onclick="window.print()" class="px-6 py-3.5 rounded-xl bg-neutral-900 border border-white/10 text-white font-bold text-xs sm:text-sm hover:border-white/30 flex items-center justify-center transition-colors cursor-pointer" :class="!isTransfer ? 'flex-1' : ''">
                         <span>Descargar / Imprimir Comprobante</span>
                     </button>
+                    
                     <a href="index.html" class="px-6 py-3.5 rounded-xl bg-neutral-900 border border-white/10 text-white font-bold text-xs sm:text-sm hover:border-white/30 flex items-center justify-center transition-colors">
                         Volver a la Tienda
                     </a>

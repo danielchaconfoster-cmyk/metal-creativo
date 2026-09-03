@@ -48,7 +48,7 @@
 </head>
 <body class="min-h-screen flex flex-col bg-[#07080b] antialiased">
 
-    <!-- NAVBAR SIMPLIFICADO DE CHECKOUT -->
+    <!-- NAVBAR DE CHECKOUT -->
     <nav class="bg-[#050608] border-b border-white/10 py-4">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-3">
@@ -85,27 +85,41 @@
         comuna: '',
         direccion: '',
         depto: '',
-        tipoDespacho: 'starken_por_pagar',
+        tipoDespacho: 'rm_express', // 'rm_express' o 'starken_por_pagar'
         paymentMethod: 'mercadopago', // mercadopago | transferencia | whatsapp
         processing: false,
         processStep: '',
         rutValido: true,
 
+        get isRM() {
+            return this.region === 'Región Metropolitana';
+        },
+
         get subtotal() {
             return this.cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
         },
+
         get shippingCost() {
-            if (this.tipoDespacho === 'rm_express') return 4990;
-            return 0;
+            if (this.isRM && this.tipoDespacho === 'rm_express') return 4990;
+            return 0; // Envío por pagar en regiones o Starken
         },
+
         get grandTotal() {
             return this.subtotal + this.shippingCost;
         },
+
         formatPrice(val) {
             return new Intl.NumberFormat('es-CL').format(val);
         },
 
-        // Algoritmo de validacion Modulo 11 de RUT chileno
+        onRegionChange() {
+            // Regla de Negocio: Si sale de RM, Express Santiago queda deshabilitado
+            if (!this.isRM) {
+                this.tipoDespacho = 'starken_por_pagar';
+            }
+        },
+
+        // Algoritmo Módulo 11 de validación de RUT chileno
         validarRUT(rutCompleto) {
             if (!rutCompleto || rutCompleto.trim().length < 7) return false;
             let valor = rutCompleto.replace(/\./g, '').replace(/-/g, '').trim().toUpperCase();
@@ -136,17 +150,24 @@
             this.rutValido = this.validarRUT(this.rut);
         },
 
+        get buttonText() {
+            if (this.paymentMethod === 'mercadopago') return 'Pagar con Mercado Pago (Webpay / Tarjetas)';
+            if (this.paymentMethod === 'transferencia') return 'Generar Orden y Ver Datos Bancarios';
+            if (this.paymentMethod === 'whatsapp') return 'Confirmar y Enviar Pedido a WhatsApp';
+            return 'Confirmar y Proceder al Pago';
+        },
+
         async submitOrder() {
             if (this.cart.length === 0) {
                 alert('Tu carrito está vacío. Agrega productos antes de continuar.');
                 return;
             }
             if (!this.nombre || !this.rut || !this.email || !this.telefono || !this.direccion || !this.comuna) {
-                alert('Por favor completa todos los campos requeridos para el envío.');
+                alert('Por favor completa todos los campos requeridos para el despacho.');
                 return;
             }
             if (!this.validarRUT(this.rut)) {
-                alert('El RUT ingresado no es válido. Verifica el dígito verificador.');
+                alert('El RUT ingresado no es válido. Por favor verifica el dígito verificador.');
                 return;
             }
 
@@ -171,7 +192,8 @@
                     region: this.region,
                     comuna: this.comuna,
                     direccion: this.direccion,
-                    metodo: this.tipoDespacho
+                    metodo: this.tipoDespacho,
+                    costo: this.shippingCost
                 },
                 items: this.cart,
                 subtotal: this.subtotal,
@@ -180,28 +202,30 @@
                 paymentMethod: this.paymentMethod
             };
 
-            // FLUJO 1: PAGO DIRECTO POR WHATSAPP
+            // 1. FLUJO DIRECTO A WHATSAPP
             if (this.paymentMethod === 'whatsapp') {
                 localStorage.setItem('last_order', JSON.stringify(orderData));
                 localStorage.removeItem('mc_cart');
-                const msg = encodeURIComponent(`Hola Metal Creativo, quiero confirmar la Orden #${orderId}.\n- Total: $${this.formatPrice(this.grandTotal)} CLP\n- Comprador: ${this.nombre} (RUT: ${this.rut})\n- Despacho: ${this.direccion}, ${this.comuna} (${this.region}).`);
+                const resumenItems = this.cart.map(i => `${i.qty}x ${i.name}`).join(', ');
+                const despachoTexto = this.isRM && this.tipoDespacho === 'rm_express' ? 'Express Santiago ($4.990)' : 'Starken Regional (Por Pagar)';
+                const msg = encodeURIComponent(`Hola Metal Creativo! 🛠️\nQuiero coordinar la compra de mi orden:\n- Orden: #${orderId}\n- Productos: ${resumenItems}\n- Total: $${this.formatPrice(this.grandTotal)} CLP\n- Comprador: ${this.nombre} (RUT: ${this.rut})\n- Teléfono: ${this.telefono}\n- Despacho: ${this.direccion}, ${this.comuna} (${this.region})\n- Modalidad: ${despachoTexto}\n\nPor favor confirmar recepción para coordinar.`);
                 window.location.href = `https://wa.me/56912345678?text=${msg}`;
                 return;
             }
 
-            // FLUJO 2: TRANSFERENCIA BANCARIA DIRECTA
+            // 2. FLUJO TRANSFERENCIA BANCARIA DIRECTA
             if (this.paymentMethod === 'transferencia') {
                 this.processing = true;
-                this.processStep = 'Registrando orden de transferencia...';
+                this.processStep = 'Registrando orden oficial de compra...';
                 localStorage.setItem('last_order', JSON.stringify(orderData));
                 localStorage.removeItem('mc_cart');
                 setTimeout(() => {
                     window.location.href = `checkout-success.html?order=${orderId}&method=transferencia`;
-                }, 800);
+                }, 600);
                 return;
             }
 
-            // FLUJO 3: MERCADO PAGO OFICIAL (CHECKOUT PRO)
+            // 3. FLUJO MERCADO PAGO OFICIAL (CHECKOUT PRO)
             this.processing = true;
             this.processStep = 'Iniciando pasarela segura de Mercado Pago...';
 
@@ -222,20 +246,16 @@
                 if (result.success && result.init_point) {
                     localStorage.setItem('last_order', JSON.stringify(orderData));
                     localStorage.removeItem('mc_cart');
-                    this.processStep = 'Redirigiendo a Mercado Pago...';
+                    this.processStep = 'Redirigiendo a pasarela bancaria...';
                     window.location.href = result.init_point;
                 } else {
-                    // Fallback seguro si las llaves aun estan pendientes de configurar en Vercel
-                    console.warn('API Mercado Pago pendiente de credenciales:', result.error);
-                    this.processStep = 'Conectando con asesor de ventas...';
+                    // Si las credenciales aun no estan configuradas en Vercel, respaldo seguro
                     localStorage.setItem('last_order', JSON.stringify(orderData));
                     localStorage.removeItem('mc_cart');
-                    const msg = encodeURIComponent(`Hola Metal Creativo, generé la Orden #${orderId} por $${this.formatPrice(this.grandTotal)} CLP a nombre de ${this.nombre} (RUT: ${this.rut}). Por favor envíenme el link directo de pago.`);
-                    window.location.href = `https://wa.me/56912345678?text=${msg}`;
+                    window.location.href = `checkout-success.html?order=${orderId}&method=pending`;
                 }
             } catch (err) {
                 console.error('Error al conectar con pasarela:', err);
-                // Respaldo inmediato para nunca perder la venta
                 localStorage.setItem('last_order', JSON.stringify(orderData));
                 localStorage.removeItem('mc_cart');
                 window.location.href = `checkout-success.html?order=${orderId}&method=pending`;
@@ -277,7 +297,7 @@
                                 <div>
                                     <label class="block font-bold text-gray-400 mb-1 uppercase">RUT Chileno *</label>
                                     <input type="text" x-model="rut" @input="formatearRUT()" required placeholder="12.345.678-9" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border text-white focus:outline-none" :class="rut.length > 3 && !rutValido ? 'border-red-500 text-red-300' : 'border-white/10 focus:border-orange-500'">
-                                    <span x-show="rut.length > 3 && !rutValido" class="text-[10px] text-red-400 mt-1 block">RUT inválido (Módulo 11)</span>
+                                    <span x-show="rut.length > 3 && !rutValido" class="text-[10px] text-red-400 mt-1 block">RUT inválido (Dígito verificador incorrecto)</span>
                                 </div>
                                 <div>
                                     <label class="block font-bold text-gray-400 mb-1 uppercase">Correo Electrónico *</label>
@@ -290,7 +310,7 @@
                             </div>
                         </div>
 
-                        <!-- 2. DATOS DE DESPACHO -->
+                        <!-- 2. DATOS DE DESPACHO INTELIGENTE -->
                         <div class="metal-card p-6 rounded-2xl space-y-4">
                             <h3 class="text-base font-bold text-white flex items-center gap-2">
                                 <span class="w-6 h-6 rounded-full bg-orange-500 text-white text-xs font-black flex items-center justify-center">2</span>
@@ -300,22 +320,49 @@
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block font-bold text-gray-400 mb-1 uppercase">Región de Destino *</label>
-                                        <select x-model="region" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
+                                        <select x-model="region" @change="onRegionChange()" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
                                             <option value="Región Metropolitana">Región Metropolitana de Santiago</option>
-                                            <option value="Valparaíso">Región de Valparaíso</option>
-                                            <option value="Biobío">Región del Biobío</option>
-                                            <option value="O'Higgins">Región de O'Higgins</option>
-                                            <option value="Maule">Región del Maule</option>
-                                            <option value="Coquimbo">Región de Coquimbo</option>
-                                            <option value="Araucanía">Región de La Araucanía</option>
-                                            <option value="Los Lagos">Región de Los Lagos</option>
-                                            <option value="Antofagasta">Región de Antofagasta</option>
-                                            <option value="Otras Regiones">Otras Regiones (Starken a Domicilio/Agencia)</option>
+                                            <option value="Región de Valparaíso">Región de Valparaíso</option>
+                                            <option value="Región del Biobío">Región del Biobío</option>
+                                            <option value="Región de O'Higgins">Región de O'Higgins</option>
+                                            <option value="Región del Maule">Región del Maule</option>
+                                            <option value="Región de Coquimbo">Región de Coquimbo</option>
+                                            <option value="Región de La Araucanía">Región de La Araucanía</option>
+                                            <option value="Región de Los Lagos">Región de Los Lagos</option>
+                                            <option value="Región de Antofagasta">Región de Antofagasta</option>
+                                            <option value="Región de Los Ríos">Región de Los Ríos</option>
+                                            <option value="Región de Ñuble">Región de Ñuble</option>
+                                            <option value="Región de Tarapacá">Región de Tarapacá</option>
+                                            <option value="Región de Atacama">Región de Atacama</option>
+                                            <option value="Región de Arica y Parinacota">Región de Arica y Parinacota</option>
+                                            <option value="Región de Aysén">Región de Aysén</option>
+                                            <option value="Región de Magallanes">Región de Magallanes</option>
                                         </select>
                                     </div>
                                     <div>
                                         <label class="block font-bold text-gray-400 mb-1 uppercase">Comuna / Ciudad *</label>
-                                        <input type="text" x-model="comuna" required placeholder="Ej: Providencia, Rancagua, Concepción" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
+                                        <input type="text" x-model="comuna" list="comunas-sugeridas" required placeholder="Ej: Providencia, Talca, Concepción" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
+                                        <datalist id="comunas-sugeridas">
+                                            <option value="Santiago Centro"></option>
+                                            <option value="Providencia"></option>
+                                            <option value="Las Condes"></option>
+                                            <option value="Ñuñoa"></option>
+                                            <option value="Maipú"></option>
+                                            <option value="La Florida"></option>
+                                            <option value="Puente Alto"></option>
+                                            <option value="San Bernardo"></option>
+                                            <option value="Quilicura"></option>
+                                            <option value="Talca"></option>
+                                            <option value="Curicó"></option>
+                                            <option value="Rancagua"></option>
+                                            <option value="Viña del Mar"></option>
+                                            <option value="Valparaíso"></option>
+                                            <option value="Concepción"></option>
+                                            <option value="Temuco"></option>
+                                            <option value="Puerto Montt"></option>
+                                            <option value="Antofagasta"></option>
+                                            <option value="La Serena"></option>
+                                        </datalist>
                                     </div>
                                 </div>
 
@@ -330,26 +377,46 @@
                                     </div>
                                 </div>
 
-                                <!-- MODALIDADES DE COURIER -->
+                                <!-- MODALIDADES DE COURIER CON VALIDACION REGIONAL ESTRICTA -->
                                 <div class="space-y-2 pt-2">
-                                    <label class="block font-bold text-gray-400 uppercase">Modalidad de Transporte:</label>
+                                    <label class="block font-bold text-gray-400 uppercase">Modalidad de Transporte para tu Región:</label>
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                        
+                                        <!-- OPCION 1: STARKEN REGIONAL / RM (SIEMPRE DISPONIBLE) -->
                                         <label class="p-3.5 rounded-xl border flex items-center gap-3 cursor-pointer transition-all" :class="tipoDespacho === 'starken_por_pagar' ? 'border-orange-500 bg-orange-500/10 text-white' : 'border-white/10 bg-neutral-900 text-gray-400'">
                                             <input type="radio" name="tipoDespacho" value="starken_por_pagar" x-model="tipoDespacho" class="accent-orange-500">
                                             <div>
                                                 <strong class="block text-white">Starken / Chilexpress</strong>
-                                                <span class="text-[11px]">Envío Por Pagar en Entrega</span>
+                                                <span class="text-[11px] text-gray-300">Envío Por Pagar en Entrega / Agencia</span>
                                             </div>
                                         </label>
 
-                                        <label class="p-3.5 rounded-xl border flex items-center gap-3 cursor-pointer transition-all" :class="tipoDespacho === 'rm_express' ? 'border-orange-500 bg-orange-500/10 text-white' : 'border-white/10 bg-neutral-900 text-gray-400'">
-                                            <input type="radio" name="tipoDespacho" value="rm_express" x-model="tipoDespacho" class="accent-orange-500">
-                                            <div>
-                                                <strong class="block text-white">Express Santiago ($4.990)</strong>
-                                                <span class="text-[11px]">Entrega 24-48h hábiles</span>
+                                        <!-- OPCION 2: EXPRESS SANTIAGO (SOLO ACTIVO SI ES REGION METROPOLITANA) -->
+                                        <template x-if="isRM">
+                                            <label class="p-3.5 rounded-xl border flex items-center gap-3 cursor-pointer transition-all" :class="tipoDespacho === 'rm_express' ? 'border-orange-500 bg-orange-500/10 text-white' : 'border-white/10 bg-neutral-900 text-gray-400'">
+                                                <input type="radio" name="tipoDespacho" value="rm_express" x-model="tipoDespacho" class="accent-orange-500">
+                                                <div>
+                                                    <strong class="block text-white">Express Santiago ($4.990)</strong>
+                                                    <span class="text-[11px] text-gray-300">Entrega 24-48h hábiles en RM</span>
+                                                </div>
+                                            </label>
+                                        </template>
+
+                                        <!-- MENSAJE INFORMATIVO BLOQUEADO SI NO ES RM -->
+                                        <template x-if="!isRM">
+                                            <div class="p-3.5 rounded-xl border border-white/5 bg-neutral-950/60 text-gray-500 flex items-center gap-3 select-none opacity-60">
+                                                <div class="w-4 h-4 rounded-full border border-gray-600 flex items-center justify-center text-[10px]">✕</div>
+                                                <div>
+                                                    <strong class="block text-gray-400 text-xs">Express RM ($4.990)</strong>
+                                                    <span class="text-[10px] text-gray-500">Exclusivo para Región Metropolitana</span>
+                                                </div>
                                             </div>
-                                        </label>
+                                        </template>
+
                                     </div>
+                                    <p x-show="!isRM" class="text-[11px] text-orange-400/90 pt-1">
+                                        Despachamos a tu región mediante Starken o Chilexpress por pagar con número de seguimiento para rastreo en línea.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -370,9 +437,9 @@
                                             <strong class="text-white flex items-center gap-2">
                                                 <span class="text-sky-400 font-extrabold">Mercado Pago</span> (Webpay Plus / Débito / Crédito)
                                             </strong>
-                                            <span class="px-2 py-0.5 rounded bg-sky-500/20 text-sky-400 text-[10px] font-bold">Recomendado</span>
+                                            <span class="px-2 py-0.5 rounded bg-sky-500/20 text-sky-400 text-[10px] font-bold">Inmediato</span>
                                         </div>
-                                        <p class="text-[11px] text-gray-400">Paga de forma encriptada en cuotas con tarjeta de crédito, débito o dinero en cuenta.</p>
+                                        <p class="text-[11px] text-gray-400">Paga en cuotas con tarjeta de crédito, tarjeta de débito Redcompra o dinero en cuenta.</p>
                                     </div>
                                 </label>
 
@@ -380,17 +447,13 @@
                                 <label class="p-4 rounded-xl border flex items-start gap-3 cursor-pointer transition-all" :class="paymentMethod === 'transferencia' ? 'border-emerald-400 bg-emerald-950/20 text-white' : 'border-white/10 bg-neutral-900 text-gray-400'">
                                     <input type="radio" name="paymentMethod" value="transferencia" x-model="paymentMethod" class="accent-emerald-400 mt-1">
                                     <div class="flex-grow space-y-2">
-                                        <strong class="text-white flex items-center gap-2">
-                                            Transferencia Bancaria Electrónica Directa
-                                        </strong>
-                                        <p class="text-[11px] text-gray-400">Transfiere directamente desde tu banco tras generar la orden.</p>
-                                        
-                                        <div x-show="paymentMethod === 'transferencia'" class="p-3 bg-black/60 rounded-lg border border-emerald-500/30 text-xs text-gray-300 space-y-1">
-                                            <p><strong class="text-emerald-400">Banco:</strong> BancoEstado / Cuenta Vista</p>
-                                            <p><strong class="text-emerald-400">RUT:</strong> 76.842.190-5</p>
-                                            <p><strong class="text-emerald-400">Titular:</strong> Metal Creativo Chile SpA</p>
-                                            <p><strong class="text-emerald-400">Email:</strong> transferencias@metalcreativo.cl</p>
+                                        <div class="flex items-center justify-between">
+                                            <strong class="text-white flex items-center gap-2">
+                                                Transferencia Bancaria Electrónica
+                                            </strong>
+                                            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">Datos al confirmar</span>
                                         </div>
+                                        <p class="text-[11px] text-gray-400">Genera la orden y realiza la transferencia desde tu banco. Recibirás los datos bancarios y el número de pedido.</p>
                                     </div>
                                 </label>
 
@@ -401,7 +464,7 @@
                                         <strong class="text-white flex items-center gap-2">
                                             Confirmar y Coordinar vía WhatsApp
                                         </strong>
-                                        <p class="text-[11px] text-gray-400">Genera la orden y un asesor te atenderá personalmente.</p>
+                                        <p class="text-[11px] text-gray-400">Genera la orden con un mensaje estructurado y coordina directamente con nuestro taller.</p>
                                     </div>
                                 </label>
                             </div>
@@ -439,7 +502,7 @@
                                 </div>
                                 <div class="flex justify-between text-gray-400">
                                     <span>Despacho:</span>
-                                    <span class="text-white font-bold" x-text="tipoDespacho === 'rm_express' ? '$4.990 CLP' : 'Por Pagar (Starken)'"></span>
+                                    <span class="text-white font-bold" x-text="isRM && tipoDespacho === 'rm_express' ? '$4.990 CLP' : 'Por Pagar (Starken)'"></span>
                                 </div>
                                 <div class="flex justify-between text-sm font-extrabold pt-2 border-t border-white/10">
                                     <span class="text-white">Total a Pagar:</span>
@@ -447,16 +510,16 @@
                                 </div>
                             </div>
 
-                            <!-- BOTON DE ACCION -->
-                            <button type="submit" :disabled="processing" class="btn-metal-orange w-full py-4 rounded-xl font-black text-sm uppercase tracking-wider cursor-pointer shadow-xl shadow-orange-500/30 flex items-center justify-center gap-2">
-                                <span x-show="!processing">Confirmar y Proceder al Pago</span>
+                            <!-- BOTON DE ACCION CONTEXTUAL -->
+                            <button type="submit" :disabled="processing" class="btn-metal-orange w-full py-4 rounded-xl font-black text-xs sm:text-sm uppercase tracking-wider cursor-pointer shadow-xl shadow-orange-500/30 flex items-center justify-center gap-2">
+                                <span x-show="!processing" x-text="buttonText"></span>
                                 <span x-show="processing" class="flex items-center gap-2">
                                     <span class="inline-block animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>
                                     <span x-text="processStep"></span>
                                 </span>
                             </button>
 
-                            <!-- SELLOS -->
+                            <!-- SELLOS DE CONFIANZA -->
                             <div class="pt-2 text-center text-[10px] text-gray-500 space-y-1">
                                 <p>Garantía Legal 6 Meses SERNAC Incluida</p>
                                 <p>Despachos con seguimiento a todo Chile</p>
