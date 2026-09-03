@@ -1,5 +1,5 @@
 # 🎯 ESTRATEGIA MAESTRA DE ADS EN META (FACEBOOK & INSTAGRAM)
-## Metal Creativo Chile (@nico_parfum_store)
+## Metal Creativo Chile 
 
 > **Objetivo**: Proporcionar una guía definitiva de psicología de compras, dolores reales, aspiraciones, hooks de 3 segundos, guiones de video y copys publicitarios de alta conversión para lanzar campañas publicitarias rentables en Meta Ads hacia WhatsApp.
 

@@ -1,5 +1,5 @@
 # 📌 CONTEXTO MAESTRO DEL PROYECTO
-## Marca Oficial: METAL CREATIVO CHILE (@nico_parfum_store)
+## Marca Oficial: METAL CREATIVO CHILE 
 *Fuente única de la verdad (Single Source of Truth) para desarrollo web, video y marketing.*
 
 ---
@@ -36,6 +36,6 @@
 
 ## 📲 3. CANALES DE VENTA
 - **Web Oficial con E-Commerce & Checkout**: https://metalcreativo.cl
-- **Instagram**: @nico_parfum_store (https://www.instagram.com/nico_parfum_store)
+- **Instagram**: Metal Creativo Chile (#)
 - **WhatsApp**: +56 9 1234 5678 (Venta directa y transferencias)
 - **Despachos**: A todo Chile por Starken y Chilexpress.

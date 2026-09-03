@@ -197,7 +197,7 @@
 | **GlassSurface** | CSS Glassmorphism | Panel de vidrio translúcido con desenfoque de fondo y borde iluminado. | Contenedor de la barra de navegación y del drawer del carrito de compras. |
 | **FluidGlass** | WebGL Refraction | Superficie de vidrio líquido que distorsiona ópticamente los elementos detrás al moverla. | Efecto interactivo sobre imágenes de fogones encendidos. |
 | **FlyingPosters** | Three.js 3D Mesh | Posters publicitarios suspendidos en el aire que se inclinan con la inercia del scroll vertical. | Galería de infografías de uso reglamentario de la barra de remolque. |
-| **DriftWall** | CSS Parallax Drift | Muro infinito de imágenes con movimiento de deriva constante y efecto de profundidad. | Muro social de publicaciones de Instagram (@nico_parfum_store) en la web. |
+| **DriftWall** | CSS Parallax Drift | Muro infinito de imágenes con movimiento de deriva constante y efecto de profundidad. | Muro social de publicaciones de Instagram  en la web. |
 | **Masonry** | Framer Motion Grid | Grilla estilo Pinterest con reordenamiento suave de tarjetas de diferentes alturas. | Galería de fotos de proyectos especiales, rejas, mesas y fogones. |
 | **AccordionGallery** | Framer Motion Flex Grow | Galería donde la imagen sobre la que se pasa el mouse se expande ocupando el 60% del ancho. | Comparativa visual de los 3 acabados disponibles para los fogones a bioetanol. |
 | **AnimatedList** | Framer Motion List | Lista de elementos que entran con animación escalonada y se reorganizan solas al filtrar. | Lista interactiva de preguntas frecuentes con buscador en vivo. |

@@ -1,6 +1,6 @@
 # ⚙️ DOSSIER TÉCNICO, LEGAL Y DE MERCADO
 ## Marca Oficial: METAL CREATIVO CHILE
-**Instagram**: `@nico_parfum_store` | **Dominio Web**: `metalcreativo.cl`
+**Instagram**: `Metal Creativo Chile` | **Dominio Web**: `metalcreativo.cl`
 
 ---
 
