@@ -10,7 +10,7 @@
     <!-- Open Graph / Redes Sociales -->
     <meta property="og:title" content="Metal Creativo Chile | Soluciones en Acero para tu Auto y tu Hogar">
     <meta property="og:description" content="Barras de remolque desarmables que cumplen con la Ley de Tránsito MTT en Chile y fogones a bioetanol sin humo. Fabricación nacional con 6 meses de garantía.">
-    <meta property="og:image" content="https://metalcreativo.cl/images/lanza_carretera_pro.jpg">
+    <meta property="og:image" content="https://metalcreativo.cl/images/auto_remolque_real.jpeg">
     <meta property="og:url" content="https://metalcreativo.cl/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Metal Creativo Chile">
@@ -56,7 +56,7 @@
           "@type": "Product",
           "@id": "https://metalcreativo.cl/#lanza-remolque",
           "name": "Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)",
-          "image": "https://metalcreativo.cl/images/lanza_carretera_pro.jpg",
+          "image": "https://metalcreativo.cl/images/auto_remolque_real.jpeg",
           "description": "Lanza de remolque para autos de 1.8 metros, desarmable en 3 tramos de menos de 65 cm. Tubo de acero reforzado de 5 mm y capacidad de arrastre de 3.500 kg.",
           "brand": { "@type": "Brand", "name": "Metal Creativo Chile" },
           "offers": {
@@ -148,17 +148,21 @@
             background-clip: text;
         }
 
+        /* EFECTO MAGNET BUTTON DE REACT BITS */
+        .btn-magnet {
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s ease;
+            will-change: transform;
+        }
+
         .btn-metal-primary {
             background: linear-gradient(180deg, #3a3f47 0%, #1e2229 100%);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #ffffff;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
         }
         .btn-metal-primary:hover {
             border-color: #ff6a00;
             box-shadow: 0 0 25px rgba(255, 106, 0, 0.4);
-            transform: translateY(-2px);
         }
 
         .btn-metal-orange {
@@ -166,25 +170,37 @@
             border: 1px solid #ff8c3b;
             color: #ffffff;
             box-shadow: 0 4px 20px rgba(217, 85, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
         }
         .btn-metal-orange:hover {
             box-shadow: 0 0 30px rgba(255, 106, 0, 0.7);
-            transform: translateY(-2px);
         }
 
-        /* EFECTO SPOTLIGHT CARD DE REACT BITS */
+        /* EFECTO SPOTLIGHT CARD INTERACTIVO EN TIEMPO REAL (REACT BITS) */
         .spotlight-card {
-            background: linear-gradient(145deg, #14171d 0%, #0d0f13 100%);
+            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 106, 0, 0.12), transparent 40%),
+                        linear-gradient(145deg, #14171d 0%, #0d0f13 100%);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .spotlight-card:hover {
             border-color: rgba(255, 106, 0, 0.5);
-            box-shadow: 0 0 30px rgba(255, 106, 0, 0.2);
+            box-shadow: 0 0 35px rgba(255, 106, 0, 0.25);
+        }
+
+        /* EFECTO SHINY TEXT DE REACT BITS */
+        .shiny-text {
+            background: linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.4) 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3.5s infinite linear;
+        }
+        @keyframes shine {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
         }
 
         #sparkCanvas {
@@ -211,7 +227,7 @@
             </a>
 
             <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-300">
-                <a href="#showcase" class="hover:text-orange-400 transition-colors">Catálogo de Productos</a>
+                <a href="#showcase" class="hover:text-orange-400 transition-colors">Catálogo</a>
                 <a href="#galeria-real" class="hover:text-orange-400 transition-colors">Fotos en Acción</a>
                 <a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors">Preguntas Frecuentes</a>
                 <a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors">Garantía 6 Meses</a>
@@ -220,11 +236,11 @@
 
             <div class="flex items-center gap-3">
                 <!-- BOTÓN CARRITO CON CONTADOR REACTIVO -->
-                <button @click="cartOpen = true" class="relative p-2.5 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer shadow-lg" title="Ver Carrito de Compras">
+                <button @click="cartOpen = true" class="btn-magnet relative p-2.5 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer shadow-lg" title="Ver Carrito de Compras">
                     <i class="fa-solid fa-cart-shopping text-base text-orange-400"></i>
                     <span x-show="totalItems > 0" x-text="totalItems" class="absolute -top-1.5 -right-1.5 bg-orange-600 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center border-2 border-[#07080b]"></span>
                 </button>
-                <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo,%20quisiera%20hacer%20una%20consulta" target="_blank" class="btn-metal-orange px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2 shadow-lg shadow-orange-500/20">
+                <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo,%20quisiera%20hacer%20una%20consulta" target="_blank" class="btn-magnet btn-metal-orange px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2 shadow-lg shadow-orange-500/20">
                     <i class="fa-brands fa-whatsapp text-sm"></i>
                     <span class="hidden sm:inline">WhatsApp</span>
                 </a>
@@ -265,7 +281,7 @@
         </div>
 
         <div class="relative z-10 text-center max-w-4xl px-4 sm:px-6 mx-auto space-y-6 pt-16 sm:pt-20 pb-10">
-            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-400 text-xs font-extrabold uppercase tracking-widest backdrop-blur-sm">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-400 text-xs font-extrabold uppercase tracking-widest backdrop-blur-sm shiny-text">
                 <i class="fa-solid fa-hammer text-orange-400"></i> FABRICACIÓN NACIONAL & SOLUCIONES EN ACERO
             </span>
 
@@ -279,7 +295,7 @@
             <!-- SELECTOR DUAL DE PRODUCTOS -->
             <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto text-left">
                 <!-- TARJETA 1: BIOETANOL -->
-                <div @click="activeTab = 'hogar'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="group cursor-pointer p-4 sm:p-5 rounded-xl bg-neutral-900/90 border border-orange-500/30 hover:border-orange-500 hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-300 relative overflow-hidden backdrop-blur-md">
+                <div @click="activeTab = 'hogar'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="spotlight-card group cursor-pointer p-4 sm:p-5 rounded-xl border border-orange-500/30 hover:border-orange-500 transition-all duration-300 relative overflow-hidden backdrop-blur-md">
                     <div class="flex items-center gap-3 mb-2">
                         <div class="w-10 h-10 rounded-lg bg-orange-500/20 border border-orange-500/40 text-orange-400 flex items-center justify-center text-lg shrink-0">
                             <i class="fa-solid fa-fire"></i>
@@ -297,7 +313,7 @@
                 </div>
 
                 <!-- TARJETA 2: BARRA REMOLQUE -->
-                <div @click="activeTab = 'auto'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="group cursor-pointer p-4 sm:p-5 rounded-xl bg-neutral-900/90 border border-sky-500/30 hover:border-sky-400 hover:shadow-2xl hover:shadow-sky-500/20 transition-all duration-300 relative overflow-hidden backdrop-blur-md">
+                <div @click="activeTab = 'auto'; document.getElementById('showcase').scrollIntoView({ behavior: 'smooth' })" class="spotlight-card group cursor-pointer p-4 sm:p-5 rounded-xl border border-sky-500/30 hover:border-sky-400 transition-all duration-300 relative overflow-hidden backdrop-blur-md">
                     <div class="flex items-center gap-3 mb-2">
                         <div class="w-10 h-10 rounded-lg bg-sky-500/20 border border-sky-500/40 text-sky-400 flex items-center justify-center text-lg shrink-0">
                             <i class="fa-solid fa-shield-halved"></i>
@@ -317,23 +333,23 @@
         </div>
     </section>
 
-    <!-- BARRA DE CONFIANZA Y NÚMEROS REALES (COUNT UP) -->
-    <div class="bg-[#0c0e13] border-y border-white/10 py-6">
+    <!-- BARRA DE CONFIANZA Y NÚMEROS REALES (COUNT UP INTERACTIVO) -->
+    <div class="bg-[#0c0e13] border-y border-white/10 py-6" id="stats-section">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div class="space-y-1">
-                <span class="text-2xl sm:text-3xl font-black text-orange-400">+1.200</span>
+                <span class="text-2xl sm:text-3xl font-black text-orange-400 count-up" data-target="1200">+1.200</span>
                 <p class="text-xs text-gray-400 font-medium">Productos Despachados</p>
             </div>
             <div class="space-y-1">
-                <span class="text-2xl sm:text-3xl font-black text-white">3.500 kg</span>
+                <span class="text-2xl sm:text-3xl font-black text-white count-up" data-target="3500">3.500 kg</span>
                 <p class="text-xs text-gray-400 font-medium">Capacidad de Arrastre</p>
             </div>
             <div class="space-y-1">
-                <span class="text-2xl sm:text-3xl font-black text-sky-400">5 mm</span>
+                <span class="text-2xl sm:text-3xl font-black text-sky-400 count-up" data-target="5">5 mm</span>
                 <p class="text-xs text-gray-400 font-medium">Tubo de Acero Reforzado</p>
             </div>
             <div class="space-y-1">
-                <span class="text-2xl sm:text-3xl font-black text-emerald-400">6 Meses</span>
+                <span class="text-2xl sm:text-3xl font-black text-emerald-400 count-up" data-target="6">6 Meses</span>
                 <p class="text-xs text-gray-400 font-medium">Garantía Legal SERNAC</p>
             </div>
         </div>
@@ -352,10 +368,10 @@
 
                 <!-- Selector de Pestañas -->
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 max-w-md mx-auto">
-                    <button @click="activeTab = 'auto'" :class="activeTab === 'auto' ? 'btn-metal-orange' : 'btn-metal-primary'" class="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs sm:text-sm cursor-pointer transition-all text-center">
+                    <button @click="activeTab = 'auto'" :class="activeTab === 'auto' ? 'btn-metal-orange' : 'btn-metal-primary'" class="btn-magnet w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs sm:text-sm cursor-pointer transition-all text-center">
                         <i class="fa-solid fa-car-side mr-2"></i> Barra de Remolque Desarmable ($65.000)
                     </button>
-                    <button @click="activeTab = 'hogar'" :class="activeTab === 'hogar' ? 'btn-metal-orange' : 'btn-metal-primary'" class="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs sm:text-sm cursor-pointer transition-all text-center">
+                    <button @click="activeTab = 'hogar'" :class="activeTab === 'hogar' ? 'btn-metal-orange' : 'btn-metal-primary'" class="btn-magnet w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs sm:text-sm cursor-pointer transition-all text-center">
                         <i class="fa-solid fa-fire mr-2"></i> Fogón a Bioetanol ($149.900)
                     </button>
                 </div>
@@ -367,7 +383,7 @@
                             <span class="px-3 py-1 rounded-full bg-sky-500/20 border border-sky-500/30 text-sky-400 text-xs font-black uppercase tracking-wider">
                                 🛡️ OBLIGATORIA POR LEY DE TRÁNSITO
                             </span>
-                            <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-black uppercase tracking-wider">
+                            <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-black uppercase tracking-wider shiny-text">
                                 ⚖️ DECRETO SUPREMO N° 55/2025 MTT
                             </span>
                         </div>
@@ -413,15 +429,15 @@
                                 <span class="text-3xl font-black text-white">$65.000 <span class="text-xs font-bold text-sky-400">CLP</span></span>
                             </div>
                             <div class="flex flex-wrap items-center gap-2">
-                                <button @click="addItem('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-metal-primary px-4 py-3 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
+                                <button @click="addItem('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-magnet btn-metal-primary px-4 py-3 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
                                     <i class="fa-solid fa-cart-plus text-sky-400"></i>
                                     <span>Añadir al Carrito</span>
                                 </button>
-                                <button @click="buyNow('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-metal-orange px-6 py-3 rounded-xl text-white font-extrabold text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-sky-500/20">
+                                <button @click="buyNow('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-magnet btn-metal-orange px-6 py-3 rounded-xl text-white font-extrabold text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-sky-500/20">
                                     <i class="fa-solid fa-bolt"></i>
                                     <span>Comprar Ahora</span>
                                 </button>
-                                <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo,%20quiero%20pedir%20la%20Barra%20de%20Remolque%20($65.000%20CLP)" target="_blank" class="p-3 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center text-sm" title="Pedir por WhatsApp">
+                                <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo,%20quiero%20pedir%20la%20Barra%20de%20Remolque%20($65.000%20CLP)" target="_blank" class="btn-magnet p-3 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center text-sm" title="Pedir por WhatsApp">
                                     <i class="fa-brands fa-whatsapp text-lg"></i>
                                 </a>
                             </div>
@@ -482,15 +498,15 @@
                                 <span class="text-3xl font-black text-white">$149.900 <span class="text-xs font-bold text-orange-400">CLP</span></span>
                             </div>
                             <div class="flex flex-wrap items-center gap-2">
-                                <button @click="addItem('fogon', 'Fogón de Mesa a Bioetanol', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-metal-primary px-4 py-3 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
+                                <button @click="addItem('fogon', 'Fogón de Mesa a Bioetanol', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-magnet btn-metal-primary px-4 py-3 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
                                     <i class="fa-solid fa-cart-plus text-orange-400"></i>
                                     <span>Añadir al Carrito</span>
                                 </button>
-                                <button @click="buyNow('fogon', 'Fogón de Mesa a Bioetanol', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-metal-orange px-6 py-3 rounded-xl text-white font-extrabold text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-orange-500/20">
+                                <button @click="buyNow('fogon', 'Fogón de Mesa a Bioetanol', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-magnet btn-metal-orange px-6 py-3 rounded-xl text-white font-extrabold text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-orange-500/20">
                                     <i class="fa-solid fa-bolt"></i>
                                     <span>Comprar Ahora</span>
                                 </button>
-                                <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo,%20quiero%20cotizar%20el%20Fog%C3%B3n%20a%20Bioetanol%20($149.900%20CLP)" target="_blank" class="p-3 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center text-sm" title="Cotizar por WhatsApp">
+                                <a href="https://wa.me/56912345678?text=Hola%20Metal%20Creativo,%20quiero%20cotizar%20el%20Fog%C3%B3n%20a%20Bioetanol%20($149.900%20CLP)" target="_blank" class="btn-magnet p-3 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center text-sm" title="Cotizar por WhatsApp">
                                     <i class="fa-brands fa-whatsapp text-lg"></i>
                                 </a>
                             </div>
@@ -592,13 +608,13 @@
         </div>
     </main>
 
-    <!-- FOOTER CORPORATIVO -->
+    <!-- FOOTER CORPORATIVO ULTRA PROFESIONAL -->
     <footer class="bg-[#050608] border-t border-white/10 pt-14 pb-8 text-xs text-gray-400 mt-auto relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
             <div class="space-y-4">
                 <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-12 w-auto object-contain">
                 <p class="text-gray-400 text-xs leading-relaxed">
-                    Fabricación en acero y calefacción ecológica a bioetanol en Chile. Soluciones prácticas, seguras y duraderas.
+                    Taller chileno de diseño y fabricación en acero estructural y calefacción ecológica a bioetanol. Soluciones prácticas, seguras y duraderas.
                 </p>
                 <div class="space-y-1.5 text-gray-300 font-medium text-xs">
                     <p class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-orange-400"></i> Santiago, Chile (Despachos a todo el país)</p>
@@ -606,7 +622,7 @@
                     <p class="flex items-center gap-2"><i class="fa-solid fa-phone text-orange-400"></i> +56 9 1234 5678</p>
                 </div>
                 <div class="flex items-center gap-3 pt-2">
-                    <a href="https://instagram.com/metalcreativo.cl" target="_blank" class="w-9 h-9 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500 text-orange-400 flex items-center justify-center transition-colors" title="Instagram @metalcreativo.cl">
+                    <a href="https://instagram.com/metalcreativo.cl" target="_blank" class="w-9 h-9 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500 text-orange-400 flex items-center justify-center transition-colors" title="Instagram Oficial @metalcreativo.cl">
                         <i class="fa-brands fa-instagram text-lg"></i>
                     </a>
                     <a href="https://wa.me/56912345678" target="_blank" class="w-9 h-9 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center transition-colors" title="WhatsApp Oficial">
@@ -617,34 +633,34 @@
 
             <div class="space-y-3">
                 <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-fire text-orange-400"></i> Catálogo Oficial
+                    <i class="fa-solid fa-box text-orange-400"></i> Catálogo Oficial
                 </h4>
                 <ul class="space-y-2.5 text-xs">
-                    <li><a href="#showcase" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-car-side text-sky-400 text-[10px]"></i> Barra de Remolque ($65.000)</a></li>
-                    <li><a href="#showcase" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-fire text-orange-400 text-[10px]"></i> Fogón a Bioetanol ($149.900)</a></li>
-                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-hammer text-amber-400 text-[10px]"></i> Proyectos & Forja a Medida</a></li>
-                    <li><a href="checkout.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-emerald-400 text-[10px]"></i> Carrito & Checkout Seguro</a></li>
+                    <li><a href="#showcase" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-car-side text-sky-400 text-[10px]"></i> Barra de Remolque Desarmable ($65.000)</a></li>
+                    <li><a href="#showcase" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-fire text-orange-400 text-[10px]"></i> Fogón de Mesa a Bioetanol ($149.900)</a></li>
+                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-hammer text-amber-400 text-[10px]"></i> Proyectos y Forja a Medida</a></li>
+                    <li><a href="checkout.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-emerald-400 text-[10px]"></i> Carrito & Pasarela Segura</a></li>
                 </ul>
             </div>
 
             <div class="space-y-3">
                 <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-scale-balanced text-orange-400"></i> Soporte & Legal
+                    <i class="fa-solid fa-scale-balanced text-orange-400"></i> Garantías & Legalidad
                 </h4>
                 <ul class="space-y-2.5 text-xs">
                     <li><a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-shield-halved text-orange-400 text-[10px]"></i> Garantía Legal 6 Meses SERNAC</a></li>
-                    <li><a href="terminos-condiciones.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-file-contract text-gray-400 text-[10px]"></i> Términos & Condiciones</a></li>
+                    <li><a href="terminos-condiciones.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-file-contract text-gray-400 text-[10px]"></i> Términos & Condiciones de Compra</a></li>
                     <li><a href="privacidad.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-lock text-gray-400 text-[10px]"></i> Política de Privacidad (Ley 19.628)</a></li>
                     <li><a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-circle-question text-gray-400 text-[10px]"></i> Preguntas Frecuentes (FAQ)</a></li>
-                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-headset text-gray-400 text-[10px]"></i> Contacto Directo</a></li>
+                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-headset text-gray-400 text-[10px]"></i> Contacto Directo con Taller</a></li>
                 </ul>
             </div>
 
             <div class="space-y-3">
                 <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-shield-check text-emerald-400"></i> Medios de Pago & Envíos
+                    <i class="fa-solid fa-shield-check text-emerald-400"></i> Pago Seguro & Envíos
                 </h4>
-                <p class="text-xs text-gray-400 leading-relaxed">Compra 100% segura con Webpay Plus o Transferencia. Envíos garantizados a todo Chile por Starken y Chilexpress.</p>
+                <p class="text-xs text-gray-400 leading-relaxed">Paga con total seguridad mediante Webpay Plus o Transferencia Bancaria. Envíos con número de seguimiento a todo Chile.</p>
                 <div class="grid grid-cols-2 gap-2 pt-1">
                     <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
                         <i class="fa-solid fa-credit-card text-sky-400"></i> Webpay Plus
@@ -777,7 +793,7 @@
             }
         }
 
-        // MOTOR DE CHISPAS AL CLIC (CLICK SPARK EFFECT DE REACT BITS)
+        // 1. MOTOR DE CHISPAS AL CLIC (CLICK SPARK EFFECT - REACT BITS)
         (function() {
             const canvas = document.getElementById('sparkCanvas');
             if (!canvas) return;
@@ -792,19 +808,19 @@
             resize();
 
             window.addEventListener('click', (e) => {
-                const count = 12;
+                const count = 14;
                 for (let i = 0; i < count; i++) {
                     const angle = Math.random() * Math.PI * 2;
-                    const speed = Math.random() * 4 + 2;
+                    const speed = Math.random() * 4.5 + 2.5;
                     sparks.push({
                         x: e.clientX,
                         y: e.clientY,
                         vx: Math.cos(angle) * speed,
                         vy: Math.sin(angle) * speed,
-                        size: Math.random() * 2.5 + 1,
+                        size: Math.random() * 2.5 + 1.2,
                         alpha: 1,
                         decay: Math.random() * 0.03 + 0.02,
-                        color: Math.random() > 0.3 ? '#ff8c3b' : '#ffffff'
+                        color: Math.random() > 0.35 ? '#ff8c3b' : '#ffffff'
                     });
                 }
             });
@@ -833,6 +849,63 @@
             }
             animate();
         })();
+
+        // 2. SPOTLIGHT CARD DINÁMICO EN TIEMPO REAL (REACT BITS)
+        document.querySelectorAll('.spotlight-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // 3. MAGNET BUTTON EFFECT (REACT BITS)
+        document.querySelectorAll('.btn-magnet').forEach(btn => {
+            btn.addEventListener('mousemove', e => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - (rect.left + rect.width / 2);
+                const y = e.clientY - (rect.top + rect.height / 2);
+                btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0px, 0px)';
+            });
+        });
+
+        // 4. COUNT UP EFFECT AL HACER SCROLL (REACT BITS)
+        const statsSection = document.getElementById('stats-section');
+        if (statsSection) {
+            let started = false;
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting && !started) {
+                    started = true;
+                    document.querySelectorAll('.count-up').forEach(counter => {
+                        const target = +counter.getAttribute('data-target');
+                        let current = 0;
+                        const increment = target / 40;
+                        const update = () => {
+                            current += increment;
+                            if (current < target) {
+                                if (target === 1200) counter.innerText = '+' + Math.ceil(current).toLocaleString('es-CL');
+                                else if (target === 3500) counter.innerText = Math.ceil(current).toLocaleString('es-CL') + ' kg';
+                                else if (target === 5) counter.innerText = Math.ceil(current) + ' mm';
+                                else if (target === 6) counter.innerText = Math.ceil(current) + ' Meses';
+                                requestAnimationFrame(update);
+                            } else {
+                                if (target === 1200) counter.innerText = '+1.200';
+                                else if (target === 3500) counter.innerText = '3.500 kg';
+                                else if (target === 5) counter.innerText = '5 mm';
+                                else if (target === 6) counter.innerText = '6 Meses';
+                            }
+                        };
+                        update();
+                    });
+                }
+            }, { threshold: 0.3 });
+            observer.observe(statsSection);
+        }
     </script>
 </body>
 </html>
