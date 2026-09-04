@@ -199,11 +199,15 @@ module.exports = async (req, res) => {
       await supabase.from('orders').update({ preference_id: prefResult.id }).eq('id', orderId);
     }
 
+    const isSandbox = (mpAccessToken || '').startsWith('TEST-');
+    const redirectUrl = isSandbox ? prefResult.sandbox_init_point : prefResult.init_point;
+
     return res.status(200).json({
       success: true,
       preference_id: prefResult.id,
-      init_point: prefResult.init_point,
-      sandbox_init_point: prefResult.sandbox_init_point
+      init_point: redirectUrl,
+      sandbox_init_point: prefResult.sandbox_init_point,
+      is_sandbox: isSandbox
     });
 
   } catch (err) {
