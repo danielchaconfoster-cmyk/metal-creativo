@@ -478,9 +478,9 @@
                 </div>
 
                 <!-- FOTO REAL LIMPIA (SIN CAJAS NEGRAS TAPANTO LA IMAGEN) -->
-                <div class="lg:col-span-5">
-                    <div class="rounded-2xl overflow-hidden bg-black border border-white/10 ">
-                        <img src="./images/lanza_real_armada.jpeg" alt="Barra de remolque armada Metal Creativo" class="w-full aspect-[3/4] object-cover">
+                <div class="lg:col-span-5 flex justify-center items-center">
+                    <div class="rounded-2xl overflow-hidden bg-black/40 border border-white/10 max-w-sm w-full">
+                        <img src="./images/lanza_real_armada.jpeg" alt="Barra de remolque armada Metal Creativo" class="w-full h-auto max-h-[460px] object-contain mx-auto">
                     </div>
                 </div>
 
@@ -494,9 +494,9 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                 
                 <!-- FOTO REAL LIMPIA (SIN RECTANGULOS NEGROS TAPANTO LA IMAGEN) -->
-                <div class="lg:col-span-5 order-2 lg:order-1">
-                    <div class="rounded-2xl overflow-hidden bg-black border border-white/10 ">
-                        <img src="./images/fogon_bioetanol_madera.jpg" alt="Fogón de mesa a bioetanol en madera y acero" class="w-full aspect-[3/4] object-cover">
+                <div class="lg:col-span-5 order-2 lg:order-1 flex justify-center items-center">
+                    <div class="rounded-2xl overflow-hidden bg-black/40 border border-white/10 w-full">
+                        <img src="./images/fogon_bioetanol_madera.jpg" alt="Fogón de mesa a bioetanol en madera y acero" class="w-full h-auto object-cover">
                     </div>
                 </div>
 
@@ -677,7 +677,22 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             
             <!-- BLOQUE SUPERIOR DEL FOOTER: LOGOS OFICIALES DE COURIERS Y PAGOS -->
-            <!-- BLOQUE PRINCIPAL DEL FOOTER: INFORMACIÓN DE TALLER, GARANTÍAS Y CONTACTO -->
+            <div class="space-y-6 border-b border-white/10 pb-10">
+                <div class="text-center space-y-1">
+                    <span class="text-white font-bold text-sm tracking-wider uppercase">Medios de Pago y Despacho a Todo Chile</span>
+                    <p class="text-gray-400 text-xs">Transacciones encriptadas seguras y envíos con seguimiento en tiempo real</p>
+                </div>
+
+                <!-- LOGOS OFICIALES -->
+                <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-12">
+                    <img src="./images/logo_webpay.svg" alt="Webpay Plus" class="h-7 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity" title="Webpay Plus Transbank">
+                    <img src="./images/logo_mercadopago.svg" alt="Mercado Pago" class="h-7 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity" title="Mercado Pago Oficial">
+                    <img src="./images/logo_starken.png" alt="Starken" class="h-7 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity" title="Envíos Starken">
+                    <img src="./images/logo_chilexpress.png" alt="Chilexpress" class="h-6 w-auto object-contain opacity-85 hover:opacity-100 transition-opacity" title="Envíos Chilexpress">
+                </div>
+            </div>
+
+            <!-- BLOQUE INFERIOR DEL FOOTER: INFORMACIÓN DE TALLER, GARANTÍAS Y CONTACTO -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 
                 <div class="space-y-3 md:col-span-2">
@@ -710,17 +725,8 @@
 
             </div>
 
-            <!-- BARRA INFERIOR DE CIERRE: COPYRIGHT + MEDIOS DE PAGO Y DESPACHO DISCRETOS -->
-            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-gray-500 text-xs">
-                <div>
-                    &copy; 2026 Metal Creativo Chile. Todos los derechos reservados.
-                </div>
-                <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-8 opacity-80 hover:opacity-100 transition-opacity">
-                    <img src="./images/logo_webpay.svg" alt="Webpay Plus" class="h-5 w-auto object-contain" title="Webpay Plus Transbank">
-                    <img src="./images/logo_mercadopago.svg" alt="Mercado Pago" class="h-5 w-auto object-contain" title="Mercado Pago Oficial">
-                    <img src="./images/logo_starken.png" alt="Starken" class="h-5 w-auto object-contain" title="Envíos Starken">
-                    <img src="./images/logo_chilexpress.png" alt="Chilexpress" class="h-4.5 w-auto object-contain" title="Envíos Chilexpress">
-                </div>
+            <div class="border-t border-white/5 pt-6 text-center text-gray-500 text-xs">
+                &copy; 2026 Metal Creativo Chile. Todos los derechos reservados.
             </div>
 
         </div>
