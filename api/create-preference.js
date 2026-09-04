@@ -169,11 +169,14 @@ module.exports = async (req, res) => {
     const cleanPhone = String(customer.phone || '').replace(/\D/g, '');
     const cleanRut = String(customer.rut || '').replace(/[^0-9kK]/g, '').toUpperCase();
 
+    const isSandbox = (mpAccessToken || '').startsWith('TEST-');
+    const payerEmail = isSandbox ? 'comprador_test_chile@testuser.com' : customer.email;
+
     const preferenceBody = {
       items: validatedItems,
       payer: {
         name: customer.full_name,
-        email: customer.email,
+        email: payerEmail,
         phone: { number: cleanPhone },
         identification: { type: 'RUT', number: cleanRut }
       },
@@ -199,7 +202,6 @@ module.exports = async (req, res) => {
       await supabase.from('orders').update({ preference_id: prefResult.id }).eq('id', orderId);
     }
 
-    const isSandbox = (mpAccessToken || '').startsWith('TEST-');
     const redirectUrl = isSandbox ? prefResult.sandbox_init_point : prefResult.init_point;
 
     return res.status(200).json({
