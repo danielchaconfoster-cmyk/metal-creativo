@@ -383,7 +383,11 @@
                                         <label class="p-3.5 rounded-xl border flex items-center gap-3 cursor-pointer transition-all" :class="tipoDespacho === 'starken_por_pagar' ? 'border-orange-500 bg-orange-500/10 text-white' : 'border-white/10 bg-neutral-900 text-gray-400'">
                                             <input type="radio" name="tipoDespacho" value="starken_por_pagar" x-model="tipoDespacho" class="accent-orange-500">
                                             <div>
-                                                <strong class="block text-white">Starken / Chilexpress</strong>
+                                                <div class="flex items-center gap-2 mb-0.5">
+                                                    <strong class="block text-white">Starken / Chilexpress</strong>
+                                                    <img src="./images/logo_starken.png" alt="Starken" class="h-3.5 w-auto object-contain">
+                                                    <img src="./images/logo_chilexpress.png" alt="Chilexpress" class="h-3 w-auto object-contain">
+                                                </div>
                                                 <span class="text-[11px] text-gray-300">Envío Por Pagar en Entrega / Agencia</span>
                                             </div>
                                         </label>
@@ -431,8 +435,11 @@
                                     <input type="radio" name="paymentMethod" value="mercadopago" x-model="paymentMethod" class="accent-sky-400 mt-1">
                                     <div class="flex-grow space-y-1.5">
                                         <div class="flex items-center justify-between">
-                                            <strong class="text-white flex items-center gap-2">
-                                                <span class="text-sky-400 font-extrabold">Mercado Pago</span> (Webpay Plus / Débito / Crédito)
+                                            <strong class="text-white flex items-center gap-2 flex-wrap">
+                                                <span class="text-sky-400 font-extrabold">Mercado Pago</span>
+                                                <img src="./images/logo_mercadopago.svg" alt="Mercado Pago" class="h-4 w-auto object-contain">
+                                                <img src="./images/logo_webpay.svg" alt="Webpay" class="h-3.5 w-auto object-contain">
+                                                <span class="text-gray-400 text-[11px] font-normal">(Webpay Plus / Débito / Crédito)</span>
                                             </strong>
                                             <span class="px-2 py-0.5 rounded bg-sky-500/20 text-sky-400 text-[10px] font-bold">Inmediato</span>
                                         </div>
@@ -517,9 +524,14 @@
                             </button>
 
                             <!-- SELLOS DE CONFIANZA -->
-                            <div class="pt-2 text-center text-[10px] text-gray-500 space-y-1">
-                                <p>Garantía Legal 6 Meses SERNAC Incluida</p>
-                                <p>Despachos con seguimiento a todo Chile</p>
+                            <div class="pt-2 text-center text-[10px] text-gray-500 space-y-2">
+                                <div class="flex items-center justify-center gap-4 pt-2 border-t border-white/10 opacity-75">
+                                    <img src="./images/logo_webpay.svg" alt="Webpay Plus" class="h-3.5 w-auto object-contain">
+                                    <img src="./images/logo_mercadopago.svg" alt="Mercado Pago" class="h-3.5 w-auto object-contain">
+                                    <img src="./images/logo_starken.png" alt="Starken" class="h-4 w-auto object-contain">
+                                    <img src="./images/logo_chilexpress.png" alt="Chilexpress" class="h-3 w-auto object-contain">
+                                </div>
+                                <p>Garantía Legal SERNAC • Despachos con seguimiento a todo Chile</p>
                             </div>
                         </div>
                     </div>
