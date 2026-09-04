@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" fill="none">
+  <rect width="160" height="40" rx="8" fill="#FFCC00"/>
+  <path d="M16 26C14 19 20 13 27 12C23 15 22 19 25 23C26 25 29 26 32 25C27 27 20 28 16 26Z" fill="#D9001B"/>
+  <path d="M22 15C28 11 35 12 38 14C34 16 32 19 33 22C30 19 26 17 22 15Z" fill="#D9001B"/>
+  <text x="40" y="25" font-family="'Inter', 'Arial Black', sans-serif" font-size="16" font-weight="900" font-style="italic" fill="#D9001B" letter-spacing="-0.5">chilexpress</text>
+</svg>

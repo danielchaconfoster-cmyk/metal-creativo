@@ -4,29 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metal Creativo Chile | Barras de Remolque Desarmables y Fogones a Bioetanol</title>
-    <meta name="description" content="Fabricación nacional en acero. Barras de remolque desarmables para autos conforme a la Ley MTT y fogones a bioetanol para terrazas. Despachos a todo Chile.">
+    <meta name="description" content="Fabricación chilena en acero. Barras de remolque desarmables de 1.8m homologadas bajo Decreto Supremo N° 55/2025 MTT y fogones a bioetanol para tu hogar.">
     <link rel="canonical" href="https://metalcreativo.cl/">
     
     <!-- Open Graph / Redes Sociales -->
-    <meta property="og:title" content="Metal Creativo Chile | Soluciones en Acero para tu Auto y tu Hogar">
-    <meta property="og:description" content="Barras de remolque desarmables que cumplen con la Ley de Tránsito MTT en Chile y fogones a bioetanol sin humo. Fabricación nacional con 6 meses de garantía.">
-    <meta property="og:image" content="https://metalcreativo.cl/images/lanza_carretera_pro.jpg">
+    <meta property="og:title" content="Metal Creativo Chile | Soluciones Prácticas en Acero">
+    <meta property="og:description" content="Barras de remolque homologadas Ley MTT (3.500 kg) y fogones a bioetanol sin humo. 6 meses de garantía legal y envíos a todo Chile.">
+    <meta property="og:image" content="https://metalcreativo.cl/images/lanza_maletero.jpg">
     <meta property="og:url" content="https://metalcreativo.cl/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Metal Creativo Chile">
     <meta property="og:locale" content="es_CL">
 
-    <!-- Fonts -->
+    <!-- Tipografía DM Sans Oficial Limpia -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Alpine.js CDN -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <!-- Schemas Estructurados JSON-LD para Google e Inteligencias Artificiales -->
+    <!-- Schema JSON-LD Estructurado -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -45,18 +45,14 @@
             "addressLocality": "Santiago",
             "addressRegion": "Región Metropolitana",
             "addressCountry": "CL"
-          },
-          "sameAs": [
-            "#"
-          ]
+          }
         },
         {
           "@type": "Product",
           "@id": "https://metalcreativo.cl/#lanza-remolque",
           "name": "Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)",
-          "image": "https://metalcreativo.cl/images/lanza_carretera_pro.jpg",
-          "description": "Lanza de remolque para autos de 1.8 metros, desarmable en 3 tramos de menos de 65 cm. Tubo de acero reforzado de 5 mm y capacidad de arrastre de 3.500 kg.",
-          "brand": { "@type": "Brand", "name": "Metal Creativo Chile" },
+          "image": "https://metalcreativo.cl/images/lanza_real_armada.jpeg",
+          "description": "Barra rígida de remolque para autos y camionetas de 1.8 metros, desarmable en 3 tramos de 65 cm. Tubo de acero estructural de 5 mm y arrastre hasta 3.500 kg.",
           "offers": {
             "@type": "Offer",
             "url": "https://metalcreativo.cl/checkout.html",
@@ -70,8 +66,7 @@
           "@id": "https://metalcreativo.cl/#fogon-bioetanol",
           "name": "Fogón de Mesa a Bioetanol Ecológico",
           "image": "https://metalcreativo.cl/images/fogon_bioetanol_madera.jpg",
-          "description": "Fogón ecológico para terrazas y living. Fuego real sin humo ni cenizas. Quemador de acero inoxidable, base de madera noble y piedras de cuarzo.",
-          "brand": { "@type": "Brand", "name": "Metal Creativo Chile" },
+          "description": "Fogón ecológico para terrazas y living. Fuego real sin humo, sin olor y sin cañón. Quemador de alta resistencia y base de madera noble.",
           "offers": {
             "@type": "Offer",
             "url": "https://metalcreativo.cl/checkout.html",
@@ -87,19 +82,18 @@
     <style>
         :root {
             --bg: #07080b;
-            --bg-card: #11141a;
-            --brand-orange: #ff6a00;
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --text-steel: #e2e8f0;
+            --brand-orange: #c83c00;
+            --brand-amber: #ff6a00;
         }
 
         body {
             background-color: var(--bg);
-            color: var(--text-steel);
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: #e2e8f0;
+            font-family: 'DM Sans', sans-serif;
             overflow-x: hidden;
         }
 
+        /* HERO EXACTO A LA FOTO ANTERIOR */
         .hero-section {
             position: relative;
             width: 100%;
@@ -118,130 +112,105 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            filter: brightness(0.65) contrast(1.1);
-            transform: scale(1.03);
-            transition: transform 8s ease-out;
+            filter: brightness(0.50) contrast(1.15);
+            transform: scale(1.02);
         }
 
         .hero-overlay-gradient {
             position: absolute;
             inset: 0;
             background: 
-                radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(7,8,11,0.85) 85%),
-                linear-gradient(to bottom, rgba(7,8,11,0.6) 0%, transparent 45%, rgba(7,8,11,0.98) 100%);
+                radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(7,8,11,0.85) 85%),
+                linear-gradient(to bottom, rgba(7,8,11,0.7) 0%, transparent 45%, rgba(7,8,11,0.98) 100%);
             z-index: 1;
         }
 
-        .section-glow-title {
-            color: #ff8c3b;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            text-shadow: 0 0 20px rgba(255, 106, 0, 0.35);
-        }
-
         .metal-title-gradient {
-            background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 40%, #94a3b8 70%, #ffffff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #ffffff;
         }
 
-        /* EFECTO MAGNET BUTTON */
-        .btn-magnet {
-            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s ease;
-            will-change: transform;
+        /* BOTONES PROPORCIONADOS Y SLEEK */
+        .btn-metal-orange {
+            background-color: #c83c00;
+            color: #ffffff;
+            font-weight: 700;
+            transition: background-color 0.15s ease, transform 0.1s ease;
+        }
+        .btn-metal-orange:hover {
+            background-color: #b83600;
+            transform: translateY(-1px);
         }
 
         .btn-metal-primary {
-            background: linear-gradient(180deg, #3a3f47 0%, #1e2229 100%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: #1a1e26;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             color: #ffffff;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+            transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
         }
         .btn-metal-primary:hover {
-            border-color: #ff6a00;
-            box-shadow: 0 0 25px rgba(255, 106, 0, 0.4);
+            background-color: #242a35;
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
         }
 
-        .btn-metal-orange {
-            background: linear-gradient(180deg, #ff7a14 0%, #d95500 100%);
-            border: 1px solid #ff8c3b;
-            color: #ffffff;
-            box-shadow: 0 4px 20px rgba(217, 85, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-        }
-        .btn-metal-orange:hover {
-            box-shadow: 0 0 30px rgba(255, 106, 0, 0.7);
-        }
-
-        /* SPOTLIGHT CARD INTERACTIVO */
-        .spotlight-card {
-            background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 106, 0, 0.12), transparent 40%),
-                        linear-gradient(145deg, #14171d 0%, #0d0f13 100%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-            position: relative;
-            overflow: hidden;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .spotlight-card:hover {
-            border-color: rgba(255, 106, 0, 0.5);
-            box-shadow: 0 0 35px rgba(255, 106, 0, 0.25);
-        }
-
-        /* SHINY TEXT EFFECT */
-        .shiny-text {
-            background: linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.4) 100%);
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 3.5s infinite linear;
-        }
-        @keyframes shine {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
+        /* LIENZOS DE EFECTOS ESPECIALES */
         #emberCanvas {
             position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
             z-index: 2;
+        }
+
+        #sparkCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
         }
 
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body x-data="cartStore()" class="w-full min-h-screen flex flex-col antialiased selection:bg-orange-500 selection:text-white relative bg-[#07080b]">
+<body x-data="cartStore()" class="w-full min-h-screen flex flex-col antialiased selection:bg-orange-600 selection:text-white relative bg-[#07080b]">
 
-    <!-- CANVAS PARA BRASAS / FUEGO ASCENDENTE EN VIVO -->
+    <!-- 1. LIENZO CONTINUO DE ASCOAS Y FUEGO ASCENDENTE -->
     <canvas id="emberCanvas"></canvas>
+
+    <!-- 2. LIENZO EN VIVO DE CHISPAS REACTIVAS AL MOUSE Y CLIC -->
+    <canvas id="sparkCanvas"></canvas>
 
     <!-- NAVBAR TRANSPARENTE FLOTANDO SOBRE LA IMAGEN SUPERIOR -->
     <header class="absolute top-0 left-0 w-full z-50 bg-gradient-to-b from-black/80 via-black/30 to-transparent py-4 border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3 group">
-                <img src="./images/logo_official.png" alt="Metal Creativo Chile" class="h-11 sm:h-14 w-auto object-contain group-hover:scale-105 transition-transform">
+            <a href="index.html" class="flex items-center gap-3 spark-trigger">
+                <img src="./images/logo_official.png" alt="Metal Creativo Chile" class="h-11 sm:h-13 w-auto object-contain">
             </a>
 
             <!-- ENLACES ULTRA LIMPIOS -->
             <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-200">
-                <a href="#showcase" class="hover:text-orange-400 transition-colors">Catálogo</a>
-                <a href="#galeria-real" class="hover:text-orange-400 transition-colors">Fotos Reales</a>
-                <a href="contacto.html" class="hover:text-orange-400 transition-colors">Contacto</a>
+                <a href="#lanza-remolque" class="hover:text-orange-400 transition-colors spark-trigger">Catálogo</a>
+                <a href="#fotos-reales" class="hover:text-orange-400 transition-colors spark-trigger">Fotos Reales</a>
+                <a href="contacto.html" class="hover:text-orange-400 transition-colors spark-trigger">Contacto</a>
             </nav>
 
             <div class="flex items-center gap-4">
                 <!-- BOTÓN CARRITO -->
-                <button @click="cartOpen = true" class="btn-magnet relative p-2.5 rounded-xl bg-neutral-900/80 backdrop-blur-md border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer shadow-lg" title="Ver Carrito de Compras">
+                <button @click="cartOpen = true" class="relative p-2.5 rounded-xl bg-neutral-900/80 backdrop-blur-md border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer  spark-trigger" title="Ver Carrito de Compras">
                     <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
-                    <span x-show="totalItems > 0" x-text="totalItems" class="absolute -top-1.5 -right-1.5 bg-orange-600 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center border-2 border-[#07080b]"></span>
+                    <span x-show="totalItems > 0" x-text="totalItems" class="absolute -top-1.5 -right-1.5 bg-[#c83c00] text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center border-2 border-[#07080b]"></span>
                 </button>
                 
                 <!-- BOTÓN WHATSAPP OFICIAL -->
-                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quisiera%20hacer%20una%20consulta" target="_blank" class="btn-magnet btn-metal-orange px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2 shadow-lg shadow-orange-500/20">
+                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quisiera%20hacer%20una%20consulta" target="_blank" rel="noopener" class="btn-metal-orange px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2  spark-trigger">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                     </svg>
@@ -251,497 +220,581 @@
         </div>
     </header>
 
-    <!-- HERO SECTION DE PANTALLA COMPLETA HASTA EL TOPE -->
-    <section class="hero-section" x-data="{
-        currentSlide: 0,
-        slides: [
-            './images/fogon_bioetanol_madera.jpg',
-            './images/lanza_carretera_pro.jpg',
-            './images/lanza_maletero.jpg'
-        ],
-        init() {
-            setInterval(() => {
-                this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-            }, 4500);
-        }
-    }">
-        <div class="absolute inset-0 w-full h-full overflow-hidden">
-            <div class="w-full h-full flex transition-transform duration-1000 ease-in-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%);'">
-                <template x-for="(imgSrc, idx) in slides" :key="idx">
-                    <div class="w-full h-full shrink-0 relative">
-                        <img :src="imgSrc" alt="Metal Creativo Chile" class="hero-bg-img">
-                    </div>
-                </template>
-            </div>
-        </div>
+    <!-- HERO SECTION EXACTO A LA FOTO ANTERIOR -->
+    <section class="hero-section">
+        <!-- FOTO DE FONDO: FOTO REAL DE LA BARRA EN MALETERO -->
+        <img src="./images/lanza_maletero.jpg" alt="Barra de Remolque Desarmable en Maletero" class="hero-bg-img">
         <div class="hero-overlay-gradient"></div>
 
-        <!-- Indicadores del Slider -->
-        <div class="absolute bottom-6 z-20 flex items-center justify-center gap-2">
-            <template x-for="(imgSrc, idx) in slides" :key="idx">
-                <button @click="currentSlide = idx" :class="currentSlide === idx ? 'bg-orange-500 w-8' : 'bg-white/40 w-2 hover:bg-white/70'" class="h-2 rounded-full transition-all duration-500 cursor-pointer border-none"></button>
-            </template>
-        </div>
-
         <div class="relative z-10 text-center max-w-4xl px-4 sm:px-6 mx-auto space-y-6 pt-24 sm:pt-28 pb-12">
-            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/20 border border-orange-500/40 text-orange-400 text-xs font-bold uppercase tracking-widest backdrop-blur-sm shiny-text">
-                FABRICACIÓN NACIONAL & SOLUCIONES EN ACERO
-            </span>
+            <!-- TITULO SUPERIOR SIN FONDO NI RECTANGULO OVALADO: PURAS LETRAS -->
+            <div class="text-orange-400 text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em]">
+                FABRICACIÓN NACIONAL &amp; SOLUCIONES EN ACERO
+            </div>
 
-            <h1 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold metal-title-gradient leading-tight tracking-tight">
+            <!-- TITULAR PRINCIPAL CON GRADIENTE METÁLICO ORIGINAL -->
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold metal-title-gradient leading-tight tracking-tight">
                 Soluciones Prácticas en Acero para tu Auto y tu Hogar
             </h1>
+            
             <p class="text-gray-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-normal opacity-95">
                 Fabricamos productos resistentes, fáciles de usar y bien pensados. Fabricación chilena con 6 meses de garantía legal y envíos rápidos a todo el país.
             </p>
 
-            <!-- BOTONES PRINCIPALES LIMPIOS -->
+            <!-- 4 ESPECIFICACIONES CLAVE COMO PURAS LETRAS (SIN BORDES NI RECTANGULOS) -->
+            <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-12 pt-2 text-center">
+                <div>
+                    <span class="block text-xl sm:text-2xl font-black text-white">3.500 kg</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Capacidad Arrastre</span>
+                </div>
+                <div>
+                    <span class="block text-xl sm:text-2xl font-black text-white">5 mm</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Espesor Acero</span>
+                </div>
+                <div>
+                    <span class="block text-xl sm:text-2xl font-black text-white">3 Tramos</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Desarmable (65 cm)</span>
+                </div>
+                <div>
+                    <span class="block text-xl sm:text-2xl font-black text-white">6 Meses</span>
+                    <span class="text-xs text-gray-400 uppercase tracking-wider">Garantía Legal</span>
+                </div>
+            </div>
+
+            <!-- BOTONES PROPORCIONADOS Y SLEEK (SIN PASTILLAS INTERNAS DE LEY MTT) -->
             <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
-                <a href="#showcase" @click="activeTab = 'auto'" class="btn-magnet btn-metal-orange w-full sm:w-auto px-7 py-3.5 rounded-xl font-extrabold text-sm text-center shadow-lg shadow-orange-500/20 block">
+                <a href="#lanza-remolque" class="btn-metal-orange w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-sm text-center block spark-trigger cursor-pointer">
                     Barra de Remolque ($65.000)
                 </a>
-                <a href="#showcase" @click="activeTab = 'hogar'" class="btn-magnet btn-metal-primary w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-sm text-center block">
+                <a href="#fogon-bioetanol" class="btn-metal-primary w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-sm text-center block spark-trigger cursor-pointer">
                     Fogón a Bioetanol ($149.900)
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- CONTENIDO PRINCIPAL: CATÁLOGO Y COMPRA DIRECTA -->
-    <main id="showcase" class="py-20 bg-[#07080b] relative z-10 space-y-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-
-            <!-- SECCIÓN: NUESTROS PRODUCTOS -->
-            <section class="space-y-10">
-                <div class="text-center max-w-2xl mx-auto space-y-2">
-                    <h2 class="text-3xl sm:text-4xl section-glow-title">Nuestros Productos Oficiales</h2>
-                    <p class="text-gray-400 text-sm">Selecciona una categoría para revisar medidas y comprar online con despacho a domicilio.</p>
-                </div>
-
-                <!-- Selector de Pestañas -->
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 max-w-md mx-auto">
-                    <button @click="activeTab = 'auto'" :class="activeTab === 'auto' ? 'btn-metal-orange' : 'btn-metal-primary'" class="btn-magnet w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs sm:text-sm cursor-pointer transition-all text-center">
-                        Barra de Remolque Desarmable ($65.000)
-                    </button>
-                    <button @click="activeTab = 'hogar'" :class="activeTab === 'hogar' ? 'btn-metal-orange' : 'btn-metal-primary'" class="btn-magnet w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-xs sm:text-sm cursor-pointer transition-all text-center">
-                        Fogón a Bioetanol ($149.900)
-                    </button>
-                </div>
-
-                <!-- PRODUCTO 1: BARRA DE REMOLQUE -->
-                <div x-show="activeTab === 'auto'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="spotlight-card rounded-2xl p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-sky-500/30">
-                    <div class="lg:col-span-7 space-y-5">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="px-3 py-1 rounded-full bg-sky-500/20 border border-sky-500/30 text-sky-400 text-xs font-bold uppercase tracking-wider">
-                                OBLIGATORIA POR LEY DE TRÁNSITO
-                            </span>
-                            <span class="px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider shiny-text">
-                                DECRETO SUPREMO N° 55/2025 MTT
-                            </span>
-                        </div>
-
-                        <div class="p-4 rounded-xl bg-amber-950/40 border border-amber-500/30 text-xs text-amber-200 space-y-1">
-                            <div class="font-bold text-amber-300">
-                                Evita multas de Carabineros y viaja tranquilo:
-                            </div>
-                            <p class="leading-relaxed opacity-95">
-                                En Chile está prohibido remolcar vehículos con cuerdas, piolas o cadenas. La ley exige una barra metálica fija para evitar choques por alcance al frenar.
-                            </p>
-                        </div>
-
-                        <h3 class="text-2xl sm:text-4xl font-extrabold text-white">Barra de Remolque Desarmable (1.8m)</h3>
-                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-                            Construida en tubo de acero reforzado de 5 mm de espesor con pasadores y ojales macizos. Mantiene la distancia fija de 1.8 metros para que el auto de adelante y el de atrás frenen sin tirones ni golpes.
-                        </p>
-
-                        <!-- ESPECIFICACIONES TÉCNICAS INTEGRADAS -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs text-gray-300">
-                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
-                                <strong class="text-white block mb-0.5">Arrastre hasta 3.500 kg</strong>
-                                <span>Apta para autos, SUV y camionetas.</span>
-                            </div>
-                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
-                                <strong class="text-white block mb-0.5">Tubo Reforzado de 5 mm</strong>
-                                <span>Gran resistencia mecánica y liviana de armar.</span>
-                            </div>
-                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
-                                <strong class="text-white block mb-0.5">Desarmable en 3 partes</strong>
-                                <span>Mide menos de 65 cm para guardar en el maletero.</span>
-                            </div>
-                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
-                                <strong class="text-white block mb-0.5">Kit Completo Incluido</strong>
-                                <span>Pasadores de seguridad y bandera reflectante.</span>
-                            </div>
-                        </div>
-
-                        <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-white/10">
-                            <div>
-                                <span class="text-xs text-gray-400 block font-bold uppercase tracking-wider">PRECIO OFICIAL</span>
-                                <span class="text-3xl font-black text-white">$65.000 <span class="text-xs font-bold text-sky-400">CLP</span></span>
-                            </div>
-                            <div class="flex flex-wrap items-center gap-2">
-                                <button @click="addItem('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-magnet btn-metal-primary px-4 py-3 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
-                                    <span>Añadir al Carrito</span>
-                                </button>
-                                <button @click="buyNow('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-magnet btn-metal-orange px-6 py-3 rounded-xl text-white font-extrabold text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-sky-500/20">
-                                    <span>Comprar Ahora</span>
-                                </button>
-                                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quiero%20pedir%20la%20Barra%20de%20Remolque%20($65.000%20CLP)" target="_blank" class="btn-magnet p-3 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center text-sm" title="Pedir por WhatsApp">
-                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FOTO REAL REMOLQUE LIMPIA -->
-                    <div class="lg:col-span-5">
-                        <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 h-64 sm:h-80 lg:h-[400px] w-full group">
-                            <img src="./images/lanza_real_armada.jpeg" alt="Lanza de Remolque Real Armada Metal Creativo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                            <div class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-[11px] text-gray-200">
-                                Foto Real: Lanza Armada Completa
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PRODUCTO 2: FOGÓN A BIOETANOL -->
-                <div x-show="activeTab === 'hogar'" x-cloak x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-95" class="spotlight-card rounded-2xl p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-orange-500/30">
-                    <div class="lg:col-span-7 space-y-5">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider">
-                                CALEFACCIÓN LIMPIA & SIN HUMO
-                            </span>
-                            <span class="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
-                                APTO DEPARTAMENTOS & TERRAZAS
-                            </span>
-                        </div>
-
-                        <h3 class="text-2xl sm:text-4xl font-extrabold text-white">Fogón de Mesa a Bioetanol</h3>
-                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
-                            Brinda la calidez y belleza del fuego real en tus espacios de terraza o living, <strong class="text-orange-400">sin generar humo, olor ni cenizas</strong>. No necesita cañón, chimenea ni remodelaciones.
-                        </p>
-
-                        <!-- ESPECIFICACIONES TÉCNICAS INTEGRADAS -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs text-gray-300">
-                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
-                                <strong class="text-white block mb-0.5">Quemador de Acero Inoxidable</strong>
-                                <span>Fibra térmica para un fuego parejo y seguro.</span>
-                            </div>
-                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
-                                <strong class="text-white block mb-0.5">Autonomía 3.5h a 5.5h</strong>
-                                <span>Tempera entre 25 m² y 45 m² de superficie.</span>
-                            </div>
-                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
-                                <strong class="text-white block mb-0.5">Madera Noble & Cuarzo</strong>
-                                <span>Bandeja decorativa con piedras de cuarzo incluidas.</span>
-                            </div>
-                            <div class="p-3 rounded-lg bg-black/40 border border-white/5">
-                                <strong class="text-white block mb-0.5">Listo para Usar</strong>
-                                <span>Llega armado a tu casa, solo agregar bioetanol y encender.</span>
-                            </div>
-                        </div>
-
-                        <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-white/10">
-                            <div>
-                                <span class="text-xs text-gray-400 block font-bold uppercase tracking-wider">PRECIO DE LANZAMIENTO</span>
-                                <span class="text-3xl font-black text-white">$149.900 <span class="text-xs font-bold text-orange-400">CLP</span></span>
-                            </div>
-                            <div class="flex flex-wrap items-center gap-2">
-                                <button @click="addItem('fogon', 'Fogón de Mesa a Bioetanol', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-magnet btn-metal-primary px-4 py-3 rounded-xl text-white font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
-                                    <span>Añadir al Carrito</span>
-                                </button>
-                                <button @click="buyNow('fogon', 'Fogón de Mesa a Bioetanol', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-magnet btn-metal-orange px-6 py-3 rounded-xl text-white font-extrabold text-xs flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-orange-500/20">
-                                    <span>Comprar Ahora</span>
-                                </button>
-                                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quiero%20cotizar%20el%20Fog%C3%B3n%20a%20Bioetanol%20($149.900%20CLP)" target="_blank" class="btn-magnet p-3 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center text-sm" title="Cotizar por WhatsApp">
-                                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FOTO REAL BIOETANOL -->
-                    <div class="lg:col-span-5">
-                        <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 h-64 sm:h-80 lg:h-[400px] w-full group">
-                            <img src="./images/fogon_bioetanol_madera.jpg" alt="Fogón a Bioetanol Metal Creativo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                            <div class="absolute bottom-3 left-3 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 text-[11px] text-gray-200">
-                                Fuego Real 100% Ecológico
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECCIÓN: GALERÍA DE FOTOS REALES EN ACCIÓN (SIN EMOJIS, SIN VIDEOS ARTIFICIALES) -->
-            <section id="galeria-real" class="space-y-10">
-                <div class="text-center max-w-2xl mx-auto space-y-2">
-                    <span class="inline-block px-3.5 py-1 rounded bg-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider">
-                        FOTOS REALES EN ACCIÓN
-                    </span>
-                    <h2 class="text-3xl sm:text-4xl section-glow-title">Nuestros Productos en Situaciones Reales</h2>
-                    <p class="text-gray-400 text-sm">Fotografías reales tomadas en ruta, en el maletero y en terrazas de clientes en Chile.</p>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- FOTO REAL 1: AUTO REMOLCANDO -->
-                    <div class="spotlight-card rounded-2xl overflow-hidden border border-white/10 group">
-                        <div class="aspect-square bg-black overflow-hidden relative">
-                            <img src="./images/lanza_carretera_pro.jpg" alt="Auto Remolcando con Lanza Metal Creativo" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-4 text-center">
-                            <h4 class="text-white font-bold text-sm">Lanza Original en Auto</h4>
-                            <p class="text-gray-400 text-xs mt-1">1.8m de separación fija en carretera</p>
-                        </div>
-                    </div>
-
-                    <!-- FOTO REAL 2: LANZA EN 3 PARTES -->
-                    <div class="spotlight-card rounded-2xl overflow-hidden border border-white/10 group">
-                        <div class="aspect-square bg-black overflow-hidden relative">
-                            <img src="./images/lanza_3tramos_real.jpeg" alt="Lanza Desarmada en 3 Tramos" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-4 text-center">
-                            <h4 class="text-white font-bold text-sm">Desarmable en 3 Partes</h4>
-                            <p class="text-gray-400 text-xs mt-1">Tubo de acero reforzado de 5 mm</p>
-                        </div>
-                    </div>
-
-                    <!-- FOTO REAL 3: LANZA EN MALETERO -->
-                    <div class="spotlight-card rounded-2xl overflow-hidden border border-white/10 group">
-                        <div class="aspect-square bg-black overflow-hidden relative">
-                            <img src="./images/lanza_maletero.jpg" alt="Lanza Guardada en Maletero" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-4 text-center">
-                            <h4 class="text-white font-bold text-sm">Compacta en el Maletero</h4>
-                            <p class="text-gray-400 text-xs mt-1">Mide menos de 65 cm guardada</p>
-                        </div>
-                    </div>
-
-                    <!-- FOTO REAL 4: FOGÓN ENCENDIDO -->
-                    <div class="spotlight-card rounded-2xl overflow-hidden border border-white/10 group">
-                        <div class="aspect-square bg-black overflow-hidden relative">
-                            <img src="./images/fogon_bioetanol_studio.jpg" alt="Fogón Encendido en Terraza" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                        </div>
-                        <div class="p-4 text-center">
-                            <h4 class="text-white font-bold text-sm">Fuego Real en Terraza</h4>
-                            <p class="text-gray-400 text-xs mt-1">Sin humo, sin olores y sin cañón</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        </div>
-    </main>
-
-    <!-- FOOTER CORPORATIVO OFICIAL CON LOGOS VECTORIALES -->
-    <footer class="bg-[#050608] border-t border-white/10 pt-14 pb-8 text-xs text-gray-400 mt-auto relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+    <!-- SECCIÓN: SEGURIDAD VIAL Y LEY DE TRÁNSITO (COMPARATIVA DINÁMICA SIN CAJAS OPACAS) -->
+    <section class="py-20 bg-[#07080b] relative z-10 border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             
-            <!-- COLUMNA 1: MARCA Y CONTACTO DIRECTO -->
-            <div class="space-y-4">
-                <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-12 w-auto object-contain">
-                <p class="text-gray-400 text-xs leading-relaxed">
-                    Taller chileno de diseño y fabricación en acero estructural y calefacción ecológica a bioetanol. Soluciones prácticas, seguras y duraderas.
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Seguridad Vial y Ley de Tránsito en Chile
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                    El Decreto Supremo N° 55/2025 del Ministerio de Transportes y Telecomunicaciones (MTT) regula el remolque de vehículos en vías públicas y autopistas de todo Chile.
                 </p>
-                <div class="space-y-1.5 text-gray-300 font-medium text-xs">
-                    <p class="flex items-center gap-2">Santiago, Chile (Despachos a todo el país)</p>
-                    <p class="flex items-center gap-2 text-orange-400 font-bold">metalcreativo03@gmail.com</p>
-                    <p class="flex items-center gap-2">+56 9 5492 2608</p>
-                </div>
-                <div class="flex items-center gap-3 pt-2">
-                    <!-- LOGO INSTAGRAM OFICIAL -->
-                    <a href="https://www.instagram.com/metalcreativo.cl" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-neutral-900 border border-white/10 hover:border-pink-500 text-pink-400 flex items-center justify-center transition-colors shadow" title="Instagram Oficial @metalcreativo.cl">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-                    <!-- LOGO FACEBOOK OFICIAL -->
-                    <a href="https://www.facebook.com/profile.php?id=61593411219231" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-neutral-900 border border-white/10 hover:border-sky-500 text-sky-400 flex items-center justify-center transition-colors shadow" title="Facebook Oficial Metal Creativo Chile">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                    </a>
-                    <!-- LOGO WHATSAPP OFICIAL -->
-                    <a href="https://wa.me/56954922608" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center transition-colors shadow" title="WhatsApp Oficial">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                        </svg>
-                    </a>
-                </div>
             </div>
 
-            <!-- COLUMNA 2: CATÁLOGO OFICIAL -->
-            <div class="space-y-3">
-                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider">
-                    Catálogo Oficial
-                </h4>
-                <ul class="space-y-2.5 text-xs">
-                    <li><a href="#showcase" class="hover:text-orange-400 transition-colors">Barra de Remolque Desarmable ($65.000)</a></li>
-                    <li><a href="#showcase" class="hover:text-orange-400 transition-colors">Fogón de Mesa a Bioetanol ($149.900)</a></li>
-                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors">Proyectos y Forja a Medida</a></li>
-                    <li><a href="checkout.html" class="hover:text-orange-400 transition-colors">Carrito & Pasarela Segura</a></li>
-                </ul>
-            </div>
-
-            <!-- COLUMNA 3: GARANTÍAS Y LEGALIDAD -->
-            <div class="space-y-3">
-                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider">
-                    Garantías & Legalidad
-                </h4>
-                <ul class="space-y-2.5 text-xs">
-                    <li><a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors">Garantía Legal 6 Meses SERNAC</a></li>
-                    <li><a href="terminos-condiciones.html" class="hover:text-orange-400 transition-colors">Términos & Condiciones de Compra</a></li>
-                    <li><a href="privacidad.html" class="hover:text-orange-400 transition-colors">Política de Privacidad (Ley 19.628)</a></li>
-                    <li><a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors">Preguntas Frecuentes (FAQ)</a></li>
-                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors">Contacto Directo con Taller</a></li>
-                </ul>
-            </div>
-
-            <!-- COLUMNA 4: LOGOS OFICIALES DE PAGO Y ENVÍO -->
-            <div class="space-y-3">
-                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider">
-                    Pago Seguro & Envíos
-                </h4>
-                <p class="text-xs text-gray-400 leading-relaxed">Paga con total seguridad mediante Webpay Plus o Transferencia Bancaria. Envíos con número de seguimiento a todo Chile.</p>
+            <!-- COMPARATIVA DINÁMICA DE 2 COLUMNAS EDITORIALES (SIN CAJAS PESADAS) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                 
-                <div class="grid grid-cols-2 gap-2 pt-1">
-                    <!-- LOGO WEBPAY PLUS -->
-                    <div class="p-2.5 rounded-lg bg-neutral-900/90 border border-white/10 text-center font-bold text-gray-200 text-xs flex items-center justify-center gap-1.5 shadow-sm">
-                        <span class="text-sky-400 font-extrabold">Webpay</span><span class="text-orange-400 font-extrabold">Plus</span>
+                <!-- COLUMNA 1: MÉTODO PROHIBIDO -->
+                <div class="space-y-4 border-t-2 border-red-500/60 pt-6">
+                    <div class="text-red-400 text-xs font-bold uppercase tracking-wider">
+                        Método Prohibido por Ley en Chile
                     </div>
-                    <!-- LOGO TRANSFERENCIA -->
-                    <div class="p-2.5 rounded-lg bg-neutral-900/90 border border-white/10 text-center font-bold text-gray-200 text-xs flex items-center justify-center gap-1.5 shadow-sm">
-                        <span class="text-emerald-400 font-extrabold">Transferencia</span>
+                    <h3 class="text-xl sm:text-2xl font-extrabold text-white">
+                        Cuerda, Cadena o Cinta Elástica
+                    </h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        El arrastre con elementos flexibles está estrictamente sancionado por la Ley de Tránsito N° 18.290 por su alto peligro en ruta:
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-400 font-bold">✕</span>
+                            <span><strong>Distancia variable peligrosa:</strong> En cualquier frenada imprevista el auto remolcado choca por alcance al vehículo tractor.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-400 font-bold">✕</span>
+                            <span><strong>Riesgo de corte por tensión:</strong> El latigazo metálico puede perforar carrocerías o provocar volcamientos.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-400 font-bold">✕</span>
+                            <span><strong>Multas de 1 a 1.5 UTM:</strong> Carabineros de Chile y fiscalizadores del MTT cursan infracción grave y retención.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- COLUMNA 2: SOLUCIÓN HOMOLOGADA -->
+                <div class="space-y-4 border-t-2 border-emerald-500/60 pt-6">
+                    <div class="text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                        Solución 100% Homologada MTT
                     </div>
-                    <!-- LOGO STARKEN -->
-                    <div class="p-2.5 rounded-lg bg-neutral-900/90 border border-white/10 text-center font-bold text-gray-200 text-xs flex items-center justify-center gap-1.5 shadow-sm">
-                        <span class="text-orange-400 font-black tracking-wider">STARKEN</span>
+                    <h3 class="text-xl sm:text-2xl font-extrabold text-white">
+                        Barra Rígida Desarmable (1.8m)
+                    </h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Diseñada conforme al Decreto N° 55/2025 para brindar frenado sincronizado y estabilidad total:
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex items-start gap-3">
+                            <span class="text-emerald-400 font-bold">✓</span>
+                            <span><strong>Distancia fija constante:</strong> Mantiene permanentemente 1.8 metros impidiendo cualquier impacto entre ambos vehículos.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-emerald-400 font-bold">✓</span>
+                            <span><strong>Resistencia probada de 3.500 kg:</strong> Acero estructural de 5 mm soldado para autos, SUV y camionetas.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-emerald-400 font-bold">✓</span>
+                            <span><strong>Autorizada en autopistas:</strong> Cumple con todos los estándares para circular legalmente en autopistas concesionadas y pasos fronterizos.</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PRODUCTO 1: BARRA RÍGIDA DE REMOLQUE ($65.000 CLP) -->
+    <section id="lanza-remolque" class="py-20 bg-[#0a0c10] relative z-10 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <!-- INFORMACIÓN Y FICHA TÉCNICA -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="space-y-2">
+                        <div class="text-orange-400 text-xs font-bold uppercase tracking-widest">
+                            EQUIPAMIENTO OBLIGATORIO AUTOMOTRIZ
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                            Barra de Remolque Desarmable 1.8m
+                        </h2>
+                        <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                            Fabricada en acero estructural chileno de 5 mm de espesor. Diseñada en 3 tramos desmontables de menos de 65 cm para guardarse cómodamente junto a la rueda de repuesto.
+                        </p>
                     </div>
-                    <!-- LOGO CHILEXPRESS -->
-                    <div class="p-2.5 rounded-lg bg-neutral-900/90 border border-white/10 text-center font-bold text-gray-200 text-xs flex items-center justify-center gap-1.5 shadow-sm">
-                        <span class="text-amber-400 font-black tracking-wider">Chilexpress</span>
+
+                    <!-- PUNTOS TÉCNICOS DESTACADOS -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div class="space-y-1">
+                            <strong class="text-white block font-semibold">Homologación Decreto MTT 55/2025</strong>
+                            <span class="text-gray-400 text-xs">Cumple con largo reglamentario de 1.8 metros y pasadores de traba de seguridad.</span>
+                        </div>
+                        <div class="space-y-1">
+                            <strong class="text-white block font-semibold">Arrastre de 3.500 kg</strong>
+                            <span class="text-gray-400 text-xs">Capacidad para remolcar desde autos compactos hasta camionetas y SUV medianas.</span>
+                        </div>
+                        <div class="space-y-1">
+                            <strong class="text-white block font-semibold">Desarmable en 3 partes</strong>
+                            <span class="text-gray-400 text-xs">Armado en menos de 2 minutos sin necesidad de herramientas especiales.</span>
+                        </div>
+                        <div class="space-y-1">
+                            <strong class="text-white block font-semibold">Garantía Legal de 6 Meses</strong>
+                            <span class="text-gray-400 text-xs">Respaldo directo de nuestro taller de fabricación en Santiago.</span>
+                        </div>
+                    </div>
+
+                    <!-- PRECIO Y BOTONES DE COMPRA -->
+                    <div class="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider block">Precio de Taller</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-3xl font-black text-white">$65.000</span>
+                                <span class="text-xs text-orange-400 font-bold">CLP (IVA Incluido)</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-3">
+                            <button @click="addItem('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-metal-primary px-5 py-3 rounded-xl font-bold text-xs text-white spark-trigger cursor-pointer">
+                                Añadir al Carrito
+                            </button>
+                            <button @click="buyNow('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-metal-orange px-7 py-3 rounded-xl font-bold text-xs text-white spark-trigger cursor-pointer ">
+                                Comprar Ahora &rarr;
+                            </button>
+                        </div>
                     </div>
                 </div>
+
+                <!-- FOTO REAL LIMPIA (SIN CAJAS NEGRAS TAPANTO LA IMAGEN) -->
+                <div class="lg:col-span-5">
+                    <div class="rounded-2xl overflow-hidden bg-black border border-white/10 ">
+                        <img src="./images/lanza_real_armada.jpeg" alt="Barra de remolque armada Metal Creativo" class="w-full h-80 sm:h-96 object-cover">
+                    </div>
+                </div>
+
             </div>
         </div>
+    </section>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-gray-500">
-            <p>&copy; 2026 Metal Creativo Chile. Todos los derechos reservados.</p>
-            <p class="text-center sm:text-right">Cumple con Ley N° 19.496 del Consumidor y Decreto Supremo MTT N° 55/2025.</p>
+    <!-- PRODUCTO 2: FOGÓN DE MESA A BIOETANOL ($149.900 CLP) -->
+    <section id="fogon-bioetanol" class="py-20 bg-[#07080b] relative z-10 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <!-- FOTO REAL LIMPIA (SIN RECTANGULOS NEGROS TAPANTO LA IMAGEN) -->
+                <div class="lg:col-span-5 order-2 lg:order-1">
+                    <div class="rounded-2xl overflow-hidden bg-black border border-white/10 ">
+                        <img src="./images/fogon_bioetanol_madera.jpg" alt="Fogón de mesa a bioetanol en madera y acero" class="w-full h-80 sm:h-96 object-cover">
+                    </div>
+                </div>
+
+                <!-- INFORMACIÓN Y FICHA TÉCNICA -->
+                <div class="lg:col-span-7 order-1 lg:order-2 space-y-6">
+                    <div class="space-y-2">
+                        <div class="text-orange-400 text-xs font-bold uppercase tracking-widest">
+                            DISEÑO Y CONFORT PARA TU HOGAR
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                            Fogón de Mesa a Bioetanol Ecológico
+                        </h2>
+                        <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                            Diseñado en madera noble seleccionada y acero de alta resistencia. Crea un ambiente cálido con fuego real de combustión limpia, sin humo, sin olor y sin necesidad de cañón ni chimenea.
+                        </p>
+                    </div>
+
+                    <!-- PUNTOS TÉCNICOS DESTACADOS -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-300">
+                        <div class="space-y-1">
+                            <strong class="text-white block font-semibold">Quemador de alta resistencia</strong>
+                            <span class="text-gray-400 text-xs">Fabricado en acero inoxidable para soportar calor extremo sin deformarse.</span>
+                        </div>
+                        <div class="space-y-1">
+                            <strong class="text-white block font-semibold">Combustión limpia con bioetanol</strong>
+                            <span class="text-gray-400 text-xs">Fuego real 100% ecológico, sin cenizas, sin humo ni hollín en techos o muros.</span>
+                        </div>
+                        <div class="space-y-1">
+                            <strong class="text-white block font-semibold">Autonomía de 4 a 5.5 horas</strong>
+                            <span class="text-gray-400 text-xs">Incluye fibra térmica interna para una llama pareja y optimización de combustible.</span>
+                        </div>
+                        <div class="space-y-1">
+                            <strong class="text-white block font-semibold">Base de madera noble tratada</strong>
+                            <span class="text-gray-400 text-xs">Terminación artesanal con aislación térmica segura para apoyar en cualquier mesa.</span>
+                        </div>
+                    </div>
+
+                    <!-- PRECIO Y BOTONES DE COMPRA -->
+                    <div class="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                            <span class="text-xs text-gray-400 uppercase tracking-wider block">Precio de Taller</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-3xl font-black text-white">$149.900</span>
+                                <span class="text-xs text-orange-400 font-bold">CLP (IVA Incluido)</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center gap-3">
+                            <button @click="addItem('fogon', 'Fogón de Mesa a Bioetanol Ecológico', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-metal-primary px-5 py-3 rounded-xl font-bold text-xs text-white spark-trigger cursor-pointer">
+                                Añadir al Carrito
+                            </button>
+                            <button @click="buyNow('fogon', 'Fogón de Mesa a Bioetanol Ecológico', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-metal-orange px-7 py-3 rounded-xl font-bold text-xs text-white spark-trigger cursor-pointer ">
+                                Comprar Ahora &rarr;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERÍA DE FOTOGRAFÍAS REALES (SIN FONDOS NARANJOS NI CAJAS TAPANDO LAS FOTOS) -->
+    <section id="fotos-reales" class="py-20 bg-[#0a0c10] relative z-10 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Fotografías reales de nuestros productos
+                </h2>
+                <p class="text-gray-400 text-sm">
+                    Productos reales puestos a prueba.
+                </p>
+            </div>
+
+            <!-- GRILLA FOTOGRÁFICA LIMPIA (SIN BADGES NARANJAS TAPANTO FOTOS) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="rounded-xl overflow-hidden bg-black border border-white/10  space-y-3 p-3">
+                    <img src="./images/lanza_carretera_pro.jpg" alt="Barra en carretera" class="w-full h-52 object-cover rounded-lg">
+                    <div class="px-1 text-xs">
+                        <strong class="text-white block font-semibold">Prueba en Ruta 5</strong>
+                        <span class="text-gray-400">Distancia segura de 1.8 metros entre vehículos.</span>
+                    </div>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-black border border-white/10  space-y-3 p-3">
+                    <img src="./images/lanza_3tramos_real.jpeg" alt="3 tramos desarmables" class="w-full h-52 object-cover rounded-lg">
+                    <div class="px-1 text-xs">
+                        <strong class="text-white block font-semibold">Diseño Desarmable</strong>
+                        <span class="text-gray-400">3 piezas de 65 cm con pasadores de seguridad.</span>
+                    </div>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-black border border-white/10  space-y-3 p-3">
+                    <img src="./images/fogon_bioetanol_studio.jpg" alt="Fogón en terraza" class="w-full h-52 object-cover rounded-lg">
+                    <div class="px-1 text-xs">
+                        <strong class="text-white block font-semibold">Fogón en Terraza</strong>
+                        <span class="text-gray-400">Ambiente cálido y acogedor sin humo.</span>
+                    </div>
+                </div>
+
+                <div class="rounded-xl overflow-hidden bg-black border border-white/10  space-y-3 p-3">
+                    <img src="./images/real_envio_mercadolibre.jpeg" alt="Paquetes listos para despacho" class="w-full h-52 object-cover rounded-lg">
+                    <div class="px-1 text-xs">
+                        <strong class="text-white block font-semibold">Envíos a todo Chile</strong>
+                        <span class="text-gray-400">Embalaje reforzado vía Starken y Chilexpress.</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PREGUNTAS FRECUENTES (FAQ) -->
+    <section class="py-20 bg-[#07080b] relative z-10 border-b border-white/5">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10" x-data="{ activeFaq: 1 }">
+            
+            <div class="text-center space-y-2">
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Preguntas Frecuentes
+                </h2>
+                <p class="text-gray-400 text-sm">
+                    Todo lo que necesitas saber sobre envíos, legalidad y formas de pago.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                
+                <div class="border border-white/10 rounded-xl overflow-hidden bg-[#0d0f14]">
+                    <button @click="activeFaq = (activeFaq === 1 ? null : 1)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center text-sm sm:text-base cursor-pointer">
+                        <span>¿La barra cumple con el Decreto Supremo N° 55/2025 del MTT?</span>
+                        <span class="text-orange-400 font-mono text-xl" x-text="activeFaq === 1 ? '−' : '+'"></span>
+                    </button>
+                    <div x-show="activeFaq === 1" x-collapse class="px-5 pb-5 text-xs sm:text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-3">
+                        Sí, 100%. La barra mide exactamente 1.8 metros de largo en acero estructural y cuenta con pasadores de seguridad, cumpliendo a cabalidad con la exigencia legal del Ministerio de Transportes para circular por calles y autopistas.
+                    </div>
+                </div>
+
+                <div class="border border-white/10 rounded-xl overflow-hidden bg-[#0d0f14]">
+                    <button @click="activeFaq = (activeFaq === 2 ? null : 2)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center text-sm sm:text-base cursor-pointer">
+                        <span>¿A qué regiones despachan y cuánto demora?</span>
+                        <span class="text-orange-400 font-mono text-xl" x-text="activeFaq === 2 ? '−' : '+'"></span>
+                    </button>
+                    <div x-show="activeFaq === 2" x-collapse class="px-5 pb-5 text-xs sm:text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-3">
+                        Despachamos diariamente a todas las regiones de Chile mediante Starken y Chilexpress (por pagar a sucursal o domicilio). En la Región Metropolitana contamos con opción de entrega rápida coordinada.
+                    </div>
+                </div>
+
+                <div class="border border-white/10 rounded-xl overflow-hidden bg-[#0d0f14]">
+                    <button @click="activeFaq = (activeFaq === 3 ? null : 3)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center text-sm sm:text-base cursor-pointer">
+                        <span>¿El fogón a bioetanol realmente no emite humo?</span>
+                        <span class="text-orange-400 font-mono text-xl" x-text="activeFaq === 3 ? '−' : '+'"></span>
+                    </button>
+                    <div x-show="activeFaq === 3" x-collapse class="px-5 pb-5 text-xs sm:text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-3">
+                        Así es. El bioetanol es un alcohol vegetal ecológico cuya combustión solo genera calor, vapor de agua y una mínima cantidad de CO2 (similar a dos velas encendidas). No ensucia techos, no huele y no deja cenizas.
+                    </div>
+                </div>
+
+                <div class="border border-white/10 rounded-xl overflow-hidden bg-[#0d0f14]">
+                    <button @click="activeFaq = (activeFaq === 4 ? null : 4)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center text-sm sm:text-base cursor-pointer">
+                        <span>¿Qué medios de pago aceptan?</span>
+                        <span class="text-orange-400 font-mono text-xl" x-text="activeFaq === 4 ? '−' : '+'"></span>
+                    </button>
+                    <div x-show="activeFaq === 4" x-collapse class="px-5 pb-5 text-xs sm:text-sm text-gray-400 leading-relaxed border-t border-white/5 pt-3">
+                        Aceptamos Webpay Plus (débito Redcompra y crédito en cuotas), Mercado Pago oficial y transferencia bancaria directa. Todos los pagos cuentan con comprobante y confirmación inmediata.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER CON LOGOS OFICIALES DE WEBPAY, MERCADO PAGO, BANCOESTADO, STARKEN Y CHILEXPRESS -->
+    <footer class="bg-[#050608] border-t border-white/10 text-gray-400 text-xs py-14 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            
+            <!-- BLOQUE SUPERIOR DEL FOOTER: LOGOS OFICIALES DE COURIERS Y PAGOS -->
+            <div class="space-y-6 border-b border-white/10 pb-10">
+                <div class="text-center space-y-1">
+                    <span class="text-white font-bold text-sm tracking-wider uppercase">Medios de Pago y Despacho a Todo Chile</span>
+                    <p class="text-gray-400 text-xs">Transacciones encriptadas seguras y envíos con seguimiento en tiempo real</p>
+                </div>
+
+                <!-- LOGOS OFICIALES -->
+                <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+                    
+                    <!-- 1. WEBPAY PLUS OFICIAL -->
+                    <div class="flex items-center gap-2 bg-white/5 px-4 py-2.5 rounded-xl border border-white/10" title="Webpay Plus Transbank">
+                        <img src="./images/logo_webpay.svg" alt="Webpay Plus" class="h-6 w-auto object-contain">
+                    </div>
+
+                    <!-- 2. MERCADO PAGO OFICIAL -->
+                    <div class="flex items-center gap-2 bg-white/5 px-4 py-2.5 rounded-xl border border-white/10" title="Mercado Pago">
+                        <img src="./images/logo_mercadopago.svg" alt="Mercado Pago" class="h-6 w-auto object-contain">
+                    </div>
+
+                    <!-- 3. BANCOESTADO / TRANSFERENCIA -->
+                    <div class="flex items-center gap-2 bg-white/5 px-4 py-2.5 rounded-xl border border-white/10" title="Transferencia Bancaria BancoEstado">
+                        <img src="./images/logo_bancoestado.svg" alt="BancoEstado Transferencia" class="h-6 w-auto object-contain">
+                    </div>
+
+                    <!-- 4. STARKEN OFICIAL -->
+                    <div class="flex items-center gap-2 bg-white/5 px-4 py-2.5 rounded-xl border border-white/10" title="Envíos Starken">
+                        <img src="./images/logo_starken.svg" alt="Starken" class="h-6 w-auto object-contain">
+                    </div>
+
+                    <!-- 5. CHILEXPRESS OFICIAL -->
+                    <div class="flex items-center gap-2 bg-white/5 px-4 py-2.5 rounded-xl border border-white/10" title="Envíos Chilexpress">
+                        <img src="./images/logo_chilexpress.svg" alt="Chilexpress" class="h-6 w-auto object-contain">
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- BLOQUE INFERIOR DEL FOOTER: INFORMACIÓN DE TALLER, GARANTÍAS Y CONTACTO -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                
+                <div class="space-y-3 md:col-span-2">
+                    <img src="./images/logo_official.png" alt="Metal Creativo Chile" class="h-10 w-auto object-contain">
+                    <p class="text-gray-400 text-xs leading-relaxed max-w-md">
+                        Taller chileno de diseño y fabricación en acero estructural. Especialistas en barras rígidas de remolque homologadas y fogones a bioetanol para el hogar.
+                    </p>
+                    <div class="text-gray-400 text-xs">
+                        📍 Taller en Lo Barnechea, Santiago de Chile • Despachos a todo el país.
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <strong class="text-white block font-semibold text-sm">Garantías y Legalidad</strong>
+                    <ul class="space-y-1.5 text-xs text-gray-400">
+                        <li>• Decreto Supremo N° 55/2025 MTT</li>
+                        <li>• 6 meses de garantía legal directa</li>
+                        <li>• Envío con número de seguimiento</li>
+                        <li>• Factura o boleta electrónica</li>
+                    </ul>
+                </div>
+
+                <div class="space-y-2">
+                    <strong class="text-white block font-semibold text-sm">Contacto Directo</strong>
+                    <ul class="space-y-1.5 text-xs text-gray-400">
+                        <li>WhatsApp: <a href="https://wa.me/56954922608" class="text-orange-400 hover:underline">+56 9 5492 2608</a></li>
+                        <li>Email: <a href="mailto:metalcreativo03@gmail.com" class="text-orange-400 hover:underline">metalcreativo03@gmail.com</a></li>
+                        <li>Horario: Lunes a Sábado de 09:00 a 19:00 hrs</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-white/5 pt-6 text-center text-gray-500 text-xs">
+                &copy; 2026 Metal Creativo Chile. Todos los derechos reservados.
+            </div>
+
         </div>
     </footer>
 
-    <!-- DRAWER DEL CARRITO LATERAL -->
-    <div x-cloak x-show="cartOpen" class="fixed inset-0 z-50 overflow-hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" @click="cartOpen = false"></div>
-        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
-            <div class="w-screen max-w-md bg-[#0e1117] border-l border-white/10 p-6 flex flex-col shadow-2xl">
+    <!-- DRAWER DE CARRITO DE COMPRAS SLIDEOVER -->
+    <div x-show="cartOpen" x-cloak class="fixed inset-0 z-50 overflow-hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" @click="cartOpen = false"></div>
+        <div class="fixed inset-y-0 right-0 max-w-md w-full bg-[#0a0c10] border-l border-white/10 z-50 p-6 flex flex-col justify-between ">
+            <div>
                 <div class="flex items-center justify-between pb-4 border-b border-white/10">
-                    <h2 class="text-lg font-bold text-white">Tu Carrito de Compras</h2>
-                    <button @click="cartOpen = false" class="text-gray-400 hover:text-white p-1 cursor-pointer text-xl font-bold">&times;</button>
-                </div>
-                
-                <div class="flex-grow overflow-y-auto py-4 space-y-4">
-                    <template x-if="items.length === 0">
-                        <div class="text-center py-12 space-y-3">
-                            <p class="text-gray-400 text-sm">Tu carrito está vacío actualmente.</p>
-                            <a href="#showcase" @click="cartOpen = false" class="btn-metal-orange inline-block px-4 py-2 rounded-xl text-xs font-bold">Ver Catálogo</a>
-                        </div>
-                    </template>
-                    <template x-for="(item, index) in items" :key="item.id">
-                        <div class="flex gap-4 p-3.5 bg-black/40 rounded-xl border border-white/5 items-center">
-                            <img :src="item.image" :alt="item.name" class="w-16 h-16 object-cover rounded-lg border border-white/10">
-                            <div class="flex-grow">
-                                <h4 class="text-xs font-bold text-white" x-text="item.name"></h4>
-                                <span class="text-xs text-orange-400 font-bold" x-text="'$' + formatPrice(item.price) + ' CLP'"></span>
-                                <div class="flex items-center gap-2 mt-2">
-                                    <button @click="decreaseQty(index)" class="w-6 h-6 rounded bg-neutral-800 text-white text-xs flex items-center justify-center cursor-pointer hover:bg-neutral-700">-</button>
-                                    <span class="text-xs font-bold text-white" x-text="item.qty"></span>
-                                    <button @click="increaseQty(index)" class="w-6 h-6 rounded bg-neutral-800 text-white text-xs flex items-center justify-center cursor-pointer hover:bg-neutral-700">+</button>
-                                    <button @click="removeItem(index)" class="ml-auto text-red-400 text-xs hover:text-red-300 cursor-pointer" title="Eliminar">Eliminar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </template>
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>Carrito de Compras</span>
+                        <span class="text-xs bg-[#c83c00] text-white px-2 py-0.5 rounded-full font-mono" x-text="totalItems"></span>
+                    </h3>
+                    <button @click="cartOpen = false" class="text-gray-400 hover:text-white p-2">✕</button>
                 </div>
 
-                <div x-show="items.length > 0" class="pt-4 border-t border-white/10 space-y-3">
-                    <div class="flex justify-between text-sm font-bold">
-                        <span class="text-gray-300">Subtotal:</span>
-                        <span class="text-orange-400 text-lg" x-text="'$' + formatPrice(totalAmount) + ' CLP'"></span>
-                    </div>
-                    <p class="text-[11px] text-gray-400">
-                        Envíos garantizados a todo Chile por Starken / Chilexpress.
-                    </p>
-                    <a href="checkout.html" class="btn-metal-orange w-full py-3.5 rounded-xl font-bold text-center block text-sm shadow-lg shadow-orange-500/20">
-                        Proceder al Checkout Seguro &rarr;
-                    </a>
+                <!-- ITEMS EN CARRITO -->
+                <div class="py-4 space-y-4 overflow-y-auto max-h-[60vh]">
+                    <template x-if="cart.length === 0">
+                        <div class="text-center py-12 space-y-3 text-gray-400">
+                            <p class="text-sm">Tu carrito está vacío.</p>
+                            <a href="#lanza-remolque" @click="cartOpen = false" class="btn-metal-orange inline-block px-5 py-2.5 rounded-xl text-xs font-bold text-white">
+                                Ver Barra de Remolque ($65.000)
+                            </a>
+                        </div>
+                    </template>
+
+                    <template x-for="(item, index) in cart" :key="index">
+                        <div class="flex gap-4 p-4 bg-white/5 rounded-xl border border-white/5 items-center">
+                            <img :src="item.image" :alt="item.name" class="w-16 h-16 object-cover rounded-lg shrink-0">
+                            <div class="flex-grow space-y-1">
+                                <h4 class="text-xs font-bold text-white leading-tight" x-text="item.name"></h4>
+                                <div class="text-xs font-mono text-orange-400" x-text="'$' + formatPrice(item.price)"></div>
+                                <div class="flex items-center gap-2 pt-1">
+                                    <button @click="decreaseQty(index)" class="w-6 h-6 rounded bg-white/10 text-white flex items-center justify-center font-bold hover:bg-white/20">−</button>
+                                    <span class="text-xs text-white font-mono px-2" x-text="item.quantity"></span>
+                                    <button @click="increaseQty(index)" class="w-6 h-6 rounded bg-white/10 text-white flex items-center justify-center font-bold hover:bg-white/20">+</button>
+                                </div>
+                            </div>
+                            <button @click="removeItem(index)" class="text-red-400 hover:text-red-300 p-2 text-sm">🗑️</button>
+                        </div>
+                    </template>
                 </div>
+            </div>
+
+            <div x-show="cart.length > 0" class="border-t border-white/10 pt-4 space-y-4">
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-400">Subtotal</span>
+                    <span class="text-xl font-bold text-white font-mono" x-text="'$' + formatPrice(cartTotal)"></span>
+                </div>
+                <p class="text-[11px] text-gray-400">Despacho calculado en el checkout (RM o regiones por Starken/Chilexpress).</p>
+                <a href="checkout.html" class="btn-metal-orange w-full py-3.5 rounded-xl font-bold text-center block text-sm text-white spark-trigger ">
+                    Continuar al Pago Seguro &rarr;
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- SCRIPT CARRITO GLOBAL PERSISTENTE -->
+    <!-- SCRIPTS EN VIVO DE CARRITO Y PARTICULAS -->
     <script>
+        // STORE GLOBAL DE CARRITO
         function cartStore() {
             return {
                 cartOpen: false,
-                activeTab: 'auto',
-                items: JSON.parse(localStorage.getItem('mc_cart') || '[]'),
+                cart: JSON.parse(localStorage.getItem('mc_cart') || '[]'),
                 get totalItems() {
-                    return this.items.reduce((acc, item) => acc + item.qty, 0);
+                    return this.cart.reduce((sum, item) => sum + item.quantity, 0);
                 },
-                get totalAmount() {
-                    return this.items.reduce((acc, item) => acc + (item.price * item.qty), 0);
+                get cartTotal() {
+                    return this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
                 },
-                formatPrice(val) {
-                    return new Intl.NumberFormat('es-CL').format(val);
+                formatPrice(price) {
+                    return new Intl.NumberFormat('es-CL').format(price);
                 },
                 saveCart() {
-                    localStorage.setItem('mc_cart', JSON.stringify(this.items));
+                    localStorage.setItem('mc_cart', JSON.stringify(this.cart));
                 },
                 addItem(id, name, price, image) {
-                    const existing = this.items.find(i => i.id === id);
+                    const existing = this.cart.find(item => item.id === id);
                     if (existing) {
-                        existing.qty++;
+                        existing.quantity++;
                     } else {
-                        this.items.push({ id, name, price, image, qty: 1 });
+                        this.cart.push({ id, name, price, image, quantity: 1 });
                     }
                     this.saveCart();
                     this.cartOpen = true;
                 },
                 buyNow(id, name, price, image) {
-                    const existing = this.items.find(i => i.id === id);
-                    if (!existing) {
-                        this.items.push({ id, name, price, image, qty: 1 });
-                    }
-                    this.saveCart();
+                    this.addItem(id, name, price, image);
                     window.location.href = 'checkout.html';
                 },
                 increaseQty(idx) {
-                    this.items[idx].qty++;
+                    this.cart[idx].quantity++;
                     this.saveCart();
                 },
                 decreaseQty(idx) {
-                    if (this.items[idx].qty > 1) {
-                        this.items[idx].qty--;
+                    if (this.cart[idx].quantity > 1) {
+                        this.cart[idx].quantity--;
                     } else {
-                        this.items.splice(idx, 1);
+                        this.cart.splice(idx, 1);
                     }
                     this.saveCart();
                 },
                 removeItem(idx) {
-                    this.items.splice(idx, 1);
+                    this.cart.splice(idx, 1);
                     this.saveCart();
                 }
-            }
+            };
         }
 
-        // 1. ANIMACIÓN DE FUEGO Y BRASAS ASCENDENTES CONTINUAS (AMBIENT SPARKS/EMBERS)
-        (function() {
+        // 1. CHISPAS Y FUEGO ASCENDENTE CONTINUO
+        (function initEmbers() {
             const canvas = document.getElementById('emberCanvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
@@ -758,41 +811,21 @@
             function createEmber(initial = false) {
                 return {
                     x: Math.random() * canvas.width,
-                    y: initial ? Math.random() * canvas.height : canvas.height + 10,
+                    y: initial ? Math.random() * canvas.height : canvas.height + 15,
                     size: Math.random() * 2.2 + 0.8,
-                    vy: -(Math.random() * 1.2 + 0.6), // sube hacia arriba
+                    vy: -(Math.random() * 1.2 + 0.5),
                     vx: (Math.random() - 0.5) * 0.6,
                     alpha: Math.random() * 0.7 + 0.3,
-                    decay: Math.random() * 0.003 + 0.002,
+                    decay: Math.random() * 0.003 + 0.0015,
                     oscSpeed: Math.random() * 0.02 + 0.01,
                     oscOffset: Math.random() * Math.PI * 2,
-                    color: Math.random() > 0.3 ? '#ff7a14' : '#ffb366'
+                    color: Math.random() > 0.35 ? '#c83c00' : (Math.random() > 0.5 ? '#ff7711' : '#ffb344')
                 };
             }
 
             for (let i = 0; i < maxEmbers; i++) {
                 embers.push(createEmber(true));
             }
-
-            // Chispas adicionales al hacer clic
-            window.addEventListener('click', (e) => {
-                for (let i = 0; i < 12; i++) {
-                    const angle = Math.random() * Math.PI * 2;
-                    const speed = Math.random() * 4 + 2;
-                    embers.push({
-                        x: e.clientX,
-                        y: e.clientY,
-                        size: Math.random() * 2.5 + 1.2,
-                        vx: Math.cos(angle) * speed,
-                        vy: Math.sin(angle) * speed - 1.5,
-                        alpha: 1,
-                        decay: Math.random() * 0.03 + 0.02,
-                        oscSpeed: 0,
-                        oscOffset: 0,
-                        color: Math.random() > 0.3 ? '#ff8c3b' : '#ffffff'
-                    });
-                }
-            });
 
             let frame = 0;
             function animate() {
@@ -802,15 +835,11 @@
                 for (let i = embers.length - 1; i >= 0; i--) {
                     const e = embers[i];
                     e.y += e.vy;
-                    e.x += e.vx + Math.sin(frame * e.oscSpeed + e.oscOffset) * 0.3;
+                    e.x += e.vx + Math.sin(frame * e.oscSpeed + e.oscOffset) * 0.35;
                     e.alpha -= e.decay;
 
-                    if (e.alpha <= 0 || e.y < -10) {
-                        if (embers.length <= maxEmbers) {
-                            embers[i] = createEmber(false);
-                        } else {
-                            embers.splice(i, 1);
-                        }
+                    if (e.alpha <= 0 || e.y < -15) {
+                        embers[i] = createEmber(false);
                         continue;
                     }
 
@@ -829,29 +858,93 @@
             animate();
         })();
 
-        // 2. SPOTLIGHT CARD DINÁMICO EN TIEMPO REAL
-        document.querySelectorAll('.spotlight-card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
+        // 2. CHISPAS REACTIVAS AL MOUSE Y CLIC
+        (function initMouseSparks() {
+            const canvas = document.getElementById('sparkCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let sparks = [];
 
-        // 3. MAGNET BUTTON EFFECT
-        document.querySelectorAll('.btn-magnet').forEach(btn => {
-            btn.addEventListener('mousemove', e => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - (rect.left + rect.width / 2);
-                const y = e.clientY - (rect.top + rect.height / 2);
-                btn.style.transform = `translate(${x * 0.22}px, ${y * 0.22}px)`;
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            function emitSparks(x, y, count = 10, speedMult = 1, isClick = false) {
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = (Math.random() * 4 + 1.5) * speedMult;
+                    sparks.push({
+                        x: x,
+                        y: y,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed - (isClick ? 1.8 : 0.5),
+                        size: Math.random() * 2.2 + 1,
+                        alpha: 1,
+                        decay: Math.random() * 0.04 + 0.025,
+                        gravity: 0.12,
+                        color: Math.random() > 0.4 ? '#ff9911' : (Math.random() > 0.5 ? '#ff5500' : '#ffffff')
+                    });
+                }
+            }
+
+            // Clic explosivo
+            window.addEventListener('click', (e) => {
+                emitSparks(e.clientX, e.clientY, 20, 1.4, true);
             });
-            btn.addEventListener('mouseleave', () => {
-                btn.style.transform = 'translate(0px, 0px)';
+
+            // Hover sobre elementos interactivos
+            document.addEventListener('mouseover', (e) => {
+                const target = e.target.closest('a, button, input, .spark-trigger');
+                if (target) {
+                    const rect = target.getBoundingClientRect();
+                    const sparkX = e.clientX || (rect.left + rect.width / 2);
+                    const sparkY = e.clientY || (rect.top + rect.height / 2);
+                    emitSparks(sparkX, sparkY, 8, 0.8, false);
+                }
             });
-        });
+
+            // Rastro al mover rápido el mouse
+            let lastX = 0, lastY = 0;
+            window.addEventListener('mousemove', (e) => {
+                const dist = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+                if (dist > 35) {
+                    emitSparks(e.clientX, e.clientY, 2, 0.5, false);
+                    lastX = e.clientX;
+                    lastY = e.clientY;
+                }
+            });
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = sparks.length - 1; i >= 0; i--) {
+                    const p = sparks[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += p.gravity;
+                    p.alpha -= p.decay;
+
+                    if (p.alpha <= 0) {
+                        sparks.splice(i, 1);
+                        continue;
+                    }
+
+                    ctx.save();
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fillStyle = p.color;
+                    ctx.shadowBlur = 6;
+                    ctx.shadowColor = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
     </script>
 </body>
 </html>

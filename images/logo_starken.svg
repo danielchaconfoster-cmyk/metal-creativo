@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" fill="none">
+  <rect width="160" height="40" rx="8" fill="#00A859"/>
+  <g transform="translate(14, 10)">
+    <path d="M4 10L14 3V7H20V13H14V17L4 10Z" fill="#FFFFFF"/>
+  </g>
+  <text x="42" y="25" font-family="'Inter', sans-serif" font-size="15" font-weight="900" fill="#FFFFFF" letter-spacing="-0.3">starken</text>
+</svg>

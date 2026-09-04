@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" fill="none">
+  <rect width="160" height="40" rx="8" fill="#009EE3"/>
+  <g transform="translate(10, 8) scale(0.65)">
+    <path d="M8 18L18 8C19 7 21 7 22 8L25 11C26 12 26 14 25 15L20 20" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M30 18L20 28C19 29 17 29 16 28L13 25C12 24 12 22 13 21L18 16" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="19" cy="18" r="1.5" fill="#FFFFFF"/>
+  </g>
+  <text x="38" y="25" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#FFFFFF" letter-spacing="-0.2">mercado <tspan font-weight="400">pago</tspan></text>
+</svg>
