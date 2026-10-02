@@ -1,0 +1,72 @@
+[
+  {
+    "id": "MC-2026-1048",
+    "customer_name": "Gonzalo Valenzuela",
+    "phone": "+56 9 8412 9901",
+    "product_name": "Barra Rígida de Remolque Desarmable 1.8m",
+    "channel": "web_mercadopago",
+    "total_amount": 69990,
+    "shipping_method": "rm_express",
+    "shipping_commune": "Las Condes (RM)",
+    "status": "paid",
+    "payment_method": "mercadopago",
+    "tracking_number": "STK-9041284",
+    "created_at": "2026-10-01T18:40:00Z"
+  },
+  {
+    "id": "MC-2026-1047",
+    "customer_name": "Mauricio Tapia E.",
+    "phone": "+56 9 7201 3450",
+    "product_name": "Barra Rígida de Remolque Desarmable 1.8m",
+    "channel": "mercadolibre",
+    "total_amount": 65000,
+    "shipping_method": "starken_por_pagar",
+    "shipping_commune": "Concepción (Biobío)",
+    "status": "preparing",
+    "payment_method": "mercadopago",
+    "tracking_number": null,
+    "created_at": "2026-10-01T15:22:00Z"
+  },
+  {
+    "id": "MC-2026-1046",
+    "customer_name": "Christian Albornoz",
+    "phone": "+56 9 9348 1120",
+    "product_name": "Barra Rígida de Remolque Desarmable 1.8m",
+    "channel": "whatsapp_bot",
+    "total_amount": 65000,
+    "shipping_method": "starken_por_pagar",
+    "shipping_commune": "Temuco (Araucanía)",
+    "status": "paid",
+    "payment_method": "transferencia",
+    "tracking_number": "STK-9038712",
+    "created_at": "2026-09-30T19:10:00Z"
+  },
+  {
+    "id": "MC-2026-1045",
+    "customer_name": "Patricia Saavedra",
+    "phone": "+56 9 6120 4455",
+    "product_name": "Fogón de Mesa a Bioetanol Ecológico",
+    "channel": "web_mercadopago",
+    "total_amount": 149900,
+    "shipping_method": "rm_express",
+    "shipping_commune": "Vitacura (RM)",
+    "status": "delivered",
+    "payment_method": "mercadopago",
+    "tracking_number": "STK-8991204",
+    "created_at": "2026-09-29T11:05:00Z"
+  },
+  {
+    "id": "MC-2026-1044",
+    "customer_name": "Esteban Morales F.",
+    "phone": "+56 9 5541 7890",
+    "product_name": "Barra Rígida de Remolque Desarmable 1.8m",
+    "channel": "mercadolibre",
+    "total_amount": 65000,
+    "shipping_method": "starken_por_pagar",
+    "shipping_commune": "Antofagasta (Antofagasta)",
+    "status": "shipped",
+    "payment_method": "mercadopago",
+    "tracking_number": "CHX-7740192",
+    "created_at": "2026-09-28T16:30:00Z"
+  }
+]

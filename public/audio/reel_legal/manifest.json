@@ -1,0 +1,160 @@
+[
+  {
+    "id": "scene1_hook",
+    "file": "audio/reel_legal/scene1_hook.mp3",
+    "startFrame": 0,
+    "durationFrames": 118,
+    "durSec": 3.744,
+    "captions": [
+      {
+        "text": "¿SABÍAS ESTO?",
+        "highlight": "ESTO",
+        "color": "#FFE500",
+        "startFrame": 0,
+        "durationFrames": 33
+      },
+      {
+        "text": "REMOLCAR CON PIOLA",
+        "highlight": "PIOLA",
+        "color": "#FFFFFF",
+        "startFrame": 33,
+        "durationFrames": 38
+      },
+      {
+        "text": "¡ES MULTA GRAVE!",
+        "highlight": "MULTA",
+        "color": "#FF3B30",
+        "startFrame": 71,
+        "durationFrames": 47
+      }
+    ]
+  },
+  {
+    "id": "scene2_ley",
+    "file": "audio/reel_legal/scene2_ley.mp3",
+    "startFrame": 118,
+    "durationFrames": 149,
+    "durSec": 4.752,
+    "captions": [
+      {
+        "text": "LEY DE TRÁNSITO CHILE",
+        "highlight": "CHILE",
+        "color": "#00E5FF",
+        "startFrame": 118,
+        "durationFrames": 48
+      },
+      {
+        "text": "DECRETO N° 55 MTT",
+        "highlight": "55",
+        "color": "#FFFFFF",
+        "startFrame": 166,
+        "durationFrames": 49
+      },
+      {
+        "text": "ENGANCHE RÍGIDO OBLIGATORIO",
+        "highlight": "OBLIGATORIO",
+        "color": "#00FF66",
+        "startFrame": 215,
+        "durationFrames": 52
+      }
+    ]
+  },
+  {
+    "id": "scene3_acero",
+    "file": "audio/reel_legal/scene3_acero.mp3",
+    "startFrame": 267,
+    "durationFrames": 167,
+    "durSec": 5.352,
+    "captions": [
+      {
+        "text": "TUBO ACERO 3 MM",
+        "highlight": "3",
+        "color": "#00E5FF",
+        "startFrame": 267,
+        "durationFrames": 58
+      },
+      {
+        "text": "3 TRAMOS COMPACTOS",
+        "highlight": "COMPACTOS",
+        "color": "#FFE500",
+        "startFrame": 325,
+        "durationFrames": 56
+      },
+      {
+        "text": "CABE EN TU MALETERO",
+        "highlight": "MALETERO",
+        "color": "#00FF66",
+        "startFrame": 381,
+        "durationFrames": 53
+      }
+    ]
+  },
+  {
+    "id": "scene4_resistencia",
+    "file": "audio/reel_legal/scene4_resistencia.mp3",
+    "startFrame": 434,
+    "durationFrames": 156,
+    "durSec": 4.992,
+    "captions": [
+      {
+        "text": "SÚPER LIVIANA EN MANO",
+        "highlight": "LIVIANA",
+        "color": "#00E5FF",
+        "startFrame": 434,
+        "durationFrames": 59
+      },
+      {
+        "text": "PERO SOPORTA",
+        "highlight": "SOPORTA",
+        "color": "#FFFFFF",
+        "startFrame": 493,
+        "durationFrames": 35
+      },
+      {
+        "text": "¡HASTA 3.500 KILOS!",
+        "highlight": "3.500",
+        "color": "#FFE500",
+        "startFrame": 528,
+        "durationFrames": 62
+      }
+    ]
+  },
+  {
+    "id": "scene5_seguridad",
+    "file": "audio/reel_legal/scene5_seguridad.mp3",
+    "startFrame": 590,
+    "durationFrames": 163,
+    "durSec": 5.232,
+    "captions": [
+      {
+        "text": "DISTANCIA FIJA 1.8 M",
+        "highlight": "1.8",
+        "color": "#00FF66",
+        "startFrame": 590,
+        "durationFrames": 57
+      },
+      {
+        "text": "SIN TIRONES BRUSCOS",
+        "highlight": "TIRONES",
+        "color": "#FFE500",
+        "startFrame": 647,
+        "durationFrames": 54
+      },
+      {
+        "text": "¡CERO CHOQUES EN RUTA!",
+        "highlight": "CERO",
+        "color": "#FF3B30",
+        "startFrame": 701,
+        "durationFrames": 52
+      }
+    ]
+  },
+  {
+    "id": "scene6_cierre",
+    "file": "audio/reel_legal/scene6_cierre.mp3",
+    "startFrame": 753,
+    "durationFrames": 182,
+    "durSec": 5.856,
+    "captions": []
+  }
+]

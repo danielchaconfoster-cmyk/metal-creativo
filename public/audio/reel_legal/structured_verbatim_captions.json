@@ -1,0 +1,579 @@
+{
+  "scene1_hook": [
+    {
+      "id": "c1_1",
+      "text": "¿SABÍAS QUE REMOLCAR",
+      "startFrame": 0,
+      "durationFrames": 31,
+      "words": [
+        {
+          "word": "¿SABÍAS",
+          "start": 3,
+          "end": 14,
+          "highlight": false
+        },
+        {
+          "word": "QUE",
+          "start": 15,
+          "end": 17,
+          "highlight": false
+        },
+        {
+          "word": "REMOLCAR",
+          "start": 18,
+          "end": 30,
+          "highlight": true,
+          "color": "#FFE500"
+        }
+      ]
+    },
+    {
+      "id": "c1_2",
+      "text": "CON CUERDA O PIOLA",
+      "startFrame": 31,
+      "durationFrames": 25,
+      "words": [
+        {
+          "word": "CON",
+          "start": 32,
+          "end": 37,
+          "highlight": false
+        },
+        {
+          "word": "CUERDA",
+          "start": 37,
+          "end": 45,
+          "highlight": true,
+          "color": "#00E5FF"
+        },
+        {
+          "word": "O",
+          "start": 45,
+          "end": 47,
+          "highlight": false
+        },
+        {
+          "word": "PIOLA",
+          "start": 48,
+          "end": 55,
+          "highlight": true,
+          "color": "#00E5FF"
+        }
+      ]
+    },
+    {
+      "id": "c1_3",
+      "text": "ES MULTA GRAVE EN CHILE?",
+      "startFrame": 56,
+      "durationFrames": 61,
+      "words": [
+        {
+          "word": "ES",
+          "start": 56,
+          "end": 58,
+          "highlight": false
+        },
+        {
+          "word": "MULTA",
+          "start": 59,
+          "end": 67,
+          "highlight": true,
+          "color": "#FF3B30"
+        },
+        {
+          "word": "GRAVE",
+          "start": 69,
+          "end": 76,
+          "highlight": true,
+          "color": "#FF3B30"
+        },
+        {
+          "word": "EN",
+          "start": 75,
+          "end": 78,
+          "highlight": false
+        },
+        {
+          "word": "CHILE?",
+          "start": 79,
+          "end": 117,
+          "highlight": true,
+          "color": "#FFE500"
+        }
+      ]
+    }
+  ],
+  "scene2_ley": [
+    {
+      "id": "c2_1",
+      "text": "EL MINISTERIO DE TRANSPORTES",
+      "startFrame": 0,
+      "durationFrames": 44,
+      "words": [
+        {
+          "word": "EL",
+          "start": 3,
+          "end": 7,
+          "highlight": false
+        },
+        {
+          "word": "MINISTERIO",
+          "start": 7,
+          "end": 20,
+          "highlight": true,
+          "color": "#00E5FF"
+        },
+        {
+          "word": "DE",
+          "start": 21,
+          "end": 23,
+          "highlight": false
+        },
+        {
+          "word": "TRANSPORTES",
+          "start": 25,
+          "end": 41,
+          "highlight": true,
+          "color": "#00E5FF"
+        }
+      ]
+    },
+    {
+      "id": "c2_2",
+      "text": "EXIGE ACOPLE RÍGIDO",
+      "startFrame": 44,
+      "durationFrames": 32,
+      "words": [
+        {
+          "word": "EXIGE",
+          "start": 40,
+          "end": 49,
+          "highlight": false
+        },
+        {
+          "word": "ACOPLE",
+          "start": 50,
+          "end": 60,
+          "highlight": true,
+          "color": "#00FF66"
+        },
+        {
+          "word": "RÍGIDO",
+          "start": 61,
+          "end": 72,
+          "highlight": true,
+          "color": "#00FF66"
+        }
+      ]
+    },
+    {
+      "id": "c2_3",
+      "text": "PARA EVITAR CHOQUES POR ALCANCE",
+      "startFrame": 76,
+      "durationFrames": 72,
+      "words": [
+        {
+          "word": "PARA",
+          "start": 74,
+          "end": 78,
+          "highlight": false
+        },
+        {
+          "word": "EVITAR",
+          "start": 80,
+          "end": 88,
+          "highlight": false
+        },
+        {
+          "word": "CHOQUES",
+          "start": 90,
+          "end": 99,
+          "highlight": true,
+          "color": "#FF3B30"
+        },
+        {
+          "word": "POR",
+          "start": 101,
+          "end": 104,
+          "highlight": false
+        },
+        {
+          "word": "ALCANCE",
+          "start": 104,
+          "end": 148,
+          "highlight": true,
+          "color": "#FFE500"
+        }
+      ]
+    }
+  ],
+  "scene3_acero": [
+    {
+      "id": "c3_1",
+      "text": "FABRICADA EN TUBO DE ACERO",
+      "startFrame": 0,
+      "durationFrames": 42,
+      "words": [
+        {
+          "word": "FABRICADA",
+          "start": 3,
+          "end": 18,
+          "highlight": false
+        },
+        {
+          "word": "EN",
+          "start": 18,
+          "end": 21,
+          "highlight": false
+        },
+        {
+          "word": "TUBO",
+          "start": 22,
+          "end": 27,
+          "highlight": false
+        },
+        {
+          "word": "DE",
+          "start": 28,
+          "end": 30,
+          "highlight": false
+        },
+        {
+          "word": "ACERO",
+          "start": 30,
+          "end": 39,
+          "highlight": true,
+          "color": "#00E5FF"
+        }
+      ]
+    },
+    {
+      "id": "c3_2",
+      "text": "REFORZADO DE TRES MILÍMETROS",
+      "startFrame": 42,
+      "durationFrames": 43,
+      "words": [
+        {
+          "word": "REFORZADO",
+          "start": 40,
+          "end": 54,
+          "highlight": true,
+          "color": "#00E5FF"
+        },
+        {
+          "word": "DE",
+          "start": 55,
+          "end": 57,
+          "highlight": false
+        },
+        {
+          "word": "CINCO",
+          "start": 58,
+          "end": 66,
+          "highlight": true,
+          "color": "#FFE500"
+        },
+        {
+          "word": "MILÍMETROS",
+          "start": 67,
+          "end": 83,
+          "highlight": true,
+          "color": "#FFE500"
+        }
+      ]
+    },
+    {
+      "id": "c3_3",
+      "text": "Y DESARMABLE EN TRES PARTES COMPACTAS",
+      "startFrame": 85,
+      "durationFrames": 84,
+      "words": [
+        {
+          "word": "Y",
+          "start": 83,
+          "end": 85,
+          "highlight": false
+        },
+        {
+          "word": "DESARMABLE",
+          "start": 84,
+          "end": 99,
+          "highlight": true,
+          "color": "#00FF66"
+        },
+        {
+          "word": "EN",
+          "start": 100,
+          "end": 104,
+          "highlight": false
+        },
+        {
+          "word": "TRES",
+          "start": 104,
+          "end": 110,
+          "highlight": true,
+          "color": "#FFE500"
+        },
+        {
+          "word": "PARTES",
+          "start": 112,
+          "end": 120,
+          "highlight": false
+        },
+        {
+          "word": "COMPACTAS",
+          "start": 121,
+          "end": 169,
+          "highlight": true,
+          "color": "#00FF66"
+        }
+      ]
+    }
+  ],
+  "scene4_resistencia": [
+    {
+      "id": "c4_1",
+      "text": "SÚPER LIVIANA PARA MANIPULAR",
+      "startFrame": 0,
+      "durationFrames": 50,
+      "words": [
+        {
+          "word": "SÚPER",
+          "start": 3,
+          "end": 13,
+          "highlight": true,
+          "color": "#00E5FF"
+        },
+        {
+          "word": "LIVIANA",
+          "start": 14,
+          "end": 24,
+          "highlight": true,
+          "color": "#00E5FF"
+        },
+        {
+          "word": "PARA",
+          "start": 25,
+          "end": 29,
+          "highlight": false
+        },
+        {
+          "word": "MANIPULAR",
+          "start": 30,
+          "end": 44,
+          "highlight": false
+        }
+      ]
+    },
+    {
+      "id": "c4_2",
+      "text": "PERO SOPORTA HASTA",
+      "startFrame": 50,
+      "durationFrames": 26,
+      "words": [
+        {
+          "word": "PERO",
+          "start": 53,
+          "end": 57,
+          "highlight": false
+        },
+        {
+          "word": "SOPORTA",
+          "start": 56,
+          "end": 69,
+          "highlight": true,
+          "color": "#FFE500"
+        },
+        {
+          "word": "HASTA",
+          "start": 70,
+          "end": 75,
+          "highlight": false
+        }
+      ]
+    },
+    {
+      "id": "c4_3",
+      "text": "TRES MIL QUINIENTOS KILOS DE ARRASTRE",
+      "startFrame": 76,
+      "durationFrames": 79,
+      "words": [
+        {
+          "word": "TRES",
+          "start": 76,
+          "end": 81,
+          "highlight": true,
+          "color": "#FFE500"
+        },
+        {
+          "word": "MIL",
+          "start": 82,
+          "end": 87,
+          "highlight": true,
+          "color": "#FFE500"
+        },
+        {
+          "word": "QUINIENTOS",
+          "start": 88,
+          "end": 100,
+          "highlight": true,
+          "color": "#FFE500"
+        },
+        {
+          "word": "KILOS",
+          "start": 102,
+          "end": 109,
+          "highlight": true,
+          "color": "#FFE500"
+        },
+        {
+          "word": "DE",
+          "start": 111,
+          "end": 113,
+          "highlight": false
+        },
+        {
+          "word": "ARRASTRE",
+          "start": 112,
+          "end": 155,
+          "highlight": true,
+          "color": "#00FF66"
+        }
+      ]
+    }
+  ],
+  "scene5_seguridad": [
+    {
+      "id": "c5_1",
+      "text": "MANTIENE DISTANCIA FIJA",
+      "startFrame": 0,
+      "durationFrames": 36,
+      "words": [
+        {
+          "word": "MANTIENE",
+          "start": 3,
+          "end": 14,
+          "highlight": false
+        },
+        {
+          "word": "DISTANCIA",
+          "start": 15,
+          "end": 27,
+          "highlight": true,
+          "color": "#00FF66"
+        },
+        {
+          "word": "FIJA",
+          "start": 27,
+          "end": 35,
+          "highlight": true,
+          "color": "#00FF66"
+        }
+      ]
+    },
+    {
+      "id": "c5_2",
+      "text": "DE UNO PUNTO OCHO METROS",
+      "startFrame": 36,
+      "durationFrames": 40,
+      "words": [
+        {
+          "word": "DE",
+          "start": 36,
+          "end": 39,
+          "highlight": false
+        },
+        {
+          "word": "UNO",
+          "start": 39,
+          "end": 44,
+          "highlight": true,
+          "color": "#00E5FF"
+        },
+        {
+          "word": "PUNTO",
+          "start": 46,
+          "end": 54,
+          "highlight": true,
+          "color": "#00E5FF"
+        },
+        {
+          "word": "OCHO",
+          "start": 54,
+          "end": 60,
+          "highlight": true,
+          "color": "#00E5FF"
+        },
+        {
+          "word": "METROS",
+          "start": 61,
+          "end": 72,
+          "highlight": true,
+          "color": "#00E5FF"
+        }
+      ]
+    },
+    {
+      "id": "c5_3",
+      "text": "SIN TIRONES BRUSCOS",
+      "startFrame": 76,
+      "durationFrames": 31,
+      "words": [
+        {
+          "word": "SIN",
+          "start": 78,
+          "end": 84,
+          "highlight": false
+        },
+        {
+          "word": "TIRONES",
+          "start": 84,
+          "end": 93,
+          "highlight": true,
+          "color": "#FFE500"
+        },
+        {
+          "word": "BRUSCOS",
+          "start": 95,
+          "end": 105,
+          "highlight": true,
+          "color": "#FFE500"
+        }
+      ]
+    },
+    {
+      "id": "c5_4",
+      "text": "NI RIESGO DE CHOQUE",
+      "startFrame": 107,
+      "durationFrames": 55,
+      "words": [
+        {
+          "word": "NI",
+          "start": 106,
+          "end": 109,
+          "highlight": false
+        },
+        {
+          "word": "RIESGO",
+          "start": 109,
+          "end": 118,
+          "highlight": true,
+          "color": "#FF3B30"
+        },
+        {
+          "word": "DE",
+          "start": 120,
+          "end": 122,
+          "highlight": false
+        },
+        {
+          "word": "CHOQUE",
+          "start": 123,
+          "end": 162,
+          "highlight": true,
+          "color": "#FF3B30"
+        }
+      ]
+    }
+  ]
+}

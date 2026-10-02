@@ -19,6 +19,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syncopate:wght@700;800&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
@@ -37,7 +38,7 @@
         body {
             background-color: var(--bg);
             color: #e2e8f0;
-            font-family: 'Inter', system-ui, sans-serif;
+            font-family: 'DM Sans', sans-serif;
         }
         .metal-card {
             background: linear-gradient(145deg, #14171d 0%, #0d0f13 100%);
@@ -70,36 +71,39 @@
 </head>
 <body x-data="cartStore()" class="min-h-screen flex flex-col selection:bg-orange-500 selection:text-white">
 
-    <!-- NAVBAR COMÚN -->
-    <nav class="sticky top-0 z-50 bg-[#07080b]/95 backdrop-blur-md border-b border-white/10 py-3.5 shadow-2xl">
+        <!-- NAVBAR OFICIAL METAL CREATIVO (IDÉNTICO AL INICIO) -->
+    <header class="sticky top-0 left-0 w-full z-50 bg-[#07080b]/95 backdrop-blur-md py-4 border-b border-white/5 shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-3 group">
-                <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-10 sm:h-12 w-auto object-contain group-hover:scale-105 transition-transform">
+            <a href="index.html" class="flex items-center gap-3 spark-trigger">
+                <img src="./images/logo_official.png" alt="Metal Creativo Chile" class="h-11 sm:h-13 w-auto object-contain">
             </a>
 
-            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-300">
-                <a href="index.html#showcase" class="hover:text-orange-400 transition-colors">Catálogo</a>
-                <a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors">Preguntas Frecuentes</a>
-                <a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors">Garantía 6 Meses</a>
-                <a href="contacto.html" class="hover:text-orange-400 transition-colors">Contacto</a>
-                <a href="#" target="_blank" class="hover:text-orange-400 flex items-center gap-1.5 text-orange-400 font-semibold bg-orange-500/10 border border-orange-500/30 px-3 py-1 rounded-full text-xs">
-                    <i class="fa-brands fa-instagram text-sm"></i> Metal Creativo Chile
-                </a>
-            </div>
+            <!-- ENLACES LIMPIOS IDÉNTICOS AL INICIO -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-200">
+                <a href="index.html#lanza-remolque" class="hover:text-orange-400 transition-colors spark-trigger">Catálogo</a>
+                <a href="index.html#fotos-reales" class="hover:text-orange-400 transition-colors spark-trigger">Fotos Reales</a>
+                <a href="contacto.html" class="hover:text-orange-400 transition-colors spark-trigger">Contacto</a>
+            </nav>
 
-            <div class="flex items-center gap-3">
-                <!-- BOTÓN CARRITO CON CONTADOR REACTIVO -->
-                <button @click="cartOpen = true" class="relative p-2.5 rounded-xl bg-neutral-900 border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer shadow-lg" title="Ver Carrito de Compras">
-                    <i class="fa-solid fa-cart-shopping text-base text-orange-400"></i>
-                    <span x-show="totalItems > 0" x-text="totalItems" class="absolute -top-1.5 -right-1.5 bg-orange-600 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center border-2 border-[#07080b]"></span>
+            <div class="flex items-center gap-4">
+                <!-- BOTÓN CARRITO -->
+                <button @click="cartOpen = true" class="relative p-2.5 rounded-xl bg-neutral-900/80 backdrop-blur-md border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer spark-trigger" title="Ver Carrito de Compras">
+                    <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    <span x-show="totalItems > 0" x-text="totalItems" class="absolute -top-1.5 -right-1.5 bg-[#c83c00] text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center border-2 border-[#07080b]"></span>
                 </button>
-                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo%20,%20quisiera%20hacer%20una%20consulta" target="_blank" class="btn-metal-orange px-4 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2 shadow-lg shadow-orange-500/20">
-                    <i class="fa-brands fa-whatsapp text-sm"></i>
-                    <span class="hidden sm:inline">WhatsApp</span>
+                
+                <!-- BOTÓN WHATSAPP OFICIAL -->
+                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quisiera%20hacer%20una%20consulta" target="_blank" rel="noopener" class="btn-metal-orange px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 spark-trigger">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                    </svg>
+                    <span>WhatsApp</span>
                 </a>
             </div>
         </div>
-    </nav>
+    </header>
 
     <header class="py-12 bg-gradient-to-b from-[#11141a] to-[#07080b] border-b border-white/10">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-3">
@@ -243,200 +247,199 @@
     </main>
 
     <!-- FOOTER PROFESIONAL DE 4 COLUMNAS -->
-    <footer class="bg-[#050608] border-t border-white/10 pt-14 pb-8 text-xs text-gray-400 mt-auto relative z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
-            <!-- COLUMNA 1: MARCA Y REDES -->
-            <div class="space-y-4">
-                <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-12 w-auto object-contain">
-                <p class="text-gray-400 text-xs leading-relaxed">
-                    Fabricación en acero y calefacción limpia a bioetanol. Taller metalúrgico chileno especializado en alta resistencia y soldadura estructural.
+        <!-- FOOTER OFICIAL METAL CREATIVO (IDÉNTICO AL INICIO) -->
+        <!-- FOOTER OFICIAL METAL CREATIVO (IDÉNTICO AL INICIO) -->
+        <!-- FOOTER OFICIAL METAL CREATIVO (IDÉNTICO AL INICIO) -->
+        <!-- FOOTER OFICIAL METAL CREATIVO (IDÉNTICO AL INICIO) -->
+    <footer class="bg-[#050608] border-t border-white/10 pt-16 pb-12 text-sm text-gray-400 relative z-10 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- COLUMNA 1: MARCA, UBICACIÓN Y REDES (WHATSAPP + INSTAGRAM) -->
+                <div class="space-y-4 lg:col-span-2">
+                    <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-11 w-auto object-contain">
+                    <p class="text-gray-400 text-xs leading-relaxed max-w-md">
+                        Soluciones prácticas para tu hogar. Taller chileno de diseño y fabricación en acero estructural y fogones a bioetanol.
+                    </p>
+                    <div class="space-y-1 text-gray-300 font-medium text-xs">
+                        <p class="flex items-center gap-2">📍 Quillota, Quinta Región (Despachos a todo el país)</p>
+                        <p class="flex items-center gap-2 text-orange-400 font-bold">metalcreativo03@gmail.com</p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-2">
+                        <!-- LOGO INSTAGRAM OFICIAL -->
+                        <a href="https://www.instagram.com/metalcreativo.cl" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-neutral-900 border border-white/10 hover:border-pink-500 text-pink-400 flex items-center justify-center transition-colors shadow" title="Instagram Oficial @metalcreativo.cl">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <!-- LOGO WHATSAPP OFICIAL -->
+                        <a href="https://wa.me/56954922608" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center transition-colors shadow" title="WhatsApp Oficial">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- COLUMNA 2: CATÁLOGO OFICIAL -->
+                <div class="space-y-3">
+                    <h3 class="text-white font-extrabold text-sm uppercase tracking-wider">
+                        Catálogo Oficial
+                    </h3>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="index.html#lanza-remolque" class="hover:text-orange-400 transition-colors">Barra de Remolque 1.8m ($65.000)</a></li>
+                        <li><a href="index.html#fogon-bioetanol" class="hover:text-orange-400 transition-colors">Fogón a Bioetanol ($149.900)</a></li>
+                        <li><a href="checkout.html" class="hover:text-orange-400 transition-colors">Carrito & Pasarela Segura</a></li>
+                        <li><a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quiero%20cotizar%20un%20proyecto%20a%20medida" target="_blank" class="hover:text-orange-400 transition-colors">Proyectos y Forja a Medida</a></li>
+                    </ul>
+                </div>
+
+                <!-- COLUMNA 3: GARANTÍAS & LEGALIDAD -->
+                <div class="space-y-3">
+                    <h3 class="text-white font-extrabold text-sm uppercase tracking-wider">
+                        Garantías & Legalidad
+                    </h3>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="index.html#ley-transito" class="hover:text-orange-400 transition-colors">Decreto Supremo MTT 55/2025</a></li>
+                        <li><a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors">Garantía Legal 6 Meses</a></li>
+                        <li><a href="terminos-condiciones.html" class="hover:text-orange-400 transition-colors">Términos y Condiciones</a></li>
+                        <li><a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors">Preguntas Frecuentes (FAQ)</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- LÍNEA DIVISORIA LIMPIA Y ZONA DE CIERRE INFERIOR -->
+            <div class="border-t border-white/10 pt-8 flex flex-col items-center justify-center gap-5">
+                
+                <!-- LOGOS OFICIALES TRANSPARENTES Y ALINEADOS -->
+                <div class="flex flex-wrap items-center justify-center gap-7 sm:gap-10 opacity-85 hover:opacity-100 transition-opacity">
+                    <img src="./images/logo_webpay.svg" alt="Webpay Plus" class="h-6 w-auto object-contain" title="Webpay Plus Transbank">
+                    <img src="./images/logo_mercadopago.svg" alt="Mercado Pago" class="h-6 w-auto object-contain" title="Mercado Pago Oficial">
+                    <img src="./images/logo_starken.png" alt="Starken" class="h-6 w-auto object-contain" title="Envíos Starken">
+                    <img src="./images/logo_chilexpress.png" alt="Chilexpress" class="h-5 w-auto object-contain" title="Envíos Chilexpress">
+                </div>
+
+                <!-- COPYRIGHT CENTRADO JUSTO ABAJO -->
+                <p class="text-gray-500 text-xs text-center">
+                    &copy; 2026 Metal Creativo Chile. Todos los derechos reservados.
                 </p>
-                <div class="space-y-1.5 text-gray-300 font-medium text-xs">
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-orange-400"></i> Santiago, Chile (Despachos a todo el país)</p>
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-envelope text-orange-400"></i> metalcreativo03@gmail.com</p>
-                    <p class="flex items-center gap-2"><i class="fa-solid fa-phone text-orange-400"></i> +56 9 5492 2608</p>
-                </div>
-                <div class="flex items-center gap-3 pt-2">
-                    <!-- LOGO INSTAGRAM OFICIAL -->
-                    <a href="https://www.instagram.com/metalcreativo.cl" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-neutral-900 border border-white/10 hover:border-pink-500 text-pink-400 flex items-center justify-center transition-colors shadow" title="Instagram Oficial @metalcreativo.cl">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
-                    </a>
-                    <!-- LOGO FACEBOOK OFICIAL -->
-                    <a href="https://www.facebook.com/profile.php?id=61593411219231" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-neutral-900 border border-white/10 hover:border-sky-500 text-sky-400 flex items-center justify-center transition-colors shadow" title="Facebook Oficial Metal Creativo Chile">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
-                    </a>
-                    <!-- LOGO WHATSAPP OFICIAL -->
-                    <a href="https://wa.me/56954922608" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center transition-colors shadow" title="WhatsApp Oficial">
-                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
-                        </svg>
-                    </a>
-                </div>
+
             </div>
 
-            <!-- COLUMNA 2: PRODUCTOS -->
-            <div class="space-y-3">
-                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-fire text-orange-400"></i> Catálogo Oficial
-                </h4>
-                <ul class="space-y-2.5 text-xs">
-                    <li><a href="index.html#showcase" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-car-side text-sky-400 text-[10px]"></i> Barra Rígida Remolque ($65.000)</a></li>
-                    <li><a href="index.html#showcase" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-fire text-orange-400 text-[10px]"></i> Fogón a Bioetanol Ecológico ($149.900)</a></li>
-                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-hammer text-amber-400 text-[10px]"></i> Proyectos & Forja a Medida</a></li>
-                    <li><a href="checkout.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-emerald-400 text-[10px]"></i> Pasarela E-Commerce & Carrito</a></li>
-                </ul>
-            </div>
-
-            <!-- COLUMNA 3: LEGAL & SOPORTE -->
-            <div class="space-y-3">
-                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-scale-balanced text-orange-400"></i> Soporte & Legal
-                </h4>
-                <ul class="space-y-2.5 text-xs">
-                    <li><a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-shield-halved text-orange-400 text-[10px]"></i> Garantía Legal 6 Meses SERNAC</a></li>
-                    <li><a href="terminos-condiciones.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-file-contract text-gray-400 text-[10px]"></i> Términos & Condiciones de Compra</a></li>
-                    <li><a href="privacidad.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-lock text-gray-400 text-[10px]"></i> Política de Privacidad (Ley 19.628)</a></li>
-                    <li><a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-circle-question text-gray-400 text-[10px]"></i> Preguntas Frecuentes (FAQ)</a></li>
-                    <li><a href="contacto.html" class="hover:text-orange-400 transition-colors flex items-center gap-2"><i class="fa-solid fa-headset text-gray-400 text-[10px]"></i> Centro de Contacto & Cotización</a></li>
-                </ul>
-            </div>
-
-            <!-- COLUMNA 4: PAGOS & SEGURIDAD -->
-            <div class="space-y-3">
-                <h4 class="text-white font-extrabold text-sm uppercase tracking-wider flex items-center gap-2">
-                    <i class="fa-solid fa-shield-check text-emerald-400"></i> Medios de Pago & Envíos
-                </h4>
-                <p class="text-xs text-gray-400 leading-relaxed">Compra con total seguridad. Pagos protegidos con certificado SSL de 256 bits y respaldo de garantía SERNAC.</p>
-                <div class="grid grid-cols-2 gap-2 pt-1">
-                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-credit-card text-sky-400"></i> Webpay Plus
-                    </div>
-                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-building-columns text-emerald-400"></i> Transferencia
-                    </div>
-                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-truck-fast text-orange-400"></i> Starken
-                    </div>
-                    <div class="p-2 rounded-lg bg-neutral-900 border border-white/10 text-center font-bold text-gray-300 text-[11px] flex items-center justify-center gap-1.5">
-                        <i class="fa-solid fa-box text-amber-400"></i> Chilexpress
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-gray-500">
-            <p>&copy; 2026 Metal Creativo Chile . Todos los derechos reservados.</p>
-            <p class="text-center sm:text-right">Cumple con Ley N° 19.496 del Consumidor y Decreto Supremo MTT N° 55/2025.</p>
         </div>
     </footer>
 
-    <!-- DRAWER DEL CARRITO LATERAL SLIDE-OVER -->
-    <div x-cloak x-show="cartOpen" class="fixed inset-0 z-50 overflow-hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" @click="cartOpen = false"></div>
-        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
-            <div class="w-screen max-w-md bg-[#0e1117] border-l border-white/10 p-6 flex flex-col shadow-2xl">
+        <!-- DRAWER DE CARRITO DE COMPRAS SLIDEOVER (IDÉNTICO AL INICIO) -->
+    <div x-show="cartOpen" x-cloak class="fixed inset-0 z-50 overflow-hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" @click="cartOpen = false"></div>
+        <div class="fixed inset-y-0 right-0 max-w-md w-full bg-[#0a0c10] border-l border-white/10 z-50 p-6 flex flex-col justify-between shadow-2xl">
+            <div>
                 <div class="flex items-center justify-between pb-4 border-b border-white/10">
-                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-cart-shopping text-orange-400"></i> Tu Carrito de Compras
-                    </h2>
-                    <button @click="cartOpen = false" class="text-gray-400 hover:text-white p-1 cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
-                </div>
-                
-                <div class="flex-grow overflow-y-auto py-4 space-y-4">
-                    <template x-if="items.length === 0">
-                        <div class="text-center py-12 space-y-3">
-                            <i class="fa-solid fa-cart-flatbed text-4xl text-gray-600"></i>
-                            <p class="text-gray-400 text-sm">Tu carrito está vacío actualmente.</p>
-                            <a href="index.html#showcase" @click="cartOpen = false" class="btn-metal-orange inline-block px-4 py-2 rounded-xl text-xs font-bold">Explorar Catálogo</a>
-                        </div>
-                    </template>
-                    <template x-for="(item, index) in items" :key="item.id">
-                        <div class="flex gap-4 p-3.5 bg-black/40 rounded-xl border border-white/5 items-center">
-                            <img :src="item.image" :alt="item.name" class="w-16 h-16 object-cover rounded-lg border border-white/10">
-                            <div class="flex-grow">
-                                <h4 class="text-xs font-bold text-white" x-text="item.name"></h4>
-                                <span class="text-xs text-orange-400 font-bold" x-text="'$' + formatPrice(item.price) + ' CLP'"></span>
-                                <div class="flex items-center gap-2 mt-2">
-                                    <button @click="decreaseQty(index)" class="w-6 h-6 rounded bg-neutral-800 text-white text-xs flex items-center justify-center cursor-pointer hover:bg-neutral-700">-</button>
-                                    <span class="text-xs font-bold text-white" x-text="item.qty"></span>
-                                    <button @click="increaseQty(index)" class="w-6 h-6 rounded bg-neutral-800 text-white text-xs flex items-center justify-center cursor-pointer hover:bg-neutral-700">+</button>
-                                    <button @click="removeItem(index)" class="ml-auto text-red-400 text-xs hover:text-red-300 cursor-pointer" title="Eliminar producto"><i class="fa-regular fa-trash-can"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </template>
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span>Carrito de Compras</span>
+                        <span class="text-xs bg-[#c83c00] text-white px-2 py-0.5 rounded-full font-mono" x-text="totalItems"></span>
+                    </h3>
+                    <button @click="cartOpen = false" class="text-gray-400 hover:text-white p-2 cursor-pointer">✕</button>
                 </div>
 
-                <div x-show="items.length > 0" class="pt-4 border-t border-white/10 space-y-3">
-                    <div class="flex justify-between text-sm font-bold">
-                        <span class="text-gray-300">Subtotal:</span>
-                        <span class="text-orange-400 text-lg" x-text="'$' + formatPrice(totalAmount) + ' CLP'"></span>
-                    </div>
-                    <p class="text-[11px] text-gray-400 flex items-center gap-1.5">
-                        <i class="fa-solid fa-truck-fast text-sky-400"></i> Despachos rápidos a todo Chile por Starken / Chilexpress.
-                    </p>
-                    <a href="checkout.html" class="btn-metal-orange w-full py-3.5 rounded-xl font-bold text-center block text-sm shadow-lg shadow-orange-500/20">
-                        Proceder al Checkout Seguro <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </a>
+                <!-- ITEMS EN CARRITO -->
+                <div class="py-4 space-y-4 overflow-y-auto max-h-[60vh]">
+                    <template x-if="cart.length === 0">
+                        <div class="text-center py-12 space-y-3 text-gray-400">
+                            <p class="text-sm">Tu carrito está vacío.</p>
+                            <a href="index.html#lanza-remolque" @click="cartOpen = false" class="btn-metal-orange inline-block px-5 py-2.5 rounded-xl text-xs font-bold text-white">
+                                Ver Barra de Remolque ($65.000)
+                            </a>
+                        </div>
+                    </template>
+
+                    <template x-for="(item, index) in cart" :key="index">
+                        <div class="flex gap-4 p-4 bg-white/5 rounded-xl border border-white/5 items-center">
+                            <img :src="item.image" :alt="item.name" class="w-16 h-16 object-cover rounded-lg shrink-0">
+                            <div class="flex-grow space-y-1">
+                                <h4 class="text-xs font-bold text-white leading-tight" x-text="item.name"></h4>
+                                <div class="text-xs font-mono text-orange-400" x-text="'$' + formatPrice(item.price)"></div>
+                                <div class="flex items-center gap-2 pt-1">
+                                    <button @click="decreaseQty(index)" class="w-6 h-6 rounded bg-white/10 text-white flex items-center justify-center font-bold hover:bg-white/20 cursor-pointer">−</button>
+                                    <span class="text-xs text-white font-mono px-2" x-text="item.quantity"></span>
+                                    <button @click="increaseQty(index)" class="w-6 h-6 rounded bg-white/10 text-white flex items-center justify-center font-bold hover:bg-white/20 cursor-pointer">+</button>
+                                </div>
+                            </div>
+                            <button @click="removeItem(index)" class="text-red-400 hover:text-red-300 p-2 text-sm cursor-pointer">🗑️</button>
+                        </div>
+                    </template>
                 </div>
+            </div>
+
+            <div x-show="cart.length > 0" class="border-t border-white/10 pt-4 space-y-4">
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-400">Subtotal</span>
+                    <span class="text-xl font-bold text-white font-mono" x-text="'$' + formatPrice(cartTotal)"></span>
+                </div>
+                <p class="text-[11px] text-gray-400">Despacho calculado en el checkout (RM o regiones por Starken/Chilexpress).</p>
+                <a href="checkout.html" class="btn-metal-orange w-full py-3.5 rounded-xl font-bold text-center block text-sm text-white spark-trigger">
+                    Continuar al Pago Seguro &rarr;
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- SCRIPT CARRITO GLOBAL PERSISTENTE -->
+    <!-- SCRIPTS DE CARRITO GLOBAL COMPATIBLE Y UNIFICADO -->
     <script>
         function cartStore() {
+            let raw = JSON.parse(localStorage.getItem('mc_cart') || '[]');
+            raw = raw.map(i => ({
+                id: i.id,
+                name: i.name,
+                price: Number(i.price) || 0,
+                image: i.image,
+                quantity: Number(i.quantity || i.qty || 1)
+            }));
             return {
                 cartOpen: false,
-                items: JSON.parse(localStorage.getItem('mc_cart') || '[]'),
+                cart: raw,
                 get totalItems() {
-                    return this.items.reduce((acc, item) => acc + item.qty, 0);
+                    return this.cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
                 },
-                get totalAmount() {
-                    return this.items.reduce((acc, item) => acc + (item.price * item.qty), 0);
+                get cartTotal() {
+                    return this.cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
                 },
-                formatPrice(val) {
-                    return new Intl.NumberFormat('es-CL').format(val);
+                formatPrice(price) {
+                    return new Intl.NumberFormat('es-CL').format(price || 0);
                 },
                 saveCart() {
-                    localStorage.setItem('mc_cart', JSON.stringify(this.items));
+                    localStorage.setItem('mc_cart', JSON.stringify(this.cart));
                 },
                 addItem(id, name, price, image) {
-                    const existing = this.items.find(i => i.id === id);
+                    const existing = this.cart.find(item => item.id === id);
                     if (existing) {
-                        existing.qty++;
+                        existing.quantity = (existing.quantity || 1) + 1;
                     } else {
-                        this.items.push({ id, name, price, image, qty: 1 });
+                        this.cart.push({ id, name, price, image, quantity: 1 });
                     }
                     this.saveCart();
                     this.cartOpen = true;
                 },
                 buyNow(id, name, price, image) {
-                    const existing = this.items.find(i => i.id === id);
-                    if (!existing) {
-                        this.items.push({ id, name, price, image, qty: 1 });
-                    }
-                    this.saveCart();
+                    this.addItem(id, name, price, image);
                     window.location.href = 'checkout.html';
                 },
                 increaseQty(idx) {
-                    this.items[idx].qty++;
+                    this.cart[idx].quantity = (this.cart[idx].quantity || 1) + 1;
                     this.saveCart();
                 },
                 decreaseQty(idx) {
-                    if (this.items[idx].qty > 1) {
-                        this.items[idx].qty--;
+                    if ((this.cart[idx].quantity || 1) > 1) {
+                        this.cart[idx].quantity--;
                     } else {
-                        this.items.splice(idx, 1);
+                        this.cart.splice(idx, 1);
                     }
                     this.saveCart();
                 },
                 removeItem(idx) {
-                    this.items.splice(idx, 1);
+                    this.cart.splice(idx, 1);
                     this.saveCart();
                 }
             }

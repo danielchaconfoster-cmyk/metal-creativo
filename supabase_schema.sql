@@ -117,3 +117,14 @@ CREATE POLICY "Service role full access on webhook logs" ON public.payment_webho
 
 DROP POLICY IF EXISTS "Service role full access on security logs" ON public.security_audit_events;
 CREATE POLICY "Service role full access on security logs" ON public.security_audit_events FOR ALL TO service_role USING (true) WITH CHECK (true);
+
+-- 9. PRIVILEGIOS DE SCHEMA Y TABLAS (Para service_role y backend API)
+GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO service_role;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO service_role;
+GRANT ALL ON ALL ROUTINES IN SCHEMA public TO service_role;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO service_role;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO service_role;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON ROUTINES TO service_role;
+

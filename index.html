@@ -52,7 +52,7 @@
           "@id": "https://metalcreativo.cl/#lanza-remolque",
           "name": "Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)",
           "image": "https://metalcreativo.cl/images/lanza_real_armada.jpeg",
-          "description": "Barra rígida de remolque para autos y camionetas de 1.8 metros, desarmable en 3 tramos de 65 cm. Tubo de acero estructural de 5 mm y arrastre hasta 3.500 kg.",
+          "description": "Barra rígida de remolque para autos y camionetas de 1.8 metros, desarmable en 3 tramos de 65 cm. Tubo de acero estructural de 3 mm y arrastre hasta 3.500 kg.",
           "offers": {
             "@type": "Offer",
             "url": "https://metalcreativo.cl/checkout.html",
@@ -120,8 +120,8 @@
             position: absolute;
             inset: 0;
             background: 
-                radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(7,8,11,0.85) 85%),
-                linear-gradient(to bottom, rgba(7,8,11,0.7) 0%, transparent 45%, rgba(7,8,11,0.98) 100%);
+                linear-gradient(to right, rgba(7,8,11,0.94) 0%, rgba(7,8,11,0.82) 42%, rgba(7,8,11,0.30) 100%),
+                linear-gradient(to bottom, rgba(7,8,11,0.85) 0%, transparent 45%, rgba(7,8,11,0.98) 100%);
             z-index: 1;
         }
 
@@ -129,28 +129,83 @@
             color: #ffffff;
         }
 
-        /* BOTONES PROPORCIONADOS Y SLEEK */
+        /* BOTONES DE PRECISIÓN: MINIMALISTAS, SOFISTICADOS Y COMPACTOS (SIN CURVAS TOY) */
         .btn-metal-orange {
             background-color: #c83c00;
+            border: 1px solid rgba(255, 120, 60, 0.35);
             color: #ffffff;
-            font-weight: 700;
-            transition: background-color 0.15s ease, transform 0.1s ease;
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.55rem 1.15rem;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+            text-decoration: none;
+            cursor: pointer;
         }
         .btn-metal-orange:hover {
-            background-color: #b83600;
+            background-color: #d94200;
+            border-color: rgba(255, 140, 80, 0.6);
+            color: #ffffff;
             transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(200, 60, 0, 0.25);
         }
 
-        .btn-metal-primary {
-            background-color: #1a1e26;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            font-weight: 600;
-            transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+        .btn-metal-primary, .btn-metal-outline {
+            background-color: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #e2e8f0;
+            font-size: 0.76rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.55rem 1.15rem;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            backdrop-filter: blur(8px);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            cursor: pointer;
         }
-        .btn-metal-primary:hover {
-            background-color: #242a35;
-            border-color: rgba(255, 255, 255, 0.3);
+        .btn-metal-primary:hover, .btn-metal-outline:hover {
+            background-color: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.35);
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-metal-whatsapp {
+            background-color: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.28);
+            color: #34d399;
+            font-size: 0.76rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.55rem 1.15rem;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn-metal-whatsapp:hover {
+            background-color: rgba(16, 185, 129, 0.16);
+            border-color: rgba(16, 185, 129, 0.5);
+            color: #6ee7b7;
             transform: translateY(-1px);
         }
 
@@ -202,7 +257,7 @@
 
             <div class="flex items-center gap-4">
                 <!-- BOTÓN CARRITO -->
-                <button @click="cartOpen = true" class="relative p-2.5 rounded-xl bg-neutral-900/80 backdrop-blur-md border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer  spark-trigger" title="Ver Carrito de Compras">
+                <button @click="cartOpen = true" class="relative p-2.5 rounded-[4px] bg-neutral-900/80 backdrop-blur-md border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer spark-trigger" title="Ver Carrito de Compras">
                     <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
@@ -210,7 +265,7 @@
                 </button>
                 
                 <!-- BOTÓN WHATSAPP OFICIAL -->
-                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quisiera%20hacer%20una%20consulta" target="_blank" rel="noopener" class="btn-metal-orange px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2  spark-trigger">
+                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quisiera%20hacer%20una%20consulta" target="_blank" rel="noopener" class="btn-metal-orange spark-trigger">
                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                     </svg>
@@ -220,54 +275,39 @@
         </div>
     </header>
 
-    <!-- HERO SECTION EXACTO A LA FOTO ANTERIOR -->
+    <!-- HERO SECTION INSPIRADO EN DISEÑO MINIMALISTA Y SOFISTICADO -->
     <section class="hero-section">
         <!-- FOTO DE FONDO: FOTO REAL DE LA BARRA EN MALETERO -->
         <img src="./images/lanza_maletero.jpg" alt="Barra de Remolque Desarmable en Maletero" class="hero-bg-img">
         <div class="hero-overlay-gradient"></div>
 
-        <div class="relative z-10 text-center max-w-4xl px-4 sm:px-6 mx-auto space-y-6 pt-24 sm:pt-28 pb-12">
-            <!-- TITULO SUPERIOR SIN FONDO NI RECTANGULO OVALADO: PURAS LETRAS -->
-            <div class="text-orange-400 text-xs sm:text-sm font-extrabold uppercase tracking-[0.25em]">
-                FABRICACIÓN NACIONAL &amp; SOLUCIONES EN ACERO
-            </div>
-
-            <!-- TITULAR PRINCIPAL CON GRADIENTE METÁLICO ORIGINAL -->
-            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold metal-title-gradient leading-tight tracking-tight">
-                Soluciones Prácticas en Acero para tu Hogar
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-32 pb-20 sm:pt-40 sm:pb-28 flex flex-col items-start text-left">
+            <!-- TITULAR PRINCIPAL: TIPOGRAFÍA LIGERA Y ELEGANTE INSPIRADA EN LA IMAGEN DE REFERENCIA -->
+            <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-[5.2rem] font-light tracking-tight text-white leading-[1.08] mb-6">
+                Diseño.<br>
+                Precisión.<br>
+                <span class="font-normal text-white">Resistencia.</span>
             </h1>
             
-            <p class="text-gray-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-normal opacity-95">
-                Fabricamos productos resistentes, de uso práctico y diseño funcional. Fabricación chilena y envíos rápidos a todo el país.
+            <p class="text-gray-300/85 text-sm sm:text-base md:text-lg max-w-lg font-light leading-relaxed mb-8">
+                Especialistas en barras de remolque bajo normativa y fogones a bioetanol para el hogar. Fabricados con ingeniería sólida y terminaciones de taller.
             </p>
 
-            <!-- 4 ESPECIFICACIONES CLAVE COMO PURAS LETRAS (SIN BORDES NI RECTANGULOS) -->
-            <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-12 pt-2 text-center">
-                <div>
-                    <span class="block text-xl sm:text-2xl font-black text-white">3.500 kg</span>
-                    <span class="text-xs text-gray-400 uppercase tracking-wider">Capacidad Arrastre</span>
-                </div>
-                <div>
-                    <span class="block text-xl sm:text-2xl font-black text-white">5 mm</span>
-                    <span class="text-xs text-gray-400 uppercase tracking-wider">Espesor Acero</span>
-                </div>
-                <div>
-                    <span class="block text-xl sm:text-2xl font-black text-white">3 Tramos</span>
-                    <span class="text-xs text-gray-400 uppercase tracking-wider">Desarmable (65 cm)</span>
-                </div>
-                <div>
-                    <span class="block text-xl sm:text-2xl font-black text-white">6 Meses</span>
-                    <span class="text-xs text-gray-400 uppercase tracking-wider">Garantía Legal</span>
-                </div>
+            <!-- BOTONES SOFISTICADOS, MINIMALISTAS Y DE CONTACTO DIRECTO (SIN PRECIOS) -->
+            <div class="flex flex-wrap items-center gap-3">
+                <a href="#lanza-remolque" class="btn-metal-orange spark-trigger">
+                    Barra de Remolque
+                </a>
+                <a href="#fogon-bioetanol" class="btn-metal-primary spark-trigger">
+                    Fogón Abierto
+                </a>
             </div>
 
-            <!-- BOTONES PROPORCIONADOS Y SLEEK (SIN PASTILLAS INTERNAS DE LEY MTT) -->
-            <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
-                <a href="#lanza-remolque" class="btn-metal-orange w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-sm text-center block spark-trigger cursor-pointer">
-                    Barra de Remolque ($65.000)
-                </a>
-                <a href="#fogon-bioetanol" class="btn-metal-primary w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-sm text-center block spark-trigger cursor-pointer">
-                    Fogón a Bioetanol ($149.900)
+            <!-- ENLACE DIRECTO DISCRETO HACIA CONTACTO -->
+            <div class="pt-4">
+                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quisiera%20hacer%20una%20consulta%20directa" target="_blank" rel="noopener" class="text-xs text-gray-400 hover:text-orange-400 flex items-center gap-1.5 transition-colors font-medium">
+                    <span>Contacto directo y cotizaciones por WhatsApp</span>
+                    <span class="text-orange-400">&rarr;</span>
                 </a>
             </div>
         </div>
@@ -384,7 +424,7 @@
                               <path d="M162 72 L155 75 L162 78 M360 72 L367 75 L360 78" fill="none" stroke="#10b981" stroke-width="1.5"/>
                               <rect x="195" y="63" width="132" height="22" rx="4" fill="#064e3b" stroke="#10b981" stroke-width="1"/>
                               <text x="261" y="78" fill="#a7f3d0" font-size="10" font-family="'DM Sans', sans-serif" font-weight="800" text-anchor="middle">1.8 METROS SIN CHOQUE</text>
-                              <text x="261" y="145" fill="#94a3b8" font-size="9" font-family="'DM Sans', sans-serif" text-anchor="middle">Acero Estructural 5 mm de espesor • Pasadores de Seguridad</text>
+                              <text x="261" y="145" fill="#94a3b8" font-size="9" font-family="'DM Sans', sans-serif" text-anchor="middle">Acero Estructural 3 mm de espesor • Pasadores de Seguridad</text>
                             </svg>
                         </div>
 
@@ -396,7 +436,7 @@
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <span class="text-emerald-400 font-bold">✓</span>
-                                <span><strong>Tubo de acero estructural de 5 mm de espesor:</strong> Resistencia probada de arrastre hasta 3.500 kg.</span>
+                                <span><strong>Tubo de acero estructural de 3 mm de espesor:</strong> Resistencia probada de arrastre hasta 3.500 kg.</span>
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <span class="text-emerald-400 font-bold">✓</span>
@@ -432,7 +472,7 @@
                             Barra de Remolque Desarmable 1.8m
                         </h2>
                         <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
-                            Fabricada en acero estructural chileno de 5 mm de espesor. Diseñada en 3 tramos desmontables de menos de 65 cm para guardarse cómodamente junto a la rueda de repuesto.
+                            Fabricada en acero estructural chileno de 3 mm de espesor. Diseñada en 3 tramos desmontables de menos de 65 cm para guardarse cómodamente junto a la rueda de repuesto.
                         </p>
                     </div>
 
@@ -466,21 +506,25 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-wrap items-center gap-3">
-                            <button @click="addItem('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-metal-primary px-5 py-3 rounded-xl font-bold text-xs text-white spark-trigger cursor-pointer">
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <button @click="addItem('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-metal-primary spark-trigger">
                                 Añadir al Carrito
                             </button>
-                            <button @click="buyNow('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-metal-orange px-7 py-3 rounded-xl font-bold text-xs text-white spark-trigger cursor-pointer ">
-                                Comprar Ahora &rarr;
+                            <button @click="buyNow('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, './images/lanza_real_armada.jpeg')" class="btn-metal-orange spark-trigger">
+                                Comprar Ahora
                             </button>
+                            <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quisiera%20consultar%20por%20la%20Barra%20de%20Remolque%20de%201.8m" target="_blank" rel="noopener" class="btn-metal-whatsapp spark-trigger" title="Contacto directo vía WhatsApp">
+                                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                                <span>WhatsApp</span>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- FOTO REAL LIMPIA (SIN CAJAS NEGRAS TAPANTO LA IMAGEN) -->
                 <div class="lg:col-span-5 flex justify-center items-center">
-                    <div class="rounded-2xl overflow-hidden bg-black/40 border border-white/10 max-w-sm w-full">
-                        <img src="./images/lanza_real_armada.jpeg" alt="Barra de remolque armada Metal Creativo" class="w-full h-auto max-h-[460px] object-contain mx-auto">
+                    <div class="rounded-2xl overflow-hidden bg-black/40 border border-white/10 w-full">
+                        <img src="./images/lanza_real_armada.jpeg" alt="Barra de remolque armada Metal Creativo" class="w-full h-auto object-cover">
                     </div>
                 </div>
 
@@ -507,7 +551,7 @@
                             DISEÑO Y CONFORT PARA TU HOGAR
                         </div>
                         <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                            Fogón de Mesa a Bioetanol Ecológico
+                            Fogón Abierto a Bioetanol
                         </h2>
                         <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
                             Diseñado en madera noble seleccionada y acero de alta resistencia. Crea un ambiente cálido con fuego real de combustión limpia, sin humo, sin olor y sin necesidad de cañón ni chimenea.
@@ -544,13 +588,17 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-wrap items-center gap-3">
-                            <button @click="addItem('fogon', 'Fogón de Mesa a Bioetanol Ecológico', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-metal-primary px-5 py-3 rounded-xl font-bold text-xs text-white spark-trigger cursor-pointer">
+                        <div class="flex flex-wrap items-center gap-2.5">
+                            <button @click="addItem('fogon', 'Fogón Abierto a Bioetanol Ecológico', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-metal-primary spark-trigger">
                                 Añadir al Carrito
                             </button>
-                            <button @click="buyNow('fogon', 'Fogón de Mesa a Bioetanol Ecológico', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-metal-orange px-7 py-3 rounded-xl font-bold text-xs text-white spark-trigger cursor-pointer ">
-                                Comprar Ahora &rarr;
+                            <button @click="buyNow('fogon', 'Fogón Abierto a Bioetanol Ecológico', 149900, './images/fogon_bioetanol_madera.jpg')" class="btn-metal-orange spark-trigger">
+                                Comprar Ahora
                             </button>
+                            <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quisiera%20consultar%20por%20el%20Fog%C3%B3n%20Abierto%20a%20Bioetanol" target="_blank" rel="noopener" class="btn-metal-whatsapp spark-trigger" title="Contacto directo vía WhatsApp">
+                                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                                <span>WhatsApp</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -690,14 +738,14 @@
                     </div>
                     <div class="flex items-center gap-3 pt-2">
                         <!-- LOGO INSTAGRAM OFICIAL -->
-                        <a href="https://www.instagram.com/metalcreativo.cl" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-neutral-900 border border-white/10 hover:border-pink-500 text-pink-400 flex items-center justify-center transition-colors shadow" title="Instagram Oficial @metalcreativo.cl">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <a href="https://www.instagram.com/metalcreativo.cl" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-[4px] bg-neutral-900 border border-white/10 hover:border-pink-500 text-pink-400 flex items-center justify-center transition-colors shadow" title="Instagram Oficial @metalcreativo.cl">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                             </svg>
                         </a>
                         <!-- LOGO WHATSAPP OFICIAL -->
-                        <a href="https://wa.me/56954922608" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center transition-colors shadow" title="WhatsApp Oficial">
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <a href="https://wa.me/56954922608" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-[4px] bg-neutral-900 border border-white/10 hover:border-emerald-500 text-emerald-400 flex items-center justify-center transition-colors shadow" title="WhatsApp Oficial">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                             </svg>
                         </a>
@@ -770,23 +818,23 @@
                 <div class="py-4 space-y-4 overflow-y-auto max-h-[60vh]">
                     <template x-if="cart.length === 0">
                         <div class="text-center py-12 space-y-3 text-gray-400">
-                            <p class="text-sm">Tu carrito está vacío.</p>
-                            <a href="#lanza-remolque" @click="cartOpen = false" class="btn-metal-orange inline-block px-5 py-2.5 rounded-xl text-xs font-bold text-white">
-                                Ver Barra de Remolque ($65.000)
+                            <p class="text-sm font-light">Tu carrito está vacío.</p>
+                            <a href="#lanza-remolque" @click="cartOpen = false" class="btn-metal-orange">
+                                Ver Barra de Remolque
                             </a>
                         </div>
                     </template>
 
                     <template x-for="(item, index) in cart" :key="index">
-                        <div class="flex gap-4 p-4 bg-white/5 rounded-xl border border-white/5 items-center">
-                            <img :src="item.image" :alt="item.name" class="w-16 h-16 object-cover rounded-lg shrink-0">
+                        <div class="flex gap-4 p-4 bg-white/5 rounded-[4px] border border-white/5 items-center">
+                            <img :src="item.image" :alt="item.name" class="w-16 h-16 object-cover rounded-[3px] shrink-0">
                             <div class="flex-grow space-y-1">
                                 <h4 class="text-xs font-bold text-white leading-tight" x-text="item.name"></h4>
                                 <div class="text-xs font-mono text-orange-400" x-text="'$' + formatPrice(item.price)"></div>
                                 <div class="flex items-center gap-2 pt-1">
-                                    <button @click="decreaseQty(index)" class="w-6 h-6 rounded bg-white/10 text-white flex items-center justify-center font-bold hover:bg-white/20">−</button>
+                                    <button @click="decreaseQty(index)" class="w-6 h-6 rounded-[3px] bg-white/10 text-white flex items-center justify-center font-bold hover:bg-white/20">−</button>
                                     <span class="text-xs text-white font-mono px-2" x-text="item.quantity"></span>
-                                    <button @click="increaseQty(index)" class="w-6 h-6 rounded bg-white/10 text-white flex items-center justify-center font-bold hover:bg-white/20">+</button>
+                                    <button @click="increaseQty(index)" class="w-6 h-6 rounded-[3px] bg-white/10 text-white flex items-center justify-center font-bold hover:bg-white/20">+</button>
                                 </div>
                             </div>
                             <button @click="removeItem(index)" class="text-red-400 hover:text-red-300 p-2 text-sm">🗑️</button>
@@ -801,7 +849,7 @@
                     <span class="text-xl font-bold text-white font-mono" x-text="'$' + formatPrice(cartTotal)"></span>
                 </div>
                 <p class="text-[11px] text-gray-400">Despacho calculado en el checkout (RM o regiones por Starken/Chilexpress).</p>
-                <a href="checkout.html" class="btn-metal-orange w-full py-3.5 rounded-xl font-bold text-center block text-sm text-white spark-trigger ">
+                <a href="checkout.html" class="btn-metal-orange w-full spark-trigger">
                     Continuar al Pago Seguro &rarr;
                 </a>
             </div>

@@ -1,4 +1,4 @@
-﻿# Metal Creativo Chile 
+# Metal Creativo Chile 
 > Fabricación metalúrgica de precisión en acero macizo y calefacción ecológica a bioetanol en Chile.
 
 ## Información de la Empresa
@@ -11,9 +11,9 @@
 ## Catálogo de Productos y Precios Oficiales (Pesos Chilenos CLP)
 
 ### 1. Barra Rígida de Remolque con Ojal Forjado (Lanza de Remolque Homologada)
-- **Precio Oficial**: .000 CLP
+- **Precio Oficial**: $65.000 CLP
 - **Capacidad de Carga y Arrastre**: 2.500 kg a 3.500 kg en tracción directa.
-- **Material**: Acero al carbono macizo estructural (tubo 45-50 mm con espesor 3.5 - 4.0 mm) con ojales forjados a fuego directo y cordón de soldadura TIG/MIG continuo.
+- **Material**: Acero al carbono macizo estructural (tubo 45-50 mm con espesor 3.0 mm) con ojales forjados a fuego directo y cordón de soldadura TIG/MIG continuo.
 - **Dimensiones**: 1.80 metros (distancia reglamentaria de seguridad entre vehículos).
 - **Marco Legal Obligatorio en Chile**: Cumple estrictamente con el **Decreto Supremo N° 55/2025 del Ministerio de Transportes y Telecomunicaciones (MTT)** y Ley de Tránsito de Chile, que prohíbe el uso de cuerdas, piolas o cadenas para remolque entre particulares por riesgo de colisión por alcance.
 - **Accesorios**: Incluye pasadores de acero galvanizado con seguro de horquilla y bandera de seguridad reflectante reglamentaria.

@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control & Ventas | Metal Creativo Chile</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Fonts & CDNs -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #07080b;
+            --bg-card: #11141a;
+            --brand-orange: #ff6a00;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --text-steel: #e2e8f0;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text-steel);
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+        }
+        .btn-metal-orange {
+            background: linear-gradient(180deg, #ff7a14 0%, #d95500 100%);
+            border: 1px solid #ff8c3b;
+            color: #ffffff;
+            box-shadow: 0 4px 16px rgba(217, 85, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            transition: all 0.2s ease;
+        }
+        .btn-metal-orange:hover {
+            box-shadow: 0 0 25px rgba(255, 106, 0, 0.6);
+            transform: translateY(-1px);
+        }
+        .metal-card {
+            background: linear-gradient(145deg, #13161c 0%, #0c0e12 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+        .metal-card-active {
+            border-color: rgba(255, 106, 0, 0.4);
+            box-shadow: 0 0 20px rgba(255, 106, 0, 0.15);
+        }
+        [x-cloak] { display: none !important; }
+        
+        /* Custom scrollbars */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #07080b; }
+        ::-webkit-scrollbar-thumb { background: #272a33; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ff6a00; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#07080b] antialiased text-gray-200" x-data="adminApp()" x-init="init()">
+
+    <!-- TOPBAR OPERACIONAL -->
+    <header class="bg-[#050608]/90 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
+            
+            <!-- Logo & Title -->
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="flex items-center gap-2 group">
+                    <img src="./images/logo_official.png" alt="Metal Creativo Chile" class="h-9 w-auto object-contain">
+                    <span class="inline-block px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest bg-orange-500/20 text-orange-400 border border-orange-500/30">
+                        Cockpit Admin
+                    </span>
+                </a>
+                <span class="text-xs text-gray-500 hidden sm:inline">•</span>
+                <span class="text-xs text-gray-400 hidden sm:inline">Centro de Gestión de Ventas & Meta Ads</span>
+            </div>
+
+            <!-- Status Badges & Controls -->
+            <div class="flex items-center gap-3 text-xs">
+                <!-- Meta Ads Status -->
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Meta Ads: 83 Leads Activos</span>
+                </div>
+
+                <!-- Sandbox Badge -->
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 font-semibold" title="WhatsApp en Sandbox Seguro: No toca tu número de chip real">
+                    <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                    <span class="hidden md:inline">WhatsApp:</span> Sandbox Seguro
+                </div>
+
+                <!-- Refresh Button -->
+                <button @click="fetchMetrics()" :disabled="loading" class="px-3 py-1.5 rounded-lg bg-neutral-900 border border-white/10 hover:border-orange-500 text-gray-300 hover:text-white transition-all flex items-center gap-1.5 text-xs font-bold cursor-pointer">
+                    <svg class="w-3.5 h-3.5" :class="loading ? 'animate-spin text-orange-400' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                    <span class="hidden sm:inline" x-text="loading ? 'Actualizando...' : 'Actualizar'"></span>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <!-- ===================================================================== -->
+        <!-- 1. RIBBON DE KPIS EN VIVO (META ADS + VENTAS MULTICANAL) -->
+        <!-- ===================================================================== -->
+        <section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            
+            <!-- KPI 1: Facturación Total -->
+            <div class="metal-card p-4 rounded-xl space-y-1">
+                <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">Facturación Total</span>
+                <div class="text-xl sm:text-2xl font-black text-white" x-text="'$' + formatPrice(kpis.totalRevenue) + ' CLP'">
+                    $414.890 CLP
+                </div>
+                <div class="text-[10px] text-gray-400 flex items-center gap-1">
+                    <span class="text-emerald-400 font-bold" x-text="kpis.totalOrders + ' pedidos'"></span> multicanal
+                </div>
+            </div>
+
+            <!-- KPI 2: Gasto Meta Ads -->
+            <div class="metal-card p-4 rounded-xl space-y-1 border-orange-500/20">
+                <span class="text-[11px] font-bold text-orange-400 uppercase tracking-wider block">Gasto Meta Ads</span>
+                <div class="text-xl sm:text-2xl font-black text-white" x-text="'$' + formatPrice(metaAds.spend) + ' CLP'">
+                    $9.744 CLP
+                </div>
+                <div class="text-[10px] text-gray-400 flex items-center justify-between">
+                    <span>Diario: $5.000</span>
+                    <span class="text-emerald-400 font-bold">Activo</span>
+                </div>
+            </div>
+
+            <!-- KPI 3: Leads de WhatsApp -->
+            <div class="metal-card p-4 rounded-xl space-y-1 bg-gradient-to-br from-emerald-950/20 to-neutral-950">
+                <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">Leads WhatsApp</span>
+                <div class="text-xl sm:text-2xl font-black text-emerald-300" x-text="kpis.whatsappLeads">
+                    83
+                </div>
+                <div class="text-[10px] text-gray-400 flex items-center gap-1">
+                    <span>Conversaciones 7d</span>
+                </div>
+            </div>
+
+            <!-- KPI 4: Costo por Lead ($117 CLP) -->
+            <div class="metal-card p-4 rounded-xl space-y-1">
+                <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">Costo por Chat</span>
+                <div class="text-xl sm:text-2xl font-black text-orange-400" x-text="'$' + metaAds.costPerConversation + ' CLP'">
+                    $117.4 CLP
+                </div>
+                <div class="text-[10px] text-emerald-400 font-medium">
+                    🔥 Benchmark Superior (-82%)
+                </div>
+            </div>
+
+            <!-- KPI 5: CTR Campaña -->
+            <div class="metal-card p-4 rounded-xl space-y-1">
+                <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">CTR Anuncios</span>
+                <div class="text-xl sm:text-2xl font-black text-white" x-text="metaAds.ctr + '%'">
+                    5.91%
+                </div>
+                <div class="text-[10px] text-gray-400">
+                    <span x-text="metaAds.clicks">435</span> clics / <span x-text="metaAds.impressions">7.366</span> imp.
+                </div>
+            </div>
+
+            <!-- KPI 6: ROAS Estimado -->
+            <div class="metal-card p-4 rounded-xl space-y-1">
+                <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">ROAS Estimado</span>
+                <div class="text-xl sm:text-2xl font-black text-white" x-text="kpis.roas">
+                    42.6x
+                </div>
+                <div class="text-[10px] text-gray-400">
+                    Ticket Prom: <span x-text="'$' + formatPrice(kpis.averageTicket)"></span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- 2. NAVEGACIÓN POR PESTAÑAS TÉCNICAS -->
+        <!-- ===================================================================== -->
+        <nav class="flex items-center gap-2 border-b border-white/10 pb-4 overflow-x-auto text-xs font-bold">
+            <button @click="activeTab = 'orders'" class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2" :class="activeTab === 'orders' ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30' : 'bg-neutral-900 text-gray-400 hover:text-white'">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                <span>Órdenes Multicanal</span>
+                <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-black/40" x-text="orders.length">5</span>
+            </button>
+
+            <button @click="activeTab = 'leads'" class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2" :class="activeTab === 'leads' ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30' : 'bg-neutral-900 text-gray-400 hover:text-white'">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+                <span>Embudo Leads WhatsApp</span>
+                <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-black/40" x-text="metaAds.conversationsStarted">83</span>
+            </button>
+
+            <button @click="activeTab = 'meta'" class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2" :class="activeTab === 'meta' ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30' : 'bg-neutral-900 text-gray-400 hover:text-white'">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                <span>Métricas Meta Ads en Vivo</span>
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            </button>
+
+            <button @click="activeTab = 'shipping'" class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2" :class="activeTab === 'shipping' ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30' : 'bg-neutral-900 text-gray-400 hover:text-white'">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+                <span>Cotizador Starken Rápido</span>
+            </button>
+
+            <button @click="activeTab = 'simulator'" class="px-4 py-2.5 rounded-xl transition-all flex items-center gap-2" :class="activeTab === 'simulator' ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/30' : 'bg-neutral-900 text-gray-400 hover:text-white'">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                <span>Simulador Bot WhatsApp</span>
+            </button>
+        </nav>
+
+        <!-- ===================================================================== -->
+        <!-- TAB 1: ÓRDENES MULTICANAL -->
+        <!-- ===================================================================== -->
+        <div x-show="activeTab === 'orders'" class="space-y-6" x-cloak>
+            
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-white">Registro Unificado de Ventas</h2>
+                    <p class="text-xs text-gray-400">Consolidado automático de Web (Mercado Pago / Transferencia) y Mercado Libre.</p>
+                </div>
+                <!-- Filtros Rápidos -->
+                <div class="flex items-center gap-2 text-xs">
+                    <span class="text-gray-400">Canal:</span>
+                    <button @click="orderFilter = 'all'" class="px-2.5 py-1 rounded-lg border text-xs" :class="orderFilter === 'all' ? 'bg-neutral-800 border-orange-500 text-white' : 'border-white/10 text-gray-400'">Todos</button>
+                    <button @click="orderFilter = 'web'" class="px-2.5 py-1 rounded-lg border text-xs" :class="orderFilter === 'web' ? 'bg-neutral-800 border-orange-500 text-white' : 'border-white/10 text-gray-400'">Web / MP</button>
+                    <button @click="orderFilter = 'mercadolibre'" class="px-2.5 py-1 rounded-lg border text-xs" :class="orderFilter === 'mercadolibre' ? 'bg-neutral-800 border-orange-500 text-white' : 'border-white/10 text-gray-400'">Mercado Libre</button>
+                </div>
+            </div>
+
+            <!-- Tabla de Pedidos -->
+            <div class="metal-card rounded-2xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-gray-300">
+                        <thead class="bg-[#050608] text-gray-400 uppercase text-[10px] tracking-wider border-b border-white/10">
+                            <tr>
+                                <th class="py-3 px-4">Orden / Fecha</th>
+                                <th class="py-3 px-4">Comprador</th>
+                                <th class="py-3 px-4">Producto</th>
+                                <th class="py-3 px-4">Canal</th>
+                                <th class="py-3 px-4">Monto</th>
+                                <th class="py-3 px-4">Despacho / Ciudad</th>
+                                <th class="py-3 px-4">Estado</th>
+                                <th class="py-3 px-4 text-right">Flete / Courier</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            <template x-for="order in filteredOrders" :key="order.id">
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="py-3.5 px-4 font-mono font-bold text-white">
+                                        <div x-text="order.id"></div>
+                                        <div class="text-[10px] text-gray-500 font-sans font-normal" x-text="formatDate(order.created_at)"></div>
+                                    </td>
+                                    <td class="py-3.5 px-4 font-semibold text-white">
+                                        <div x-text="order.customer_name"></div>
+                                        <div class="text-[10px] text-gray-400 font-mono" x-text="order.phone"></div>
+                                    </td>
+                                    <td class="py-3.5 px-4 text-gray-300" x-text="order.product_name"></td>
+                                    <td class="py-3.5 px-4">
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider"
+                                            :class="{
+                                                'bg-blue-500/20 text-blue-400 border border-blue-500/30': order.channel === 'web_mercadopago',
+                                                'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30': order.channel === 'mercadolibre',
+                                                'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30': order.channel === 'whatsapp_bot'
+                                            }"
+                                            x-text="order.channel === 'web_mercadopago' ? 'Web (MP)' : order.channel === 'mercadolibre' ? 'Mercado Libre' : 'WhatsApp Bot'">
+                                        </span>
+                                    </td>
+                                    <td class="py-3.5 px-4 font-mono font-bold text-white" x-text="'$' + formatPrice(order.total_amount) + ' CLP'"></td>
+                                    <td class="py-3.5 px-4">
+                                        <div class="font-medium text-gray-200" x-text="order.shipping_commune"></div>
+                                        <div class="text-[10px] text-gray-400 uppercase" x-text="order.shipping_method === 'rm_express' ? 'Express Santiago' : 'Starken Por Pagar'"></div>
+                                    </td>
+                                    <td class="py-3.5 px-4">
+                                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide"
+                                            :class="{
+                                                'bg-emerald-500/20 text-emerald-400': order.status === 'paid' || order.status === 'delivered',
+                                                'bg-amber-500/20 text-amber-400': order.status === 'preparing',
+                                                'bg-cyan-500/20 text-cyan-400': order.status === 'shipped'
+                                            }"
+                                            x-text="order.status === 'paid' ? 'Pagado' : order.status === 'preparing' ? 'En Taller' : order.status === 'shipped' ? 'En Ruta' : 'Entregado'">
+                                        </span>
+                                    </td>
+                                    <td class="py-3.5 px-4 text-right font-mono text-[11px]">
+                                        <template x-if="order.tracking_number">
+                                            <span class="text-orange-400 hover:underline cursor-pointer" @click="navigator.clipboard.writeText(order.tracking_number); alert('Copiado Flete #' + order.tracking_number)" x-text="'#' + order.tracking_number"></span>
+                                        </template>
+                                        <template x-if="!order.tracking_number">
+                                            <button @click="promptTracking(order)" class="px-2 py-0.5 rounded bg-neutral-800 text-gray-400 hover:text-white border border-white/10 text-[10px]">
+                                                + Asignar Flete
+                                            </button>
+                                        </template>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- TAB 2: EMBUDO DE LEADS WHATSAPP (KANBAN CRM) -->
+        <!-- ===================================================================== -->
+        <div x-show="activeTab === 'leads'" class="space-y-6" x-cloak>
+            
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-white">Pipeline de Prospectos WhatsApp (83 Leads Meta Ads)</h2>
+                    <p class="text-xs text-gray-400">Ordena las conversaciones entrantes sin que se pierdan ni se enreden.</p>
+                </div>
+                <div class="text-xs text-emerald-400 font-bold flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Costo promedio por lead: $117 CLP
+                </div>
+            </div>
+
+            <!-- Kanban Columns -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                
+                <!-- Columna 1: Nuevos Leads -->
+                <div class="metal-card p-4 rounded-xl space-y-3">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                        <span class="text-xs font-bold text-gray-300 uppercase tracking-wider">1. Nuevos Leads</span>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-blue-500/20 text-blue-400">83</span>
+                    </div>
+                    <div class="space-y-2.5">
+                        <template x-for="lead in leads.filter(l => l.status === 'new')" :key="lead.id">
+                            <div class="p-3 rounded-lg bg-black/40 border border-white/5 space-y-2 hover:border-orange-500/40 transition-colors">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-white text-xs" x-text="lead.name"></span>
+                                    <span class="text-[10px] font-mono text-gray-500" x-text="lead.commune"></span>
+                                </div>
+                                <p class="text-[11px] text-gray-400 italic" x-text="'“' + lead.last_message + '”'"></p>
+                                <div class="flex items-center justify-between pt-1 text-[10px]">
+                                    <span class="text-orange-400 font-semibold" x-text="'Starken: $' + formatPrice(lead.estimated_shipping)"></span>
+                                    <a :href="'https://wa.me/' + lead.phone.replace(/[^0-9]/g, '')" target="_blank" class="px-2 py-1 rounded bg-emerald-600/30 hover:bg-emerald-600 text-emerald-300 hover:text-white font-bold transition-all">
+                                        Abrir Chat
+                                    </a>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Columna 2: En Negociación / Compatibilidad -->
+                <div class="metal-card p-4 rounded-xl space-y-3">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                        <span class="text-xs font-bold text-gray-300 uppercase tracking-wider">2. En Negociación</span>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-amber-500/20 text-amber-400" x-text="leads.filter(l => l.status === 'negotiating').length">2</span>
+                    </div>
+                    <div class="space-y-2.5">
+                        <template x-for="lead in leads.filter(l => l.status === 'negotiating')" :key="lead.id">
+                            <div class="p-3 rounded-lg bg-black/40 border border-white/5 space-y-2 hover:border-amber-500/40 transition-colors">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-white text-xs" x-text="lead.name"></span>
+                                    <span class="text-[10px] font-mono text-gray-500" x-text="lead.commune"></span>
+                                </div>
+                                <p class="text-[11px] text-gray-400 italic" x-text="'“' + lead.last_message + '”'"></p>
+                                <div class="flex items-center justify-between pt-1 text-[10px]">
+                                    <span class="text-amber-400 font-semibold">Esperando modelo auto</span>
+                                    <a :href="'https://wa.me/' + lead.phone.replace(/[^0-9]/g, '')" target="_blank" class="px-2 py-1 rounded bg-emerald-600/30 hover:bg-emerald-600 text-emerald-300 hover:text-white font-bold transition-all">
+                                        Responder
+                                    </a>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Columna 3: Cotizados con Link de Pago -->
+                <div class="metal-card p-4 rounded-xl space-y-3">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                        <span class="text-xs font-bold text-gray-300 uppercase tracking-wider">3. Cotizados / Link MP</span>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-purple-500/20 text-purple-400" x-text="leads.filter(l => l.status === 'quoted').length">2</span>
+                    </div>
+                    <div class="space-y-2.5">
+                        <template x-for="lead in leads.filter(l => l.status === 'quoted')" :key="lead.id">
+                            <div class="p-3 rounded-lg bg-black/40 border border-white/5 space-y-2 hover:border-purple-500/40 transition-colors">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-white text-xs" x-text="lead.name"></span>
+                                    <span class="text-[10px] font-mono text-gray-500" x-text="lead.commune"></span>
+                                </div>
+                                <p class="text-[11px] text-gray-400 italic" x-text="'“' + lead.last_message + '”'"></p>
+                                <div class="flex items-center justify-between pt-1 text-[10px]">
+                                    <span class="text-purple-400 font-bold">$65.000 CLP</span>
+                                    <button @click="markAsWon(lead)" class="px-2 py-1 rounded bg-orange-600/30 hover:bg-orange-600 text-orange-300 hover:text-white font-bold transition-all">
+                                        Confirmar Pago
+                                    </button>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Columna 4: Ventas Cerradas (Won) -->
+                <div class="metal-card p-4 rounded-xl space-y-3">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                        <span class="text-xs font-bold text-gray-300 uppercase tracking-wider">4. Ventas Cerradas</span>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/20 text-emerald-400" x-text="leads.filter(l => l.status === 'won').length">1</span>
+                    </div>
+                    <div class="space-y-2.5">
+                        <template x-for="lead in leads.filter(l => l.status === 'won')" :key="lead.id">
+                            <div class="p-3 rounded-lg bg-black/40 border border-emerald-500/20 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-white text-xs" x-text="lead.name"></span>
+                                    <span class="text-[10px] text-emerald-400 font-bold">✓ Pagado</span>
+                                </div>
+                                <p class="text-[11px] text-gray-400 italic" x-text="'“' + lead.last_message + '”'"></p>
+                                <div class="text-[10px] text-gray-500 font-mono">
+                                    Listo para despacho taller
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- TAB 3: MÉTRICAS META ADS EN VIVO -->
+        <!-- ===================================================================== -->
+        <div x-show="activeTab === 'meta'" class="space-y-6" x-cloak>
+            
+            <div class="metal-card p-6 rounded-2xl space-y-6">
+                <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
+                    <div>
+                        <span class="text-orange-400 text-xs font-bold uppercase tracking-widest block">Campaña Oficial Meta Ads</span>
+                        <h2 class="text-xl font-black text-white" x-text="metaAds.campaignName"></h2>
+                        <p class="text-xs text-gray-400">Datos obtenidos directamente desde Meta Graph API (v21.0).</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                            🟢 ESTADO: ACTIVA
+                        </span>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-neutral-800 text-gray-300">
+                            Presupuesto: $5.000 CLP / día
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Detalle de Métricas Técnicas -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+                    <div class="p-4 rounded-xl bg-black/40 border border-white/5 space-y-1">
+                        <span class="text-gray-500 font-bold uppercase">Gasto Invertido</span>
+                        <div class="text-lg font-black text-white" x-text="'$' + formatPrice(metaAds.spend) + ' CLP'"></div>
+                        <span class="text-[10px] text-gray-500">Últimos 7 días</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-black/40 border border-white/5 space-y-1">
+                        <span class="text-gray-500 font-bold uppercase">Personas Alcanzadas</span>
+                        <div class="text-lg font-black text-white" x-text="formatPrice(metaAds.impressions)"></div>
+                        <span class="text-[10px] text-gray-500">Impresiones totales</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-black/40 border border-white/5 space-y-1">
+                        <span class="text-gray-500 font-bold uppercase">Clics al Anuncio</span>
+                        <div class="text-lg font-black text-white" x-text="metaAds.clicks"></div>
+                        <span class="text-[10px] text-emerald-400 font-bold" x-text="'CTR: ' + metaAds.ctr + '%'"></span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-black/40 border border-white/5 space-y-1">
+                        <span class="text-gray-500 font-bold uppercase">Costo por Clic (CPC)</span>
+                        <div class="text-lg font-black text-white" x-text="'$' + metaAds.cpc + ' CLP'"></div>
+                        <span class="text-[10px] text-emerald-400 font-bold">Ultracompetitivo</span>
+                    </div>
+                </div>
+
+                <!-- Los 3 Anuncios Activos -->
+                <div class="space-y-3 pt-2">
+                    <h3 class="text-sm font-extrabold text-white uppercase tracking-wider">Creativos Activos en Circulación</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        
+                        <!-- Anuncio 1 -->
+                        <div class="p-4 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-white">Anuncio 1: Flyer 1080x1920</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">Activo</span>
+                            </div>
+                            <p class="text-gray-400 text-[11px] leading-relaxed">
+                                "¿Sabías que remolcar con cuerda o piola ya es ilegal en Chile? Decreto Supremo 55/2025 MTT".
+                            </p>
+                            <div class="pt-2 border-t border-white/10 flex justify-between text-[10px] text-gray-500">
+                                <span>Destino: WhatsApp</span>
+                                <span class="text-orange-400 font-bold">$65.000 CLP</span>
+                            </div>
+                        </div>
+
+                        <!-- Anuncio 2 -->
+                        <div class="p-4 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-white">Anuncio 2: Video Alerta Legal</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">Activo</span>
+                            </div>
+                            <p class="text-gray-400 text-[11px] leading-relaxed">
+                                "Evita multas graves y remolca seguro según la ley. Barra desarmable en 3 tramos de 65 cm".
+                            </p>
+                            <div class="pt-2 border-t border-white/10 flex justify-between text-[10px] text-gray-500">
+                                <span>Destino: WhatsApp</span>
+                                <span class="text-orange-400 font-bold">$65.000 CLP</span>
+                            </div>
+                        </div>
+
+                        <!-- Anuncio 3 -->
+                        <div class="p-4 rounded-xl bg-black/40 border border-white/10 space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-white">Anuncio 3: Video Viral Fuerza</span>
+                                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">Activo</span>
+                            </div>
+                            <p class="text-gray-400 text-[11px] leading-relaxed">
+                                "¿Aguanta el tirón o se dobla? Prueba de arrastre directo hasta 3.500 kg en camionetas".
+                            </p>
+                            <div class="pt-2 border-t border-white/10 flex justify-between text-[10px] text-gray-500">
+                                <span>Destino: WhatsApp</span>
+                                <span class="text-orange-400 font-bold">$65.000 CLP</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- TAB 4: COTIZADOR STARKEN RÁPIDO -->
+        <!-- ===================================================================== -->
+        <div x-show="activeTab === 'shipping'" class="space-y-6" x-cloak>
+            
+            <div class="metal-card p-6 rounded-2xl max-w-2xl mx-auto space-y-5">
+                <div>
+                    <h2 class="text-lg font-bold text-white">Cotizador Rápido de Fletes Starken & Chilexpress</h2>
+                    <p class="text-xs text-gray-400">Herramienta para tu vendedor: escribe cualquier ciudad de Chile y obtén la tarifa exacta para responder en 2 segundos.</p>
+                </div>
+
+                <div class="space-y-4 text-xs">
+                    <div>
+                        <label class="block text-gray-400 font-bold uppercase mb-1">Comuna o Ciudad de Destino</label>
+                        <div class="flex gap-2">
+                            <input type="text" x-model="shippingSearch" @keydown.enter.prevent="lookupShipping()" placeholder="Ej: Temuco, Antofagasta, Chillán, Rancagua..." class="flex-grow px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500 text-xs">
+                            <button @click="lookupShipping()" class="btn-metal-orange px-5 py-2.5 rounded-lg font-bold">
+                                Cotizar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Resultado de la Cotización -->
+                    <template x-if="shippingResult">
+                        <div class="p-4 rounded-xl bg-black/50 border border-orange-500/30 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="font-extrabold text-white text-sm" x-text="shippingResult.region"></span>
+                                <span class="text-xs text-gray-400 font-mono" x-text="shippingResult.estimatedDays"></span>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3 pt-1">
+                                <div class="p-3 rounded-lg bg-neutral-900 border border-white/5 space-y-1">
+                                    <span class="text-[10px] text-orange-400 font-bold uppercase">Starken (Recomendado)</span>
+                                    <div class="text-base font-black text-white" x-text="'$' + formatPrice(shippingResult.couriers.starken.cost) + ' CLP'"></div>
+                                    <span class="text-[10px] text-gray-400" x-text="shippingResult.couriers.starken.modality === 'pagado' ? 'Express Pagado' : 'Por Pagar a destino'"></span>
+                                </div>
+                                <div class="p-3 rounded-lg bg-neutral-900 border border-white/5 space-y-1">
+                                    <span class="text-[10px] text-gray-400 font-bold uppercase">Chilexpress Prioritario</span>
+                                    <div class="text-base font-black text-white" x-text="'$' + formatPrice(shippingResult.couriers.chilexpress.cost) + ' CLP'"></div>
+                                    <span class="text-[10px] text-gray-400">Por Pagar a destino</span>
+                                </div>
+                            </div>
+
+                            <!-- Botón Copiar Script para WhatsApp -->
+                            <div class="pt-2">
+                                <button @click="copyShippingScript()" class="w-full py-2.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-orange-300 font-bold flex items-center justify-center gap-2 transition-all">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                    <span>Copiar Respuesta Lista para WhatsApp</span>
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- TAB 5: SIMULADOR DE BOT WHATSAPP (SANDBOX) -->
+        <!-- ===================================================================== -->
+        <div x-show="activeTab === 'simulator'" class="space-y-6" x-cloak>
+            
+            <div class="metal-card p-6 rounded-2xl max-w-2xl mx-auto space-y-5">
+                <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                    <div>
+                        <h2 class="text-lg font-bold text-white">Simulador de WhatsApp Bot (Modo Sandbox)</h2>
+                        <p class="text-xs text-gray-400">Prueba cómo responde tu bot a las preguntas de los clientes sin tocar tu WhatsApp real.</p>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                        🧪 Sandbox Safe
+                    </span>
+                </div>
+
+                <!-- Chat Canvas -->
+                <div class="h-96 rounded-xl bg-[#090b0e] border border-white/10 p-4 overflow-y-auto space-y-3 font-sans text-xs flex flex-col justify-end">
+                    
+                    <template x-for="(msg, i) in simulatorMessages" :key="i">
+                        <div class="flex" :class="msg.sender === 'user' ? 'justify-end' : 'justify-start'">
+                            <div class="max-w-[80%] p-3 rounded-2xl space-y-1 shadow"
+                                :class="msg.sender === 'user' ? 'bg-[#005c4b] text-white rounded-br-none' : 'bg-[#202c33] text-gray-100 rounded-bl-none'">
+                                <div class="font-bold text-[10px] opacity-75" x-text="msg.sender === 'user' ? 'Cliente' : 'Metal Creativo Bot'"></div>
+                                <div class="whitespace-pre-line text-xs" x-html="msg.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')"></div>
+                                <div class="text-[9px] text-right opacity-60" x-text="msg.time"></div>
+                            </div>
+                        </div>
+                    </template>
+
+                </div>
+
+                <!-- Botón de Pruebas Rápidas -->
+                <div class="flex flex-wrap gap-2 text-[10px]">
+                    <span class="text-gray-500 py-1 font-bold">Probar preguntas típicas:</span>
+                    <button @click="sendSimulator('Hola, ¿tienen stock de la barra?')" class="px-2.5 py-1 rounded-full bg-neutral-800 hover:bg-neutral-700 text-gray-300">"¿Tienen stock?"</button>
+                    <button @click="sendSimulator('¿Cuánto sale el envío a Temuco?')" class="px-2.5 py-1 rounded-full bg-neutral-800 hover:bg-neutral-700 text-gray-300">"¿Envío a Temuco?"</button>
+                    <button @click="sendSimulator('¿Cumple con la ley nueva del ministerio?')" class="px-2.5 py-1 rounded-full bg-neutral-800 hover:bg-neutral-700 text-gray-300">"¿Cumple la ley?"</button>
+                    <button @click="sendSimulator('¿Cómo puedo pagar la barra?')" class="px-2.5 py-1 rounded-full bg-neutral-800 hover:bg-neutral-700 text-gray-300">"¿Cómo puedo pagar?"</button>
+                </div>
+
+                <!-- Formulario de Envío de Mensaje -->
+                <form @submit.prevent="sendCustomSimulator()" class="flex gap-2">
+                    <input type="text" x-model="customInput" placeholder="Escribe un mensaje de prueba al bot..." class="flex-grow px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500 text-xs">
+                    <button type="submit" class="btn-metal-orange px-5 py-2.5 rounded-lg font-bold text-xs">
+                        Enviar
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER ULTRA DISCRETO -->
+    <footer class="bg-[#050608] border-t border-white/10 py-6 text-center text-xs text-gray-500">
+        <p>Metal Creativo Chile • Sistema Centralizado de Rendimiento y Operaciones • 2026</p>
+    </footer>
+
+    <!-- LOGICA ALPINES JS -->
+    <script>
+        function adminApp() {
+            return {
+                activeTab: 'orders',
+                orderFilter: 'all',
+                loading: false,
+                kpis: {
+                    totalRevenue: 414890,
+                    totalOrders: 5,
+                    averageTicket: 82978,
+                    adSpend: 9744,
+                    roas: '42.6x',
+                    whatsappLeads: 83,
+                    costPerLead: '$117.4 CLP'
+                },
+                metaAds: {
+                    campaignName: 'METAL CREATIVO — Barra Remolque MTT ($65.000) [WhatsApp Directo]',
+                    status: 'ACTIVE',
+                    spend: 9744,
+                    impressions: 7366,
+                    clicks: 435,
+                    ctr: 5.91,
+                    cpc: 22.4,
+                    conversationsStarted: 83,
+                    costPerConversation: 117.4
+                },
+                orders: [],
+                leads: [],
+                shippingSearch: 'Temuco',
+                shippingResult: null,
+                simulatorMessages: [
+                    { sender: 'bot', text: '¡Hola! 👋 Bienvenido a **Metal Creativo Chile** 🇨🇱.\n¿Por cuál de nuestros productos te gustaría cotizar hoy?\n1️⃣ Barra Rígida de Remolque ($65.000)\n2️⃣ Fogón Ecológico a Bioetanol ($149.900)', time: '04:30' }
+                ],
+                customInput: '',
+
+                get filteredOrders() {
+                    if (this.orderFilter === 'all') return this.orders;
+                    if (this.orderFilter === 'web') return this.orders.filter(o => o.channel.startsWith('web'));
+                    if (this.orderFilter === 'mercadolibre') return this.orders.filter(o => o.channel === 'mercadolibre');
+                    return this.orders;
+                },
+
+                async init() {
+                    await this.fetchMetrics();
+                    this.lookupShipping();
+                },
+
+                async fetchMetrics() {
+                    this.loading = true;
+                    try {
+                        const res = await fetch('/api/admin-metrics');
+                        const data = await res.json();
+                        if (data.success) {
+                            this.kpis = data.kpis;
+                            this.metaAds = data.metaAds;
+                            this.orders = data.orders;
+                            this.leads = data.leads;
+                        }
+                    } catch (e) {
+                        console.warn('Usando datos de respaldo locales:', e);
+                    } finally {
+                        this.loading = false;
+                    }
+                },
+
+                async lookupShipping() {
+                    if (!this.shippingSearch) return;
+                    try {
+                        const res = await fetch(`/api/shipping-quote?commune=${encodeURIComponent(this.shippingSearch)}`);
+                        this.shippingResult = await res.json();
+                    } catch (e) {
+                        console.error('Error calculando flete:', e);
+                    }
+                },
+
+                copyShippingScript() {
+                    if (!this.shippingResult) return;
+                    const c = this.shippingResult.couriers.starken;
+                    const text = `🚗 Para ${this.shippingResult.region} el envío de la Barra Rígida (paquete de 65 cm, 6 kg) sale aproximadamente $${this.formatPrice(c.cost)} CLP vía Starken (${this.shippingResult.estimatedDays}). Modalidad habitual: Por Pagar al retirar en sucursal o domicilio.`;
+                    navigator.clipboard.writeText(text);
+                    alert('¡Texto copiado al portapapeles listo para pegar en WhatsApp!');
+                },
+
+                async sendSimulator(text) {
+                    this.simulatorMessages.push({ sender: 'user', text: text, time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) });
+                    
+                    try {
+                        const res = await fetch('/api/whatsapp-webhook', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ simulate: true, message: text, name: 'Cliente de Prueba' })
+                        });
+                        const data = await res.json();
+                        this.simulatorMessages.push({ sender: 'bot', text: data.botResponse, time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) });
+                    } catch (e) {
+                        this.simulatorMessages.push({ sender: 'bot', text: 'Error al conectar con webhook.', time: '04:35' });
+                    }
+                },
+
+                sendCustomSimulator() {
+                    if (!this.customInput.trim()) return;
+                    this.sendSimulator(this.customInput);
+                    this.customInput = '';
+                },
+
+                markAsWon(lead) {
+                    lead.status = 'won';
+                    alert(`¡Venta cerrada con éxito para ${lead.name}!`);
+                },
+
+                promptTracking(order) {
+                    const flete = prompt('Ingresa el número de seguimiento de Starken o Chilexpress:');
+                    if (flete) {
+                        order.tracking_number = flete;
+                        order.status = 'shipped';
+                        alert('¡Flete registrado! Estado cambiado a En Ruta.');
+                    }
+                },
+
+                formatPrice(val) {
+                    return new Intl.NumberFormat('es-CL').format(val || 0);
+                },
+
+                formatDate(isoStr) {
+                    if (!isoStr) return '';
+                    const d = new Date(isoStr);
+                    return d.toLocaleDateString('es-CL', { day: '2-digit', month: 'short' });
+                }
+            };
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,650 @@
+[
+  {
+    "id": "scene1_hook",
+    "text": "¿Sabías que remolcar con cuerda o piola es multa grave en Chile?",
+    "file": "audio/reel_legal/scene1_hook.mp3",
+    "dur_sec": 3.744,
+    "dur_frames": 117,
+    "scene_start_frame": 0,
+    "words": [
+      {
+        "word": "Sabías",
+        "offset_ms": 96.3,
+        "duration_ms": 382.0,
+        "start_frame": 3,
+        "duration_frames": 11
+      },
+      {
+        "word": "que",
+        "offset_ms": 513.0,
+        "duration_ms": 69.5,
+        "start_frame": 15,
+        "duration_frames": 2
+      },
+      {
+        "word": "remolcar",
+        "offset_ms": 605.5,
+        "duration_ms": 405.1,
+        "start_frame": 18,
+        "duration_frames": 12
+      },
+      {
+        "word": "con",
+        "offset_ms": 1057.0,
+        "duration_ms": 162.0,
+        "start_frame": 32,
+        "duration_frames": 5
+      },
+      {
+        "word": "cuerda",
+        "offset_ms": 1230.5,
+        "duration_ms": 266.2,
+        "start_frame": 37,
+        "duration_frames": 8
+      },
+      {
+        "word": "o",
+        "offset_ms": 1508.3,
+        "duration_ms": 34.7,
+        "start_frame": 45,
+        "duration_frames": 2
+      },
+      {
+        "word": "piola",
+        "offset_ms": 1612.5,
+        "duration_ms": 243.0,
+        "start_frame": 48,
+        "duration_frames": 7
+      },
+      {
+        "word": "es",
+        "offset_ms": 1867.1,
+        "duration_ms": 81.0,
+        "start_frame": 56,
+        "duration_frames": 2
+      },
+      {
+        "word": "multa",
+        "offset_ms": 1971.3,
+        "duration_ms": 277.8,
+        "start_frame": 59,
+        "duration_frames": 8
+      },
+      {
+        "word": "grave",
+        "offset_ms": 2283.8,
+        "duration_ms": 219.9,
+        "start_frame": 69,
+        "duration_frames": 7
+      },
+      {
+        "word": "en",
+        "offset_ms": 2515.3,
+        "duration_ms": 115.7,
+        "start_frame": 75,
+        "duration_frames": 3
+      },
+      {
+        "word": "Chile",
+        "offset_ms": 2631.0,
+        "duration_ms": 254.6,
+        "start_frame": 79,
+        "duration_frames": 8
+      }
+    ]
+  },
+  {
+    "id": "scene2_ley",
+    "text": "El Ministerio de Transportes exige acople rígido para evitar choques por alcance.",
+    "file": "audio/reel_legal/scene2_ley.mp3",
+    "dur_sec": 4.752,
+    "dur_frames": 148,
+    "scene_start_frame": 117,
+    "words": [
+      {
+        "word": "El",
+        "offset_ms": 96.3,
+        "duration_ms": 127.3,
+        "start_frame": 3,
+        "duration_frames": 4
+      },
+      {
+        "word": "Ministerio",
+        "offset_ms": 246.8,
+        "duration_ms": 439.8,
+        "start_frame": 7,
+        "duration_frames": 13
+      },
+      {
+        "word": "de",
+        "offset_ms": 709.7,
+        "duration_ms": 69.5,
+        "start_frame": 21,
+        "duration_frames": 2
+      },
+      {
+        "word": "Transportes",
+        "offset_ms": 825.5,
+        "duration_ms": 520.8,
+        "start_frame": 25,
+        "duration_frames": 16
+      },
+      {
+        "word": "exige",
+        "offset_ms": 1346.3,
+        "duration_ms": 312.5,
+        "start_frame": 40,
+        "duration_frames": 9
+      },
+      {
+        "word": "acople",
+        "offset_ms": 1658.8,
+        "duration_ms": 347.2,
+        "start_frame": 50,
+        "duration_frames": 10
+      },
+      {
+        "word": "rígido",
+        "offset_ms": 2029.2,
+        "duration_ms": 358.8,
+        "start_frame": 61,
+        "duration_frames": 11
+      },
+      {
+        "word": "para",
+        "offset_ms": 2457.4,
+        "duration_ms": 127.3,
+        "start_frame": 74,
+        "duration_frames": 4
+      },
+      {
+        "word": "evitar",
+        "offset_ms": 2654.2,
+        "duration_ms": 277.8,
+        "start_frame": 80,
+        "duration_frames": 8
+      },
+      {
+        "word": "choques",
+        "offset_ms": 3001.4,
+        "duration_ms": 289.3,
+        "start_frame": 90,
+        "duration_frames": 9
+      },
+      {
+        "word": "por",
+        "offset_ms": 3360.2,
+        "duration_ms": 92.6,
+        "start_frame": 101,
+        "duration_frames": 3
+      },
+      {
+        "word": "alcance",
+        "offset_ms": 3452.8,
+        "duration_ms": 439.8,
+        "start_frame": 104,
+        "duration_frames": 13
+      }
+    ]
+  },
+  {
+    "id": "scene3_acero",
+    "text": "Fabricada en tubo de acero reforzado de tres milímetros y desarmable en tres partes compactas.",
+    "file": "audio/reel_legal/scene3_acero.mp3",
+    "dur_sec": 5.472,
+    "dur_frames": 169,
+    "scene_start_frame": 265,
+    "words": [
+      {
+        "word": "Fabricada",
+        "offset_ms": 96.3,
+        "duration_ms": 509.2,
+        "start_frame": 3,
+        "duration_frames": 15
+      },
+      {
+        "word": "en",
+        "offset_ms": 605.5,
+        "duration_ms": 115.8,
+        "start_frame": 18,
+        "duration_frames": 3
+      },
+      {
+        "word": "tubo",
+        "offset_ms": 744.5,
+        "duration_ms": 162.0,
+        "start_frame": 22,
+        "duration_frames": 5
+      },
+      {
+        "word": "de",
+        "offset_ms": 929.6,
+        "duration_ms": 57.9,
+        "start_frame": 28,
+        "duration_frames": 2
+      },
+      {
+        "word": "acero",
+        "offset_ms": 999.1,
+        "duration_ms": 300.9,
+        "start_frame": 30,
+        "duration_frames": 9
+      },
+      {
+        "word": "reforzado",
+        "offset_ms": 1323.2,
+        "duration_ms": 463.0,
+        "start_frame": 40,
+        "duration_frames": 14
+      },
+      {
+        "word": "de",
+        "offset_ms": 1820.8,
+        "duration_ms": 81.0,
+        "start_frame": 55,
+        "duration_frames": 2
+      },
+      {
+        "word": "tres",
+        "offset_ms": 1925.0,
+        "duration_ms": 277.8,
+        "start_frame": 58,
+        "duration_frames": 8
+      },
+      {
+        "word": "milímetros",
+        "offset_ms": 2225.9,
+        "duration_ms": 520.8,
+        "start_frame": 67,
+        "duration_frames": 16
+      },
+      {
+        "word": "y",
+        "offset_ms": 2758.3,
+        "duration_ms": 11.6,
+        "start_frame": 83,
+        "duration_frames": 2
+      },
+      {
+        "word": "desarmable",
+        "offset_ms": 2816.2,
+        "duration_ms": 497.7,
+        "start_frame": 84,
+        "duration_frames": 15
+      },
+      {
+        "word": "en",
+        "offset_ms": 3325.5,
+        "duration_ms": 127.3,
+        "start_frame": 100,
+        "duration_frames": 4
+      },
+      {
+        "word": "tres",
+        "offset_ms": 3475.9,
+        "duration_ms": 196.8,
+        "start_frame": 104,
+        "duration_frames": 6
+      },
+      {
+        "word": "partes",
+        "offset_ms": 3742.1,
+        "duration_ms": 266.2,
+        "start_frame": 112,
+        "duration_frames": 8
+      },
+      {
+        "word": "compactas",
+        "offset_ms": 4043.0,
+        "duration_ms": 567.1,
+        "start_frame": 121,
+        "duration_frames": 17
+      }
+    ]
+  },
+  {
+    "id": "scene4_resistencia",
+    "text": "Súper liviana para manipular, pero soporta hasta tres mil quinientos kilos de arrastre.",
+    "file": "audio/reel_legal/scene4_resistencia.mp3",
+    "dur_sec": 4.992,
+    "dur_frames": 155,
+    "scene_start_frame": 434,
+    "words": [
+      {
+        "word": "Súper",
+        "offset_ms": 96.3,
+        "duration_ms": 347.2,
+        "start_frame": 3,
+        "duration_frames": 10
+      },
+      {
+        "word": "liviana",
+        "offset_ms": 466.7,
+        "duration_ms": 324.1,
+        "start_frame": 14,
+        "duration_frames": 10
+      },
+      {
+        "word": "para",
+        "offset_ms": 848.6,
+        "duration_ms": 127.3,
+        "start_frame": 25,
+        "duration_frames": 4
+      },
+      {
+        "word": "manipular",
+        "offset_ms": 999.1,
+        "duration_ms": 474.5,
+        "start_frame": 30,
+        "duration_frames": 14
+      },
+      {
+        "word": "pero",
+        "offset_ms": 1751.4,
+        "duration_ms": 127.3,
+        "start_frame": 53,
+        "duration_frames": 4
+      },
+      {
+        "word": "soporta",
+        "offset_ms": 1878.7,
+        "duration_ms": 439.8,
+        "start_frame": 56,
+        "duration_frames": 13
+      },
+      {
+        "word": "hasta",
+        "offset_ms": 2330.1,
+        "duration_ms": 162.0,
+        "start_frame": 70,
+        "duration_frames": 5
+      },
+      {
+        "word": "tres",
+        "offset_ms": 2550.0,
+        "duration_ms": 173.6,
+        "start_frame": 76,
+        "duration_frames": 5
+      },
+      {
+        "word": "mil",
+        "offset_ms": 2746.8,
+        "duration_ms": 150.5,
+        "start_frame": 82,
+        "duration_frames": 5
+      },
+      {
+        "word": "quinientos",
+        "offset_ms": 2943.5,
+        "duration_ms": 405.1,
+        "start_frame": 88,
+        "duration_frames": 12
+      },
+      {
+        "word": "kilos",
+        "offset_ms": 3406.5,
+        "duration_ms": 231.5,
+        "start_frame": 102,
+        "duration_frames": 7
+      },
+      {
+        "word": "de",
+        "offset_ms": 3684.2,
+        "duration_ms": 46.3,
+        "start_frame": 111,
+        "duration_frames": 2
+      },
+      {
+        "word": "arrastre",
+        "offset_ms": 3730.5,
+        "duration_ms": 416.7,
+        "start_frame": 112,
+        "duration_frames": 12
+      }
+    ]
+  },
+  {
+    "id": "scene5_seguridad",
+    "text": "Mantiene distancia fija de uno punto ocho metros, sin tirones bruscos ni riesgo de choque.",
+    "file": "audio/reel_legal/scene5_seguridad.mp3",
+    "dur_sec": 5.232,
+    "dur_frames": 162,
+    "scene_start_frame": 589,
+    "words": [
+      {
+        "word": "Mantiene",
+        "offset_ms": 96.3,
+        "duration_ms": 370.4,
+        "start_frame": 3,
+        "duration_frames": 11
+      },
+      {
+        "word": "distancia",
+        "offset_ms": 489.8,
+        "duration_ms": 393.5,
+        "start_frame": 15,
+        "duration_frames": 12
+      },
+      {
+        "word": "fija",
+        "offset_ms": 906.5,
+        "duration_ms": 254.6,
+        "start_frame": 27,
+        "duration_frames": 8
+      },
+      {
+        "word": "de",
+        "offset_ms": 1184.2,
+        "duration_ms": 92.6,
+        "start_frame": 36,
+        "duration_frames": 3
+      },
+      {
+        "word": "uno",
+        "offset_ms": 1288.4,
+        "duration_ms": 162.0,
+        "start_frame": 39,
+        "duration_frames": 5
+      },
+      {
+        "word": "punto",
+        "offset_ms": 1531.5,
+        "duration_ms": 254.6,
+        "start_frame": 46,
+        "duration_frames": 8
+      },
+      {
+        "word": "ocho",
+        "offset_ms": 1797.7,
+        "duration_ms": 196.8,
+        "start_frame": 54,
+        "duration_frames": 6
+      },
+      {
+        "word": "metros",
+        "offset_ms": 2017.6,
+        "duration_ms": 382.0,
+        "start_frame": 61,
+        "duration_frames": 11
+      },
+      {
+        "word": "sin",
+        "offset_ms": 2596.3,
+        "duration_ms": 208.3,
+        "start_frame": 78,
+        "duration_frames": 6
+      },
+      {
+        "word": "tirones",
+        "offset_ms": 2816.2,
+        "duration_ms": 312.5,
+        "start_frame": 84,
+        "duration_frames": 9
+      },
+      {
+        "word": "bruscos",
+        "offset_ms": 3163.4,
+        "duration_ms": 324.1,
+        "start_frame": 95,
+        "duration_frames": 10
+      },
+      {
+        "word": "ni",
+        "offset_ms": 3522.2,
+        "duration_ms": 92.6,
+        "start_frame": 106,
+        "duration_frames": 3
+      },
+      {
+        "word": "riesgo",
+        "offset_ms": 3638.0,
+        "duration_ms": 312.5,
+        "start_frame": 109,
+        "duration_frames": 9
+      },
+      {
+        "word": "de",
+        "offset_ms": 3985.2,
+        "duration_ms": 57.9,
+        "start_frame": 120,
+        "duration_frames": 2
+      },
+      {
+        "word": "choque",
+        "offset_ms": 4100.9,
+        "duration_ms": 277.8,
+        "start_frame": 123,
+        "duration_frames": 8
+      }
+    ]
+  },
+  {
+    "id": "scene6_cierre",
+    "text": "Cumple la ley y viaja seguro por sesenta y cinco mil pesos. Pídela hoy en Metal Creativo.",
+    "file": "audio/reel_legal/scene6_cierre.mp3",
+    "dur_sec": 5.856,
+    "dur_frames": 181,
+    "scene_start_frame": 751,
+    "words": [
+      {
+        "word": "Cumple",
+        "offset_ms": 96.3,
+        "duration_ms": 277.8,
+        "start_frame": 3,
+        "duration_frames": 8
+      },
+      {
+        "word": "la",
+        "offset_ms": 397.2,
+        "duration_ms": 92.6,
+        "start_frame": 12,
+        "duration_frames": 3
+      },
+      {
+        "word": "ley",
+        "offset_ms": 501.4,
+        "duration_ms": 185.2,
+        "start_frame": 15,
+        "duration_frames": 6
+      },
+      {
+        "word": "y",
+        "offset_ms": 698.2,
+        "duration_ms": 11.6,
+        "start_frame": 21,
+        "duration_frames": 2
+      },
+      {
+        "word": "viaja",
+        "offset_ms": 756.0,
+        "duration_ms": 277.8,
+        "start_frame": 23,
+        "duration_frames": 8
+      },
+      {
+        "word": "seguro",
+        "offset_ms": 1033.8,
+        "duration_ms": 324.1,
+        "start_frame": 31,
+        "duration_frames": 10
+      },
+      {
+        "word": "por",
+        "offset_ms": 1415.8,
+        "duration_ms": 81.0,
+        "start_frame": 42,
+        "duration_frames": 2
+      },
+      {
+        "word": "sesenta",
+        "offset_ms": 1508.3,
+        "duration_ms": 347.2,
+        "start_frame": 45,
+        "duration_frames": 10
+      },
+      {
+        "word": "y",
+        "offset_ms": 1878.7,
+        "duration_ms": 23.2,
+        "start_frame": 56,
+        "duration_frames": 2
+      },
+      {
+        "word": "cinco",
+        "offset_ms": 1925.0,
+        "duration_ms": 266.2,
+        "start_frame": 58,
+        "duration_frames": 8
+      },
+      {
+        "word": "mil",
+        "offset_ms": 2225.9,
+        "duration_ms": 138.9,
+        "start_frame": 67,
+        "duration_frames": 4
+      },
+      {
+        "word": "pesos",
+        "offset_ms": 2434.2,
+        "duration_ms": 358.8,
+        "start_frame": 73,
+        "duration_frames": 11
+      },
+      {
+        "word": "Pídela",
+        "offset_ms": 3657.4,
+        "duration_ms": 370.4,
+        "start_frame": 110,
+        "duration_frames": 11
+      },
+      {
+        "word": "hoy",
+        "offset_ms": 4039.3,
+        "duration_ms": 115.8,
+        "start_frame": 121,
+        "duration_frames": 3
+      },
+      {
+        "word": "en",
+        "offset_ms": 4166.7,
+        "duration_ms": 81.0,
+        "start_frame": 125,
+        "duration_frames": 2
+      },
+      {
+        "word": "Metal",
+        "offset_ms": 4282.4,
+        "duration_ms": 266.2,
+        "start_frame": 128,
+        "duration_frames": 8
+      },
+      {
+        "word": "Creativo",
+        "offset_ms": 4583.3,
+        "duration_ms": 405.1,
+        "start_frame": 137,
+        "duration_frames": 12
+      }
+    ]
+  }
+]
