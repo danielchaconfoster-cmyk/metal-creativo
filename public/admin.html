@@ -602,6 +602,28 @@
                     </span>
                 </div>
 
+                <!-- Controles de Configuración Humana (Nombre & Latencia) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 rounded-xl bg-black/40 border border-white/5 text-xs">
+                    <div class="space-y-1">
+                        <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                            <span>👤 Tu Nombre en WhatsApp:</span>
+                            <span class="text-[9px] text-gray-500 font-normal">(Simula perfil de Meta)</span>
+                        </label>
+                        <input type="text" x-model="simulatedCustomerName" placeholder="Ej: Rodrigo, Carlos, o déjalo vacío" 
+                            class="w-full px-3 py-1.5 rounded-lg bg-neutral-900 border border-white/10 text-white text-xs focus:outline-none focus:border-orange-500">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                            <span>⏱️ Cadencia de Tipeo Humano:</span>
+                        </label>
+                        <select x-model="simulatedSpeed" 
+                            class="w-full px-3 py-1.5 rounded-lg bg-neutral-900 border border-white/10 text-white text-xs focus:outline-none focus:border-orange-500">
+                            <option value="realistic">🛠️ Taller Realista (4 a 6 seg - Lectura + Tipeo humano)</option>
+                            <option value="fast">⚡ Rápido (1.5 a 2.5 seg - Para pruebas ágiles)</option>
+                        </select>
+                    </div>
+                </div>
+
                 <!-- Chat Canvas -->
                 <div x-ref="chatContainer" class="h-96 rounded-xl bg-[#090b0e] border border-white/10 p-4 overflow-y-auto space-y-3 font-sans text-xs flex flex-col">
                     
@@ -609,7 +631,7 @@
                         <div class="flex" :class="msg.sender === 'user' ? 'justify-end' : 'justify-start'">
                             <div class="max-w-[85%] p-3 rounded-2xl space-y-1 shadow transition-all animate-fadeIn"
                                 :class="msg.sender === 'user' ? 'bg-[#005c4b] text-white rounded-br-none' : 'bg-[#202c33] text-gray-100 rounded-bl-none'">
-                                <div class="font-bold text-[10px] opacity-75" x-text="msg.sender === 'user' ? 'Cliente' : 'Nacho (Metal Creativo)'"></div>
+                                <div class="font-bold text-[10px] opacity-75" x-text="msg.sender === 'user' ? (simulatedCustomerName.trim() || 'Tú') : 'Nacho (Metal Creativo)'"></div>
                                 <div class="whitespace-pre-line text-xs leading-relaxed" x-text="msg.text"></div>
                                 <div class="text-[9px] text-right opacity-60 flex items-center justify-end gap-1">
                                     <span x-text="msg.time"></span>
@@ -698,6 +720,8 @@
                 ],
                 customInput: '',
                 isTyping: false,
+                simulatedCustomerName: 'Rodrigo',
+                simulatedSpeed: 'realistic',
 
                 get filteredOrders() {
                     if (this.orderFilter === 'all') return this.orders;
@@ -748,6 +772,7 @@
                 },
 
                 async sendSimulator(text) {
+                    const custName = (this.simulatedCustomerName || '').trim();
                     this.simulatorMessages.push({
                         sender: 'user',
                         text: text,
@@ -760,22 +785,23 @@
                         const res = await fetch('/api/whatsapp-webhook', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ simulate: true, message: text, name: 'Cliente' })
+                            body: JSON.stringify({ simulate: true, message: text, name: custName })
                         });
                         const data = await res.json();
                         
                         // Extraer burbujas secuenciales (cadencia humana en ráfaga)
                         const bubbles = (data.messages && data.messages.length) ? data.messages : [data.botResponse || '¡Hola!'];
+                        const isRealistic = this.simulatedSpeed === 'realistic';
                         
                         for (let i = 0; i < bubbles.length; i++) {
                             this.isTyping = true;
                             this.scrollChat();
                             
-                            // Retardo proporcional por burbuja (lectura + tipeo natural)
+                            // Retardo proporcional por burbuja (lectura humana + tipeo de taller)
                             const bubble = bubbles[i];
                             const typingDelay = i === 0 
-                                ? Math.min(Math.max(bubble.length * 18, 1400), 2600)
-                                : Math.min(Math.max(bubble.length * 15, 1100), 2100);
+                                ? (isRealistic ? Math.min(Math.max(bubble.length * 24, 3200), 5200) : Math.min(Math.max(bubble.length * 15, 1200), 2200))
+                                : (isRealistic ? Math.min(Math.max(bubble.length * 18, 2200), 3800) : Math.min(Math.max(bubble.length * 12, 900), 1700));
                             
                             await new Promise(r => setTimeout(r, typingDelay));
                             
@@ -789,7 +815,7 @@
                             
                             // Pausa de respiro entre burbujas consecutivas
                             if (i < bubbles.length - 1) {
-                                await new Promise(r => setTimeout(r, 450));
+                                await new Promise(r => setTimeout(r, isRealistic ? 600 : 350));
                             }
                         }
                     } catch (e) {

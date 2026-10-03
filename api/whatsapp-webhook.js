@@ -19,10 +19,13 @@ Debes responder SIEMPRE con un objeto JSON válido con la propiedad "messages", 
 - Burbuja 3: Pregunta de cierre abierta para avanzar el cierre ("¿Para qué vehículo la necesitas tú?", "¿De qué comuna me escribes para cotizarte el flete por Starken?").
 
 REGLAS ESTRICTAS PARA NO PARECER UN BOT:
-1. CERO TONO O FORMATO ROBÓTICO: Jamás uses viñetas con guiones, listas numeradas (1, 2, 3), ni asteriscos de markdown (**palabra**). Escribe como un chileno real desde su celular.
-2. CERO EMOJIS ROBÓTICOS: Prohibido saturar con emojis (nada de 🤖, 📌, 🚀, 💡, ✅). Máximo 1 emoji casual en toda la conversación (como 👍 o 💪).
-3. TONO DE TALLER CHILENO: Amable, cercano, confiable y relajado ("al tiro", "te queda impecable", "ningún drama", "te cuento", "al toque").
-4. CONOCIMIENTO TÉCNICO OFICIAL:
+1. TRATO Y SALUDO HUMANO:
+   - Si se indica un nombre de pila real chileno (ej: Carlos, Rodrigo, Juan, Andrea), salúdalo casualmente por su nombre una vez ("¡Hola Carlos! Qué tal").
+   - PROHIBICIÓN TOTAL: NUNCA llames a nadie "Cliente", "Amigo", "Usuario" ni uses apodos extraños de WhatsApp. Si el nombre no es una persona real o es desconocido, saluda naturalmente: "¡Hola qué tal!", "Hola compadre, todo bien por acá", o "Buenas tardes".
+2. CERO TONO O FORMATO ROBÓTICO: Jamás uses viñetas con guiones, listas numeradas (1, 2, 3), ni asteriscos de markdown (**palabra**). Escribe como un chileno real desde su celular.
+3. CERO EMOJIS ROBÓTICOS: Prohibido saturar con emojis (nada de 🤖, 📌, 🚀, 💡, ✅). Máximo 1 emoji casual en toda la conversación (como 👍 o 💪).
+4. TONO DE TALLER CHILENO: Amable, cercano, confiable y relajado ("al tiro", "te queda impecable", "ningún drama", "te cuento", "al toque").
+5. CONOCIMIENTO TÉCNICO OFICIAL:
    - Barra de Remolque: Cuesta $65.000 CLP (IVA incluido). Acero estructural macizo de 3 mm de espesor. Soporta hasta 3.500 kg de arrastre directo certificado.
    - Se desarma en 3 tramos de 65 cm para guardarla en la maleta al lado de la rueda de repuesto.
    - Incluye 2 grilletes forjados de seguridad que enganchan en cualquier vehículo (camioneta, furgón, SUV o auto con perno de tiro).
@@ -35,8 +38,25 @@ function cleanBubbleText(text) {
   return text.replace(/\*\*/g, '').replace(/\*/g, '').replace(/^[-•]\s*/, '').trim();
 }
 
-async function generateHumanReply(incomingText, customerName = 'Amigo/a') {
+function parseCustomerGreetingName(name) {
+  if (!name) return '';
+  const cleaned = name.trim();
+  const lower = cleaned.toLowerCase();
+  const blacklisted = ['cliente', 'usuario', 'amigo', 'amigo/a', 'user', 'test', 'prueba', 'none', 'null', 'contacto'];
+  if (blacklisted.includes(lower)) return '';
+
+  const words = cleaned.replace(/[^\p{L}\s]/gu, '').trim().split(/\s+/);
+  if (words.length > 0 && words[0].length >= 2) {
+    const first = words[0];
+    if (blacklisted.includes(first.toLowerCase())) return '';
+    return first.charAt(0).toUpperCase() + first.slice(1).toLowerCase();
+  }
+  return '';
+}
+
+async function generateHumanReply(incomingText, customerName = '') {
   const text = (incomingText || '').trim();
+  const validName = parseCustomerGreetingName(customerName);
 
   // 1. Detectar si hay consulta de flete para darle contexto a la IA
   let shippingContext = '';
@@ -53,7 +73,11 @@ async function generateHumanReply(incomingText, customerName = 'Amigo/a') {
   if (GEMINI_API_KEY) {
     try {
       const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
-      const promptContent = `${SYSTEM_PERSONA_PROMPT}\n${shippingContext}\n\nCliente (${customerName}) dice: "${text}"\nGenera el JSON con el array "messages":`;
+      const nameContext = validName
+        ? `[NOMBRE DEL CLIENTE: "${validName}" (salúdalo casualmente por su nombre de pila si es inicio de conversación)]`
+        : `[NOMBRE DEL CLIENTE: Desconocido. Saluda de forma natural ("¡Hola qué tal!", "Hola compadre, todo bien"). NUNCA uses la palabra 'Cliente' ni 'Amigo']`;
+
+      const promptContent = `${SYSTEM_PERSONA_PROMPT}\n${shippingContext}\n${nameContext}\n\nCliente dice: "${text}"\nGenera el JSON con el array "messages":`;
 
       const response = await fetch(url, {
         method: 'POST',
@@ -89,9 +113,11 @@ async function generateHumanReply(incomingText, customerName = 'Amigo/a') {
   }
 
   // 3. RESPALDO CONVERSACIONAL FRAGMENTADO (CADENCIA NATURAL DE 2 A 3 BURBUJAS)
+  const greeting = validName ? `¡Hola ${validName}! Qué tal` : `¡Hola qué tal!`;
+
   if (lower.includes('navara') || lower.includes('hilux') || lower.includes('l200') || lower.includes('camioneta') || lower.includes('auto') || lower.includes('compatible')) {
     return [
-      `¡Hola ${customerName}! Qué tal`,
+      greeting,
       `Sí, te cuento que le queda impecable. La barra aguanta hasta 3.500 kilos y viene con dos grilletes forjados de seguridad que enganchan directo al tiro sin problema`,
       `¿De qué comuna me escribes para ver el tema del despacho por Starken?`
     ];
@@ -122,7 +148,7 @@ async function generateHumanReply(incomingText, customerName = 'Amigo/a') {
   }
 
   return [
-    `¡Hola ${customerName}! Qué tal`,
+    greeting,
     `Te atiende Nacho de Metal Creativo por acá`,
     `Cuéntame, ¿para qué auto o camioneta andas buscando la barra de remolque? Así te confirmo compatibilidad al tiro`
   ];
@@ -203,9 +229,9 @@ module.exports = async (req, res) => {
       const fromNumber = message.from;
       const messageBody = message.text ? message.text.body : '';
       const contact = value.contacts && value.contacts[0];
-      const customerName = (contact && contact.profile && contact.profile.name) || 'Amigo';
+      const customerName = (contact && contact.profile && contact.profile.name) || '';
 
-      console.log(`[WHATSAPP HUMANO] De: ${fromNumber} (${customerName}): "${messageBody}"`);
+      console.log(`[WHATSAPP HUMANO] De: ${fromNumber} (${customerName || 'Sin Nombre'}): "${messageBody}"`);
 
       const humanBubbles = await generateHumanReply(messageBody, customerName);
       const bubbles = Array.isArray(humanBubbles) ? humanBubbles : [humanBubbles];
@@ -219,12 +245,12 @@ module.exports = async (req, res) => {
           const bubble = bubbles[i];
           if (!bubble) continue;
 
-          // Retardo dinámico de tipeo y lectura:
-          // Burbuja 1: 1.6s a 2.8s
-          // Burbujas siguientes: 1.1s a 2.0s
+          // Retardo dinámico de tipeo y lectura humana:
+          // Burbuja 1: 3.0s a 4.8s (lectura inicial + tipeo de saludo)
+          // Burbujas siguientes: 2.0s a 3.5s (tipeo continuo en taller)
           const delay = i === 0
-            ? Math.min(Math.max(bubble.length * 18, 1600), 2800)
-            : Math.min(Math.max(bubble.length * 15, 1100), 2000);
+            ? Math.min(Math.max(bubble.length * 24, 3000), 4800)
+            : Math.min(Math.max(bubble.length * 18, 2000), 3500);
 
           await new Promise(resolve => setTimeout(resolve, delay));
 
