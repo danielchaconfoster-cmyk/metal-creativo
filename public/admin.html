@@ -589,8 +589,13 @@
             <div class="metal-card p-6 rounded-2xl max-w-2xl mx-auto space-y-5">
                 <div class="flex items-center justify-between border-b border-white/10 pb-4">
                     <div>
-                        <h2 class="text-lg font-bold text-white">Simulador de WhatsApp Bot (Modo Sandbox)</h2>
-                        <p class="text-xs text-gray-400">Prueba cómo responde tu bot a las preguntas de los clientes sin tocar tu WhatsApp real.</p>
+                        <div class="flex items-center gap-2">
+                            <h2 class="text-lg font-bold text-white">Simulador de WhatsApp Humano (Cadencia en Ráfaga)</h2>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                2-3 Burbujas Secuenciales
+                            </span>
+                        </div>
+                        <p class="text-xs text-gray-400">Prueba cómo responde Nacho con pausas naturales de tipeo, sin sonar a robot ni usar formato artificial.</p>
                     </div>
                     <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
                         🧪 Sandbox Safe
@@ -688,7 +693,8 @@
                 shippingSearch: 'Temuco',
                 shippingResult: null,
                 simulatorMessages: [
-                    { sender: 'bot', text: '¡Hola qué tal! Te atiende Nacho de Metal Creativo. Cuéntame, ¿para qué auto o camioneta andas buscando la barra de remolque? Así te confirmo compatibilidad al tiro.', time: '04:30' }
+                    { sender: 'bot', text: '¡Hola qué tal!', time: '04:30' },
+                    { sender: 'bot', text: 'Te atiende Nacho de Metal Creativo. Cuéntame, ¿para qué auto o camioneta andas buscando la barra de remolque? Así te confirmo compatibilidad al tiro.', time: '04:30' }
                 ],
                 customInput: '',
                 isTyping: false,
@@ -742,7 +748,11 @@
                 },
 
                 async sendSimulator(text) {
-                    this.simulatorMessages.push({ sender: 'user', text: text, time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) });
+                    this.simulatorMessages.push({
+                        sender: 'user',
+                        text: text,
+                        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                    });
                     this.scrollChat();
                     this.isTyping = true;
                     
@@ -754,16 +764,41 @@
                         });
                         const data = await res.json();
                         
-                        // Demora humana realista: simula tiempo de lectura y tipeo de 2.2 a 3.8 segundos
-                        const humanTypingDelay = Math.min(Math.max((data.botResponse || '').length * 15, 2200), 3800);
-                        await new Promise(r => setTimeout(r, humanTypingDelay));
+                        // Extraer burbujas secuenciales (cadencia humana en ráfaga)
+                        const bubbles = (data.messages && data.messages.length) ? data.messages : [data.botResponse || '¡Hola!'];
                         
-                        this.isTyping = false;
-                        this.simulatorMessages.push({ sender: 'bot', text: data.botResponse, time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) });
-                        this.scrollChat();
+                        for (let i = 0; i < bubbles.length; i++) {
+                            this.isTyping = true;
+                            this.scrollChat();
+                            
+                            // Retardo proporcional por burbuja (lectura + tipeo natural)
+                            const bubble = bubbles[i];
+                            const typingDelay = i === 0 
+                                ? Math.min(Math.max(bubble.length * 18, 1400), 2600)
+                                : Math.min(Math.max(bubble.length * 15, 1100), 2100);
+                            
+                            await new Promise(r => setTimeout(r, typingDelay));
+                            
+                            this.isTyping = false;
+                            this.simulatorMessages.push({
+                                sender: 'bot',
+                                text: bubble,
+                                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                            });
+                            this.scrollChat();
+                            
+                            // Pausa de respiro entre burbujas consecutivas
+                            if (i < bubbles.length - 1) {
+                                await new Promise(r => setTimeout(r, 450));
+                            }
+                        }
                     } catch (e) {
                         this.isTyping = false;
-                        this.simulatorMessages.push({ sender: 'bot', text: 'Disculpa, se me fue un segundo la señal. ¿Me repites por favor?', time: '04:35' });
+                        this.simulatorMessages.push({
+                            sender: 'bot',
+                            text: 'Disculpa, se me fue un segundo la señal. ¿Me repites por favor?',
+                            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                        });
                         this.scrollChat();
                     }
                 },

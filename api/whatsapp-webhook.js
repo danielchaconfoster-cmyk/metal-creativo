@@ -12,17 +12,28 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY || 'AIzaSyAb16muTUfrb80LknOr8I
 const SYSTEM_PERSONA_PROMPT = `Eres Nacho, maestro soldador y dueño del taller Metal Creativo Chile (+56 9 5492 2608).
 Atiendes personalmente por WhatsApp a clientes que vieron tus anuncios en Facebook e Instagram de la Barra Rígida de Remolque ($65.000 CLP) o los Fogones a Bioetanol ($149.900 CLP).
 
-REGLAS OBLIGATORIAS PARA NO PARECER UN BOT:
-1. CERO TONO ROBÓTICO: Jamás uses viñetas con guiones, listas numeradas (1, 2, 3), ni asteriscos de negrita de markdown (**palabra**). Escribe exactamente como escribe un chileno real desde su teléfono en WhatsApp.
-2. MENSAJES CORTOS Y NATURALES: Máximo 2 a 3 oraciones por mensaje. Tono cálido, de taller, confiable y respetuoso ("¡Hola qué tal!", "te cuento", "te queda impecable", "ningún drama", "al tiro").
-3. CONOCIMIENTO TÉCNICO OFICIAL:
-   - Barra de Remolque: Cuesta $65.000 CLP (IVA incluido). Fabricada en acero macizo estructural de 3 mm de espesor. Soporta hasta 3.500 kg de arrastre directo certificado.
-   - Viene en 3 tramos de 65 cm para guardarla en la maleta al lado de la rueda de repuesto sin que estorbe.
+FORMATO OBLIGATORIO DE SALIDA (CADENCIA HUMANA EN RÁFAGA):
+Debes responder SIEMPRE con un objeto JSON válido con la propiedad "messages", que es una lista de 2 o máximo 3 textos breves (burbujas consecutivas de WhatsApp), simulando cómo chatea una persona real desde su teléfono:
+- Burbuja 1: Saludo inicial cálido, reacción rápida o acuse de recibo ("¡Hola qué tal!", "Hola compadre, todo bien por acá", "Buena").
+- Burbuja 2: Respuesta directa, técnica y honesta de taller (1 o 2 oraciones, sin relleno ni tecnicismos artificiales).
+- Burbuja 3: Pregunta de cierre abierta para avanzar el cierre ("¿Para qué vehículo la necesitas tú?", "¿De qué comuna me escribes para cotizarte el flete por Starken?").
+
+REGLAS ESTRICTAS PARA NO PARECER UN BOT:
+1. CERO TONO O FORMATO ROBÓTICO: Jamás uses viñetas con guiones, listas numeradas (1, 2, 3), ni asteriscos de markdown (**palabra**). Escribe como un chileno real desde su celular.
+2. CERO EMOJIS ROBÓTICOS: Prohibido saturar con emojis (nada de 🤖, 📌, 🚀, 💡, ✅). Máximo 1 emoji casual en toda la conversación (como 👍 o 💪).
+3. TONO DE TALLER CHILENO: Amable, cercano, confiable y relajado ("al tiro", "te queda impecable", "ningún drama", "te cuento", "al toque").
+4. CONOCIMIENTO TÉCNICO OFICIAL:
+   - Barra de Remolque: Cuesta $65.000 CLP (IVA incluido). Acero estructural macizo de 3 mm de espesor. Soporta hasta 3.500 kg de arrastre directo certificado.
+   - Se desarma en 3 tramos de 65 cm para guardarla en la maleta al lado de la rueda de repuesto.
    - Incluye 2 grilletes forjados de seguridad que enganchan en cualquier vehículo (camioneta, furgón, SUV o auto con perno de tiro).
-   - Cumple al 100% el Decreto Supremo N° 55/2025 del Ministerio de Transportes (que prohíbe terminantemente remolcar con cuerda o piola por multas de 1 a 1.5 UTM y riesgo de choque).
+   - Cumple al 100% el Decreto Supremo N° 55/2025 del Ministerio de Transportes (multa de 1 a 1.5 UTM por remolcar con cuerda o piola).
    - Envíos diarios a todo Chile por Starken por pagar al retirar o a domicilio.
-   - Si piden datos de pago: Ofrece transferencia a cuenta de la empresa o link de Mercado Pago / Webpay para pagar en cuotas con tarjeta (https://metalcreativo.cl/checkout.html).
-4. CIERRE CONVERSACIONAL: Termina siempre con una pregunta natural y relajada (ej: "¿Para qué auto la necesitas tú?" o "¿De qué ciudad me escribes para ver el envío?").`;
+   - Medios de pago: Transferencia a la cuenta de la empresa o tarjeta en cuotas por Webpay en https://metalcreativo.cl/checkout.html.`;
+
+function cleanBubbleText(text) {
+  if (!text) return '';
+  return text.replace(/\*\*/g, '').replace(/\*/g, '').replace(/^[-•]\s*/, '').trim();
+}
 
 async function generateHumanReply(incomingText, customerName = 'Amigo/a') {
   const text = (incomingText || '').trim();
@@ -38,11 +49,11 @@ async function generateHumanReply(incomingText, customerName = 'Amigo/a') {
     }
   }
 
-  // 2. LLAMADA A GEMINI 3.1 FLASH LITE (RESPUESTA HUMANA EN < 800ms)
+  // 2. LLAMADA A GEMINI 3.1 FLASH LITE CON SALIDA JSON ESTRUCTURADA EN BURBUJAS
   if (GEMINI_API_KEY) {
     try {
       const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
-      const promptContent = `${SYSTEM_PERSONA_PROMPT}\n${shippingContext}\n\nCliente (${customerName}) dice: "${text}"\nResponde como Nacho:`;
+      const promptContent = `${SYSTEM_PERSONA_PROMPT}\n${shippingContext}\n\nCliente (${customerName}) dice: "${text}"\nGenera el JSON con el array "messages":`;
 
       const response = await fetch(url, {
         method: 'POST',
@@ -51,7 +62,8 @@ async function generateHumanReply(incomingText, customerName = 'Amigo/a') {
           contents: [{ role: 'user', parts: [{ text: promptContent }] }],
           generationConfig: {
             temperature: 0.7,
-            maxOutputTokens: 250
+            maxOutputTokens: 350,
+            responseMimeType: 'application/json'
           }
         }),
         signal: AbortSignal.timeout(4500)
@@ -59,30 +71,61 @@ async function generateHumanReply(incomingText, customerName = 'Amigo/a') {
 
       const data = await response.json();
       if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-        let reply = data.candidates[0].content.parts[0].text.trim();
-        // Limpiar asteriscos accidentales para que parezca WhatsApp 100% natural
-        reply = reply.replace(/\*\*/g, '').replace(/\*/g, '');
-        return reply;
+        const rawJson = data.candidates[0].content.parts[0].text.trim();
+        try {
+          const parsed = JSON.parse(rawJson);
+          if (Array.isArray(parsed.messages) && parsed.messages.length > 0) {
+            return parsed.messages.map(cleanBubbleText).filter(Boolean);
+          }
+        } catch (_) {
+          // Si no vino como JSON estricto, separar por saltos de línea
+          const splitLines = rawJson.split(/\n\n+/).map(cleanBubbleText).filter(Boolean);
+          if (splitLines.length > 0) return splitLines;
+        }
       }
     } catch (err) {
       console.warn('[GEMINI AI WARNING]: Usando respaldo conversacional:', err.message);
     }
   }
 
-  // 3. RESPALDO CONVERSACIONAL NATURAL (SI LA IA TARDA O ESTÁ OFFLINE)
-  if (lower.includes('navara') || lower.includes('hilux') || lower.includes('l200') || lower.includes('camioneta') || lower.includes('auto')) {
-    return `¡Hola ${customerName}! Qué tal. Sí, te cuento que le queda impecable. La barra aguanta hasta 3.500 kilos y viene con dos grilletes forjados de seguridad que enganchan directo al tiro sin problema. ¿De qué comuna me escribes para ver el tema del despacho?`;
+  // 3. RESPALDO CONVERSACIONAL FRAGMENTADO (CADENCIA NATURAL DE 2 A 3 BURBUJAS)
+  if (lower.includes('navara') || lower.includes('hilux') || lower.includes('l200') || lower.includes('camioneta') || lower.includes('auto') || lower.includes('compatible')) {
+    return [
+      `¡Hola ${customerName}! Qué tal`,
+      `Sí, te cuento que le queda impecable. La barra aguanta hasta 3.500 kilos y viene con dos grilletes forjados de seguridad que enganchan directo al tiro sin problema`,
+      `¿De qué comuna me escribes para ver el tema del despacho por Starken?`
+    ];
   }
 
-  if (lower.includes('temuco') || lower.includes('concepcion') || lower.includes('antofagasta') || lower.includes('envio') || lower.includes('despacho')) {
-    return `¡Hola! Mira, nosotros despachamos todos los días hábiles por Starken por pagar a sucursal o domicilio, así que te llega súper rápido en 1 a 2 días hábiles. ¿Para qué vehículo la estarías necesitando tú?`;
+  if (lower.includes('temuco') || lower.includes('concepcion') || lower.includes('antofagasta') || lower.includes('envio') || lower.includes('despacho') || lower.includes('starken')) {
+    return [
+      `¡Hola! Mira, nosotros despachamos todos los días hábiles por Starken`,
+      `Se envía por pagar ya sea a sucursal o directo a tu domicilio, y demora entre 1 a 2 días hábiles en llegar`,
+      `¿Para qué vehículo la estarías necesitando tú?`
+    ];
   }
 
-  if (lower.includes('pagar') || lower.includes('cuenta') || lower.includes('transferir') || lower.includes('comprar')) {
-    return `¡Buenísima! El pago lo puedes hacer por transferencia a la cuenta de la empresa o si prefieres con tarjeta de crédito en cuotas por Webpay en nuestra web https://metalcreativo.cl/checkout.html. Avísame cuál te acomoda y te paso los datos al tiro.`;
+  if (lower.includes('ley') || lower.includes('decreto') || lower.includes('multa') || lower.includes('ministerio') || lower.includes('carabineros')) {
+    return [
+      `Hola! Sí, exactamente`,
+      `Cumple al 100% con el nuevo Decreto Supremo N° 55/2025 del Ministerio de Transportes. Ahora está estrictamente prohibido tirar con piola o lazo porque te sacan partes de hasta 1.5 UTM`,
+      `La barra nuestra es rígida y certificada para 3.500 kg. ¿Para qué vehículo la necesitas?`
+    ];
   }
 
-  return `¡Hola ${customerName}! Qué tal, te atiende Nacho de Metal Creativo. Cuéntame, ¿para qué auto o camioneta andas buscando la barra de remolque? Así te confirmo compatibilidad al tiro.`;
+  if (lower.includes('pagar') || lower.includes('cuenta') || lower.includes('transferir') || lower.includes('comprar') || lower.includes('precio')) {
+    return [
+      `Sale $65.000 IVA incluido con los 2 grilletes forjados listos para usar`,
+      `Lo puedes pagar por transferencia a la cuenta de la empresa o en cuotas con tarjeta por Webpay en https://metalcreativo.cl/checkout.html`,
+      `¿Cuál te acomoda más para pasarte los datos al tiro?`
+    ];
+  }
+
+  return [
+    `¡Hola ${customerName}! Qué tal`,
+    `Te atiende Nacho de Metal Creativo por acá`,
+    `Cuéntame, ¿para qué auto o camioneta andas buscando la barra de remolque? Así te confirmo compatibilidad al tiro`
+  ];
 }
 
 module.exports = async (req, res) => {
@@ -108,10 +151,11 @@ module.exports = async (req, res) => {
       // MODO SIMULACIÓN PARA TESTEO DIRECTO EN EL PANEL ADMIN
       if (body.simulate === true) {
         const text = body.message || 'Hola, ¿tienen stock?';
-        const name = body.name || 'Cliente Prueba';
+        const name = body.name || 'Cliente';
         const phone = body.phone || '+56 9 8888 7777';
 
-        const humanReply = await generateHumanReply(text, name);
+        const humanBubbles = await generateHumanReply(text, name);
+        const bubbles = Array.isArray(humanBubbles) ? humanBubbles : [humanBubbles];
 
         // Guardar lead en el historial del Kanban
         const newLead = {
@@ -141,7 +185,8 @@ module.exports = async (req, res) => {
           success: true,
           mode: 'simulated_human_ai',
           customerMessage: text,
-          botResponse: humanReply
+          messages: bubbles,
+          botResponse: bubbles.join('\n\n')
         });
       }
 
@@ -162,33 +207,44 @@ module.exports = async (req, res) => {
 
       console.log(`[WHATSAPP HUMANO] De: ${fromNumber} (${customerName}): "${messageBody}"`);
 
-      const humanReply = await generateHumanReply(messageBody, customerName);
+      const humanBubbles = await generateHumanReply(messageBody, customerName);
+      const bubbles = Array.isArray(humanBubbles) ? humanBubbles : [humanBubbles];
 
-      // Pausa humana realista: simula tiempo de lectura y tipeo (2.2 a 3.8 segundos)
-      const humanDelayMs = Math.min(Math.max((humanReply || '').length * 15, 2200), 3800);
-      await new Promise(resolve => setTimeout(resolve, humanDelayMs));
-
-      // Responder a través de Meta WhatsApp Cloud API
+      // Responder secuencialmente a través de Meta WhatsApp Cloud API con cadencia humana
       const metaToken = process.env.META_ACCESS_TOKEN;
       const testPhoneId = process.env.WHATSAPP_TEST_PHONE_NUMBER_ID;
 
       if (metaToken && testPhoneId && fromNumber) {
-        try {
-          await fetch(`https://graph.facebook.com/v21.0/${testPhoneId}/messages`, {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${metaToken}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              messaging_product: 'whatsapp',
-              to: fromNumber,
-              type: 'text',
-              text: { body: humanReply }
-            })
-          });
-        } catch (sendErr) {
-          console.warn('[WHATSAPP SEND ERROR]:', sendErr.message);
+        for (let i = 0; i < bubbles.length; i++) {
+          const bubble = bubbles[i];
+          if (!bubble) continue;
+
+          // Retardo dinámico de tipeo y lectura:
+          // Burbuja 1: 1.6s a 2.8s
+          // Burbujas siguientes: 1.1s a 2.0s
+          const delay = i === 0
+            ? Math.min(Math.max(bubble.length * 18, 1600), 2800)
+            : Math.min(Math.max(bubble.length * 15, 1100), 2000);
+
+          await new Promise(resolve => setTimeout(resolve, delay));
+
+          try {
+            await fetch(`https://graph.facebook.com/v21.0/${testPhoneId}/messages`, {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${metaToken}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                messaging_product: 'whatsapp',
+                to: fromNumber,
+                type: 'text',
+                text: { body: bubble }
+              })
+            });
+          } catch (sendErr) {
+            console.warn('[WHATSAPP SEND ERROR]:', sendErr.message);
+          }
         }
       }
 
