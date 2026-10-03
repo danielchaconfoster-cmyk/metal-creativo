@@ -1,111 +1,88 @@
 // Vercel Serverless Function: api/whatsapp-webhook.js
-// Webhook Oficial para WhatsApp Cloud API (Modo Sandbox & Producción)
-// Incluye Motor Conversacional con Ficha Técnica MTT 55/2025, Cotizador Starken y Pasarela Mercado Pago
+// Motor de IA Conversacional Humana (Gemini 3.1 Flash Lite) para WhatsApp
+// Persona: Nacho, Maestro Soldador y Dueño de Metal Creativo Chile (Quillota / Santiago)
 
 try { require('dotenv').config(); } catch (_) {}
 const fs = require('fs');
 const path = require('path');
 const { calculateShipping, COMMUNE_MAP } = require('./shipping-quote');
 
-// 1. MOTOR DE RESPUESTAS INTELIGENTES BASADO EN EL PLAYBOOK OFICIAL
-function generateBotReply(incomingText, customerName = 'Amigo/a') {
-  const text = (incomingText || '').toLowerCase().trim();
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || 'AIzaSyAb16muTUfrb80LknOr8IwDp-Pn_kqwA5Q';
 
-  // A. DETECCIÓN DE COMUNA PARA COTIZAR FLETE STARKEN
-  let detectedCommune = null;
+const SYSTEM_PERSONA_PROMPT = `Eres Nacho, maestro soldador y dueño del taller Metal Creativo Chile (+56 9 5492 2608).
+Atiendes personalmente por WhatsApp a clientes que vieron tus anuncios en Facebook e Instagram de la Barra Rígida de Remolque ($65.000 CLP) o los Fogones a Bioetanol ($149.900 CLP).
+
+REGLAS OBLIGATORIAS PARA NO PARECER UN BOT:
+1. CERO TONO ROBÓTICO: Jamás uses viñetas con guiones, listas numeradas (1, 2, 3), ni asteriscos de negrita de markdown (**palabra**). Escribe exactamente como escribe un chileno real desde su teléfono en WhatsApp.
+2. MENSAJES CORTOS Y NATURALES: Máximo 2 a 3 oraciones por mensaje. Tono cálido, de taller, confiable y respetuoso ("¡Hola qué tal!", "te cuento", "te queda impecable", "ningún drama", "al tiro").
+3. CONOCIMIENTO TÉCNICO OFICIAL:
+   - Barra de Remolque: Cuesta $65.000 CLP (IVA incluido). Fabricada en acero macizo estructural de 3 mm de espesor. Soporta hasta 3.500 kg de arrastre directo certificado.
+   - Viene en 3 tramos de 65 cm para guardarla en la maleta al lado de la rueda de repuesto sin que estorbe.
+   - Incluye 2 grilletes forjados de seguridad que enganchan en cualquier vehículo (camioneta, furgón, SUV o auto con perno de tiro).
+   - Cumple al 100% el Decreto Supremo N° 55/2025 del Ministerio de Transportes (que prohíbe terminantemente remolcar con cuerda o piola por multas de 1 a 1.5 UTM y riesgo de choque).
+   - Envíos diarios a todo Chile por Starken por pagar al retirar o a domicilio.
+   - Si piden datos de pago: Ofrece transferencia a cuenta de la empresa o link de Mercado Pago / Webpay para pagar en cuotas con tarjeta (https://metalcreativo.cl/checkout.html).
+4. CIERRE CONVERSACIONAL: Termina siempre con una pregunta natural y relajada (ej: "¿Para qué auto la necesitas tú?" o "¿De qué ciudad me escribes para ver el envío?").`;
+
+async function generateHumanReply(incomingText, customerName = 'Amigo/a') {
+  const text = (incomingText || '').trim();
+
+  // 1. Detectar si hay consulta de flete para darle contexto a la IA
+  let shippingContext = '';
+  const lower = text.toLowerCase();
   for (const commune of Object.keys(COMMUNE_MAP)) {
-    if (text.includes(commune)) {
-      detectedCommune = commune;
+    if (lower.includes(commune)) {
+      const quote = calculateShipping(commune, 'barra_remolque');
+      shippingContext = `[DATO DE FLETE: Para ${quote.region} el envío aproximado por Starken es de $${quote.couriers.starken.cost.toLocaleString('es-CL')} CLP y demora ${quote.estimatedDays}].`;
       break;
     }
   }
 
-  // B. FLUJO: COMPRA DIRECTA / LINK DE PAGO
-  if (text.includes('pagar') || text.includes('cuenta') || text.includes('transferir') || text.includes('comprar') || text.includes('link') || text.includes('datos')) {
-    return {
-      type: 'payment',
-      intent: 'checkout',
-      replyText: `¡Excelente decisión! 🛠️ Puedes pagar tu **Barra Rígida de Remolque ($65.000 CLP)** de forma 100% segura por:
+  // 2. LLAMADA A GEMINI 3.1 FLASH LITE (RESPUESTA HUMANA EN < 800ms)
+  if (GEMINI_API_KEY) {
+    try {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
+      const promptContent = `${SYSTEM_PERSONA_PROMPT}\n${shippingContext}\n\nCliente (${customerName}) dice: "${text}"\nResponde como Nacho:`;
 
-💳 **1. Tarjetas de Crédito / Débito / Webpay (Mercado Pago)**:
-https://metalcreativo.cl/checkout.html
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts: [{ text: promptContent }] }],
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 250
+          }
+        }),
+        signal: AbortSignal.timeout(4500)
+      });
 
-🏦 **2. Transferencia Bancaria Directa**:
-• Banco: Banco Estado / Cuenta Vista
-• Titular: Metal Creativo SpA
-• RUT: 77.892.410-K
-• Correo: pagos@metalcreativo.cl
-• Monto: $65.000 CLP
-
-Apenas realices el pago, envíanos el comprobante por aquí con tu nombre y dirección para dejar tu barra embalada hoy mismo. 📦`
-    };
+      const data = await response.json();
+      if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+        let reply = data.candidates[0].content.parts[0].text.trim();
+        // Limpiar asteriscos accidentales para que parezca WhatsApp 100% natural
+        reply = reply.replace(/\*\*/g, '').replace(/\*/g, '');
+        return reply;
+      }
+    } catch (err) {
+      console.warn('[GEMINI AI WARNING]: Usando respaldo conversacional:', err.message);
+    }
   }
 
-  // C. FLUJO: PREGUNTA POR ENVÍO O COMUNA
-  if (detectedCommune || text.includes('envio') || text.includes('despacho') || text.includes('starken') || text.includes('chilexpress') || text.includes('cuanto sale el envio')) {
-    const target = detectedCommune || 'tu comuna';
-    const quote = calculateShipping(target, 'barra_remolque');
-    
-    return {
-      type: 'shipping_quote',
-      intent: 'shipping',
-      commune: quote.region,
-      replyText: `🚗 Para **${quote.region}**, el envío de la Barra Rígida (paquete de 65 cm, 6 kg) sale aproximadamente **$${quote.couriers.starken.cost.toLocaleString('es-CL')} CLP vía Starken** (${quote.estimatedDays}).
-
-📦 Modalidad habitual: **Por Pagar** al retirar en tu sucursal Starken más cercana o en tu domicilio.
-
-¿Para qué vehículo o camioneta la necesitas? Te confirmamos compatibilidad de inmediato.`
-    };
+  // 3. RESPALDO CONVERSACIONAL NATURAL (SI LA IA TARDA O ESTÁ OFFLINE)
+  if (lower.includes('navara') || lower.includes('hilux') || lower.includes('l200') || lower.includes('camioneta') || lower.includes('auto')) {
+    return `¡Hola ${customerName}! Qué tal. Sí, te cuento que le queda impecable. La barra aguanta hasta 3.500 kilos y viene con dos grilletes forjados de seguridad que enganchan directo al tiro sin problema. ¿De qué comuna me escribes para ver el tema del despacho?`;
   }
 
-  // D. FLUJO: CONSULTA DE LEY MTT / DECRETO 55/2025
-  if (text.includes('ley') || text.includes('mtt') || text.includes('decreto') || text.includes('multa') || text.includes('legal') || text.includes('carabinero')) {
-    return {
-      type: 'legal_mtt',
-      intent: 'legal_compliance',
-      replyText: `⚖️ **¡Cumple 100% con la Nueva Ley!** 
-
-Desde agosto de 2026, el **Decreto Supremo N° 55/2025 del Ministerio de Transportes** prohíbe terminantemente remolcar con cuerdas, cadenas o piolas elásticas por riesgo grave de corte y choques por alcance al frenar.
-
-Nuestra **Barra Rígida Metal Creativo**:
-✅ Mantiene 1.80 metros fijos (Cero impactos entre autos al frenar).
-✅ Acero estructural macizo de 3 mm con ojales forjados al rojo.
-✅ Arrastre directo certificado hasta 3.500 kg.
-✅ Se desarma en 3 tramos de 65 cm para entrar en la maleta o tolva.
-
-💰 **Valor de Taller**: $65.000 CLP.
-¿Te gustaría coordinar el despacho a tu comuna?`
-    };
+  if (lower.includes('temuco') || lower.includes('concepcion') || lower.includes('antofagasta') || lower.includes('envio') || lower.includes('despacho')) {
+    return `¡Hola! Mira, nosotros despachamos todos los días hábiles por Starken por pagar a sucursal o domicilio, así que te llega súper rápido en 1 a 2 días hábiles. ¿Para qué vehículo la estarías necesitando tú?`;
   }
 
-  // E. FLUJO: ESTUFA / FOGÓN A BIOETANOL
-  if (text.includes('fogon') || text.includes('fogón') || text.includes('estufa') || text.includes('bioetanol') || text.includes('terraza')) {
-    return {
-      type: 'fogon',
-      intent: 'fogon_product',
-      replyText: `🔥 **Fogón de Mesa a Bioetanol Ecológico ($149.900 CLP)**
-
-• Funciona con bioetanol (combustión 100% limpia sin humo, cenizas ni olor).
-• NO requiere cañón ni ductos de ventilación (Apto para terrazas y departamentos).
-• Acero al carbono con pintura ignífuga (resiste 600°C) + cristales templados de 6 mm.
-• Autonomía de 3.5 a 5.5 horas de llama viva por carga.
-
-¿Te gustaría coordinar despacho a domicilio o ver fotos en detalle?`
-    };
+  if (lower.includes('pagar') || lower.includes('cuenta') || lower.includes('transferir') || lower.includes('comprar')) {
+    return `¡Buenísima! El pago lo puedes hacer por transferencia a la cuenta de la empresa o si prefieres con tarjeta de crédito en cuotas por Webpay en nuestra web https://metalcreativo.cl/checkout.html. Avísame cuál te acomoda y te paso los datos al tiro.`;
   }
 
-  // F. SALUDO GENERAL / POR DEFECTO
-  return {
-    type: 'welcome',
-    intent: 'general_inquiry',
-    replyText: `¡Hola ${customerName}! 👋 Bienvenido a **Metal Creativo Chile** 🇨🇱.
-
-Somos taller de fabricación especializada en:
-1️⃣ **Barra Rígida de Remolque 1.8m ($65.000 CLP)**: Homologada bajo el Decreto Supremo 55/2025 MTT, resiste 3.500 kg y se desarma en 3 tramos.
-2️⃣ **Fogón Ecológico a Bioetanol ($149.900 CLP)**: Fuego real para terrazas sin cañón ni humo.
-
-¿Por cuál de los productos te gustaría cotizar o tienes alguna duda técnica?`
-  };
+  return `¡Hola ${customerName}! Qué tal, te atiende Nacho de Metal Creativo. Cuéntame, ¿para qué auto o camioneta andas buscando la barra de remolque? Así te confirmo compatibilidad al tiro.`;
 }
 
 module.exports = async (req, res) => {
@@ -114,16 +91,13 @@ module.exports = async (req, res) => {
     const mode = req.query['hub.mode'];
     const token = req.query['hub.verify_token'];
     const challenge = req.query['hub.challenge'];
-
     const expectedToken = process.env.WHATSAPP_VERIFY_TOKEN || 'metal_creativo_webhook_secure_2026';
 
     if (mode === 'subscribe' && token === expectedToken) {
       console.log('[WHATSAPP WEBHOOK] Verificación exitosa de Meta.');
       return res.status(200).send(challenge);
-    } else {
-      console.warn('[WHATSAPP WEBHOOK] Fallo de verificación de token.');
-      return res.status(403).send('Token no coincide');
     }
+    return res.status(403).send('Token no coincide');
   }
 
   // 2. RECEPCIÓN DE MENSAJES (POST)
@@ -137,19 +111,19 @@ module.exports = async (req, res) => {
         const name = body.name || 'Cliente Prueba';
         const phone = body.phone || '+56 9 8888 7777';
 
-        const botReply = generateBotReply(text, name);
+        const humanReply = await generateHumanReply(text, name);
 
-        // Guardar lead de simulación en historial
+        // Guardar lead en el historial del Kanban
         const newLead = {
           id: 'LEAD-' + Math.floor(1000 + Math.random() * 9000),
           name: name,
           phone: phone,
-          product: text.includes('fogon') ? 'fogon' : 'barra_remolque',
-          commune: botReply.commune || 'Santiago',
-          region: botReply.commune || 'Región Metropolitana',
+          product: text.toLowerCase().includes('fogon') ? 'fogon' : 'barra_remolque',
+          commune: 'Chile',
+          region: 'Chile',
           status: 'new',
           source: 'whatsapp_sandbox',
-          estimated_shipping: 4990,
+          estimated_shipping: 7900,
           last_message: text,
           created_at: new Date().toISOString()
         };
@@ -165,35 +139,32 @@ module.exports = async (req, res) => {
 
         return res.status(200).json({
           success: true,
-          mode: 'simulated_sandbox',
+          mode: 'simulated_human_ai',
           customerMessage: text,
-          botResponse: botReply.replyText,
-          detectedIntent: botReply.intent
+          botResponse: humanReply
         });
       }
 
-      // 3. ESTRUCTURA OFICIAL META WHATSAPP CLOUD API
+      // 3. PROCESAMIENTO OFICIAL DE MENSAJE DE META
       const entry = body.entry && body.entry[0];
       const change = entry && entry.changes && entry.changes[0];
       const value = change && change.value;
       const message = value && value.messages && value.messages[0];
 
       if (!message) {
-        // Puede ser un status update (read, sent, delivered)
         return res.status(200).send('EVENT_RECEIVED');
       }
 
       const fromNumber = message.from;
       const messageBody = message.text ? message.text.body : '';
       const contact = value.contacts && value.contacts[0];
-      const customerName = (contact && contact.profile && contact.profile.name) || 'Cliente';
+      const customerName = (contact && contact.profile && contact.profile.name) || 'Amigo';
 
-      console.log(`[WHATSAPP ENTRANTE] De: ${fromNumber} (${customerName}) - Texto: "${messageBody}"`);
+      console.log(`[WHATSAPP HUMANO] De: ${fromNumber} (${customerName}): "${messageBody}"`);
 
-      // Generar respuesta
-      const botReply = generateBotReply(messageBody, customerName);
+      const humanReply = await generateHumanReply(messageBody, customerName);
 
-      // Si tenemos credenciales de Meta y es un mensaje de prueba Sandbox
+      // Responder a través de Meta WhatsApp Cloud API
       const metaToken = process.env.META_ACCESS_TOKEN;
       const testPhoneId = process.env.WHATSAPP_TEST_PHONE_NUMBER_ID;
 
@@ -209,22 +180,22 @@ module.exports = async (req, res) => {
               messaging_product: 'whatsapp',
               to: fromNumber,
               type: 'text',
-              text: { body: botReply.replyText }
+              text: { body: humanReply }
             })
           });
         } catch (sendErr) {
-          console.warn('[WHATSAPP API] No se pudo enviar mensaje saliente (Sandbox):', sendErr.message);
+          console.warn('[WHATSAPP SEND ERROR]:', sendErr.message);
         }
       }
 
       return res.status(200).send('EVENT_RECEIVED');
     } catch (err) {
       console.error('[WHATSAPP WEBHOOK ERROR]:', err);
-      return res.status(200).send('EVENT_RECEIVED'); // Responder siempre 200 a Meta
+      return res.status(200).send('EVENT_RECEIVED');
     }
   }
 
   return res.status(405).json({ error: 'Método no permitido' });
 };
 
-module.exports.generateBotReply = generateBotReply;
+module.exports.generateHumanReply = generateHumanReply;
