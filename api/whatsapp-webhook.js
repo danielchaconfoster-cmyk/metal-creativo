@@ -164,6 +164,10 @@ module.exports = async (req, res) => {
 
       const humanReply = await generateHumanReply(messageBody, customerName);
 
+      // Pausa humana realista: simula tiempo de lectura y tipeo (2.2 a 3.8 segundos)
+      const humanDelayMs = Math.min(Math.max((humanReply || '').length * 15, 2200), 3800);
+      await new Promise(resolve => setTimeout(resolve, humanDelayMs));
+
       // Responder a través de Meta WhatsApp Cloud API
       const metaToken = process.env.META_ACCESS_TOKEN;
       const testPhoneId = process.env.WHATSAPP_TEST_PHONE_NUMBER_ID;

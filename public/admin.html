@@ -598,18 +598,33 @@
                 </div>
 
                 <!-- Chat Canvas -->
-                <div class="h-96 rounded-xl bg-[#090b0e] border border-white/10 p-4 overflow-y-auto space-y-3 font-sans text-xs flex flex-col justify-end">
+                <div x-ref="chatContainer" class="h-96 rounded-xl bg-[#090b0e] border border-white/10 p-4 overflow-y-auto space-y-3 font-sans text-xs flex flex-col">
                     
                     <template x-for="(msg, i) in simulatorMessages" :key="i">
                         <div class="flex" :class="msg.sender === 'user' ? 'justify-end' : 'justify-start'">
-                            <div class="max-w-[80%] p-3 rounded-2xl space-y-1 shadow"
+                            <div class="max-w-[85%] p-3 rounded-2xl space-y-1 shadow transition-all animate-fadeIn"
                                 :class="msg.sender === 'user' ? 'bg-[#005c4b] text-white rounded-br-none' : 'bg-[#202c33] text-gray-100 rounded-bl-none'">
-                                <div class="font-bold text-[10px] opacity-75" x-text="msg.sender === 'user' ? 'Cliente' : 'Metal Creativo Bot'"></div>
-                                <div class="whitespace-pre-line text-xs" x-html="msg.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')"></div>
-                                <div class="text-[9px] text-right opacity-60" x-text="msg.time"></div>
+                                <div class="font-bold text-[10px] opacity-75" x-text="msg.sender === 'user' ? 'Cliente' : 'Nacho (Metal Creativo)'"></div>
+                                <div class="whitespace-pre-line text-xs leading-relaxed" x-text="msg.text"></div>
+                                <div class="text-[9px] text-right opacity-60 flex items-center justify-end gap-1">
+                                    <span x-text="msg.time"></span>
+                                    <span x-show="msg.sender === 'user'" class="text-blue-400 font-bold">✓✓</span>
+                                </div>
                             </div>
                         </div>
                     </template>
+
+                    <!-- Indicador Humano "Escribiendo..." -->
+                    <div x-show="isTyping" class="flex justify-start" x-cloak>
+                        <div class="p-3 rounded-2xl bg-[#202c33] text-gray-300 rounded-bl-none flex items-center gap-2 shadow animate-pulse">
+                            <span class="text-[11px] font-medium text-emerald-400">Nacho está escribiendo</span>
+                            <div class="flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-bounce" style="animation-delay: 0ms"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-bounce" style="animation-delay: 150ms"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-bounce" style="animation-delay: 300ms"></span>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -673,9 +688,10 @@
                 shippingSearch: 'Temuco',
                 shippingResult: null,
                 simulatorMessages: [
-                    { sender: 'bot', text: '¡Hola! 👋 Bienvenido a **Metal Creativo Chile** 🇨🇱.\n¿Por cuál de nuestros productos te gustaría cotizar hoy?\n1️⃣ Barra Rígida de Remolque ($65.000)\n2️⃣ Fogón Ecológico a Bioetanol ($149.900)', time: '04:30' }
+                    { sender: 'bot', text: '¡Hola qué tal! Te atiende Nacho de Metal Creativo. Cuéntame, ¿para qué auto o camioneta andas buscando la barra de remolque? Así te confirmo compatibilidad al tiro.', time: '04:30' }
                 ],
                 customInput: '',
+                isTyping: false,
 
                 get filteredOrders() {
                     if (this.orderFilter === 'all') return this.orders;
@@ -727,18 +743,37 @@
 
                 async sendSimulator(text) {
                     this.simulatorMessages.push({ sender: 'user', text: text, time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) });
+                    this.scrollChat();
+                    this.isTyping = true;
                     
                     try {
                         const res = await fetch('/api/whatsapp-webhook', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ simulate: true, message: text, name: 'Cliente de Prueba' })
+                            body: JSON.stringify({ simulate: true, message: text, name: 'Cliente' })
                         });
                         const data = await res.json();
+                        
+                        // Demora humana realista: simula tiempo de lectura y tipeo de 2.2 a 3.8 segundos
+                        const humanTypingDelay = Math.min(Math.max((data.botResponse || '').length * 15, 2200), 3800);
+                        await new Promise(r => setTimeout(r, humanTypingDelay));
+                        
+                        this.isTyping = false;
                         this.simulatorMessages.push({ sender: 'bot', text: data.botResponse, time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) });
+                        this.scrollChat();
                     } catch (e) {
-                        this.simulatorMessages.push({ sender: 'bot', text: 'Error al conectar con webhook.', time: '04:35' });
+                        this.isTyping = false;
+                        this.simulatorMessages.push({ sender: 'bot', text: 'Disculpa, se me fue un segundo la señal. ¿Me repites por favor?', time: '04:35' });
+                        this.scrollChat();
                     }
+                },
+
+                scrollChat() {
+                    this.$nextTick(() => {
+                        if (this.$refs.chatContainer) {
+                            this.$refs.chatContainer.scrollTop = this.$refs.chatContainer.scrollHeight;
+                        }
+                    });
                 },
 
                 sendCustomSimulator() {
