@@ -785,7 +785,12 @@
                         const res = await fetch('/api/whatsapp-webhook', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ simulate: true, message: text, name: custName })
+                            body: JSON.stringify({
+                                simulate: true,
+                                message: text,
+                                name: custName,
+                                history: this.simulatorMessages.slice(-10)
+                            })
                         });
                         const data = await res.json();
                         
