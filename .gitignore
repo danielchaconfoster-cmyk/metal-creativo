@@ -10,3 +10,17 @@ out
 .cursor/
 ~$*
 
+# Archivos de render y scratch temporales
+scratch_frames/
+scratch_*
+*.raw
+.agent_chrome_profile/
+test.mp3
+test.vtt
+
+# Material audiovisual crudo y assets locales de marketing
+asets videos imagenes reales/
+google_flow_assets/
+hisrorias agendaiento1/
+lab-merch-revolution/
+

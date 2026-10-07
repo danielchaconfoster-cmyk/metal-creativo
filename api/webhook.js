@@ -49,21 +49,25 @@ module.exports = async (req, res) => {
       }
     }
 
-    // 2. CONECTAR CON SUPABASE PARA AUDITORIA
+    // 2. CONECTAR CON SUPABASE PARA AUDITORIA (Con Tolerancia a Fallos)
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
     let supabase = null;
 
     if (supabaseUrl && supabaseKey) {
-      supabase = createClient(supabaseUrl, supabaseKey);
-      await supabase.from('payment_webhook_logs').insert([{
-        gateway: 'mercadopago',
-        event_type: action || 'payment.update',
-        payment_id: String(paymentId || ''),
-        raw_payload: body || query,
-        signature_verified: signatureVerified,
-        ip_address: headers['x-forwarded-for'] || req.socket.remoteAddress
-      }]);
+      try {
+        supabase = createClient(supabaseUrl, supabaseKey);
+        await supabase.from('payment_webhook_logs').insert([{
+          gateway: 'mercadopago',
+          event_type: action || 'payment.update',
+          payment_id: String(paymentId || ''),
+          raw_payload: body || query,
+          signature_verified: signatureVerified,
+          ip_address: headers['x-forwarded-for'] || req.socket.remoteAddress
+        }]);
+      } catch (logErr) {
+        console.warn('[WEBHOOK AUDIT WARNING] No se pudo guardar log en Supabase:', logErr.message);
+      }
     }
 
     // 3. CONSULTAR DIRECTAMENTE A MERCADO PAGO (Fuente de Verdad)
@@ -75,21 +79,51 @@ module.exports = async (req, res) => {
 
       const paymentData = await payment.get({ id: paymentId });
 
-      if (paymentData && paymentData.status === 'approved' && supabase) {
+      if (paymentData && paymentData.status === 'approved') {
         const orderId = paymentData.external_reference;
+        const paidAmount = Number(paymentData.transaction_amount || 0);
 
-        // Actualizar estado de orden a 'paid' de forma idempotente
-        const { error: updateError } = await supabase
-          .from('orders')
-          .update({
-            status: 'paid',
-            payment_id: String(paymentId),
-            updated_at: new Date().toISOString()
-          })
-          .eq('id', orderId);
+        // A. Actualizar en Supabase si está activo
+        if (supabase && orderId) {
+          try {
+            await supabase
+              .from('orders')
+              .update({
+                status: 'paid',
+                payment_id: String(paymentId),
+                updated_at: new Date().toISOString()
+              })
+              .eq('id', orderId);
+            console.log(`[SUPABASE] Orden ${orderId} marcada como PAGADA.`);
+          } catch (supErr) {
+            console.warn('[SUPABASE UPDATE WARNING]:', supErr.message);
+          }
+        }
 
-        if (!updateError) {
-          console.log(`Orden ${orderId} marcada como PAGADA con exito.`);
+        // B. Actualizar en registro local de respaldo (Fallback Resiliente)
+        try {
+          const fs = require('fs');
+          const path = require('path');
+          const fallbackPath = path.join(process.cwd(), 'data', 'orders_fallback.json');
+          if (fs.existsSync(fallbackPath)) {
+            const currentOrders = JSON.parse(fs.readFileSync(fallbackPath, 'utf8'));
+            let matched = false;
+            currentOrders.forEach(o => {
+              if (o.id === orderId || (!o.payment_id && o.customer_email === paymentData.payer?.email)) {
+                o.status = 'paid';
+                o.payment_id = String(paymentId);
+                o.paid_amount = paidAmount;
+                o.paid_at = new Date().toISOString();
+                matched = true;
+              }
+            });
+            if (matched) {
+              fs.writeFileSync(fallbackPath, JSON.stringify(currentOrders, null, 2));
+              console.log(`[LOCAL FALLBACK] Orden ${orderId} actualizada a PAID con éxito.`);
+            }
+          }
+        } catch (fsErr) {
+          console.warn('[LOCAL FALLBACK UPDATE WARNING]:', fsErr.message);
         }
       }
     }

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon & Identidad de Marca -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#ea580c">
+
+    <title>Cierre Cuadrado 1:1 - Barra de Remolque Metal Creativo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            width: 1080px;
+            height: 1080px;
+            background: #06090F;
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* FOTO REAL EN FONDO COMPLETO INMERSIVO CUADRADO (1:1) */
+        .bg-photo-wrapper {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .bg-photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 25% 42%;
+            transform: scale(1.18);
+            transform-origin: 30% 40%;
+            filter: contrast(1.10) brightness(0.92);
+        }
+
+        /* CENSORES / BLUR SOBRE LA PATENTE RC-CT-14 */
+        .license-plate-blur {
+            position: absolute;
+            top: 31%;
+            left: 36%;
+            width: 250px;
+            height: 70px;
+            background: rgba(18, 22, 32, 0.95);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1.5px solid rgba(255, 255, 255, 0.28);
+            border-radius: 8px;
+            z-index: 5;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .license-plate-blur span {
+            font-size: 12px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* GRADIENTES CINEMÁTICOS DE PROTECCIÓN DE TEXTO */
+        .bg-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg, 
+                rgba(6, 9, 15, 0.95) 0%, 
+                rgba(6, 9, 15, 0.60) 18%, 
+                rgba(6, 9, 15, 0.15) 40%, 
+                rgba(6, 9, 15, 0.10) 55%, 
+                rgba(6, 9, 15, 0.70) 75%,
+                rgba(6, 9, 15, 0.98) 92%,
+                rgba(6, 9, 15, 1.00) 100%
+            );
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* CONTENIDO PRINCIPAL */
+        .content-container {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 44px 48px;
+        }
+
+        /* HEADER: LOGO MC + INSIGNIA MTT */
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            height: 64px;
+            filter: drop-shadow(0 6px 20px rgba(0,0,0,0.9));
+        }
+
+        /* INSIGNIA MTT */
+        .mtt-badge-horizontal {
+            display: flex;
+            align-items: center;
+            background: rgba(10, 15, 25, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(255, 255, 255, 0.22);
+            border-radius: 14px;
+            padding: 10px 18px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.65);
+            gap: 12px;
+        }
+
+        /* BANDERA CHILENA OFICIAL */
+        .mtt-flag {
+            width: 34px;
+            height: 24px;
+            border-radius: 3px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mtt-flag-top {
+            height: 50%;
+            width: 100%;
+            display: flex;
+        }
+        .mtt-flag-blue {
+            width: 38%;
+            height: 100%;
+            background: #0033A0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: #FFFFFF;
+        }
+        .mtt-flag-white {
+            width: 62%;
+            height: 100%;
+            background: #FFFFFF;
+        }
+        .mtt-flag-red {
+            height: 50%;
+            width: 100%;
+            background: #DA291C;
+        }
+
+        .mtt-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.15;
+        }
+
+        .mtt-text .gov {
+            font-size: 11px;
+            font-weight: 900;
+            color: #FFFFFF;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .mtt-text .mtt {
+            font-size: 10px;
+            font-weight: 700;
+            color: #CBD5E1;
+        }
+
+        .mtt-text .law {
+            font-size: 11px;
+            font-weight: 900;
+            color: #F59E0B;
+            letter-spacing: 0.5px;
+        }
+
+        /* ZONA DE TITULARES */
+        .headline-section {
+            text-align: right;
+            align-self: flex-end;
+            max-width: 680px;
+            margin-top: -10px;
+        }
+
+        .alert-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #DC2626;
+            color: #FFFFFF;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 7px 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.7);
+            margin-bottom: 10px;
+        }
+
+        .main-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 78px;
+            line-height: 0.90;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            text-shadow: 
+                0 4px 0 #000000,
+                0 10px 30px rgba(0,0,0,0.95);
+        }
+
+        .main-title .highlight {
+            color: #F59E0B;
+            text-shadow: 
+                0 4px 0 #000000,
+                0 10px 30px rgba(245, 158, 11, 0.5);
+        }
+
+        .subtitle {
+            font-size: 18px;
+            font-weight: 800;
+            color: #E2E8F0;
+            margin-top: 8px;
+            letter-spacing: -0.01em;
+            text-shadow: 0 3px 12px rgba(0,0,0,0.9);
+        }
+
+        /* FOOTER CON PRECIO $65.000 Y CTA WHATSAPP */
+        .footer-floating {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .price-hero-floating {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.18);
+            padding-bottom: 14px;
+        }
+
+        .price-label-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .price-label-tag {
+            font-size: 13px;
+            font-weight: 800;
+            color: #F59E0B;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .price-label-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: #FFFFFF;
+            letter-spacing: -0.01em;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.8);
+        }
+
+        .price-digits-block {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .price-digits {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 88px;
+            line-height: 0.85;
+            color: #FFFFFF;
+            letter-spacing: 2px;
+            text-shadow: 
+                0 6px 0 #000000,
+                0 12px 30px rgba(0,0,0,0.9);
+        }
+
+        .price-currency {
+            font-size: 24px;
+            font-weight: 900;
+            color: #F59E0B;
+            letter-spacing: 1px;
+        }
+
+        /* BOTÓN CTA WHATSAPP */
+        .cta-whatsapp-pill {
+            background: linear-gradient(135deg, #25D366 0%, #16A34A 100%);
+            color: #FFFFFF;
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 18px 36px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            box-shadow: 
+                0 10px 35px rgba(37, 211, 102, 0.55),
+                0 0 0 2px rgba(255, 255, 255, 0.25) inset;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+            border: none;
+            width: 100%;
+        }
+
+        .wa-svg {
+            width: 32px;
+            height: 32px;
+            fill: #FFFFFF;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+        }
+
+        .shipping-tag {
+            text-align: center;
+            font-size: 13px;
+            font-weight: 800;
+            color: #94A3B8;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. FOTO REAL EN FONDO CUADRADO INMERSIVO (IDÉNTICA A LA VERTICAL) -->
+    <div class="bg-photo-wrapper">
+        <img src="./public/images/lanza_real_uso_oficial.jpg" alt="Barra de Remolque en Uso">
+    </div>
+
+    <!-- 2. BLUR CENSOR SOBRE LA PATENTE DEL AUTO (CHILE) -->
+    <div class="license-plate-blur">
+        <span>CHILE</span>
+    </div>
+
+    <!-- 3. GRADIENTES CINEMÁTICOS PARA LEGIBILIDAD -->
+    <div class="bg-overlay"></div>
+
+    <!-- 4. CONTENIDO GRÁFICO IDÉNTICO AL VERTICAL -->
+    <div class="content-container">
+        <!-- HEADER: LOGO MC + LOGO MTT -->
+        <header class="header-bar">
+            <img src="./public/images/logo_transparent.png" alt="Metal Creativo" class="brand-logo">
+
+            <!-- BADGE MTT -->
+            <div class="mtt-badge-horizontal">
+                <div class="mtt-flag">
+                    <div class="mtt-flag-top">
+                        <div class="mtt-flag-blue">★</div>
+                        <div class="mtt-flag-white"></div>
+                    </div>
+                    <div class="mtt-flag-red"></div>
+                </div>
+                <div class="mtt-text">
+                    <span class="gov">Gobierno de Chile</span>
+                    <span class="mtt">Min. Transportes</span>
+                    <span class="law">D.S. N° 55/2025</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- TITULARES IDÉNTICOS A LA VERTICAL -->
+        <section class="headline-section">
+            <div class="alert-pill">⚠️ LA PIOLA ESTÁ PROHIBIDA EN CHILE</div>
+            <h1 class="main-title">
+                EVITA MULTAS<br>
+                <span class="highlight">Y REMOLCA SEGURO</span>
+            </h1>
+            <p class="subtitle">Barra de acero reforzado de 3 mm. Exigida para autos, camionetas y SUV.</p>
+        </section>
+
+        <!-- FOOTER IDÉNTICO: PRECIO $65.000 Y CTA WHATSAPP -->
+        <footer class="footer-floating">
+            <div class="price-hero-floating">
+                <div class="price-label-group">
+                    <span class="price-label-tag">Oferta Directa de Taller</span>
+                    <span class="price-label-title">Barra Rígida de Remolque</span>
+                </div>
+                <div class="price-digits-block">
+                    <span class="price-digits">$65.000</span>
+                    <span class="price-currency">CLP</span>
+                </div>
+            </div>
+
+            <div class="cta-whatsapp-pill">
+                <svg class="wa-svg" viewBox="0 0 24 24">
+                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.585 1.961.905 3.013.905 3.183 0 5.769-2.587 5.77-5.768 0-3.18-2.587-5.767-5.77-5.767zm0 10.375c-.886 0-1.745-.24-2.493-.695l-.179-.107-1.854.486.495-1.808-.117-.187c-.504-.803-.77-1.735-.769-2.697 0-2.617 2.13-4.747 4.747-4.747 2.619 0 4.75 2.13 4.75 4.748 0 2.618-2.131 4.748-4.748 4.748zm3.016-3.535c-.165-.083-.978-.482-1.129-.537-.151-.055-.261-.083-.371.083-.11.165-.426.537-.522.647-.096.11-.192.124-.357.041-.165-.083-.697-.257-1.328-.819-.491-.438-.823-.979-.919-1.144-.096-.165-.01-.254.072-.336.074-.074.165-.193.248-.289.082-.096.11-.165.165-.275.055-.11.027-.206-.014-.289-.041-.083-.371-.894-.509-1.224-.134-.322-.27-.278-.371-.283l-.316-.005c-.11 0-.289.041-.44.206-.151.165-.577.564-.577 1.375 0 .811.591 1.595.673 1.705.083.11 1.164 1.777 2.821 2.492.394.17.702.272.942.348.396.126.756.108 1.04.066.317-.047.978-.4 1.116-.786.137-.385.137-.715.096-.786-.041-.07-.151-.11-.316-.193z"/>
+                </svg>
+                <span>PEDIR POR WHATSAPP</span>
+            </div>
+
+            <div class="shipping-tag">
+                ENVÍO EXPRESS A TODO CHILE · STARKEN / CHILEXPRESS
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

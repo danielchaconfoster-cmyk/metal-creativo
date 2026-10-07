@@ -23,7 +23,7 @@
 | **ScrollFloat** | GSAP (ScrollTrigger) | El texto flota hacia arriba en 3D letra por letra al hacer scroll por la página con aceleración elástica. | Títulos principales del Hero: *"Lanza de Remolque Homologada"* y *"Fogón a Bioetanol"*. |
 | **ShinyText** | CSS / Tailwind | Reflejo de brillo metálico animado que se desplaza continuamente a lo largo de las letras. | Insignias de *"Cumple Ley MTT 55/2025"* y *"Garantía 6 Meses SERNAC"* para simular acero pulido. |
 | **SplitText** | Framer Motion / GSAP | Descompone frases y las revela palabra por palabra o carácter por carácter con retrasos escalonados. | Bajadas de título y frases de impacto en testimonios y beneficios. |
-| **TrueFocus** | Framer Motion / CSS | Caja de enfoque nítido con esquinas luminosas que salta automáticamente de palabra en palabra. | Resaltar los 3 atributos clave: *"LIVIANA (5mm)"*, *"SEGURA (3.500kg)"* y *"DESARMABLE (65cm)"*. |
+| **TrueFocus** | Framer Motion / CSS | Caja de enfoque nítido con esquinas luminosas que salta automáticamente de palabra en palabra. | Resaltar los 3 atributos clave: *"LIVIANA (3mm)"*, *"SEGURA (3.500kg)"* y *"DESARMABLE (65cm)"*. |
 | **DecryptedText** | React Hooks / RAF | Efecto de desencriptación estilo hacker militar donde caracteres aleatorios rotan hasta fijar el texto real. | Fichas técnicas, números de serie y certificados de ensayo estructural en acero. |
 | **CountUp** | React Hooks | Contador numérico animado ascendente con formateo de decimales y separadores de miles. | Estadísticas: *"+1.200 Lanzas Despachadas"*, *"3.500 kg de arrastre"*, *"$65.000 CLP"*. |
 | **RotatingText** | Framer Motion | Rueda de palabras vertical/horizontal que va cambiando en bucle fluido dentro de una frase fija. | Frase dinámica: *"Lanza obligatoria para [Autos \| Camionetas \| Furgones \| SUV]"*. |
@@ -87,7 +87,7 @@
 | **ShapeBlur** | CSS Blur / Keyframes | Formas geométricas de colores que flotan desenfocadas creando ambiente de luz volumétrica. | Luces naranja cálido y azul cobalto detrás de las fotos de producto. |
 | **Strands** | WebGL Geometry | Filamentos luminosos que vibran y se tensan según la velocidad de navegación. | Simulación de líneas de fuerza y tensión de tiro automotriz. |
 | **SwarmCursor** | Canvas Boids | Enjambre de micropartículas inteligentes que persiguen y rodean al cursor como luciérnagas. | Interacción de mouse en secciones nocturnas o de fogón. |
-| **TargetCursor** | SVG / Pointer Tracking | Retícula de puntería táctica con coordenadas numéricas en vivo que sigue el mouse. | Enfoque de alta precisión en la sección de detalles milimétricos del tubo de 5 mm. |
+| **TargetCursor** | SVG / Pointer Tracking | Retícula de puntería táctica con coordenadas numéricas en vivo que sigue el mouse. | Enfoque de alta precisión en la sección de detalles milimétricos del tubo de 3 mm. |
 | **Crosshair** | CSS Fixed Lines | Líneas de mira telescópica en los ejes X e Y que cruzan toda la pantalla. | Herramienta visual para modo de inspección técnica del producto. |
 | **CursorGrid** | Canvas Grid | Cuadrícula que ilumina las casillas por donde pasa el mouse con un gradiente cálido. | Fondo interactivo de la sección de cotización y medidas especiales. |
 | **ElasticMesh** | Spring Physics | Malla elástica que se deforma al tirar de ella con el cursor y regresa con inercia. | Demostración visual de elasticidad peligrosa en cuerdas vs rigidez en acero. |
@@ -167,7 +167,7 @@
 
 | Componente | Motor / Tecnología | ¿Qué hace exactamente? | Uso recomendado en Metal Creativo |
 | :--- | :--- | :--- | :--- |
-| **SpotlightCard** | CSS Radial Gradient / JS | Tarjeta interactiva con reflector de luz radial que sigue el cursor iluminando bordes metálicos. | Tarjetas de características de la Lanza de Remolque (Tubo 5mm, Pasadores, Bandera reflectante). |
+| **SpotlightCard** | CSS Radial Gradient / JS | Tarjeta interactiva con reflector de luz radial que sigue el cursor iluminando bordes metálicos. | Tarjetas de características de la Lanza de Remolque (Tubo 3mm, Pasadores, Bandera reflectante). |
 | **TiltedCard** | CSS 3D Perspective / JS | Tarjeta con inclinación giroscópica tridimensional que sigue el ángulo exacto del mouse. | Fichas principales de compra de la Barra de Remolque ($65.000) y Fogón ($149.900). |
 | **MagicBento** | CSS Bento Grid + Spotlight | Grilla Bento inteligente donde todas las tarjetas comparten el mismo haz de luz reflectante conjunto. | Sección de especificaciones técnicas completas y normativas legales MTT 55/2025. |
 | **PixelCard** | Canvas Pixel Dissolve | Tarjeta cuya superficie se transforma en un mosaico de píxeles luminosos al pasar el cursor. | Tarjeta de *"Proyectos Especiales y Forja a Medida"* para llamar la atención. |

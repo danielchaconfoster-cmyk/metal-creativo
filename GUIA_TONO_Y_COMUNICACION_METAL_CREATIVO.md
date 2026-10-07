@@ -21,7 +21,7 @@ Metal Creativo **NO** es una empresa de ingeniería aeroespacial ficticia, ni un
    - Hablar en primera persona plural: *"Fabricamos en Chile"*, *"Pensamos cada producto para que te dure muchos años"*, *"Te atendemos directo por WhatsApp"*.
 3. **Cero Palabras Rimbombantes**:
    - ❌ Prohibido: *"Ingeniería aeroespacial"*, *"Maestranza pesada"*, *"Artesanal tosco"*.
-   - ✅ Permitido: *"Tubo de acero reforzado de 5 mm"*, *"Desarmable en 3 partes"*, *"Liviana para el maletero"*, *"Acero inoxidable"*, *"Fabricación nacional"*.
+   - ✅ Permitido: *"Tubo de acero reforzado de 3 mm"*, *"Desarmable en 3 partes"*, *"Liviana para el maletero"*, *"Acero inoxidable"*, *"Fabricación nacional"*.
 
 ---
 
@@ -33,7 +33,7 @@ Metal Creativo **NO** es una empresa de ingeniería aeroespacial ficticia, ni un
 2. **¿Es legal para evitar multas de Carabineros?**  
    👉 *Sí, cumple con el Decreto Supremo N° 55/2025 del Ministerio de Transportes (MTT), que prohíbe usar cuerdas o lazos elásticos.*
 3. **¿Cabe en la maleta o pesa demasiado?**  
-   👉 *Fabricada en tubo de acero de 5 mm de espesor: es firme pero liviana. Se desarma en 3 tramos de menos de 65 cm para guardarla en cualquier maletero.*
+   👉 *Fabricada en tubo de acero de 3 mm de espesor: es firme pero liviana. Se desarma en 3 tramos de menos de 65 cm para guardarla en cualquier maletero.*
 4. **¿Por qué es más segura que una cuerda?**  
    👉 *Mantiene la distancia fija de 1.8 metros. Cuando el auto de adelante frena, la barra impide que choques por alcance.*
 
@@ -57,7 +57,7 @@ Metal Creativo **NO** es una empresa de ingeniería aeroespacial ficticia, ni un
 > **¿Sabías que remolcar con cuerda ahora es multa grave en Chile?** 🚗⚖️  
 > Evita infracciones y accidentes por alcance con la **Barra Rígida Desarmable de Metal Creativo**.  
 > ✅ Soporta hasta 3.500 kg  
-> ✅ Fabricada en tubo de acero reforzado de 5 mm  
+> ✅ Fabricada en tubo de acero reforzado de 3 mm  
 > ✅ Se desarma en 3 partes compactas para tu maletero  
 > 📦 *Despachos a todo Chile por Starken y Chilexpress.*  
 > 👉 Pídela en www.metalcreativo.cl o escríbenos a WhatsApp.

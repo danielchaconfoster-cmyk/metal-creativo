@@ -11,6 +11,7 @@
 ## Catálogo de Productos y Precios Oficiales (Pesos Chilenos CLP)
 
 ### 1. Barra Rígida de Remolque con Ojal Forjado (Lanza de Remolque Homologada)
+- **URL Oficial del Producto**: https://metalcreativo.cl/barra-de-remolque
 - **Precio Oficial**: $65.000 CLP
 - **Capacidad de Carga y Arrastre**: 2.500 kg a 3.500 kg en tracción directa.
 - **Material**: Acero al carbono macizo estructural (tubo 45-50 mm con espesor 3.0 mm) con ojales forjados a fuego directo y cordón de soldadura TIG/MIG continuo.
@@ -20,14 +21,15 @@
 - **Garantía**: 6 meses de garantía legal directa (SERNAC / Ley N° 19.496).
 
 ### 2. Fogón de Mesa y Estufas a Bioetanol Ecológicas
-- **Precio Oficial**: .900 CLP
+- **URL Oficial del Producto**: https://metalcreativo.cl/fogon-bioetanol
+- **Precio Oficial**: $149.900 CLP
 - **Capacidad Térmica & Autonomía**: 3.5 a 5.5 horas continuas por carga (cobertura 25 m² a 45 m²).
 - **Materiales**: Quemador de grado quirúrgico en Acero Inoxidable AISI 304 anti-derrame con fibra cerámica de retención térmica, base en acero macizo con tratamiento ignífugo y bandeja de madera noble tratada con incrustaciones de piedra de cuarzo decorativo.
 - **Ventajas**: Fuego 100% real y ecológico sin humo, sin olores tóxicos, sin cenizas, sin necesidad de ductos ni cañones de ventilación. Apto para departamentos, living y terrazas.
 
 ## Políticas y Soporte
-- **Garantía y Devoluciones**: https://metalcreativo.cl/devoluciones-garantia.html (6 meses de garantía legal conforme a Ley 19.496 de Chile).
-- **Términos y Condiciones**: https://metalcreativo.cl/terminos-condiciones.html
-- **Preguntas Frecuentes**: https://metalcreativo.cl/preguntas-frecuentes.html
-- **Contacto Directo**: https://metalcreativo.cl/contacto.html
+- **Garantía y Devoluciones**: https://metalcreativo.cl/devoluciones-garantia (6 meses de garantía legal conforme a Ley 19.496 de Chile).
+- **Términos y Condiciones**: https://metalcreativo.cl/terminos-condiciones
+- **Preguntas Frecuentes**: https://metalcreativo.cl/preguntas-frecuentes
+- **Contacto Directo**: https://metalcreativo.cl/contacto
 - **Dossier Técnico Completo para IAs**: https://metalcreativo.cl/llms-full.txt

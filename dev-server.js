@@ -19,6 +19,7 @@ const MIME_TYPES = {
   '.svg': 'image/svg+xml',
   '.webp': 'image/webp',
   '.ico': 'image/x-icon',
+  '.webmanifest': 'application/manifest+json',
   '.mp4': 'video/mp4',
   '.pdf': 'application/pdf',
   '.txt': 'text/plain; charset=UTF-8'

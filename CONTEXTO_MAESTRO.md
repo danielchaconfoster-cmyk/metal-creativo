@@ -15,7 +15,7 @@
 
 | Producto | Precio Oficial | Especificación Real & Beneficio | Marco Legal / Uso |
 | :--- | :--- | :--- | :--- |
-| **🚗 Barra Rígida de Remolque Desarmable** | **$65.000 CLP** | Tubo de acero reforzado de 5 mm (soporta 3.500 kg). Se desarma en 3 partes compactas (65 cm) para guardar en el maletero. | **Obligatorio por Ley en Chile**: Decreto Supremo N° 55/2025 MTT (prohíbe piolas y cuerdas). |
+| **🚗 Barra Rígida de Remolque Desarmable** | **$65.000 CLP** | Tubo de acero reforzado de 3 mm (soporta 3.500 kg). Se desarma en 3 partes compactas (65 cm) para guardar en el maletero. | **Obligatorio por Ley en Chile**: Decreto Supremo N° 55/2025 MTT (prohíbe piolas y cuerdas). |
 | **🔥 Fogón / Estufa a Bioetanol Ecológico** | **$149.900 CLP** | Quemador de Acero Inoxidable AISI 304 con madera noble y cuarzo. Autonomía 3.5 a 5.5 horas de fuego real. | Uso en terrazas, living y departamentos sin obras, sin humo ni cañón. |
 
 ---

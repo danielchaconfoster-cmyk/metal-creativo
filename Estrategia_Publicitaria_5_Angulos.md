@@ -101,7 +101,7 @@ Antes de crear un anuncio, debemos entender **por qué la gente saca la tarjeta 
 * **Hook de 3 Segundos**:
   > *"No confíes la seguridad de tu auto a una barra delgada importada de plástico y lata."*
 * **Guión de Video**:
-  1. Muestra primeros planos de las soldaduras de penetración profunda, la pintura anticorrosiva gruesa y el grosor del tubo de acero (45mm - 50mm, pared 3.5mm).
+  1. Muestra primeros planos de las soldaduras de penetración profunda, la pintura anticorrosiva gruesa y el grosor del tubo de acero (45mm - 50mm, pared 3.0mm).
   2. Test de golpe / demostración de firmeza: *"Fabricado a mano en Chile con acero estructural. Diseñado para soportar hasta 3.500 kg reales."*
 * **Copy para Meta Ads**:
   > 🇨🇱 **CALIDAD DE MAESTRANZA CHILENA | NADA DE LATA DELGADA**  

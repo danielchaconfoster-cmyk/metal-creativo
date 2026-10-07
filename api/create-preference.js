@@ -26,7 +26,31 @@ function checkRateLimit(ip) {
   return true;
 }
 
-// 2. LISTA DE PRECIOS OFICIALES INMUTABLES
+// 2. VALIDACION DE IDENTIFICACION (Modulo 11 para RUT chileno o Pasaporte)
+function validateRut(rutCompleto) {
+  if (!rutCompleto || typeof rutCompleto !== 'string' || rutCompleto.trim().length < 6) return false;
+  const valor = rutCompleto.replace(/\./g, '').replace(/-/g, '').trim().toUpperCase();
+
+  // Caso 1: RUT Chileno Estándar (Cuerpo numérico + dígito verificador 0-9 o K)
+  if (/^[0-9]{7,9}[0-9K]$/.test(valor)) {
+    const cuerpo = valor.slice(0, -1);
+    const dv = valor.slice(-1);
+    let suma = 0;
+    let multiplo = 2;
+    for (let i = cuerpo.length - 1; i >= 0; i--) {
+      suma += multiplo * parseInt(cuerpo.charAt(i), 10);
+      multiplo = multiplo < 7 ? multiplo + 1 : 2;
+    }
+    const dvEsperado = 11 - (suma % 11);
+    const dvFinal = dvEsperado === 11 ? '0' : dvEsperado === 10 ? 'K' : dvEsperado.toString();
+    return dv === dvFinal;
+  }
+
+  // Caso 2: Pasaporte o documento de identidad extranjero válido (6 a 15 caracteres alfanuméricos)
+  return /^[A-Z0-9]{6,15}$/.test(valor);
+}
+
+// 3. LISTA DE PRECIOS OFICIALES INMUTABLES
 const OFFICIAL_PRICES = {
   'barra_remolque': {
     name: 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)',
@@ -57,13 +81,17 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const { customer, items, shipping_cost = 0, shipping_method = 'starken' } = req.body;
+    const { customer, items, shipping_cost, shipping_method = 'starken' } = req.body;
 
     if (!customer || !customer.rut || !customer.email || !customer.phone || !items || !items.length) {
       return res.status(400).json({ error: 'Datos incompletos para procesar la orden' });
     }
 
-    // Calculo inmutable en servidor
+    if (!validateRut(customer.rut)) {
+      return res.status(400).json({ error: 'RUT chileno invalido. Por favor verifica el digito verificador.' });
+    }
+
+    // Calculo inmutable en servidor (Zero Trust)
     let validatedItems = [];
     let serverTotal = 0;
 
@@ -74,7 +102,7 @@ module.exports = async (req, res) => {
       }
       const qty = parseInt(item.qty, 10);
       if (isNaN(qty) || qty <= 0 || qty > 10) {
-        return res.status(400).json({ error: 'Cantidad no permitida' });
+        return res.status(400).json({ error: 'Cantidad no permitida (debe ser entre 1 y 10)' });
       }
 
       const itemTotal = product.unit_price * qty;
@@ -89,7 +117,18 @@ module.exports = async (req, res) => {
       });
     }
 
-    serverTotal += Number(shipping_cost);
+    // Validacion y calculo de despacho estrictamente en el servidor (Anti-Tampering)
+    let validatedShippingCost = 0;
+    const cleanShippingMethod = String(shipping_method || 'starken').toLowerCase().trim();
+    if (cleanShippingMethod === 'rm_express') {
+      validatedShippingCost = 4990;
+    } else if (cleanShippingMethod === 'starken' || cleanShippingMethod === 'starken_por_pagar') {
+      validatedShippingCost = 0;
+    } else {
+      return res.status(400).json({ error: 'Metodo de despacho no valido' });
+    }
+
+    serverTotal += validatedShippingCost;
 
     // Registro seguro en Supabase con IP y User-Agent (Prueba de Entrega Anti-Contracargo)
     const supabaseUrl = process.env.SUPABASE_URL;
@@ -97,50 +136,85 @@ module.exports = async (req, res) => {
     let orderId = null;
 
     if (supabaseUrl && supabaseKey) {
-      const supabase = createClient(supabaseUrl, supabaseKey);
+      try {
+        const supabase = createClient(supabaseUrl, supabaseKey);
 
-      const { data: customerData } = await supabase
-        .from('customers')
-        .insert([{
-          rut: customer.rut,
-          full_name: customer.full_name,
-          email: customer.email,
-          phone: customer.phone,
-          region: customer.region,
-          comuna: customer.comuna,
-          address_street: customer.address_street,
-          address_number: customer.address_number,
-          address_extra: customer.address_extra || ''
-        }])
-        .select()
-        .single();
+        const { data: customerData } = await supabase
+          .from('customers')
+          .insert([{
+            rut: customer.rut,
+            full_name: customer.full_name,
+            email: customer.email,
+            phone: customer.phone,
+            region: customer.region,
+            comuna: customer.comuna,
+            address_street: customer.address_street,
+            address_number: customer.address_number,
+            address_extra: customer.address_extra || ''
+          }])
+          .select()
+          .single();
 
-      const { data: orderData } = await supabase
-        .from('orders')
-        .insert([{
-          customer_id: customerData ? customerData.id : null,
+        const { data: orderData } = await supabase
+          .from('orders')
+          .insert([{
+            customer_id: customerData ? customerData.id : null,
+            status: 'pending',
+            total_amount: serverTotal,
+            shipping_method: cleanShippingMethod,
+            shipping_cost: validatedShippingCost,
+            payment_method: 'mercadopago',
+            ip_address: clientIp,
+            user_agent: userAgent
+          }])
+          .select()
+          .single();
+
+        if (orderData) {
+          orderId = orderData.id;
+          const orderItemsRows = validatedItems.map(i => ({
+            order_id: orderId,
+            product_id: i.id,
+            product_name: i.title,
+            unit_price: i.unit_price,
+            quantity: i.quantity
+          }));
+          await supabase.from('order_items').insert(orderItemsRows);
+        }
+      } catch (dbErr) {
+        console.warn('[SUPABASE WARNING] Falla al guardar en base de datos externa:', dbErr.message);
+      }
+    }
+
+    // Respaldo de contingencia local si Supabase esta pausado o no disponible
+    if (!orderId) {
+      orderId = `MC-${Date.now()}`;
+      try {
+        const fs = require('fs');
+        const path = require('path');
+        const fallbackPath = path.join(process.cwd(), 'data', 'orders_fallback.json');
+        let currentOrders = [];
+        if (fs.existsSync(fallbackPath)) {
+          currentOrders = JSON.parse(fs.readFileSync(fallbackPath, 'utf8'));
+        }
+        currentOrders.unshift({
+          id: orderId,
+          customer_name: customer.full_name,
+          customer_email: customer.email,
+          customer_phone: customer.phone,
+          customer_rut: customer.rut,
+          address: `${customer.address_street} ${customer.address_number}, ${customer.comuna}, ${customer.region}`,
           status: 'pending',
           total_amount: serverTotal,
-          shipping_method: shipping_method,
-          shipping_cost: shipping_cost,
+          shipping_method: cleanShippingMethod,
+          shipping_cost: validatedShippingCost,
           payment_method: 'mercadopago',
           ip_address: clientIp,
-          user_agent: userAgent
-        }])
-        .select()
-        .single();
-
-      if (orderData) {
-        orderId = orderData.id;
-        const orderItemsRows = validatedItems.map(i => ({
-          order_id: orderId,
-          product_id: i.id,
-          product_name: i.title,
-          unit_price: i.unit_price,
-          quantity: i.quantity
-        }));
-        await supabase.from('order_items').insert(orderItemsRows);
-      }
+          user_agent: userAgent,
+          created_at: new Date().toISOString()
+        });
+        fs.writeFileSync(fallbackPath, JSON.stringify(currentOrders.slice(0, 50), null, 2));
+      } catch (_) {}
     }
 
     // Crear Preferencia en Mercado Pago
@@ -152,12 +226,12 @@ module.exports = async (req, res) => {
     const client = new MercadoPagoConfig({ accessToken: mpAccessToken });
     const preference = new Preference(client);
 
-    if (shipping_cost > 0) {
+    if (validatedShippingCost > 0) {
       validatedItems.push({
         id: 'shipping_fee',
-        title: `Despacho (${shipping_method.toUpperCase()})`,
+        title: `Despacho (${cleanShippingMethod === 'rm_express' ? 'EXPRESS SANTIAGO' : cleanShippingMethod.toUpperCase()})`,
         quantity: 1,
-        unit_price: Number(shipping_cost),
+        unit_price: validatedShippingCost,
         currency_id: 'CLP'
       });
     }

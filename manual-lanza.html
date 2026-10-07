@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon & Identidad de Marca -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#ea580c">
+
+    <title>Manual Oficial de Usuario y Seguridad | Barra Rígida de Remolque Metal Creativo</title>
+    <meta name="description" content="Manual técnico, instrucciones de ensamble, acople y protocolo de seguridad vial bajo el Decreto Supremo N° 55/2025 MTT para la Barra Rígida de Remolque Metal Creativo Chile.">
+    
+    <!-- Tipografía DM Sans Oficial -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg: #07080b;
+            --brand-orange: #c83c00;
+            --brand-amber: #ff6a00;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: #e2e8f0;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .metal-card {
+            background: linear-gradient(145deg, #11141b 0%, #090b0e 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-metal-orange {
+            background-color: #c83c00;
+            border: 1px solid rgba(255, 120, 60, 0.35);
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.6rem 1.25rem;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(200, 60, 0, 0.3);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-metal-orange:hover {
+            background-color: #d94200;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(200, 60, 0, 0.45);
+        }
+
+        .btn-metal-outline {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #e2e8f0;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.6rem 1.25rem;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-metal-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+        }
+
+        /* ESTILOS PARA IMPRESIÓN / EXPORTACIÓN A PDF */
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                color: #0f172a !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .metal-card {
+                background: #ffffff !important;
+                border: 1px solid #cbd5e1 !important;
+                box-shadow: none !important;
+                color: #0f172a !important;
+            }
+            .text-white {
+                color: #0f172a !important;
+            }
+            .text-gray-300, .text-gray-400 {
+                color: #334155 !important;
+            }
+            .bg-\[\#07080b\], .bg-\[\#0a0c10\], .bg-\[\#0b0e14\], .bg-\[\#11141b\] {
+                background-color: #ffffff !important;
+            }
+            .border-white\/10, .border-white\/5 {
+                border-color: #e2e8f0 !important;
+            }
+            h1, h2, h3, strong {
+                color: #0f172a !important;
+            }
+            .print-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body class="selection:bg-orange-500 selection:text-white">
+
+    <!-- BARRA SUPERIOR NO-PRINT -->
+    <header class="sticky top-0 left-0 w-full z-50 bg-[#07080b]/95 backdrop-blur-md py-4 border-b border-white/10 no-print shadow-xl">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3">
+                <img src="./images/logo_official.png" alt="Metal Creativo Chile" class="h-10 w-auto object-contain">
+                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest hidden sm:inline">| Dossier Técnico</span>
+            </a>
+
+            <div class="flex items-center gap-3">
+                <button onclick="window.print()" class="btn-metal-outline">
+                    <i class="fa-solid fa-print"></i>
+                    <span>Imprimir / PDF</span>
+                </button>
+                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20tengo%20una%20consulta%20técnica%20sobre%20el%20manual" target="_blank" rel="noopener" class="btn-metal-orange">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    <span>Soporte Técnico</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO PRINCIPAL DEL MANUAL -->
+    <section class="py-14 border-b border-white/10 bg-gradient-to-b from-[#11141a] via-[#090b0e] to-[#07080b]">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center space-y-4">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-widest">
+                <i class="fa-solid fa-shield-halved"></i> Documentación Oficial de Fábrica
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
+                MANUAL DE USUARIO, OPERACIÓN Y SEGURIDAD VIAL
+            </h1>
+            <p class="text-lg sm:text-xl font-bold text-orange-400">
+                Barra Rígida de Remolque Desarmable 1.8m (Serie MC-1800R)
+            </p>
+            <p class="text-gray-400 text-sm sm:text-base max-w-3xl mx-auto leading-relaxed">
+                Fabricada en acero al carbono macizo de 3 mm bajo exigencias del <strong>Decreto Supremo N° 55/2025 del Ministerio de Transportes y Telecomunicaciones (MTT)</strong> y la <strong>Ley de Tránsito N° 18.290 de la República de Chile</strong>.
+            </p>
+        </div>
+    </section>
+
+    <!-- CUERPO PRINCIPAL DEL MANUAL -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-12 space-y-12">
+
+        <!-- ALERTA LEGAL EN RECUADRO ROJO -->
+        <div class="p-6 rounded-xl border border-red-500/40 bg-red-950/20 text-red-200 space-y-2">
+            <div class="flex items-center gap-3 text-red-400 font-extrabold text-sm uppercase tracking-wider">
+                <i class="fa-solid fa-triangle-exclamation text-lg"></i>
+                <span>Normativa Legal Vigente en Chile (Desde el 7 de Agosto de 2026)</span>
+            </div>
+            <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                El <strong>Decreto Supremo N° 55/2025 del MTT</strong> prohíbe totalmente el uso de lazos elásticos, cuerdas de nylon, piolas o cadenas para el remolque de vehículos en la vía pública. El remolque con elementos no rígidos constituye una <strong>Infracción Grave</strong> multada con <strong>1 a 1.5 UTM</strong>. Toda tracción debe efectuarse con acople metálico rígido homologado.
+            </p>
+        </div>
+
+        <!-- 1. ESPECIFICACIONES TÉCNICAS -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+                <span class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-sm">01</span>
+                <h2 class="text-2xl font-extrabold text-white">Especificaciones Técnicas de Fábrica</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="metal-card p-5 rounded-xl space-y-3">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-orange-400">Estructura y Dimensiones</h3>
+                    <ul class="text-xs sm:text-sm space-y-2 text-gray-300">
+                        <li class="flex justify-between border-b border-white/5 pb-1">
+                            <span class="text-gray-400">Largo Total Ensamblado:</span>
+                            <span class="font-bold text-white">1.80 metros (Reglamentario)</span>
+                        </li>
+                        <li class="flex justify-between border-b border-white/5 pb-1">
+                            <span class="text-gray-400">Modularidad:</span>
+                            <span class="font-bold text-white">3 tramos de 65 cm desmontables</span>
+                        </li>
+                        <li class="flex justify-between border-b border-white/5 pb-1">
+                            <span class="text-gray-400">Material Estructural:</span>
+                            <span class="font-bold text-white">Acero al carbono ASTM A500</span>
+                        </li>
+                        <li class="flex justify-between border-b border-white/5 pb-1">
+                            <span class="text-gray-400">Espesor del Perfil:</span>
+                            <span class="font-bold text-white">3.0 mm de espesor nominal</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-gray-400">Peso Total del Kit:</span>
+                            <span class="font-bold text-white">Aprox. 7.2 kg</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="metal-card p-5 rounded-xl space-y-3">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-orange-400">Capacidad y Seguridad</h3>
+                    <ul class="text-xs sm:text-sm space-y-2 text-gray-300">
+                        <li class="flex justify-between border-b border-white/5 pb-1">
+                            <span class="text-gray-400">Arrastre Directo Máximo:</span>
+                            <span class="font-bold text-emerald-400">3.500 kg (3.5 Toneladas)</span>
+                        </li>
+                        <li class="flex justify-between border-b border-white/5 pb-1">
+                            <span class="text-gray-400">Pasadores de Seguridad:</span>
+                            <span class="font-bold text-white">Acero cincado 1/2" + Chaveta R</span>
+                        </li>
+                        <li class="flex justify-between border-b border-white/5 pb-1">
+                            <span class="text-gray-400">Elementos de Conexión:</span>
+                            <span class="font-bold text-white">2 Grilletes tipo lira 1/2" forjados</span>
+                        </li>
+                        <li class="flex justify-between border-b border-white/5 pb-1">
+                            <span class="text-gray-400">Señalización Óptica:</span>
+                            <span class="font-bold text-white">Huincha reflectante DOT-C2</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="text-gray-400">Garantía Directa:</span>
+                            <span class="font-bold text-white">6 Meses (Ley SERNAC 19.496)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. DIAGRAMA DE DESPIECE -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+                <span class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-sm">02</span>
+                <h2 class="text-2xl font-extrabold text-white">Anatomía y Despiece de Componentes</h2>
+            </div>
+
+            <div class="metal-card p-6 rounded-xl space-y-6">
+                <!-- DIAGRAMA VECTORIAL SVG -->
+                <div class="bg-black/60 p-4 rounded-lg border border-white/10 overflow-x-auto">
+                    <svg viewBox="0 0 800 180" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full min-w-[650px] h-auto">
+                        <!-- Fondo blueprint cuadrícula sutil -->
+                        <line x1="50" y1="90" x2="750" y2="90" stroke="rgba(255,255,255,0.08)" stroke-width="1" stroke-dasharray="4 4"/>
+
+                        <!-- Grillete Izquierdo Tractor -->
+                        <circle cx="65" cy="90" r="16" stroke="#f59e0b" stroke-width="4" fill="none"/>
+                        <rect x="58" y="75" width="14" height="30" rx="3" fill="#f59e0b"/>
+                        <text x="65" y="130" fill="#f59e0b" font-size="11" font-weight="700" text-anchor="middle">Grillete 1/2"</text>
+                        <text x="65" y="145" fill="#94a3b8" font-size="9" text-anchor="middle">(Vehículo Tractor)</text>
+
+                        <!-- Tramo Frontal -->
+                        <path d="M78 85 L95 85 L95 82 L280 82 L280 98 L95 98 L95 95 L78 95 Z" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                        <circle cx="85" cy="90" r="5" fill="#07080b"/>
+                        <text x="180" y="70" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">TRAMO FRONTAL (65 cm)</text>
+
+                        <!-- Conector 1 y Pasador -->
+                        <rect x="270" y="76" width="30" height="28" rx="2" fill="#334155" stroke="#f59e0b" stroke-width="1.5"/>
+                        <line x1="285" y1="65" x2="285" y2="115" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+                        <circle cx="285" cy="65" r="4" fill="#ef4444"/>
+                        <text x="285" y="55" fill="#ef4444" font-size="10" font-weight="bold" text-anchor="middle">Pasador 1 + Chaveta R</text>
+
+                        <!-- Tramo Central con Reflectantes -->
+                        <rect x="290" y="80" width="220" height="20" rx="2" fill="#475569" stroke="#94a3b8" stroke-width="1.5"/>
+                        <!-- Huincha reflectante roja/blanca -->
+                        <rect x="330" y="82" width="35" height="16" fill="#ef4444"/>
+                        <rect x="365" y="82" width="35" height="16" fill="#ffffff"/>
+                        <rect x="400" y="82" width="35" height="16" fill="#ef4444"/>
+                        <rect x="435" y="82" width="35" height="16" fill="#ffffff"/>
+                        <text x="400" y="118" fill="#f87171" font-size="10" font-weight="bold" text-anchor="middle">Huincha Reflectante DOT-C2</text>
+                        <text x="400" y="70" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">TRAMO CENTRAL (65 cm)</text>
+
+                        <!-- Conector 2 y Pasador -->
+                        <rect x="500" y="76" width="30" height="28" rx="2" fill="#334155" stroke="#f59e0b" stroke-width="1.5"/>
+                        <line x1="515" y1="65" x2="515" y2="115" stroke="#ef4444" stroke-width="4" stroke-linecap="round"/>
+                        <circle cx="515" cy="65" r="4" fill="#ef4444"/>
+                        <text x="515" y="55" fill="#ef4444" font-size="10" font-weight="bold" text-anchor="middle">Pasador 2 + Chaveta R</text>
+
+                        <!-- Tramo Trasero -->
+                        <path d="M520 82 L705 82 L705 85 L722 85 L722 95 L705 95 L705 98 L520 98 Z" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                        <circle cx="715" cy="90" r="5" fill="#07080b"/>
+                        <text x="620" y="70" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">TRAMO TRASERO (65 cm)</text>
+
+                        <!-- Grillete Derecho Remolcado -->
+                        <circle cx="735" cy="90" r="16" stroke="#f59e0b" stroke-width="4" fill="none"/>
+                        <rect x="728" y="75" width="14" height="30" rx="3" fill="#f59e0b"/>
+                        <text x="735" y="130" fill="#f59e0b" font-size="11" font-weight="700" text-anchor="middle">Grillete 1/2"</text>
+                        <text x="735" y="145" fill="#94a3b8" font-size="9" text-anchor="middle">(Vehículo Remolcado)</text>
+
+                        <!-- Cota Total 1.80 Metros -->
+                        <line x1="65" y1="165" x2="735" y2="165" stroke="#10b981" stroke-width="2"/>
+                        <line x1="65" y1="158" x2="65" y2="172" stroke="#10b981" stroke-width="2"/>
+                        <line x1="735" y1="158" x2="735" y2="172" stroke="#10b981" stroke-width="2"/>
+                        <text x="400" y="162" fill="#10b981" font-size="12" font-weight="900" text-anchor="middle">DISTANCIA FIJA REGLAMENTARIA: 1.80 METROS</text>
+                    </svg>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-gray-300">
+                    <div class="p-3 bg-white/5 rounded-lg border border-white/5">
+                        <strong class="text-white block mb-1">1. Tramo Frontal</strong>
+                        Acople de ojal forjado hacia vehículo tractor + espiga macho de 10 cm con orificio pasante.
+                    </div>
+                    <div class="p-3 bg-white/5 rounded-lg border border-white/5">
+                        <strong class="text-white block mb-1">2. Tramo Central</strong>
+                        Tubo matriz con doble hembra receptora y cinta reflectante reglamentaria de alta visibilidad.
+                    </div>
+                    <div class="p-3 bg-white/5 rounded-lg border border-white/5">
+                        <strong class="text-white block mb-1">3. Tramo Trasero</strong>
+                        Espiga macho receptora + ojal forjado hacia el vehículo remolcado con perno de grillete.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. INSTRUCCIONES DE MONTAJE PASO A PASO -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+                <span class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-sm">03</span>
+                <h2 class="text-2xl font-extrabold text-white">Procedimiento de Montaje y Ensamble (60 Segundos)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                <div class="metal-card p-5 rounded-xl space-y-2 border-l-4 border-l-orange-500">
+                    <span class="text-orange-400 font-extrabold uppercase text-xs">Paso 1: Posicionamiento</span>
+                    <h3 class="text-white font-bold text-base">Alinear los 3 tramos en el suelo</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Ubique los tramos sobre una superficie firme y plana (fuera de la calzada de tránsito rápido). Vista su chaleco reflectante antes de manipular cualquier elemento en la berma.
+                    </p>
+                </div>
+
+                <div class="metal-card p-5 rounded-xl space-y-2 border-l-4 border-l-orange-500">
+                    <span class="text-orange-400 font-extrabold uppercase text-xs">Paso 2: Inserción y Calce</span>
+                    <h3 class="text-white font-bold text-base">Deslizar espigas macho dentro del tubo central</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Introduzca el tramo frontal y el tramo trasero dentro de los extremos del tramo central hasta hacer coincidir visualmente las perforaciones pasantes a 90°.
+                    </p>
+                </div>
+
+                <div class="metal-card p-5 rounded-xl space-y-2 border-l-4 border-l-orange-500">
+                    <span class="text-orange-400 font-extrabold uppercase text-xs">Paso 3: Pasador de Seguridad</span>
+                    <h3 class="text-white font-bold text-base">Atravesar pasador de 1/2" completamente</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Inserte el pasador macizo de acero cincado asegurándose de que traspase ambas caras del tubo y sobresalga el orificio de bloqueo por el lado opuesto.
+                    </p>
+                </div>
+
+                <div class="metal-card p-5 rounded-xl space-y-2 border-l-4 border-l-orange-500">
+                    <span class="text-orange-400 font-extrabold uppercase text-xs">Paso 4: Traba de Chaveta R (Vital)</span>
+                    <h3 class="text-white font-bold text-base">Enganchar chaveta elástica de bloqueo</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Coloque la chaveta elástica tipo "R" dentro del orificio del pasador hasta escuchar el clic metálico. <strong>Jamás inicie la marcha sin ambas chavetas aseguradas.</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. PROTOCOLO DE ACOPLE A VEHÍCULOS Y GRILLETES -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+                <span class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-sm">04</span>
+                <h2 class="text-2xl font-extrabold text-white">Protocolo de Acople Seguro y Regla de Grilletes</h2>
+            </div>
+
+            <div class="metal-card p-6 rounded-xl space-y-4">
+                <h3 class="text-base font-bold text-white">¿Dónde enganchar la barra en cada automóvil?</h3>
+                <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                    Conecte ÚNICAMENTE a los <strong>ganchos de tiro estructurales originales</strong> soldados al chasis del vehículo o al <strong>cáncamo roscable original</strong> provisto en el kit de herramientas de la rueda de repuesto.
+                </p>
+
+                <div class="p-4 rounded-lg bg-red-950/30 border border-red-500/30 text-xs sm:text-sm text-red-200 space-y-2">
+                    <strong class="text-red-400 flex items-center gap-2">
+                        <i class="fa-solid fa-ban"></i> PROHIBICIÓN ABSOLUTA DE ENGANCHE A:
+                    </strong>
+                    <ul class="list-disc list-inside space-y-1 text-gray-300">
+                        <li>Parachoques plásticos o molduras estéticas.</li>
+                        <li>Bandejas de suspensión, rótulas o brazos basculantes de rueda.</li>
+                        <li>Barra estabilizadora o terminales de dirección.</li>
+                        <li>Eje de transmisión (cardán) o semiejes de tracción.</li>
+                    </ul>
+                </div>
+
+                <div class="p-4 rounded-lg bg-emerald-950/30 border border-emerald-500/30 text-xs sm:text-sm text-emerald-200 space-y-1">
+                    <strong class="text-emerald-400 flex items-center gap-2">
+                        <i class="fa-solid fa-check"></i> REGLA DE ORO DEL GRILLETE TIPO LIRA:
+                    </strong>
+                    <p class="text-gray-300">
+                        Al colocar el perno roscado del grillete, apriételo a fondo con la mano. Una vez ajustado al tope, <strong>gírelo 1/4 de vuelta hacia atrás (antihorario)</strong>. Esto evita que la tracción del remolque apriete la rosca por deformación elástica e impida soltarlo después.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CHECKLIST OBLIGATORIO ANTES DE PARTIR -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+                <span class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-sm">05</span>
+                <h2 class="text-2xl font-extrabold text-white">Checklist de Cabina Previo a la Partida</h2>
+            </div>
+
+            <div class="metal-card p-6 rounded-xl space-y-3">
+                <div class="space-y-2 text-xs sm:text-sm">
+                    <label class="flex items-start gap-3 p-3 bg-white/5 rounded-lg border border-white/5 cursor-pointer">
+                        <input type="checkbox" checked disabled class="mt-1 accent-orange-500">
+                        <span><strong>1. LLAVE EN POSICIÓN "ON" (DESBLOQUEO DE VOLANTE)</strong>: En el auto remolcado, active la llave en contacto para deshabilitar el trabavolante mecánico. Mueva el volante para confirmar giro libre.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 bg-white/5 rounded-lg border border-white/5 cursor-pointer">
+                        <input type="checkbox" checked disabled class="mt-1 accent-orange-500">
+                        <span><strong>2. FRENO DE MANO COMPLETAMENTE ABAJO</strong>: Verificar visualmente en el panel del auto remolcado que el testigo de freno de estacionamiento esté apagado.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 bg-white/5 rounded-lg border border-white/5 cursor-pointer">
+                        <input type="checkbox" checked disabled class="mt-1 accent-orange-500">
+                        <span><strong>3. CAJA EN PUNTO MUERTO (NEUTRO)</strong>: Palanca en Neutro (N) en transmisiones manuales o automáticas.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 bg-white/5 rounded-lg border border-white/5 cursor-pointer">
+                        <input type="checkbox" checked disabled class="mt-1 accent-orange-500">
+                        <span><strong>4. LUCES DE ADVERTENCIA ENCENDIDAS</strong>: Intermitentes / hazard activos en ambos vehículos en todo momento.</span>
+                    </label>
+                    <label class="flex items-start gap-3 p-3 bg-white/5 rounded-lg border border-white/5 cursor-pointer">
+                        <input type="checkbox" checked disabled class="mt-1 accent-orange-500">
+                        <span><strong>5. CONDUCTOR HABILITADO AL VOLANTE</strong>: Con licencia de conducir al día. Sin niños ni mascotas a bordo del auto remolcado.</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. DINÁMICA DE CONDUCCIÓN -->
+        <section class="space-y-6">
+            <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+                <span class="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-sm">06</span>
+                <h2 class="text-2xl font-extrabold text-white">Técnicas de Manejo Seguro en Ruta</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                <div class="metal-card p-5 rounded-xl space-y-2">
+                    <h3 class="text-orange-400 font-bold text-sm">Frenos y Dirección Duros</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Con el motor apagado no opera el servofreno ni la bomba de dirección. El pedal de freno estará duro y requiere <strong>pisar con mucha fuerza muscular</strong> para detener el auto. Sujete firmemente el volante con ambas manos.
+                    </p>
+                </div>
+
+                <div class="metal-card p-5 rounded-xl space-y-2">
+                    <h3 class="text-orange-400 font-bold text-sm">Velocidades Máximas por Ley</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Respete los límites legales del DS 55/2025: <strong>30 km/h en zona urbana</strong> y <strong>40 km/h en autopistas</strong>. Remolcar a más de 40 km/h produce inestabilidad y riesgo de coleo o volcamiento.
+                    </p>
+                </div>
+
+                <div class="metal-card p-5 rounded-xl space-y-2">
+                    <h3 class="text-orange-400 font-bold text-sm">Arranques Progresivos</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        El vehículo tractor debe soltar el embrague con suavidad en primera marcha. Cero aceleraciones violentas. Una vez en movimiento, suba de marchas sin tirones bruscos.
+                    </p>
+                </div>
+
+                <div class="metal-card p-5 rounded-xl space-y-2">
+                    <h3 class="text-orange-400 font-bold text-sm">Curvas con Radio Amplio</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        Abra la trayectoria al doblar esquinas o rotondas para evitar que los neumáticos traseros del vehículo remolcado golpeen contra soleras o caigan a zanjas de la berma.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. GARANTÍA Y SERVICIO TÉCNICO -->
+        <section class="metal-card p-8 rounded-2xl border border-orange-500/20 space-y-4 text-center">
+            <span class="text-xs uppercase tracking-widest text-orange-400 font-extrabold">Certificación & Respaldo Nacional</span>
+            <h2 class="text-2xl sm:text-3xl font-black text-white">Garantía Legal de 6 Meses Metal Creativo</h2>
+            <p class="text-xs sm:text-sm text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                Este producto cuenta con garantía legal directa de fábrica contra todo defecto estructural en perfiles de acero y cordones de soldadura conforme a la <strong>Ley N° 19.496 del SERNAC</strong>.
+            </p>
+            <div class="pt-4 flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-gray-300">
+                <span class="flex items-center gap-2"><i class="fa-solid fa-industry text-orange-400"></i> Fabricación 100% Chilena</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-truck-fast text-orange-400"></i> Repuestos de Pasadores y Grilletes en Stock</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-phone text-orange-400"></i> WhatsApp: +56 9 5492 2608</span>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER SIMPLE -->
+    <footer class="py-8 border-t border-white/10 text-center text-xs text-gray-500 space-y-2">
+        <p>© 2026 Metal Creativo Chile. Todos los derechos reservados.</p>
+        <p class="text-gray-600">Documento técnico oficial para clientes y distribuidores autorizados.</p>
+    </footer>
+
+</body>
+</html>

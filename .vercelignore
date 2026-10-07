@@ -1,0 +1,14 @@
+.git
+node_modules
+out
+*.mp4
+*.raw
+*.docx
+*.pdf
+*.log
+asets videos imagenes reales/
+google_flow_assets/
+hisrorias agendaiento1/
+scratch_frames/
+lab-merch-revolution/
+.agent_chrome_profile/

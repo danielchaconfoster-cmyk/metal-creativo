@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon & Identidad de Marca -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#ea580c">
+
     <title>Checkout Seguro | Metal Creativo Chile</title>
     <meta name="description" content="Finaliza tu compra segura en Metal Creativo Chile. Despachos a todo el país vía Starken y Chilexpress con garantía de 6 meses.">
     <link rel="canonical" href="https://metalcreativo.cl/checkout.html">
@@ -309,9 +317,13 @@
                                     <input type="text" x-model="nombre" required placeholder="Carlos Muñoz" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
                                 </div>
                                 <div>
-                                    <label class="block font-bold text-gray-400 mb-1 uppercase">RUT Chileno *</label>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <label class="block font-bold text-gray-300 uppercase">RUT / Cédula *</label>
+                                        <span class="text-[10px] text-orange-400 font-semibold tracking-wide">📦 Requerido por Starken</span>
+                                    </div>
                                     <input type="text" x-model="rut" @input="formatearRUT()" required placeholder="12.345.678-9" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border text-white focus:outline-none" :class="rut.length > 3 && !rutValido ? 'border-red-500 text-red-300' : 'border-white/10 focus:border-orange-500'">
-                                    <span x-show="rut.length > 3 && !rutValido" class="text-[10px] text-red-400 mt-1 block">RUT inválido (Dígito verificador incorrecto)</span>
+                                    <span x-show="rut.length > 3 && !rutValido" class="text-[10px] text-red-400 mt-1 block">RUT inválido (Verifica el dígito verificador)</span>
+                                    <p x-show="!rut || rutValido" class="text-[10px] text-gray-500 mt-1">Exigido por Starken y Chilexpress para la entrega de tu encomienda.</p>
                                 </div>
                                 <div>
                                     <label class="block font-bold text-gray-400 mb-1 uppercase">Correo Electrónico *</label>

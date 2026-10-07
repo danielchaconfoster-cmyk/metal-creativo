@@ -268,8 +268,17 @@ module.exports = async (req, res) => {
     try {
       const body = req.body || {};
 
-      // MODO SIMULACIÓN PARA TESTEO DIRECTO EN EL PANEL ADMIN
+      // MODO SIMULACIÓN PARA TESTEO DIRECTO EN EL PANEL ADMIN (Protegido por Token)
       if (body.simulate === true) {
+        const expectedToken = process.env.ADMIN_TOKEN || 'metalcreativo2026';
+        const clientToken = req.headers['x-admin-token'] || req.query?.token || body.admin_token;
+        const host = req.headers.host || '';
+        const isLocal = host.includes('localhost') || host.includes('127.0.0.1');
+
+        if (!isLocal && clientToken !== expectedToken) {
+          return res.status(401).json({ error: 'No autorizado para modo simulacion' });
+        }
+
         const text = body.message || 'Hola, ¿tienen stock?';
         const name = body.name || '';
         const phone = body.phone || '+56 9 8888 7777';

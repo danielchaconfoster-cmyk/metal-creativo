@@ -15,7 +15,7 @@
 ## 🚗 2. FICHA TÉCNICA Y LEGAL: BARRA RÍGIDA DE REMOLQUE CON OJAL FORJADO
 
 ### A. Especificaciones Físicas y Mecánicas
-* **Estructura**: Tubo de acero al carbono de alta resistencia (diámetro exterior 45 mm - 50 mm, espesor de pared 3.5 mm - 4.0 mm).
+* **Estructura**: Tubo de acero al carbono de alta resistencia (diámetro exterior 45 mm - 50 mm, espesor de pared 3.0 mm).
 * **Terminales de Enganche**: Ojales forjados soldados de penetración profunda para conexión mediante grilletes de acero pasantes.
 * **Capacidad de Arrastre**: 2.500 kg a 3.500 kg de arrastre directo en línea recta.
 * **Longitud Extendida**: 1.60 metros a 1.80 metros (distancia óptima de seguridad entre auto tractor y remolcado).

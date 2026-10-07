@@ -9,10 +9,28 @@ import { AnuncioPickupTow } from './Compositions/AnuncioPickupTow';
 import { LanzaRealShowcase } from './Compositions/LanzaRealShowcase';
 import { LanzaRealPuro } from './Compositions/LanzaRealPuro';
 import { ReelViralLanza30s } from './Compositions/ReelViralLanza30s';
+import { Reel01Cinematico } from './Compositions/Reel01Cinematico';
+import { Reel02Cinematico } from './Compositions/Reel02Cinematico';
 
 export const RemotionRoot: React.FC = () => {
 	return (
 		<>
+			<Composition
+				id="Reel02Cinematico"
+				component={Reel02Cinematico}
+				durationInFrames={1012}
+				fps={30}
+				width={1080}
+				height={1920}
+			/>
+			<Composition
+				id="Reel01Cinematico"
+				component={Reel01Cinematico}
+				durationInFrames={932}
+				fps={30}
+				width={1080}
+				height={1920}
+			/>
 			<Composition
 				id="ReelViralLanza30s"
 				component={ReelViralLanza30s}
