@@ -9,7 +9,7 @@ const { createClient } = require('@supabase/supabase-js');
 // Bloquea robots que prueben cientos de tarjetas robadas por minuto
 const ipRequestHistory = new Map();
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutos
-const MAX_REQUESTS_PER_WINDOW = 6; // Max 6 intentos por IP
+const MAX_REQUESTS_PER_WINDOW = 30; // 30 intentos por ventana para evitar falsos positivos en clientes legítimos
 
 function checkRateLimit(ip) {
   const now = Date.now();
