@@ -57,7 +57,17 @@ const OFFICIAL_PRICES = {
     unit_price: 65000,
     currency_id: 'CLP'
   },
+  'lanza_remolque': {
+    name: 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)',
+    unit_price: 65000,
+    currency_id: 'CLP'
+  },
   'fogon': {
+    name: 'Fogon de Mesa a Bioetanol Ecologico',
+    unit_price: 149900,
+    currency_id: 'CLP'
+  },
+  'fogon_bioetanol': {
     name: 'Fogon de Mesa a Bioetanol Ecologico',
     unit_price: 149900,
     currency_id: 'CLP'
@@ -100,7 +110,8 @@ module.exports = async (req, res) => {
       if (!product) {
         return res.status(400).json({ error: `Producto invalido: ${item.id}` });
       }
-      const qty = parseInt(item.qty, 10);
+      const rawQty = item.qty !== undefined ? item.qty : (item.quantity !== undefined ? item.quantity : 1);
+      const qty = parseInt(rawQty, 10);
       if (isNaN(qty) || qty <= 0 || qty > 10) {
         return res.status(400).json({ error: 'Cantidad no permitida (debe ser entre 1 y 10)' });
       }

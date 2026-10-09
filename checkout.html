@@ -234,7 +234,7 @@
             if (this.paymentMethod === 'whatsapp') {
                 localStorage.setItem('last_order', JSON.stringify(orderData));
                 localStorage.removeItem('mc_cart');
-                const resumenItems = this.cart.map(i => `${i.qty}x ${i.name}`).join(', ');
+                const resumenItems = this.cart.map(i => `${i.quantity || i.qty || 1}x ${i.name}`).join(', ');
                 const despachoTexto = this.isRM && this.tipoDespacho === 'rm_express' ? 'Express Santiago ($4.990)' : 'Starken Regional (Por Pagar)';
                 const msg = encodeURIComponent(`Hola Metal Creativo! 🛠️\nQuiero coordinar la compra de mi orden:\n- Orden: #${orderId}\n- Productos: ${resumenItems}\n- Total: $${this.formatPrice(this.grandTotal)} CLP\n- Comprador: ${this.nombre} (RUT: ${this.rut})\n- Teléfono: ${this.telefono}\n- Despacho: ${this.direccion}, ${this.comuna} (${this.region})\n- Modalidad: ${despachoTexto}\n\nPor favor confirmar recepción para coordinar.`);
                 window.location.href = `https://wa.me/56954922608?text=${msg}`;
@@ -263,7 +263,11 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         customer: customerPayload,
-                        items: this.cart.map(i => ({ id: i.id, qty: i.qty })),
+                        items: this.cart.map(i => ({
+                            id: i.id,
+                            qty: Number(i.quantity || i.qty || 1),
+                            quantity: Number(i.quantity || i.qty || 1)
+                        })),
                         shipping_cost: this.shippingCost,
                         shipping_method: this.tipoDespacho
                     })
