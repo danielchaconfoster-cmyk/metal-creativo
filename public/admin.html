@@ -66,7 +66,23 @@
         ::-webkit-scrollbar-thumb:hover { background: #ff6a00; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col bg-[#07080b] antialiased text-gray-200" x-data="adminApp()" x-init="init()">
+<body class="min-h-screen flex flex-col bg-[#07080b] antialiased text-gray-200" x-data="adminApp()">
+
+    <section x-show="!authenticated" class="metal-card w-full max-w-md mx-auto my-16 p-8 rounded-2xl">
+        <h1 class="text-xl font-bold">Administración de Metal Creativo</h1>
+        <p class="text-sm text-gray-400 mt-3">Ingresa tu clave privada para acceder al panel.</p>
+        <form @submit.prevent="login()" class="mt-6 space-y-4">
+            <label for="admin-key" class="block text-sm">Clave de acceso</label>
+            <input id="admin-key" type="password" x-model="loginToken" autocomplete="current-password" required
+                class="w-full rounded-lg bg-neutral-900 border border-white/20 p-3" :disabled="loading">
+            <button type="submit" :disabled="loading" class="btn-metal-orange rounded-lg px-5 py-3 w-full"
+                x-text="loading ? 'Verificando...' : 'Ingresar'"></button>
+        </form>
+    </section>
+    <p x-show="authError" x-cloak x-text="authError" role="alert" class="text-red-300 text-sm text-center p-4"></p>
+
+    <template x-if="authenticated">
+    <div>
 
     <!-- TOPBAR OPERACIONAL -->
     <header class="bg-[#050608]/90 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
@@ -99,6 +115,7 @@
                 </div>
 
                 <!-- Refresh Button -->
+                <button @click="logout()" class="px-3 py-1.5 rounded-lg border border-white/20">Cerrar sesión</button>
                 <button @click="fetchMetrics()" :disabled="loading" class="px-3 py-1.5 rounded-lg bg-neutral-900 border border-white/10 hover:border-orange-500 text-gray-300 hover:text-white transition-all flex items-center gap-1.5 text-xs font-bold cursor-pointer">
                     <svg class="w-3.5 h-3.5" :class="loading ? 'animate-spin text-orange-400' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
@@ -693,6 +710,8 @@
     <footer class="bg-[#050608] border-t border-white/10 py-6 text-center text-xs text-gray-500">
         <p>Metal Creativo Chile • Sistema Centralizado de Rendimiento y Operaciones • 2026</p>
     </footer>
+    </div>
+    </template>
 
     <!-- LOGICA ALPINES JS -->
     <script>
@@ -701,6 +720,11 @@
                 activeTab: 'orders',
                 orderFilter: 'all',
                 loading: false,
+                authenticated: false,
+                loginToken: '',
+                authToken: '',
+                authError: '',
+                sessionVersion: 0,
                 kpis: {
                     totalRevenue: 414890,
                     totalOrders: 5,
@@ -741,41 +765,69 @@
                     return this.orders;
                 },
 
-                async init() {
-                    await this.fetchMetrics();
-                    this.lookupShipping();
+                init() {
+                    // Remove credentials saved by older versions; this page keeps the key only in memory.
+                    try { sessionStorage.removeItem('mc_admin_token'); } catch (_) {}
+                },
+
+                async login() {
+                    if (this.loading) return;
+                    this.authToken = this.loginToken.trim();
+                    this.loginToken = '';
+                    this.authError = '';
+                    if (!this.authToken) return;
+                    if (await this.fetchMetrics()) this.lookupShipping();
+                },
+
+                logout(message = '') {
+                    this.sessionVersion++;
+                    this.authenticated = false;
+                    this.authToken = '';
+                    this.loginToken = '';
+                    this.orders = [];
+                    this.leads = [];
+                    this.kpis = {};
+                    this.metaAds = {};
+                    this.simulatorMessages = [];
+                    this.customInput = '';
+                    this.simulatedCustomerName = '';
+                    this.shippingResult = null;
+                    this.isTyping = false;
+                    this.loading = false;
+                    this.authError = message;
                 },
 
                 async fetchMetrics() {
+                    if (!this.authToken || this.loading) return false;
+                    const version = this.sessionVersion;
                     this.loading = true;
                     try {
-                        let token = sessionStorage.getItem('mc_admin_token') || 'metalcreativo2026';
-                        let res = await fetch(`/api/admin-metrics?token=${encodeURIComponent(token)}`, {
-                            headers: { 'x-admin-token': token }
+                        const res = await fetch('/api/admin-metrics', {
+                            headers: { 'x-admin-token': this.authToken },
+                            cache: 'no-store',
+                            redirect: 'error'
                         });
-
-                        if (res.status === 401) {
-                            const entered = prompt('🔐 Ingrese el PIN de Seguridad del Panel de Metal Creativo:');
-                            if (entered) {
-                                token = entered.trim();
-                                sessionStorage.setItem('mc_admin_token', token);
-                                res = await fetch(`/api/admin-metrics?token=${encodeURIComponent(token)}`, {
-                                    headers: { 'x-admin-token': token }
-                                });
-                            }
+                        if (version !== this.sessionVersion) return false;
+                        if (res.status === 401 || res.status === 503) {
+                            this.logout(res.status === 503 ? 'El acceso administrativo todavía no está configurado.' : 'Clave incorrecta o vencida. Vuelve a ingresar.');
+                            return false;
                         }
-
+                        if (!res.ok) throw new Error('Metrics unavailable');
                         const data = await res.json();
-                        if (data.success) {
-                            this.kpis = data.kpis;
-                            this.metaAds = data.metaAds;
-                            this.orders = data.orders;
-                            this.leads = data.leads;
-                        }
+                        if (version !== this.sessionVersion) return false;
+                        if (!data.success) throw new Error('Invalid metrics response');
+                        this.kpis = data.kpis;
+                        this.metaAds = data.metaAds;
+                        this.orders = data.orders;
+                        this.leads = data.leads;
+                        this.authenticated = true;
+                        this.authError = '';
+                        return true;
                     } catch (e) {
-                        console.warn('Usando datos de respaldo locales:', e);
+                        if (version === this.sessionVersion) this.logout('No se pudo cargar el panel. Intenta ingresar nuevamente.');
+                        return false;
                     } finally {
-                        this.loading = false;
+                        if (version === this.sessionVersion) this.loading = false;
                     }
                 },
 
@@ -798,6 +850,8 @@
                 },
 
                 async sendSimulator(text) {
+                    if (!this.authenticated || this.isTyping) return;
+                    const version = this.sessionVersion;
                     const custName = (this.simulatedCustomerName || '').trim();
                     this.simulatorMessages.push({
                         sender: 'user',
@@ -808,22 +862,30 @@
                     this.isTyping = true;
                     
                     try {
-                        const token = sessionStorage.getItem('mc_admin_token') || 'metalcreativo2026';
                         const res = await fetch('/api/whatsapp-webhook', {
                             method: 'POST',
+                            cache: 'no-store',
+                            redirect: 'error',
                             headers: { 
                                 'Content-Type': 'application/json',
-                                'x-admin-token': token
+                                'x-admin-token': this.authToken
                             },
                             body: JSON.stringify({
                                 simulate: true,
-                                admin_token: token,
                                 message: text,
                                 name: custName,
                                 history: this.simulatorMessages.slice(-10)
                             })
                         });
+                        if (version !== this.sessionVersion) return;
+                        if (res.status === 401 || res.status === 503) {
+                            this.logout(res.status === 503 ? 'El acceso administrativo todavía no está configurado.' : 'Tu clave ya no es válida. Vuelve a ingresar.');
+                            return;
+                        }
+                        if (!res.ok) throw new Error('Simulator unavailable');
                         const data = await res.json();
+                        if (version !== this.sessionVersion) return;
+                        if (!data.success) throw new Error('Invalid simulator response');
                         
                         // Extraer burbujas secuenciales (cadencia humana en ráfaga)
                         const bubbles = (data.messages && data.messages.length) ? data.messages : [data.botResponse || '¡Hola!'];
@@ -840,6 +902,7 @@
                                 : (isRealistic ? Math.min(Math.max(bubble.length * 18, 2200), 3800) : Math.min(Math.max(bubble.length * 12, 900), 1700));
                             
                             await new Promise(r => setTimeout(r, typingDelay));
+                            if (version !== this.sessionVersion) return;
                             
                             this.isTyping = false;
                             this.simulatorMessages.push({
@@ -852,13 +915,15 @@
                             // Pausa de respiro entre burbujas consecutivas
                             if (i < bubbles.length - 1) {
                                 await new Promise(r => setTimeout(r, isRealistic ? 600 : 350));
+                                if (version !== this.sessionVersion) return;
                             }
                         }
                     } catch (e) {
+                        if (version !== this.sessionVersion) return;
                         this.isTyping = false;
                         this.simulatorMessages.push({
                             sender: 'bot',
-                            text: 'Disculpa, se me fue un segundo la señal. ¿Me repites por favor?',
+                            text: 'No se pudo ejecutar la simulación. Intenta nuevamente.',
                             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
                         });
                         this.scrollChat();

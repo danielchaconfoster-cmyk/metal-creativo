@@ -6,6 +6,7 @@ try { require('dotenv').config(); } catch (_) {}
 const fs = require('fs');
 const path = require('path');
 const { calculateShipping, COMMUNE_MAP } = require('./shipping-quote');
+const { requireAdmin } = require('../lib/admin-auth');
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 
@@ -270,14 +271,7 @@ module.exports = async (req, res) => {
 
       // MODO SIMULACIÓN PARA TESTEO DIRECTO EN EL PANEL ADMIN (Protegido por Token)
       if (body.simulate === true) {
-        const expectedToken = process.env.ADMIN_TOKEN || 'metalcreativo2026';
-        const clientToken = req.headers['x-admin-token'] || req.query?.token || body.admin_token;
-        const host = req.headers.host || '';
-        const isLocal = host.includes('localhost') || host.includes('127.0.0.1');
-
-        if (!isLocal && clientToken !== expectedToken) {
-          return res.status(401).json({ error: 'No autorizado para modo simulacion' });
-        }
+        if (!requireAdmin(req, res)) return;
 
         const text = body.message || 'Hola, ¿tienen stock?';
         const name = body.name || '';

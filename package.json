@@ -2,6 +2,7 @@
   "name": "metal-creativo-remotion",
   "version": "1.0.0",
   "scripts": {
+    "test:admin-auth": "node --test tests/admin-auth.test.js",
     "dev": "remotion preview",
     "server": "node dev-server.js",
     "admin": "node dev-server.js",

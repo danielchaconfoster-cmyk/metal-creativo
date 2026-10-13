@@ -6,22 +6,13 @@ try { require('dotenv').config(); } catch (_) {}
 const fs = require('fs');
 const path = require('path');
 const { createClient } = require('@supabase/supabase-js');
+const { requireAdmin } = require('../lib/admin-auth');
 
 module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.setHeader('Cache-Control', 'no-store, max-age=0');
 
-  // AUTENTICACION ADMINISTRADOR (Proteccion Ley 19.628 de Datos Personales)
-  const expectedToken = process.env.ADMIN_TOKEN || 'metalcreativo2026';
-  const queryToken = req.query?.token;
-  const headerToken = req.headers?.['x-admin-token'] || (req.headers?.authorization ? req.headers.authorization.replace('Bearer ', '').trim() : '');
-
-  if (queryToken !== expectedToken && headerToken !== expectedToken) {
-    return res.status(401).json({
-      error: 'Acceso no autorizado. Se requiere token o PIN de administrador.',
-      code: 'UNAUTHORIZED'
-    });
-  }
+  if (!requireAdmin(req, res)) return;
 
   const metaToken = process.env.META_ACCESS_TOKEN;
   const campaignId = process.env.META_CAMPAIGN_ID || '120250654937270615';
