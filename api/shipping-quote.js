@@ -154,9 +154,18 @@ function calculateShipping(communeOrRegion, productId = 'barra_remolque') {
 }
 
 module.exports = async (req, res) => {
+  const { installHttp, readJson, sendError } = require('../lib/http');
+  installHttp(req, res);
+  if (!['GET','HEAD','POST'].includes(req.method)) {
+    res.setHeader('Allow','GET, HEAD, POST');
+    return res.status(405).json({success:false,code:'METHOD_NOT_ALLOWED'});
+  }
   // Soporta tanto GET ?commune=Temuco como POST { commune: 'Temuco' }
   const query = req.query || {};
-  const body = req.body || {};
+  let body = {};
+  if (req.method === 'POST') {
+    try { body = await readJson(req); } catch (error) { return sendError(res, error); }
+  }
   const input = query.commune || query.region || body.commune || body.region || 'Región Metropolitana';
   const productId = query.product || body.product || 'barra_remolque';
 

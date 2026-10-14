@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
+const { createHmac } = require('node:crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const TOKEN = 'synthetic-test-key-0123456789abcdef0123456789abcdef';
@@ -13,7 +14,7 @@ const LEGACY = ['metalcreativo', '2026'].join('');
 // Evaluate the real handlers and shared helper with isolated env and synthetic I/O.
 // Never load .env, read customer files, or contact providers from these tests.
 function backend(extraEnv = {}) {
-  const env = { META_ACCESS_TOKEN: 'fake-meta', GEMINI_API_KEY: 'fake-gemini',
+  const env = { META_ACCESS_TOKEN: 'fake-meta', META_CAMPAIGN_ID: '12345', GEMINI_API_KEY: 'fake-gemini', META_APP_SECRET: 'synthetic-meta-secret',
     SUPABASE_URL: 'https://test.invalid', SUPABASE_SERVICE_ROLE_KEY: 'fake-db', ...extraEnv };
   const effects = [];
   const cache = new Map();
@@ -24,25 +25,24 @@ function backend(extraEnv = {}) {
     cache.set(file, module);
     vm.runInNewContext(fs.readFileSync(file, 'utf8'), {
       module, exports: module.exports, process: { env, cwd: () => ROOT },
-      console: { log() {}, warn() {}, error() {} }, AbortSignal, setTimeout,
+      console: { log() {}, warn() {}, error() {} }, AbortSignal, setTimeout, clearTimeout, Buffer, TextDecoder, URL,
       async fetch(url) {
         effects.push('network');
         if (url.includes('generativelanguage')) return { json: async () => ({ candidates: [{
           content: { parts: [{ text: JSON.stringify({ messages: ['Respuesta de prueba'] }) }] }
         }] }) };
-        return { json: async () => ({ data: [] }) };
+        return { ok: true, json: async () => url.includes('/insights?') ? { data: [] } : { name: 'Campaña sintética', status: 'PAUSED', daily_budget: '0' } };
       },
       require(name) {
-        if (name === 'dotenv') return { config() {} };
-        if (name === 'fs') return {
-          existsSync() { effects.push('file-check'); return true; },
-          readFileSync() { effects.push('file-read'); return '[]'; },
-          writeFileSync() { effects.push('file-write'); }
-        };
         if (name === '@supabase/supabase-js') return { createClient() {
           effects.push('database');
-          const query = { from() { return this; }, select() { return this; }, order() { return this; },
-            async limit() { return { data: [{ id: 'synthetic-order', total_amount: 123 }], error: null }; } };
+          const query = { from(table) { return { select() { return this; }, order() { return this; },
+            async limit() { return { data: table === 'orders' ? [{ id: 'synthetic-order', total_amount: 123, customers: {}, order_items: [] }] : [], error: null }; } }; },
+            async rpc(name) {
+              assert.equal(name, 'backend_admin_totals');
+              return { data: { total_orders: 1, total_revenue: 123, average_ticket: 123, lead_count: 0, won_leads: 0,
+                channels: { web: 1, mercadolibre: 0, whatsapp: 0 } }, error: null };
+            } };
           return query;
         } };
         if (name.startsWith('.')) return load(path.relative(ROOT, path.resolve(path.dirname(file), name + '.js')));
@@ -56,7 +56,7 @@ function backend(extraEnv = {}) {
     const res = { headers: {}, setHeader(k, v) { this.headers[k] = v; },
       status(code) { this.code = code; return this; }, json(body) { this.body = body; return this; },
       send(body) { this.body = body; return this; } };
-    await load(endpoint)({ method: 'POST', headers: {}, query: {},
+    await load(endpoint)({ method: endpoint.includes('metrics') ? 'GET' : 'POST', headers: {}, query: {},
       body: endpoint.includes('whatsapp') ? { simulate: true, message: 'hola' } : {}, ...input }, res);
     return res;
   } };
@@ -109,7 +109,8 @@ for (const endpoint of ['api/admin-metrics.js', 'api/whatsapp-webhook.js']) {
         assert.ok(app.effects.includes('database'));
       } else {
         assert.equal(res.body.messages[0], 'Respuesta de prueba');
-        assert.ok(app.effects.includes('file-write'));
+        assert.ok(!app.effects.includes('database'));
+        assert.ok(!app.effects.includes('file-write'));
       }
       app.env.ADMIN_TOKEN = OTHER;
       app.effects.length = 0;
@@ -128,7 +129,10 @@ test('Meta verification and non-simulation acknowledgements retain their contrac
   assert.equal(response.code, 200);
   assert.equal(response.body, '1234');
   assert.equal((await app.call(endpoint, { method: 'GET' })).code, 403);
-  assert.equal((await app.call(endpoint, { body: {} })).body, 'EVENT_RECEIVED');
+  const rawBody = Buffer.from(JSON.stringify({ object: 'whatsapp_business_account', entry: [] }));
+  const signature = 'sha256=' + createHmac('sha256', app.env.META_APP_SECRET).update(rawBody).digest('hex');
+  assert.equal((await app.call(endpoint, { rawBody, body: undefined, headers: { 'x-hub-signature-256': signature } })).body, 'EVENT_RECEIVED');
+  assert.equal((await app.call(endpoint, { rawBody, body: undefined, headers: {} })).code, 401);
   assert.equal((await app.call(endpoint, { method: 'DELETE' })).code, 405);
   assert.equal(app.effects.length, 0);
 });

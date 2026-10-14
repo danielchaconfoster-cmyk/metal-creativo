@@ -12,3 +12,7 @@ hisrorias agendaiento1/
 scratch_frames/
 lab-merch-revolution/
 .agent_chrome_profile/
+.env*
+data/
+tests/
+supabase/

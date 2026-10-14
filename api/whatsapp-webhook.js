@@ -2,9 +2,9 @@
 // Motor de IA Conversacional Humana (Gemini 3.1 Flash Lite) para WhatsApp
 // Persona: Nacho, Maestro Soldador y Dueño de Metal Creativo Chile (Quillota / Santiago)
 
-try { require('dotenv').config(); } catch (_) {}
-const fs = require('fs');
-const path = require('path');
+const crypto = require('node:crypto');
+const { installHttp, readRaw, readJson, parseJson, singleHeader, HttpError, sendError } = require('../lib/http');
+const { getDatabase, rpc } = require('../lib/database');
 const { calculateShipping, COMMUNE_MAP } = require('./shipping-quote');
 const { requireAdmin } = require('../lib/admin-auth');
 
@@ -142,6 +142,7 @@ async function generateHumanReply(incomingText, customerName = '', history = [])
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        redirect: 'error',
         body: JSON.stringify({
           contents: [{ role: 'user', parts: [{ text: promptContent }] }],
           generationConfig: {
@@ -159,7 +160,8 @@ async function generateHumanReply(incomingText, customerName = '', history = [])
         try {
           const parsed = JSON.parse(rawJson);
           if (Array.isArray(parsed.messages) && parsed.messages.length > 0) {
-            return parsed.messages.map(cleanBubbleText).filter(Boolean);
+            const cleaned=parsed.messages.filter(item => typeof item === 'string').slice(0,3).map(item => cleanBubbleText(item).slice(0,4096)).filter(Boolean);
+            if(cleaned.length)return cleaned;
           }
         } catch (_) {
           const splitLines = rawJson.split(/\n\n+/).map(cleanBubbleText).filter(Boolean);
@@ -167,7 +169,7 @@ async function generateHumanReply(incomingText, customerName = '', history = [])
         }
       }
     } catch (err) {
-      console.warn('[GEMINI AI WARNING]: Usando motor conversacional de taller local:', err.message);
+      console.warn('[GEMINI_UNAVAILABLE]');
     }
   }
 
@@ -249,147 +251,140 @@ async function generateHumanReply(incomingText, customerName = '', history = [])
   ];
 }
 
-module.exports = async (req, res) => {
-  // 1. VERIFICACIÓN DEL WEBHOOK POR PARTE DE META (GET)
-  if (req.method === 'GET') {
-    const mode = req.query['hub.mode'];
-    const token = req.query['hub.verify_token'];
-    const challenge = req.query['hub.challenge'];
-    const expectedToken = process.env.WHATSAPP_VERIFY_TOKEN || 'metal_creativo_webhook_secure_2026';
 
-    if (mode === 'subscribe' && token === expectedToken) {
-      console.log('[WHATSAPP WEBHOOK] Verificación exitosa de Meta.');
-      return res.status(200).send(challenge);
+function verifyMeta(req, raw) {
+  const secret=process.env.META_APP_SECRET?.trim();
+  if (!secret) throw new HttpError(503,'WEBHOOK_NOT_CONFIGURED');
+  const signature=singleHeader(req,'x-hub-signature-256');
+  if(typeof signature!=='string' || !/^sha256=[a-fA-F0-9]{64}$/.test(signature)) throw new HttpError(401,'INVALID_SIGNATURE');
+  const expected=crypto.createHmac('sha256',secret).update(raw).digest();
+  if(!crypto.timingSafeEqual(expected,Buffer.from(signature.slice(7),'hex'))) throw new HttpError(401,'INVALID_SIGNATURE');
+}
+function phoneId() {
+  return process.env.WHATSAPP_PHONE_NUMBER_ID?.trim() || (!process.env.VERCEL && process.env.WHATSAPP_ALLOW_TEST_NUMBER==='true' ? process.env.WHATSAPP_TEST_PHONE_NUMBER_ID?.trim() : '');
+}
+function boundedText(value,max,optional=false) {
+  if(optional && value===undefined)return '';
+  if(typeof value!=='string' || value.length>max || (!optional && !value.trim()) || /[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/.test(value))throw new HttpError(400,'INVALID_MESSAGE');
+  return value;
+}
+async function processMessage(message,db) {
+      const claim=await rpc(db,'backend_claim_whatsapp',{p_id:message.id,p_phone:message.phone,p_text:message.text,p_name:message.name});
+      if(!claim || typeof claim.claimed!=='boolean')throw new HttpError(503,'MESSAGE_NOT_SAVED');
+      if(!claim.claimed) {
+        if(claim.reason==='conversation_busy' || claim.status==='processing' || claim.status==='retryable')throw new HttpError(503,'CONVERSATION_BUSY');
+        return claim.status;
+      }
+      const metaToken=process.env.META_ACCESS_TOKEN?.trim();
+      if(!metaToken) {
+        await rpc(db,'backend_finish_whatsapp',{p_id:message.id,p_response:claim.response || {bubbles:[],lead:{name:message.name,last_message:message.text}},p_status:'awaiting_configuration',p_sent_count:claim.sent_count || 0,p_error_code:'OUTBOUND_NOT_CONFIGURED'});
+        return 'awaiting_configuration';
+      }
+      const receiver=phoneId();
+      const version=process.env.META_GRAPH_VERSION || 'v21.0';
+      if(!receiver || !/^v\d{1,2}\.\d{1,2}$/.test(version)) throw new HttpError(503,'WHATSAPP_NOT_CONFIGURED');
+      let response=claim.response;
+      if(!response || !Array.isArray(response.bubbles) || !response.bubbles.length) {
+        const history=Array.isArray(claim.history)?claim.history.slice(-18).map(item=>({sender:item.sender,text:String(item.text || '').slice(0,1024)})):[];
+        const bubbles=(await generateHumanReply(message.text,message.name,history)).slice(0,3).map(text=>text.slice(0,4096));
+        const context=extractConversationContext(history,message.text);
+        response={bubbles,history:[...history,{sender:'user',text:message.text.slice(0,1024)},{sender:'bot',text:bubbles.join(' ').slice(0,1024)}].slice(-20),lead:{name:message.name,product:/fogon|fogón/i.test(message.text)?'fogon':'barra_remolque',commune:context.detectedCommune || '',region:context.quote?.region || '',estimated_shipping:context.quote?.couriers?.starken?.cost || 0,last_message:message.text}};
+      }
+      const bubbles=response.bubbles;
+      response={...response,history:Array.isArray(response.history)?[...response.history]:[]};
+      // Keep exact replies and the acknowledged prefix; trim only old context.
+      if(response.lead) { response.lead={...response.lead}; delete response.lead.last_message; }
+      while(Buffer.byteLength(JSON.stringify(response),'utf8')>60000 && response.history.length>2) response.history.shift();
+      if(Buffer.byteLength(JSON.stringify(response),'utf8')>60000) throw new HttpError(503,'RESPONSE_TOO_LARGE');
+      const offset=claim.sent_count || 0;
+      if(!Number.isInteger(offset) || offset<0 || offset>bubbles.length)throw new HttpError(503,'INVALID_DELIVERY_STATE');
+      for(let index=offset;index<bubbles.length;index++) {
+        const started=await rpc(db,'backend_start_whatsapp_send',{p_id:message.id,p_index:index});
+        if(started!==true)throw new HttpError(503,'MESSAGE_SEND_LOCKED');
+        let sent;
+        try {
+          sent=await fetch('https://graph.facebook.com/'+version+'/'+receiver+'/messages',{method:'POST',headers:{Authorization:'Bearer '+metaToken,'Content-Type':'application/json'},body:JSON.stringify({messaging_product:'whatsapp',to:message.phone,type:'text',text:{body:bubbles[index]}}),signal:AbortSignal.timeout(8000),redirect:'error'});
+        } catch (_) {
+          await rpc(db,'backend_finish_whatsapp',{p_id:message.id,p_response:response,p_status:'uncertain',p_sent_count:index,p_error_code:'PROVIDER_DELIVERY_UNCERTAIN'});
+          throw new HttpError(503,'PROVIDER_DELIVERY_UNCERTAIN');
+        }
+        if(!sent.ok) {
+          let rejected;try {rejected=await sent.json();} catch (_) {rejected=null;}
+          const transient=sent.status===429 || (rejected?.error && typeof rejected.error.code==='number' && rejected.error.is_transient===true);
+          const status=transient?'retryable':sent.status>=500?'uncertain':'failed';
+          const code=transient?'PROVIDER_TEMPORARILY_REJECTED':status==='uncertain'?'PROVIDER_DELIVERY_UNCERTAIN':'PROVIDER_REJECTED';
+          await rpc(db,'backend_finish_whatsapp',{p_id:message.id,p_response:response,p_status:status,p_sent_count:index,p_error_code:code});
+          throw new HttpError(503,code);
+        }
+        let result;
+        try { result=await sent.json(); } catch (_) { result=null; }
+        if(!result?.messages?.[0]?.id) {
+          await rpc(db,'backend_finish_whatsapp',{p_id:message.id,p_response:response,p_status:'uncertain',p_sent_count:index,p_error_code:'PROVIDER_DELIVERY_UNCERTAIN'});
+          throw new HttpError(503,'PROVIDER_DELIVERY_UNCERTAIN');
+        }
+        await rpc(db,'backend_finish_whatsapp',{p_id:message.id,p_response:response,p_status:'processing',p_sent_count:index+1,p_error_code:null});
+      }
+      await rpc(db,'backend_finish_whatsapp',{p_id:message.id,p_response:response,p_status:'completed',p_sent_count:bubbles.length,p_error_code:null});
+      return 'completed';
     }
+
+module.exports = async (req,res) => {
+  installHttp(req,res);
+  res.setHeader('Cache-Control','no-store');
+  if(req.method==='GET') {
+    const expected=process.env.WHATSAPP_VERIFY_TOKEN?.trim();
+    if(!expected)return res.status(503).send('Webhook no configurado');
+    const query=req.query || {};
+    if(query['hub.mode']==='subscribe' && typeof query['hub.verify_token']==='string' && query['hub.verify_token']===expected && typeof query['hub.challenge']==='string' && query['hub.challenge'].length<=200)return res.status(200).send(query['hub.challenge']);
     return res.status(403).send('Token no coincide');
   }
-
-  // 2. RECEPCIÓN DE MENSAJES (POST)
-  if (req.method === 'POST') {
-    try {
-      const body = req.body || {};
-
-      // MODO SIMULACIÓN PARA TESTEO DIRECTO EN EL PANEL ADMIN (Protegido por Token)
-      if (body.simulate === true) {
-        if (!requireAdmin(req, res)) return;
-
-        const text = body.message || 'Hola, ¿tienen stock?';
-        const name = body.name || '';
-        const phone = body.phone || '+56 9 8888 7777';
-        const history = body.history || [];
-
-        const humanBubbles = await generateHumanReply(text, name, history);
-        const bubbles = Array.isArray(humanBubbles) ? humanBubbles : [humanBubbles];
-
-        // Guardar lead en el historial del Kanban
-        const newLead = {
-          id: 'LEAD-' + Math.floor(1000 + Math.random() * 9000),
-          name: name || 'Cliente WhatsApp',
-          phone: phone,
-          product: text.toLowerCase().includes('fogon') ? 'fogon' : 'barra_remolque',
-          commune: 'Chile',
-          region: 'Chile',
-          status: 'new',
-          source: 'whatsapp_sandbox',
-          estimated_shipping: 7900,
-          last_message: text,
-          created_at: new Date().toISOString()
-        };
-
-        try {
-          const leadsFile = path.join(process.cwd(), 'data', 'leads_fallback.json');
-          if (fs.existsSync(leadsFile)) {
-            const currentLeads = JSON.parse(fs.readFileSync(leadsFile, 'utf8'));
-            currentLeads.unshift(newLead);
-            fs.writeFileSync(leadsFile, JSON.stringify(currentLeads.slice(0, 30), null, 2));
-          }
-        } catch (_) {}
-
-        return res.status(200).json({
-          success: true,
-          mode: 'simulated_human_ai',
-          customerMessage: text,
-          messages: bubbles,
-          botResponse: bubbles.join('\n\n')
-        });
-      }
-
-      // 3. PROCESAMIENTO OFICIAL DE MENSAJE DE META
-      const entry = body.entry && body.entry[0];
-      const change = entry && entry.changes && entry.changes[0];
-      const value = change && change.value;
-      const message = value && value.messages && value.messages[0];
-
-      if (!message) {
-        return res.status(200).send('EVENT_RECEIVED');
-      }
-
-      const fromNumber = message.from;
-      const messageBody = message.text ? message.text.body : '';
-      const contact = value.contacts && value.contacts[0];
-      const customerName = (contact && contact.profile && contact.profile.name) || '';
-
-      console.log(`[WHATSAPP HUMANO] De: ${fromNumber} (${customerName || 'Sin Nombre'}): "${messageBody}"`);
-
-      // Memoria de conversación persistente por número
-      if (!global.whatsappSessions) global.whatsappSessions = new Map();
-      const prevHistory = global.whatsappSessions.get(fromNumber) || [];
-
-      const humanBubbles = await generateHumanReply(messageBody, customerName, prevHistory);
-      const bubbles = Array.isArray(humanBubbles) ? humanBubbles : [humanBubbles];
-
-      // Actualizar sesión
-      prevHistory.push({ sender: 'user', text: messageBody });
-      prevHistory.push({ sender: 'bot', text: bubbles.join(' ') });
-      if (prevHistory.length > 20) prevHistory.splice(0, prevHistory.length - 20);
-      global.whatsappSessions.set(fromNumber, prevHistory);
-
-      // Responder secuencialmente a través de Meta WhatsApp Cloud API con cadencia humana
-      const metaToken = process.env.META_ACCESS_TOKEN;
-      const testPhoneId = process.env.WHATSAPP_TEST_PHONE_NUMBER_ID;
-
-      if (metaToken && testPhoneId && fromNumber) {
-        for (let i = 0; i < bubbles.length; i++) {
-          const bubble = bubbles[i];
-          if (!bubble) continue;
-
-          // Retardo dinámico de tipeo y lectura humana:
-          // Burbuja 1: 3.0s a 4.8s (lectura inicial + tipeo de saludo)
-          // Burbujas siguientes: 2.0s a 3.5s (tipeo continuo en taller)
-          const delay = i === 0
-            ? Math.min(Math.max(bubble.length * 24, 3000), 4800)
-            : Math.min(Math.max(bubble.length * 18, 2000), 3500);
-
-          await new Promise(resolve => setTimeout(resolve, delay));
-
-          try {
-            await fetch(`https://graph.facebook.com/v21.0/${testPhoneId}/messages`, {
-              method: 'POST',
-              headers: {
-                'Authorization': `Bearer ${metaToken}`,
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                messaging_product: 'whatsapp',
-                to: fromNumber,
-                type: 'text',
-                text: { body: bubble }
-              })
-            });
-          } catch (sendErr) {
-            console.warn('[WHATSAPP SEND ERROR]:', sendErr.message);
-          }
+  if(req.method!=='POST')return res.status(405).json({error:'Método no permitido'});
+  try {
+    // Simulator uses the private admin boundary; official events use exact original bytes.
+    let body;
+    const hasAdmin=Object.keys(req.headers || {}).some(key=>['x-admin-token','authorization'].includes(key.toLowerCase()));
+    const parsedBody=Object.getOwnPropertyDescriptor(req,'body')?.value;
+    if(hasAdmin || parsedBody?.simulate===true) {
+      if(!requireAdmin(req,res))return;
+      body=await readJson(req);
+      if(body.simulate!==true)throw new HttpError(400,'INVALID_SIMULATION');
+      const text=boundedText(body.message || 'Hola, ¿tienen stock?',4000);
+      const name=boundedText(body.name,100,true);
+      if(body.history!==undefined && (!Array.isArray(body.history) || body.history.length>20))throw new HttpError(400,'INVALID_MESSAGE');
+      const history=(body.history || []).map(item=>({sender: ['user','bot'].includes(item?.sender)?item.sender:'user',text:boundedText(item?.text,4000)}));
+      const bubbles=await generateHumanReply(text,name,history);
+      return res.status(200).json({success:true,mode:'simulated_human_ai',customerMessage:text,messages:bubbles,botResponse:bubbles.join('\n\n')});
+    }
+    const raw=await readRaw(req);
+    verifyMeta(req,raw);
+    body=parseJson(raw);
+    if(body.object!=='whatsapp_business_account' || !Array.isArray(body.entry))throw new HttpError(400,'INVALID_EVENT');
+    const incoming=[];
+    for(const entry of body.entry) {
+      if(!Array.isArray(entry.changes))throw new HttpError(400,'INVALID_EVENT');
+      for(const change of entry.changes) {
+        const value=change.value || {};
+        if(value.messages===undefined)continue; // Delivery statuses have no reply effects.
+        if(!Array.isArray(value.messages))throw new HttpError(400,'INVALID_EVENT');
+        const receiver=phoneId();
+        if(!receiver)throw new HttpError(503,'WHATSAPP_NOT_CONFIGURED');
+        if(String(value.metadata?.phone_number_id)!==receiver)throw new HttpError(403,'WRONG_WHATSAPP_ACCOUNT');
+        for(const message of value.messages) {
+          if(message.type!=='text')continue;
+          if(typeof message.id!=='string' || !/^[A-Za-z0-9._:=+\/-]{1,200}$/.test(message.id) || typeof message.from!=='string' || !/^\d{8,15}$/.test(message.from))throw new HttpError(400,'INVALID_MESSAGE');
+          const contact=(value.contacts || []).find(item=>item.wa_id===message.from);
+          incoming.push({id:message.id,phone:message.from,text:boundedText(message.text?.body,4000),name:boundedText(contact?.profile?.name,255,true)});
+          if(incoming.length>20)throw new HttpError(413,'TOO_MANY_MESSAGES');
         }
       }
-
-      return res.status(200).send('EVENT_RECEIVED');
-    } catch (err) {
-      console.error('[WHATSAPP WEBHOOK ERROR]:', err);
-      return res.status(200).send('EVENT_RECEIVED');
     }
-  }
-
-  return res.status(405).json({ error: 'Método no permitido' });
+    if(!incoming.length)return res.status(200).send('EVENT_RECEIVED');
+    const db=getDatabase();
+    for(const message of incoming) await processMessage(message,db);
+    return res.status(200).send('EVENT_RECEIVED');
+  } catch(error) {return sendError(res,error);}
 };
+module.exports.generateHumanReply=generateHumanReply;
 
-module.exports.generateHumanReply = generateHumanReply;
+module.exports.processMessage=processMessage;
+module.exports.phoneId=phoneId;

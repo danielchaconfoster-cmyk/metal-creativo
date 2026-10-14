@@ -185,7 +185,60 @@
             return 'Confirmar y Proceder al Pago';
         },
 
+        attemptKey: '',
+        attemptHash: '',
+
+        async checkoutKey(payload) {
+            const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(payload)));
+            const hash = Array.from(new Uint8Array(bytes), value => value.toString(16).padStart(2, '0')).join('');
+            let pending = null;
+            try { pending = JSON.parse(localStorage.getItem('mc_checkout_attempt') || 'null'); } catch (_) {}
+            if (pending && pending.hash === hash && /^[0-9a-f-]{36}$/i.test(pending.key || '')) {
+                this.attemptKey = pending.key;
+                this.attemptHash = hash;
+            }
+            if (!this.attemptKey || this.attemptHash !== hash) {
+                this.attemptKey = crypto.randomUUID();
+                this.attemptHash = hash;
+            }
+            try { localStorage.setItem('mc_checkout_attempt', JSON.stringify({ key: this.attemptKey, hash: hash })); } catch (_) {}
+            return this.attemptKey;
+        },
+
+        saveOrder(result, customer, cartSnapshot, paymentMethod) {
+            if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(result.order_id || '') ||
+                !Number.isFinite(Number(result.total_amount)) || Number(result.total_amount) <= 0) {
+                throw new Error('Invalid order response');
+            }
+            const summary = {
+                orderId: result.order_id,
+                orderNumber: result.order_number,
+                date: new Date().toISOString(),
+                customer: { full_name: customer.full_name },
+                shipping: { direccion: customer.address_street, comuna: customer.comuna },
+                total: Number(result.total_amount),
+                paymentMethod: paymentMethod,
+                cartSnapshot: cartSnapshot,
+                attemptKey: this.attemptKey
+            };
+            // Only the current tab retains the receipt display; credentials stay in the HttpOnly cookie.
+            sessionStorage.setItem('last_order', JSON.stringify(summary));
+            try { localStorage.removeItem('last_order'); } catch (_) {}
+            return summary;
+        },
+
+        finishRecordedOrder(cartSnapshot) {
+            if (localStorage.getItem('mc_cart') === cartSnapshot) localStorage.removeItem('mc_cart');
+            try {
+                const attempt = JSON.parse(localStorage.getItem('mc_checkout_attempt') || 'null');
+                if (attempt && attempt.key === this.attemptKey) localStorage.removeItem('mc_checkout_attempt');
+            } catch (_) {}
+            this.attemptKey = '';
+            this.attemptHash = '';
+        },
+
         async submitOrder() {
+            if (this.processing) return;
             if (this.cart.length === 0) {
                 alert('Tu carrito está vacío. Agrega productos antes de continuar.');
                 return;
@@ -198,8 +251,11 @@
                 alert('El RUT ingresado no es válido. Por favor verifica el dígito verificador.');
                 return;
             }
+            const paymentMethod = this.paymentMethod;
+            if (!['mercadopago', 'transferencia', 'whatsapp'].includes(paymentMethod)) return;
+            const shippingMethod = this.tipoDespacho;
+            const orderedItems = this.cart.map(item => ({ ...item }));
 
-            const orderId = 'MC-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
             const customerPayload = {
                 full_name: this.nombre,
                 rut: this.rut,
@@ -211,82 +267,59 @@
                 address_number: this.depto || 'S/N',
                 address_extra: this.depto
             };
-
-            const orderData = {
-                orderId: orderId,
-                date: new Date().toISOString(),
+            const cartSnapshot = JSON.stringify(orderedItems);
+            const payload = {
                 customer: customerPayload,
-                shipping: {
-                    region: this.region,
-                    comuna: this.comuna,
-                    direccion: this.direccion,
-                    metodo: this.tipoDespacho,
-                    costo: this.shippingCost
-                },
-                items: this.cart,
-                subtotal: this.subtotal,
-                shippingCost: this.shippingCost,
-                total: this.grandTotal,
-                paymentMethod: this.paymentMethod
+                items: orderedItems.map(item => ({
+                    id: item.id,
+                    qty: Number(item.quantity || item.qty || 1),
+                    quantity: Number(item.quantity || item.qty || 1)
+                })),
+                shipping_method: shippingMethod,
+                payment_method: paymentMethod
             };
-
-            // 1. FLUJO DIRECTO A WHATSAPP
-            if (this.paymentMethod === 'whatsapp') {
-                localStorage.setItem('last_order', JSON.stringify(orderData));
-                localStorage.removeItem('mc_cart');
-                const resumenItems = this.cart.map(i => `${i.quantity || i.qty || 1}x ${i.name}`).join(', ');
-                const despachoTexto = this.isRM && this.tipoDespacho === 'rm_express' ? 'Express Santiago ($4.990)' : 'Starken Regional (Por Pagar)';
-                const msg = encodeURIComponent(`Hola Metal Creativo! 🛠️\nQuiero coordinar la compra de mi orden:\n- Orden: #${orderId}\n- Productos: ${resumenItems}\n- Total: $${this.formatPrice(this.grandTotal)} CLP\n- Comprador: ${this.nombre} (RUT: ${this.rut})\n- Teléfono: ${this.telefono}\n- Despacho: ${this.direccion}, ${this.comuna} (${this.region})\n- Modalidad: ${despachoTexto}\n\nPor favor confirmar recepción para coordinar.`);
-                window.location.href = `https://wa.me/56954922608?text=${msg}`;
-                return;
-            }
-
-            // 2. FLUJO TRANSFERENCIA BANCARIA DIRECTA
-            if (this.paymentMethod === 'transferencia') {
-                this.processing = true;
-                this.processStep = 'Registrando orden oficial de compra...';
-                localStorage.setItem('last_order', JSON.stringify(orderData));
-                localStorage.removeItem('mc_cart');
-                setTimeout(() => {
-                    window.location.href = `checkout-success.html?order=${orderId}&method=transferencia`;
-                }, 600);
-                return;
-            }
-
-            // 3. FLUJO MERCADO PAGO OFICIAL (CHECKOUT PRO)
             this.processing = true;
-            this.processStep = 'Iniciando pasarela segura de Mercado Pago...';
-
+            this.processStep = paymentMethod === 'mercadopago'
+                ? 'Iniciando pasarela segura de Mercado Pago...'
+                : 'Registrando orden oficial de compra...';
             try {
-                const response = await fetch('/api/create-preference', {
+                payload.idempotency_key = await this.checkoutKey(payload);
+                const response = await fetch(paymentMethod === 'mercadopago' ? '/api/create-preference' : '/api/orders', {
                     method: 'POST',
+                    credentials: 'same-origin',
+                    cache: 'no-store',
+                    redirect: 'error',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        customer: customerPayload,
-                        items: this.cart.map(i => ({
-                            id: i.id,
-                            qty: Number(i.quantity || i.qty || 1),
-                            quantity: Number(i.quantity || i.qty || 1)
-                        })),
-                        shipping_cost: this.shippingCost,
-                        shipping_method: this.tipoDespacho
-                    })
+                    body: JSON.stringify(payload)
                 });
-
                 const result = await response.json();
-
-                if (result.success && result.init_point) {
-                    localStorage.setItem('last_order', JSON.stringify(orderData));
-                    localStorage.removeItem('mc_cart');
+                if (!response.ok || !result.success) throw new Error(result.error || 'No se pudo registrar el pedido. Intenta nuevamente.');
+                if (paymentMethod === 'mercadopago') {
+                    const paymentUrl = new URL(result.init_point);
+                    if (paymentUrl.protocol !== 'https:' || !/^([a-z0-9-]+\.)*mercadopago\.(cl|com|com\.ar|com\.br|com\.mx|com\.co|com\.pe|com\.uy)$/.test(paymentUrl.hostname)) {
+                        throw new Error('No se pudo generar el enlace de pago. Por favor intenta de nuevo o selecciona Transferencia Bancaria.');
+                    }
+                    this.saveOrder(result, customerPayload, cartSnapshot, paymentMethod);
                     this.processStep = 'Redirigiendo a pasarela bancaria...';
-                    window.location.href = result.init_point;
-                } else {
-                    alert('Aviso Mercado Pago: ' + (result.error || 'No se pudo generar el enlace de pago. Por favor intenta de nuevo o selecciona Transferencia Bancaria.'));
-                    this.processing = false;
+                    window.location.href = paymentUrl.href;
+                    return;
                 }
-            } catch (err) {
-                console.error('Error al conectar con pasarela:', err);
-                alert('Hubo un problema de conexión al iniciar el pago. Puedes intentar nuevamente o coordinar por Transferencia / WhatsApp.');
+                const summary = this.saveOrder(result, customerPayload, cartSnapshot, paymentMethod);
+                this.finishRecordedOrder(cartSnapshot);
+                if (paymentMethod === 'transferencia') {
+                    window.location.href = 'checkout-success.html?order_id=' + encodeURIComponent(summary.orderId);
+                    return;
+                }
+                const resumenItems = orderedItems.map(item => (item.quantity || item.qty || 1) + 'x ' + item.name).join(', ');
+                const despachoTexto = customerPayload.region === 'Región Metropolitana' && shippingMethod === 'rm_express' ? 'Express Santiago ($4.990)' : 'Starken Regional (Por Pagar)';
+                const msg = encodeURIComponent('Hola Metal Creativo! 🛠️\nQuiero coordinar la compra de mi orden:\n- Orden: #' + summary.orderId +
+                    '\n- Productos: ' + resumenItems + '\n- Total: $' + this.formatPrice(summary.total) + ' CLP\n- Comprador: ' +
+                    customerPayload.full_name + ' (RUT: ' + customerPayload.rut + ')\n- Teléfono: ' + customerPayload.phone + '\n- Despacho: ' + customerPayload.address_street + ', ' +
+                    customerPayload.comuna + ' (' + customerPayload.region + ')\n- Modalidad: ' + despachoTexto + '\n\nPor favor confirmar recepción para coordinar.');
+                window.location.href = 'https://wa.me/56954922608?text=' + msg;
+            } catch (error) {
+                alert(error.message || 'Hubo un problema de conexión al iniciar el pago. Puedes intentar nuevamente o coordinar por Transferencia / WhatsApp.');
+            } finally {
                 this.processing = false;
             }
         }

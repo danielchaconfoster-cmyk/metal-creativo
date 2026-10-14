@@ -306,7 +306,7 @@
                                                 'bg-amber-500/20 text-amber-400': order.status === 'preparing',
                                                 'bg-cyan-500/20 text-cyan-400': order.status === 'shipped'
                                             }"
-                                            x-text="order.status === 'paid' ? 'Pagado' : order.status === 'preparing' ? 'En Taller' : order.status === 'shipped' ? 'En Ruta' : 'Entregado'">
+                                            x-text="orderStatusLabel(order.status)">
                                         </span>
                                     </td>
                                     <td class="py-3.5 px-4 text-right font-mono text-[11px]">
@@ -725,26 +725,9 @@
                 authToken: '',
                 authError: '',
                 sessionVersion: 0,
-                kpis: {
-                    totalRevenue: 414890,
-                    totalOrders: 5,
-                    averageTicket: 82978,
-                    adSpend: 9744,
-                    roas: '42.6x',
-                    whatsappLeads: 83,
-                    costPerLead: '$117.4 CLP'
-                },
-                metaAds: {
-                    campaignName: 'METAL CREATIVO — Barra Remolque MTT ($65.000) [WhatsApp Directo]',
-                    status: 'ACTIVE',
-                    spend: 9744,
-                    impressions: 7366,
-                    clicks: 435,
-                    ctr: 5.91,
-                    cpc: 22.4,
-                    conversationsStarted: 83,
-                    costPerConversation: 117.4
-                },
+                pendingUpdates: {},
+                kpis: { totalRevenue: 0, totalOrders: 0, averageTicket: 0, adSpend: 0, roas: '0x', whatsappLeads: 0, costPerLead: '$0 CLP' },
+                metaAds: { campaignName: '', status: 'NOT_CONFIGURED', spend: 0, impressions: 0, clicks: 0, ctr: 0, cpc: 0, conversationsStarted: 0, costPerConversation: 0 },
                 orders: [],
                 leads: [],
                 shippingSearch: 'Temuco',
@@ -781,6 +764,7 @@
 
                 logout(message = '') {
                     this.sessionVersion++;
+                    this.pendingUpdates = {};
                     this.authenticated = false;
                     this.authToken = '';
                     this.loginToken = '';
@@ -944,18 +928,82 @@
                     this.customInput = '';
                 },
 
-                markAsWon(lead) {
-                    lead.status = 'won';
-                    alert(`¡Venta cerrada con éxito para ${lead.name}!`);
+                async saveAdminUpdate(path, payload, version, token) {
+                    if (!this.authenticated || !token || version !== this.sessionVersion || token !== this.authToken) return null;
+                    const response = await fetch(path, {
+                        method: 'PATCH',
+                        cache: 'no-store',
+                        redirect: 'error',
+                        headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
+                        body: JSON.stringify(payload)
+                    });
+                    if (version !== this.sessionVersion || token !== this.authToken) return null;
+                    if (response.status === 401) {
+                        this.logout('Tu clave ya no es válida. Vuelve a ingresar.');
+                        return null;
+                    }
+                    const result = await response.json();
+                    if (version !== this.sessionVersion || token !== this.authToken) return null;
+                    if (!response.ok || !result.success) throw new Error(result.error || 'No se pudo guardar el cambio. Intenta nuevamente.');
+                    return result;
                 },
 
-                promptTracking(order) {
-                    const flete = prompt('Ingresa el número de seguimiento de Starken o Chilexpress:');
-                    if (flete) {
-                        order.tracking_number = flete;
-                        order.status = 'shipped';
-                        alert('¡Flete registrado! Estado cambiado a En Ruta.');
+                async markAsWon(lead) {
+                    if (!this.authenticated || this.pendingUpdates['lead:' + lead.id]) return;
+                    const version = this.sessionVersion;
+                    const token = this.authToken;
+                    const key = 'lead:' + lead.id;
+                    this.pendingUpdates[key] = true;
+                    try {
+                        const result = await this.saveAdminUpdate('/api/admin-leads', { lead_id: lead.id, status: 'won' }, version, token);
+                        if (!result) return;
+                        if (!result.lead || result.lead.id !== lead.id || result.lead.status !== 'won') throw new Error('No se pudo guardar el cambio. Intenta nuevamente.');
+                        Object.assign(lead, result.lead);
+                        alert('¡Venta cerrada con éxito para ' + lead.name + '!');
+                    } catch (error) {
+                        if (version === this.sessionVersion && token === this.authToken) alert(error.message || 'No se pudo guardar el cambio. Intenta nuevamente.');
+                    } finally {
+                        if (version === this.sessionVersion && token === this.authToken) delete this.pendingUpdates[key];
                     }
+                },
+
+                async promptTracking(order) {
+                    if (!this.authenticated || this.pendingUpdates['order:' + order.id]) return;
+                    if (!['paid', 'preparing', 'shipped', 'delivered'].includes(order.status)) {
+                        alert('El pedido debe tener el pago confirmado antes de registrar el despacho.');
+                        return;
+                    }
+                    const flete = prompt('Ingresa el número de seguimiento de Starken o Chilexpress:');
+                    if (!flete || !flete.trim()) return;
+                    const version = this.sessionVersion;
+                    const token = this.authToken;
+                    const key = 'order:' + order.id;
+                    this.pendingUpdates[key] = true;
+                    try {
+                        if (order.status === 'paid') {
+                            const preparation = await this.saveAdminUpdate('/api/admin-orders', { order_id: order.id, status: 'preparing' }, version, token);
+                            if (!preparation) return;
+                            if (!preparation.order || preparation.order.id !== order.id || preparation.order.status !== 'preparing') throw new Error('No se pudo guardar el cambio. Intenta nuevamente.');
+                            Object.assign(order, preparation.order);
+                        }
+                        const payload = { order_id: order.id, tracking_number: flete.trim() };
+                        if (order.status === 'preparing') payload.status = 'shipped';
+                        const result = await this.saveAdminUpdate('/api/admin-orders', payload, version, token);
+                        if (!result) return;
+                        if (!result.order || result.order.id !== order.id || result.order.tracking_number !== flete.trim()) throw new Error('No se pudo guardar el cambio. Intenta nuevamente.');
+                        Object.assign(order, result.order);
+                        alert(order.status === 'shipped' ? '¡Flete registrado! Estado cambiado a En Ruta.' : 'Seguimiento actualizado.');
+                    } catch (error) {
+                        if (version === this.sessionVersion && token === this.authToken) alert(error.message || 'No se pudo guardar el cambio. Intenta nuevamente.');
+                    } finally {
+                        if (version === this.sessionVersion && token === this.authToken) delete this.pendingUpdates[key];
+                    }
+                },
+
+                orderStatusLabel(status) {
+                    return { paid: 'Pagado', preparing: 'En Taller', shipped: 'En Ruta', delivered: 'Entregado',
+                        pending: 'Pendiente', cancelled: 'Cancelado', refunded: 'Reembolsado',
+                        disputed: 'En disputa', chargeback: 'Contracargo' }[status] || String(status || '');
                 },
 
                 formatPrice(val) {

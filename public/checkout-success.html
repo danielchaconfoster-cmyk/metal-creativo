@@ -74,14 +74,60 @@
         </div>
     </nav>
 
-    <main class="flex-grow py-16" x-data="{
-        order: JSON.parse(localStorage.getItem('last_order') || '{}'),
-        urlMethod: new URLSearchParams(window.location.search).get('method'),
-        urlStatus: new URLSearchParams(window.location.search).get('status') || new URLSearchParams(window.location.search).get('collection_status'),
+    <main class="flex-grow py-16" x-cloak x-show="verified" x-data="{
+        order: (() => {
+            try { return JSON.parse(sessionStorage.getItem('last_order') || '{}'); } catch (_) { return {}; }
+        })(),
+        verified: false,
         copied: false,
 
+        async init() {
+            try { localStorage.removeItem('last_order'); } catch (_) {}
+            const orderId = new URLSearchParams(window.location.search).get('order_id') || this.order.orderId;
+            if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(orderId || '')) {
+                window.location.replace('checkout.html');
+                return;
+            }
+            if (this.order.orderId !== orderId) this.order = {};
+            try {
+                const response = await fetch('/api/order-status?order_id=' + encodeURIComponent(orderId), {
+                    credentials: 'same-origin',
+                    cache: 'no-store',
+                    redirect: 'error'
+                });
+                const result = await response.json();
+                const record = result.order;
+                if (!response.ok || !result.success || !record || record.id !== orderId ||
+                    record.currency !== 'CLP' || !Number.isFinite(Number(record.total_amount)) || Number(record.total_amount) <= 0) {
+                    throw new Error('No se pudo verificar el estado del pedido. Intenta nuevamente.');
+                }
+                const paid = ['paid', 'preparing', 'shipped', 'delivered'].includes(record.status);
+                const transfer = record.status === 'pending' && record.payment_method === 'transferencia';
+                if (!paid && !transfer) {
+                    window.location.replace('checkout.html');
+                    return;
+                }
+                this.order = { ...this.order, orderId: record.id, orderNumber: record.order_number,
+                    status: record.status, total: Number(record.total_amount), paymentMethod: record.payment_method };
+                sessionStorage.setItem('last_order', JSON.stringify(this.order));
+                if (paid) {
+                    if (this.order.cartSnapshot && localStorage.getItem('mc_cart') === this.order.cartSnapshot) {
+                        localStorage.removeItem('mc_cart');
+                    }
+                    try {
+                        const attempt = JSON.parse(localStorage.getItem('mc_checkout_attempt') || 'null');
+                        if (attempt && attempt.key === this.order.attemptKey) localStorage.removeItem('mc_checkout_attempt');
+                    } catch (_) {}
+                }
+                this.verified = true;
+            } catch (error) {
+                alert(error.message || 'No se pudo verificar el estado del pedido. Intenta nuevamente.');
+                window.location.replace('checkout.html');
+            }
+        },
+
         get isTransfer() {
-            return (this.order.paymentMethod === 'transferencia') || (this.urlMethod === 'transferencia');
+            return this.verified && this.order.status === 'pending' && this.order.paymentMethod === 'transferencia';
         },
 
         formatPrice(val) {
@@ -89,6 +135,7 @@
         },
 
         copyBankDetails() {
+            if (!this.verified || !this.isTransfer) return;
             const id = this.order.orderId || 'MC-2026';
             const total = this.formatPrice(this.order.total || 65000);
             const text = `DATOS DE TRANSFERENCIA METAL CREATIVO CHILE:
@@ -108,6 +155,7 @@ Asunto/Glosa obligatoria: ${id}`;
         },
 
         sendProofWhatsApp() {
+            if (!this.verified || !this.isTransfer) return;
             const id = this.order.orderId || 'MC-2026';
             const total = this.formatPrice(this.order.total || 65000);
             const msg = encodeURIComponent(`Hola Metal Creativo! Adjunto el comprobante de transferencia bancaria para la Orden #${id} por un total de $${total} CLP.`);

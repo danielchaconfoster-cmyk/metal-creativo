@@ -133,8 +133,44 @@
         telefono: '',
         mensaje: '',
         enviado: false,
-        enviarFormulario() {
-            this.enviado = true;
+        processing: false,
+        contactKey: '',
+        contactPayload: '',
+
+        async enviarFormulario() {
+            if (this.processing) return;
+            const payload = {
+                name: this.nombre.trim(),
+                email: this.email.trim(),
+                phone: this.telefono.trim(),
+                product_interest: this.productInterest,
+                message: this.mensaje.trim()
+            };
+            const fingerprint = JSON.stringify(payload);
+            if (!this.contactKey || this.contactPayload !== fingerprint) {
+                this.contactKey = crypto.randomUUID();
+                this.contactPayload = fingerprint;
+            }
+            this.processing = true;
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    cache: 'no-store',
+                    redirect: 'error',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ...payload, idempotency_key: this.contactKey })
+                });
+                const result = await response.json();
+                if (!response.ok || !result.success || !result.contact_id) throw new Error(result.error || 'No se pudo enviar la consulta. Intenta nuevamente.');
+                this.enviado = true;
+                this.contactKey = '';
+                this.contactPayload = '';
+            } catch (error) {
+                alert(error.message || 'No se pudo enviar la consulta. Intenta nuevamente.');
+            } finally {
+                this.processing = false;
+            }
         },
         enviarWhatsApp() {
             const texto = encodeURIComponent(`Hola Metal Creativo! Mi nombre es ${this.nombre || 'un cliente'}. Me interesa: ${this.productInterest === 'remolque' ? 'Barra Rígida de Remolque ($65.000)' : this.productInterest === 'fogon' ? 'Fogón a Bioetanol ($149.900)' : 'Proyecto a Medida'}. Mensaje: ${this.mensaje || 'Quisiera más detalles y opciones de despacho.'}`);
