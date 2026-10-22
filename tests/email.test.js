@@ -81,7 +81,7 @@ test('email templates: renders shipping dispatch alert with carrier tracking but
   assert.ok(html.includes('Gonzalo Valenzuela'), 'HTML includes customer name');
 });
 
-test('email templates: renders audit block and scannable QR digital pass', () => {
+test('email templates: renders audit block and direct tracking button without QR clutter', () => {
   const html = renderReceiptHtml({
     order: { id: 'a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d', order_number: 'MC-2026-4444', total_amount: 65000, shipping_method: 'starken' },
     customer: { full_name: 'Marcela Paz', rut: '14.555.666-7', phone: '+56911223344', comuna: 'La Serena', region: 'Coquimbo' },
@@ -91,7 +91,9 @@ test('email templates: renders audit block and scannable QR digital pass', () =>
   });
 
   assert.ok(html.includes('Auditoría de Transacción'), 'HTML includes audit title');
-  assert.ok(html.includes('api.qrserver.com'), 'HTML includes dynamic QR code generator');
+  assert.ok(html.includes('Ver Estado de mi Orden en Vivo'), 'HTML includes direct mobile-friendly tracking button');
+  assert.ok(html.includes('checkout-success?order_id=a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d'), 'HTML includes direct order URL');
   assert.ok(html.includes('application/ld+json'), 'HTML includes Google Schema Markup');
+  assert.ok(!html.includes('api.qrserver.com'), 'QR code removed to avoid mobile screen redundancy');
   assert.ok(!html.includes('IVA'), 'HTML strictly avoids mentioning IVA per user requirement');
 });
