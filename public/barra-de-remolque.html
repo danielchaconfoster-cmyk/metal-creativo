@@ -477,6 +477,98 @@
 
             </div>
 
+            
+            <!-- SECCIÓN DEMOSTRACIÓN DE ARMADO EN VIDEO (LINK ANCHOR #video-armado) -->
+            <section id="video-armado" class="mt-20 pt-16 border-t border-white/10 scroll-mt-24">
+                <div class="max-w-6xl mx-auto space-y-10">
+                    <div class="text-center space-y-3">
+                        <span class="badge-metal">Demostración en Video Real</span>
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+                            ¿Cómo armar tu Barra de Remolque en Terreno?
+                        </h2>
+                        <p class="text-gray-400 text-sm max-w-2xl mx-auto leading-relaxed">
+                            Diseño modular de ensamblaje en menos de 45 segundos sin necesidad de herramientas mecánicas. Tres tramos de acero macizo estructural con pasadores de seguridad pasantes y chavetas de bloqueo.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                        <!-- VIDEO REPRODUCTOR RESPONSIVE -->
+                        <div class="lg:col-span-5 flex flex-col items-center">
+                            <div class="relative w-full max-w-[340px] rounded-2xl overflow-hidden border border-white/15 bg-black shadow-[0_20px_50px_rgba(0,0,0,0.8)] ring-1 ring-white/10">
+                                <video 
+                                    controls 
+                                    playsinline 
+                                    preload="metadata" 
+                                    poster="/images/poster_video_armado.jpg"
+                                    class="w-full aspect-[9/16] object-cover bg-black"
+                                >
+                                    <source src="/videos/video_armado_lanza.mp4" type="video/mp4">
+                                    Tu navegador no soporta reproducción de video HTML5.
+                                </video>
+                            </div>
+                            <div class="flex items-center gap-2 mt-3 text-xs text-gray-400 font-medium">
+                                <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                <span>Demostración de ensamblaje y prueba real de tracción</span>
+                            </div>
+                        </div>
+
+                        <!-- GUÍA PASO A PASO EN TERRENO -->
+                        <div class="lg:col-span-7 space-y-5">
+                            <div class="metal-card p-5 rounded-xl border border-white/10 space-y-2">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 font-black text-sm flex items-center justify-center shrink-0 border border-orange-500/30">1</span>
+                                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Despliegue de los 3 Tramos</h3>
+                                </div>
+                                <p class="text-xs text-gray-400 leading-relaxed pl-11">
+                                    Retira los 3 tramos (60 cm cada uno) de la maleta o del compartimento de la rueda de repuesto. Colócalos alineados en línea recta entre ambos vehículos.
+                                </p>
+                            </div>
+
+                            <div class="metal-card p-5 rounded-xl border border-white/10 space-y-2">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 font-black text-sm flex items-center justify-center shrink-0 border border-orange-500/30">2</span>
+                                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Acople Macho-Hembra y Pasadores</h3>
+                                </div>
+                                <p class="text-xs text-gray-400 leading-relaxed pl-11">
+                                    Introduce el tramo central en los tubos extremos con calce de precisión milimétrica. Inserta los 2 pasadores pasantes galvanizados y bloquea con sus chavetas de horquilla de seguridad.
+                                </p>
+                            </div>
+
+                            <div class="metal-card p-5 rounded-xl border border-white/10 space-y-2">
+                                <div class="flex items-center gap-3">
+                                    <span class="w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 font-black text-sm flex items-center justify-center shrink-0 border border-orange-500/30">3</span>
+                                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Conexión a Argollas y Bandera</h3>
+                                </div>
+                                <p class="text-xs text-gray-400 leading-relaxed pl-11">
+                                    Conecta los ojales forjados a los ganchos o argollas de tiro de ambos autos. Ajusta los pernos o grilletes y fija la bandera reflectante en el centro de la barra según exige la Ley MTT 55/2025.
+                                </p>
+                            </div>
+
+                            <!-- RESUMEN TÉCNICO DE SEGURIDAD -->
+                            <div class="p-4 rounded-xl bg-gradient-to-r from-orange-950/30 to-black border border-orange-500/30 flex flex-wrap items-center justify-between gap-4">
+                                <div class="flex items-center gap-6 text-xs text-gray-300">
+                                    <div>
+                                        <span class="block text-white font-extrabold text-sm">⏱️ 45 Segundos</span>
+                                        <span class="text-gray-400 text-[11px]">Armado sin herramientas</span>
+                                    </div>
+                                    <div class="border-l border-white/10 pl-6">
+                                        <span class="block text-white font-extrabold text-sm">🛡️ Acero 3.0 mm</span>
+                                        <span class="text-gray-400 text-[11px]">Resistencia 3.500 kg</span>
+                                    </div>
+                                    <div class="border-l border-white/10 pl-6 hidden sm:block">
+                                        <span class="block text-emerald-400 font-extrabold text-sm">⚖️ MTT 55/2025</span>
+                                        <span class="text-gray-400 text-[11px]">100% Homologada</span>
+                                    </div>
+                                </div>
+                                <button @click="buyNow('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, '/images/lanza_real_armada.jpeg')" class="btn-metal-orange !py-2.5 !px-4 !text-xs shrink-0">
+                                    Comprar por $65.000 &rarr;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- SECCIÓN EDUCATIVA Y LEGAL (MARCO LEGAL CHILE Y SEGURIDAD) -->
             <section class="mt-20 pt-16 border-t border-white/10">
                 <div class="max-w-4xl mx-auto space-y-10">
