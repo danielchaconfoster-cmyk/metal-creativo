@@ -52,6 +52,20 @@ module.exports = async (req, res) => {
     const { error } = await db.from('payment_webhook_logs').upsert({ gateway: 'mercadopago', event_type: 'payment.approved', payment_id: id,
       raw_payload: { order_id: payment.external_reference, applied: result.applied, reason: result.reason || null }, signature_verified: true }, { onConflict: 'gateway,payment_id,event_type' });
     if (error) throw new HttpError(503, 'PAYMENT_AUDIT_NOT_SAVED');
+    if (result.applied && process.env.RESEND_API_KEY) {
+      try {
+        const { notifyCustomerOrder, notifyAdminSale } = require('../lib/email');
+        const { data: fullOrder } = await db.from('orders').select('*, customers(*)').eq('id', payment.external_reference).maybeSingle();
+        if (fullOrder && fullOrder.customers) {
+          const { data: orderItems } = await db.from('order_items').select('*').eq('order_id', fullOrder.id);
+          const mappedItems = (orderItems || []).map(it => ({ title: it.product_name, quantity: it.quantity, unit_price: it.unit_price }));
+          await Promise.allSettled([
+            notifyCustomerOrder({ order: fullOrder, customer: fullOrder.customers, items: mappedItems, isPaid: true, isTransfer: false }),
+            notifyAdminSale({ order: fullOrder, customer: fullOrder.customers, items: mappedItems, isPaid: true, isTransfer: false })
+          ]);
+        }
+      } catch (_) {}
+    }
     return res.status(200).send('OK');
   } catch (error) { return sendError(res, error); }
 };
