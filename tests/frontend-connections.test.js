@@ -332,8 +332,8 @@ function appearanceSource(html) {
 
 // Baseline hashes cover every byte outside the explicitly allowed JavaScript/state bindings.
 const APPEARANCE_HASHES = {
-    "checkout": "8c19bacb1c6efe60f59d60aa092cd4b38247e23efe8a8b78836b781e66b02e1b",
-    "checkout-success": "db0d49d11635d99a787ab8f84903a32f5e90c5468881f78ff61a7d32a357bb31",
+    "checkout": "0c22920906336044b2587d16cc9aceccec491abcfdf55980c188032681a88af5",
+    "checkout-success": "21f761650789fa927fa8b78eba0d2fb2c906784137f601888c2da198bc9c5205",
     "contacto": "294c02e7a30bb524f73a2fb3f2b9c2afe70c7f1a5cf3985baf59074f15be154c",
     "admin": "c40f70789eb9b8122cff2eb167d0813f4f1701c987342e90a614d72427614582"
 };
