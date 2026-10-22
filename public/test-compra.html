@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prueba de Compra $1.000 CLP — Metal Creativo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-950 text-white min-h-screen flex items-center justify-center p-4 font-sans">
+  <div class="max-w-md w-full bg-gray-900 border border-orange-500/40 rounded-xl p-8 text-center shadow-2xl">
+    <div class="w-16 h-16 bg-orange-500/10 border border-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+      <span class="text-2xl">🧪</span>
+    </div>
+    <h1 class="text-xl font-bold text-white mb-2">Test de Verificación en Vivo</h1>
+    <p class="text-gray-400 text-sm mb-6">
+      Este enlace prepara tu carrito con la <strong class="text-white">Barra de Remolque de Prueba ($1.000 CLP)</strong> para realizar la compra real con Webpay / Mercado Pago y validar los correos automáticos.
+    </p>
+
+    <div class="bg-black/50 border border-gray-800 rounded-lg p-4 mb-6 text-left text-sm space-y-2">
+      <div class="flex justify-between text-gray-300">
+        <span>Producto:</span>
+        <span class="font-semibold text-white">Barra Remolque (Test)</span>
+      </div>
+      <div class="flex justify-between text-gray-300">
+        <span>Precio Servidor:</span>
+        <span class="font-bold text-orange-400">$1.000 CLP</span>
+      </div>
+      <div class="flex justify-between text-gray-300">
+        <span>Despacho:</span>
+        <span class="text-emerald-400 font-semibold">Starken por Pagar ($0)</span>
+      </div>
+      <div class="border-t border-gray-800 pt-2 flex justify-between font-bold text-white">
+        <span>Total a pagar:</span>
+        <span class="text-orange-500 text-lg">$1.000 CLP</span>
+      </div>
+    </div>
+
+    <button id="btnProceed" class="w-full bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all transform active:scale-95">
+      Ir al Checkout Seguro ($1.000 CLP) →
+    </button>
+  </div>
+
+  <script>
+    document.getElementById('btnProceed').addEventListener('click', function() {
+      const testItem = [{
+        id: 'test_verificacion',
+        name: 'Barra de Remolque - Test Verificación Oficial',
+        price: 1000,
+        quantity: 1,
+        image: '/images/barra_remolque.jpg'
+      }];
+      localStorage.setItem('mc_cart', JSON.stringify(testItem));
+      window.location.href = '/checkout';
+    });
+  </script>
+</body>
+</html>

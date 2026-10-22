@@ -1,7 +1,7 @@
 'use strict';
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { renderReceiptHtml, renderAdminAlertHtml, sendRawEmail, notifyCustomerOrder, notifyAdminSale } = require('../lib/email');
+const { renderReceiptHtml, renderAdminAlertHtml, renderShippingDispatchHtml, sendRawEmail, notifyCustomerOrder, notifyAdminSale, notifyShippingDispatch } = require('../lib/email');
 
 test('email templates: renders customer receipt with correct items, totals, and branding', () => {
   const html = renderReceiptHtml({
@@ -60,7 +60,38 @@ test('email delivery: sendRawEmail safely returns null without network calls whe
 
     const adminRes = await notifyAdminSale({ order: { id: '123' }, customer: { email: 'client@example.com' }, items: [] });
     assert.equal(adminRes, null, 'Admin notify returns null when unconfigured');
+
+    const dispatchRes = await notifyShippingDispatch({ order: { id: '123' }, customer: { email: 'client@example.com' }, trackingNumber: '999111', carrier: 'Starken' });
+    assert.equal(dispatchRes, null, 'Shipping notify returns null when unconfigured');
   } finally {
     if (originalKey !== undefined) process.env.RESEND_API_KEY = originalKey;
   }
+});
+
+test('email templates: renders shipping dispatch alert with carrier tracking button', () => {
+  const html = renderShippingDispatchHtml({
+    order: { order_number: 'MC-2026-5555' },
+    customer: { full_name: 'Gonzalo Valenzuela', email: 'gonzalo@example.com' },
+    trackingNumber: '789123456',
+    carrier: 'Starken'
+  });
+
+  assert.ok(html.includes('789123456'), 'HTML includes Starken tracking number');
+  assert.ok(html.includes('starken.cl/seguimiento?codigo=789123456'), 'HTML includes direct Starken URL');
+  assert.ok(html.includes('Gonzalo Valenzuela'), 'HTML includes customer name');
+});
+
+test('email templates: renders audit block and scannable QR digital pass', () => {
+  const html = renderReceiptHtml({
+    order: { id: 'a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d', order_number: 'MC-2026-4444', total_amount: 65000, shipping_method: 'starken' },
+    customer: { full_name: 'Marcela Paz', rut: '14.555.666-7', phone: '+56911223344', comuna: 'La Serena', region: 'Coquimbo' },
+    items: [{ title: 'Barra de Remolque Desarmable 1.8m', quantity: 1, unit_price: 65000 }],
+    isPaid: true,
+    isTransfer: false
+  });
+
+  assert.ok(html.includes('Auditoría de Transacción'), 'HTML includes audit title');
+  assert.ok(html.includes('api.qrserver.com'), 'HTML includes dynamic QR code generator');
+  assert.ok(html.includes('application/ld+json'), 'HTML includes Google Schema Markup');
+  assert.ok(!html.includes('IVA'), 'HTML strictly avoids mentioning IVA per user requirement');
 });
