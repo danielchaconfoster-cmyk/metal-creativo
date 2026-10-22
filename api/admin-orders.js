@@ -54,6 +54,21 @@ module.exports = async (req, res) => {
     const changed = await update.select('id,status,tracking_number,updated_at').maybeSingle();
     if (changed.error) throw new HttpError(503, 'DATABASE_UNAVAILABLE');
     if (!changed.data) throw new HttpError(409, 'ORDER_CHANGED');
+    if (status === 'shipped' && (tracking || order.tracking_number) && process.env.RESEND_API_KEY) {
+      try {
+        const { notifyShippingDispatch } = require('../lib/email');
+        const { data: fullOrder } = await database.from('orders').select('*, customers(*)').eq('id', body.order_id).maybeSingle();
+        if (fullOrder && fullOrder.customers) {
+          const carrier = (fullOrder.shipping_method || '').toLowerCase().includes('chilexpress') ? 'Chilexpress' : 'Starken';
+          await notifyShippingDispatch({
+            order: fullOrder,
+            customer: fullOrder.customers,
+            trackingNumber: tracking || order.tracking_number,
+            carrier
+          });
+        }
+      } catch (_) {}
+    }
     return res.status(200).json({ success: true, order: changed.data });
   } catch (error) {
     return sendError(res, error);

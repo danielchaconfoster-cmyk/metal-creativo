@@ -173,7 +173,7 @@
             }
         },
         enviarWhatsApp() {
-            const texto = encodeURIComponent(`Hola Metal Creativo! Mi nombre es ${this.nombre || 'un cliente'}. Me interesa: ${this.productInterest === 'remolque' ? 'Barra Rígida de Remolque ($65.000)' : this.productInterest === 'fogon' ? 'Fogón a Bioetanol ($149.900)' : 'Proyecto a Medida'}. Mensaje: ${this.mensaje || 'Quisiera más detalles y opciones de despacho.'}`);
+            const texto = encodeURIComponent(`Hola Metal Creativo! Mi nombre es ${this.nombre || 'un cliente'}. Me interesa: ${this.productInterest === 'remolque' ? 'Barra Rígida de Remolque ($65.000)' : this.productInterest === 'fogon' ? 'Fogón a Bioetanol ($100.000)' : 'Proyecto a Medida'}. Mensaje: ${this.mensaje || 'Quisiera más detalles y opciones de despacho.'}`);
             window.open(`https://wa.me/56954922608?text=${texto}`, '_blank');
         }
     }">
@@ -236,7 +236,7 @@
                                 <label class="block text-xs font-bold text-gray-400 mb-1 uppercase tracking-wider">Producto de Interés</label>
                                 <select x-model="productInterest" class="w-full px-4 py-3 rounded-xl bg-[#07080b] border border-white/10 text-white focus:outline-none focus:border-orange-500 text-xs sm:text-sm">
                                     <option value="remolque">Barra Rígida de Remolque con Ojal Forjado ($65.000 CLP)</option>
-                                    <option value="fogon">Fogón de Mesa & Estufas a Bioetanol ($149.900 CLP)</option>
+                                    <option value="fogon">Fogón de Mesa & Estufas a Bioetanol ($100.000 CLP)</option>
                                     <option value="medida">Proyecto Metalúrgico Especial a Medida</option>
                                     <option value="garantia">Consulta sobre Garantía / Soporte Técnico</option>
                                 </select>
@@ -336,7 +336,7 @@
                     </h3>
                     <ul class="space-y-2 text-xs">
                         <li><a href="/#lanza-remolque" class="hover:text-orange-400 transition-colors">Barra de Remolque 1.8m ($65.000)</a></li>
-                        <li><a href="/#fogon-bioetanol" class="hover:text-orange-400 transition-colors">Fogón a Bioetanol ($149.900)</a></li>
+                        <li><a href="/#fogon-bioetanol" class="hover:text-orange-400 transition-colors">Fogón a Bioetanol ($100.000)</a></li>
                         <li><a href="checkout.html" class="hover:text-orange-400 transition-colors">Carrito & Pasarela Segura</a></li>
                         <li><a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quiero%20cotizar%20un%20proyecto%20a%20medida" target="_blank" class="hover:text-orange-400 transition-colors">Proyectos y Forja a Medida</a></li>
                     </ul>

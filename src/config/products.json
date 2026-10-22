@@ -22,8 +22,8 @@
       "id": "fogon_bioetanol",
       "nombre_oficial": "Fogón de Mesa & Estufas a Bioetanol",
       "normativa": "Calefacción Ecológica sin Humo",
-      "precio_oficial": 149900,
-      "precio_formateado": "$149.900 CLP",
+      "precio_oficial": 100000,
+      "precio_formateado": "$149.000 CLP",
       "especificaciones": [
         "Quemador quirúrgico AISI 304 anti-vuelco",
         "Fibra cerámica de retención",
