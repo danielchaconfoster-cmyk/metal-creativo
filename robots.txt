@@ -1,9 +1,16 @@
-﻿User-agent: *
+User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /checkout-success
+Disallow: /order-status
 
 # Motores de Búsqueda de Inteligencia Artificial (AEO / GEO)
 User-agent: GPTBot
 Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /checkout-success
 
 User-agent: ChatGPT-User
 Allow: /
