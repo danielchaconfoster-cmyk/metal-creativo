@@ -22,8 +22,8 @@
       <g:product_type>Accesorios Automotrices &gt; Remolque &gt; Barras y Lanzas de Remolque</g:product_type>
       <g:shipping>
         <g:country>CL</g:country>
-        <g:service>Starken Regional por Pagar / Express Santiago</g:service>
-        <g:price>0 CLP</g:price>
+        <g:service>Starken a Regiones / Express Santiago</g:service>
+        <g:price>4990 CLP</g:price>
       </g:shipping>
     </item>
 
@@ -46,8 +46,8 @@
       <g:product_type>Hogar y Jardín &gt; Calefacción y Estufas &gt; Fogones a Bioetanol</g:product_type>
       <g:shipping>
         <g:country>CL</g:country>
-        <g:service>Starken Regional por Pagar / Express Santiago</g:service>
-        <g:price>0 CLP</g:price>
+        <g:service>Starken a Regiones / Express Santiago</g:service>
+        <g:price>4990 CLP</g:price>
       </g:shipping>
     </item>
   </channel>
