@@ -343,11 +343,87 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
 
-                <!-- GALERÍA DE IMÁGENES -->
-                <div class="lg:col-span-6 space-y-4">
-                    <div class="rounded-xl overflow-hidden bg-black/60 border border-white/10 shadow-2xl relative aspect-[4/3] flex items-center justify-center">
-                        <img src="/images/fogon_bioetanol_madera.jpg" alt="Fogón Abierto a Bioetanol en Madera Noble y Acero" class="w-full h-full object-cover">
-                        <span class="absolute top-3 left-3 badge-metal">Diseño y Forja de Autor</span>
+                <!-- GALERÍA DE IMÁGENES INTERACTIVA -->
+                <div class="lg:col-span-6 space-y-4" x-data="{
+                    activeIdx: 0,
+                    images: [
+                        {
+                            src: '/images/fogon_bioetanol_madera.jpg',
+                            alt: 'Fogón Abierto a Bioetanol en Madera Noble y Acero Estructural',
+                            caption: 'Base en Madera Noble y Acero Estructural'
+                        },
+                        {
+                            src: '/images/fogon_terraza_noche.jpeg',
+                            alt: 'Fogón a Bioetanol encendido de noche en terraza',
+                            caption: 'Ambiente Cálido en Terraza Nocturna'
+                        },
+                        {
+                            src: '/images/fogon_bioetanol_studio.jpg',
+                            alt: 'Quemador de Acero Inoxidable Quirúrgico AISI 304 con Cuarzo',
+                            caption: 'Quemador Acero Inox AISI 304 y Cuarzo'
+                        },
+                        {
+                            src: '/images/fogon_real_50.jpg',
+                            alt: 'Terminación y Forja en Acero 50 cm de Longitud',
+                            caption: 'Formato Estructural 50 cm — Fabricación Nacional'
+                        }
+                    ]
+                }">
+                    <!-- VISOR PRINCIPAL CON TRANSICIONES SUAVES -->
+                    <div class="rounded-xl overflow-hidden bg-black/60 border border-white/10 shadow-2xl relative aspect-[4/3] flex items-center justify-center group select-none">
+                        <template x-for="(img, idx) in images" :key="idx">
+                            <img 
+                                :src="img.src" 
+                                :alt="img.alt" 
+                                x-show="activeIdx === idx"
+                                x-transition:enter="transition ease-out duration-300"
+                                x-transition:enter-start="opacity-0 scale-95"
+                                x-transition:enter-end="opacity-100 scale-100"
+                                class="absolute inset-0 w-full h-full object-cover"
+                            >
+                        </template>
+                        
+                        <span class="absolute top-3 left-3 badge-metal z-10 pointer-events-none">Diseño y Forja de Autor</span>
+                        
+                        <!-- PIE DE FOTO DINÁMICO & CONTADOR -->
+                        <div class="absolute bottom-3 left-3 right-3 z-10 flex items-center justify-between pointer-events-none">
+                            <span class="bg-black/80 backdrop-blur-md text-gray-200 text-xs px-3 py-1 rounded-full border border-white/15" x-text="images[activeIdx].caption"></span>
+                            <span class="bg-black/80 backdrop-blur-md text-orange-400 font-mono text-xs px-2.5 py-1 rounded-full border border-white/15" x-text="`${activeIdx + 1} / ${images.length}`"></span>
+                        </div>
+
+                        <!-- CONTROLES PREV / NEXT -->
+                        <button 
+                            type="button" 
+                            @click="activeIdx = (activeIdx === 0 ? images.length - 1 : activeIdx - 1)" 
+                            class="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 transition-all opacity-80 sm:opacity-0 sm:group-hover:opacity-100 z-10 cursor-pointer"
+                            aria-label="Foto anterior"
+                        >
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                        </button>
+                        <button 
+                            type="button" 
+                            @click="activeIdx = (activeIdx === images.length - 1 ? 0 : activeIdx + 1)" 
+                            class="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 transition-all opacity-80 sm:opacity-0 sm:group-hover:opacity-100 z-10 cursor-pointer"
+                            aria-label="Siguiente foto"
+                        >
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+
+                    <!-- MINIATURAS INTERACTIVAS (THUMBNAILS) -->
+                    <div class="grid grid-cols-4 gap-2.5 sm:gap-3">
+                        <template x-for="(img, idx) in images" :key="idx">
+                            <button 
+                                type="button" 
+                                @click="activeIdx = idx" 
+                                class="relative aspect-[4/3] rounded-lg overflow-hidden border transition-all cursor-pointer group"
+                                :class="activeIdx === idx ? 'border-orange-500 ring-2 ring-orange-500/50 scale-[1.02]' : 'border-white/10 hover:border-white/30 opacity-70 hover:opacity-100'"
+                                :aria-label="`Ver ${img.caption}`"
+                            >
+                                <img :src="img.src" :alt="img.alt" class="w-full h-full object-cover">
+                                <div x-show="activeIdx === idx" class="absolute inset-0 bg-orange-500/10 pointer-events-none"></div>
+                            </button>
+                        </template>
                     </div>
 
                     <div class="p-4 rounded-lg bg-orange-950/20 border border-orange-500/20 space-y-1">

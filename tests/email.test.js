@@ -97,3 +97,42 @@ test('email templates: renders audit block and direct tracking button without QR
   assert.ok(!html.includes('api.qrserver.com'), 'QR code removed to avoid mobile screen redundancy');
   assert.ok(!html.includes('IVA'), 'HTML strictly avoids mentioning IVA per user requirement');
 });
+
+test('email templates: renders product-specific guide for Fogon bioetanol vs Barra de Remolque', () => {
+  const fogonHtml = renderReceiptHtml({
+    order: { order_number: 'MC-2026-3001', total_amount: 100000, shipping_method: 'starken_agency' },
+    customer: { full_name: 'Rodrigo Vera', email: 'rodrigo@example.com' },
+    items: [{ title: 'Fogón Abierto a Bioetanol', quantity: 1, unit_price: 100000 }],
+    isPaid: true,
+    isTransfer: false
+  });
+
+  assert.ok(fogonHtml.includes('Guía de Encendido Seguro y Cuidados de tu Fogón'), 'Fogon order contains fogon safety guide');
+  assert.ok(fogonHtml.includes('fogon-bioetanol'), 'Fogon order links to fogon page');
+  assert.ok(!fogonHtml.includes('¿Cómo armar tu Barra de Remolque en carretera?'), 'Fogon-only order does not contain barra video guide');
+
+  const barraHtml = renderReceiptHtml({
+    order: { order_number: 'MC-2026-3002', total_amount: 65000, shipping_method: 'rm_express' },
+    customer: { full_name: 'Camila Reyes', email: 'camila@example.com' },
+    items: [{ title: 'Barra de Remolque Desarmable 1.8m', quantity: 1, unit_price: 65000 }],
+    isPaid: true,
+    isTransfer: false
+  });
+
+  assert.ok(barraHtml.includes('¿Cómo armar tu Barra de Remolque en carretera?'), 'Barra order contains barra video guide');
+  assert.ok(!barraHtml.includes('Guía de Encendido Seguro y Cuidados de tu Fogón'), 'Barra-only order does not contain fogon guide');
+
+  const bothHtml = renderReceiptHtml({
+    order: { order_number: 'MC-2026-3003', total_amount: 165000, shipping_method: 'rm_express' },
+    customer: { full_name: 'Matías Silva', email: 'matias@example.com' },
+    items: [
+      { title: 'Barra de Remolque Desarmable 1.8m', quantity: 1, unit_price: 65000 },
+      { title: 'Fogón Abierto a Bioetanol', quantity: 1, unit_price: 100000 }
+    ],
+    isPaid: true,
+    isTransfer: false
+  });
+
+  assert.ok(bothHtml.includes('¿Cómo armar tu Barra de Remolque en carretera?'), 'Multi-product order contains barra guide');
+  assert.ok(bothHtml.includes('Guía de Encendido Seguro y Cuidados de tu Fogón'), 'Multi-product order contains fogon guide');
+});

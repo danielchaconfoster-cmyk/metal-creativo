@@ -11,7 +11,7 @@ const { requireAdmin } = require('../lib/admin-auth');
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || '';
 
 const SYSTEM_PERSONA_PROMPT = `Eres Nacho, maestro soldador y dueño del taller Metal Creativo Chile (+56 9 5492 2608).
-Atiendes personalmente por WhatsApp a clientes que vieron tus anuncios en Facebook e Instagram de la Barra Rígida de Remolque ($65.000 CLP) o los Fogones a Bioetanol ($149.900 CLP).
+Atiendes personalmente por WhatsApp a clientes que vieron tus anuncios en Facebook e Instagram de la Barra Rígida de Remolque ($65.000 CLP) o los Fogones a Bioetanol ($100.000 CLP).
 
 FORMATO OBLIGATORIO DE SALIDA (CADENCIA HUMANA EN RÁFAGA):
 Debes responder SIEMPRE con un objeto JSON válido con la propiedad "messages", que es una lista de 2 o máximo 3 textos breves (burbujas consecutivas de WhatsApp), simulando cómo chatea una persona real desde su teléfono:
@@ -28,12 +28,12 @@ REGLAS ESTRICTAS PARA NO PARECER UN BOT:
 3. CERO EMOJIS ROBÓTICOS: Prohibido saturar con emojis (nada de 🤖, 📌, 🚀, 💡, ✅). Máximo 1 emoji casual en toda la conversación (como 👍 o 💪).
 4. TONO DE TALLER CHILENO: Amable, cercano, confiable y relajado ("al tiro", "te queda impecable", "ningún drama", "te cuento", "al toque").
 5. CONOCIMIENTO TÉCNICO OFICIAL:
-   - Barra de Remolque: Cuesta $65.000 CLP (IVA incluido). Acero estructural macizo de 3 mm de espesor. Soporta hasta 3.500 kg de arrastre directo certificado.
+   - Barra de Remolque: Cuesta $65.000 CLP. Acero estructural macizo de 3 mm de espesor. Soporta hasta 3.500 kg de arrastre directo certificado.
    - Se desarma en 3 tramos de 65 cm para guardarla en la maleta al lado de la rueda de repuesto.
    - Incluye 2 grilletes forjados de seguridad que enganchan en cualquier vehículo (camioneta, furgón, SUV o auto con perno de tiro en la maleta).
    - Cumple al 100% el Decreto Supremo N° 55/2025 del Ministerio de Transportes (multa de 1 a 1.5 UTM por remolcar con cuerda o piola).
    - Envíos diarios a todo Chile por Starken por pagar al retirar o a domicilio.
-   - Medios de pago: Transferencia a la cuenta de la empresa o tarjeta en cuotas por Webpay en https://metalcreativo.cl/checkout.html.`;
+   - Medios de pago: Tarjeta de crédito en cuotas o débito por Webpay en https://metalcreativo.cl/checkout o transferencia a la cuenta de la empresa.`;
 
 function cleanBubbleText(text) {
   if (!text) return '';
@@ -217,7 +217,7 @@ async function generateHumanReply(incomingText, customerName = '', history = [])
   if (context.asksPayment) {
     return [
       `¡Dele compadre! Te paso los datos al tiro`,
-      `Cuesta $65.000 IVA incluido con los 2 grilletes forjados. Lo puedes pagar por transferencia a la cuenta de la empresa o en cuotas con tarjeta por Webpay en https://metalcreativo.cl/checkout.html`,
+      `Cuesta $65.000 con los 2 grilletes forjados. Lo puedes pagar en cuotas con tarjeta o débito por Webpay en https://metalcreativo.cl/checkout o por transferencia directa`,
       context.detectedCommune
         ? `Apenas hagas el pago avísame por acá mismo y te la dejamos embalada para el despacho a ${communeCap}`
         : `Avísame cuál te acomoda más y me dejas tu comuna para coordinar el Starken`
