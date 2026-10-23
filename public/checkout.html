@@ -544,20 +544,6 @@
                                     </div>
                                 </label>
 
-                                <!-- TRANSFERENCIA DIRECTA -->
-                                <label class="p-4 rounded-xl border flex items-start gap-3 cursor-pointer transition-all" :class="paymentMethod === 'transferencia' ? 'border-emerald-400 bg-emerald-950/20 text-white' : 'border-white/10 bg-neutral-900 text-gray-400'">
-                                    <input type="radio" name="paymentMethod" value="transferencia" x-model="paymentMethod" class="accent-emerald-400 mt-1">
-                                    <div class="flex-grow space-y-2">
-                                        <div class="flex items-center justify-between">
-                                            <strong class="text-white flex items-center gap-2">
-                                                Transferencia Bancaria Electrónica
-                                            </strong>
-                                            <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">Datos al confirmar</span>
-                                        </div>
-                                        <p class="text-[11px] text-gray-400">Genera la orden y realiza la transferencia desde tu banco. Recibirás los datos bancarios y el número de pedido.</p>
-                                    </div>
-                                </label>
-
                                 <!-- PEDIDO POR WHATSAPP -->
                                 <label class="p-4 rounded-xl border flex items-start gap-3 cursor-pointer transition-all" :class="paymentMethod === 'whatsapp' ? 'border-orange-500 bg-orange-950/20 text-white' : 'border-white/10 bg-neutral-900 text-gray-400'">
                                     <input type="radio" name="paymentMethod" value="whatsapp" x-model="paymentMethod" class="accent-orange-500 mt-1">
