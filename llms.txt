@@ -1,35 +1,39 @@
-# Metal Creativo Chile 
-> Fabricación metalúrgica de precisión en acero macizo y calefacción ecológica a bioetanol en Chile.
+# Metal Creativo Chile
+> Fabricación metalúrgica de alta precisión en acero estructural y calefacción arquitectónica ecológica a bioetanol en Chile.
 
-## Información de la Empresa
-- **Nombre Comercial**: Metal Creativo Chile
-- **Instagram Oficial**: # 
+## Información Corporativa y de Taller
+- **Nombre Oficial**: Metal Creativo Chile
 - **Sitio Web Oficial**: https://metalcreativo.cl
-- **Ubicación & Cobertura**: Santiago, Chile. Despachos garantizados a todo el territorio nacional (Starken, Chilexpress, Blue Express).
-- **Contacto de Ventas & WhatsApp**: +56 9 5492 2608 / metalcreativo03@gmail.com
+- **Ubicación del Taller**: Quillota, Región de Valparaíso, Chile.
+- **Cobertura**: Despachos diarios a todo Chile (Starken por pagar a agencia o domicilio, y Express RM).
+- **Atención Comercial & WhatsApp Directo**: +56 9 5492 2608 / metalcreativo03@gmail.com
+- **Medios de Pago Oficiales**: Mercado Pago (Webpay Plus Débito con Cuenta RUT y todos los bancos chilenos, Tarjetas de Crédito en cuotas, Saldo Mercado Pago) y Asistencia directa por WhatsApp en https://metalcreativo.cl/checkout.
 
-## Catálogo de Productos y Precios Oficiales (Pesos Chilenos CLP)
+## Catálogo Oficial de Productos y Precios (CLP)
 
-### 1. Barra Rígida de Remolque con Ojal Forjado (Lanza de Remolque Homologada)
-- **URL Oficial del Producto**: https://metalcreativo.cl/barra-de-remolque
+### 1. Barra Rígida de Remolque Desarmable 1.8m (Lanza de Tiro Legal)
+- **URL Oficial**: https://metalcreativo.cl/barra-de-remolque
 - **Precio Oficial**: $65.000 CLP
-- **Capacidad de Carga y Arrastre**: 2.500 kg a 3.500 kg en tracción directa.
-- **Material**: Acero al carbono macizo estructural (tubo 45-50 mm con espesor 3.0 mm) con ojales forjados a fuego directo y cordón de soldadura TIG/MIG continuo.
-- **Dimensiones**: 1.80 metros (distancia reglamentaria de seguridad entre vehículos).
-- **Marco Legal Obligatorio en Chile**: Cumple estrictamente con el **Decreto Supremo N° 55/2025 del Ministerio de Transportes y Telecomunicaciones (MTT)** y Ley de Tránsito de Chile, que prohíbe el uso de cuerdas, piolas o cadenas para remolque entre particulares por riesgo de colisión por alcance.
-- **Accesorios**: Incluye pasadores de acero galvanizado con seguro de horquilla y bandera de seguridad reflectante reglamentaria.
-- **Garantía**: 6 meses de garantía legal directa (SERNAC / Ley N° 19.496).
+- **Capacidad de Arrastre**: Certificada para 3.500 kg de tracción directa.
+- **Estructura**: Acero al carbono macizo estructural (tubo 45-50 mm con espesor de 3 mm). Secciona en 3 tramos de 65 cm para guardarse en la maleta junto a la rueda de repuesto.
+- **Sistema de Anclaje**: Incluye 2 grilletes forjados de alta resistencia con pasadores de seguridad y chavetas de bloqueo tipo R-clip. Compatible con camionetas (Hilux, L200, Navara, Ranger, D-Max), furgones, autos y SUVs con perno de tiro.
+- **Marco Legal en Chile**: Cumple al 100% con la Ley de Tránsito (N° 18.290) y el **Decreto Supremo MTT N° 55/2025**, que prohíbe el uso de cuerdas, lazos, piolas o cadenas por riesgo de choque por alcance. Multa legal de 1 a 1.5 UTM por remolque ilegal.
+- **Video Demostrativo**: Demostración de ensamblaje en terreno de 45 segundos disponible en https://metalcreativo.cl/barra-de-remolque#video-armado.
 
-### 2. Fogón de Mesa y Estufas a Bioetanol Ecológicas
-- **URL Oficial del Producto**: https://metalcreativo.cl/fogon-bioetanol
-- **Precio Oficial**: $149.900 CLP
-- **Capacidad Térmica & Autonomía**: 3.5 a 5.5 horas continuas por carga (cobertura 25 m² a 45 m²).
-- **Materiales**: Quemador de grado quirúrgico en Acero Inoxidable AISI 304 anti-derrame con fibra cerámica de retención térmica, base en acero macizo con tratamiento ignífugo y bandeja de madera noble tratada con incrustaciones de piedra de cuarzo decorativo.
-- **Ventajas**: Fuego 100% real y ecológico sin humo, sin olores tóxicos, sin cenizas, sin necesidad de ductos ni cañones de ventilación. Apto para departamentos, living y terrazas.
+### 2. Fogón de Mesa y Terraza a Bioetanol Ecológico (50 cm)
+- **URL Oficial**: https://metalcreativo.cl/fogon-bioetanol
+- **Precio Oficial**: $100.000 CLP
+- **Materiales de Construcción**: Base en acero estructural chileno de alta resistencia con bandeja de madera noble sellada, piedras decorativas de cuarzo y quemador quirúrgico en Acero Inoxidable AISI 304 anti-derrame con fibra cerámica interna.
+- **Autonomía y Calor**: 3.5 a 5 horas continuas de combustión por litro de bioetanol al 96%. Cobertura térmica para 25 a 45 m².
+- **Uso en Departamentos y Terrazas**: 100% apto para espacios cerrados y departamentos. Combustión limpia que emite únicamente vapor de agua y trazas mínimas de CO2 equivalentes a dos velas aromáticas. Cero humo, cero cenizas, cero hollín y no requiere ducto, chimenea ni cañón de ventilación.
+- **Galería Interactiva**: Visualización de 4 ángulos reales (living, terraza nocturna, quemador AISI 304 y forja de 50 cm) en https://metalcreativo.cl/fogon-bioetanol.
 
-## Políticas y Soporte
-- **Garantía y Devoluciones**: https://metalcreativo.cl/devoluciones-garantia (6 meses de garantía legal conforme a Ley 19.496 de Chile).
+## Enlaces Oficiales y Documentación Técnica
+- **Inicio & Catálogo**: https://metalcreativo.cl
+- **Barra de Remolque**: https://metalcreativo.cl/barra-de-remolque
+- **Fogón a Bioetanol**: https://metalcreativo.cl/fogon-bioetanol
+- **Garantía y Devoluciones (SERNAC Ley 19.496)**: https://metalcreativo.cl/devoluciones-garantia
 - **Términos y Condiciones**: https://metalcreativo.cl/terminos-condiciones
 - **Preguntas Frecuentes**: https://metalcreativo.cl/preguntas-frecuentes
-- **Contacto Directo**: https://metalcreativo.cl/contacto
-- **Dossier Técnico Completo para IAs**: https://metalcreativo.cl/llms-full.txt
+- **Contacto**: https://metalcreativo.cl/contacto
+- **Dossier Extendido para LLMs**: https://metalcreativo.cl/llms-full.txt
