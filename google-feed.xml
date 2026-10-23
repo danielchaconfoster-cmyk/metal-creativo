@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">
+  <channel>
+    <title>Metal Creativo Chile - Catálogo Oficial</title>
+    <link>https://metalcreativo.cl</link>
+    <description>Fabricación nacional de precisión en acero estructural: Barras de remolque desarmables homologadas Ley MTT 55/2025 y Fogones a bioetanol ecológicos de autor para departamentos y terrazas.</description>
+    
+    <!-- PRODUCTO 1: BARRA RÍGIDA DE REMOLQUE -->
+    <item>
+      <g:id>MC-TOW-65K</g:id>
+      <g:title>Barra Rígida de Remolque Desarmable 1.8m Ley MTT 55/2025</g:title>
+      <g:description>Barra de tiro y remolque rígida de 1.80 metros fabricada en acero estructural macizo de 3 mm de pared. Se desarma en 3 tramos de 65 cm para guardarse en la maleta junto a la rueda de repuesto. Capacidad de arrastre certificada para 3.500 kg en tracción directa. Incluye 2 grilletes forjados de alta resistencia, pasadores pasantes y chavetas de bloqueo tipo R-clip. Cumple al 100% con la Ley de Tránsito N° 18.290 y el Decreto Supremo MTT N° 55/2025 en Chile, evitando multas de 1 a 1.5 UTM por remolque ilegal con cuerda o piola. Compatible con camionetas (Toyota Hilux, Mitsubishi L200, Nissan Navara, Ford Ranger, Chevrolet D-Max), furgones, SUVs y automóviles particulares con perno de tiro. Fabricación nacional en taller de precisión.</g:description>
+      <g:link>https://metalcreativo.cl/barra-de-remolque</g:link>
+      <g:image_link>https://metalcreativo.cl/images/lanza_real_armada.jpeg</g:image_link>
+      <g:additional_image_link>https://metalcreativo.cl/images/barra_remolque_uso.jpg</g:additional_image_link>
+      <g:condition>new</g:condition>
+      <g:availability>in_stock</g:availability>
+      <g:price>65000 CLP</g:price>
+      <g:brand>Metal Creativo Chile</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>5687</g:google_product_category>
+      <g:product_type>Accesorios Automotrices &gt; Remolque &gt; Barras y Lanzas de Remolque</g:product_type>
+      <g:shipping>
+        <g:country>CL</g:country>
+        <g:service>Starken Regional por Pagar / Express Santiago</g:service>
+        <g:price>0 CLP</g:price>
+      </g:shipping>
+    </item>
+
+    <!-- PRODUCTO 2: FOGÓN A BIOETANOL -->
+    <item>
+      <g:id>MC-BIO-100K</g:id>
+      <g:title>Fogón a Bioetanol Ecológico 50cm Madera Noble y Acero</g:title>
+      <g:description>Fogón abierto y estufa a bioetanol de 50 cm de longitud para sobremesa, living y terraza. Fabricado con base en acero estructural chileno de alta resistencia, bandeja de madera noble tratada e incrustaciones de piedras de cuarzo decorativo. Quemador quirúrgico en Acero Inoxidable AISI 304 anti-derrame con manta de fibra cerámica microporosa de retención térmica. Fuego 100% real sin humo, sin olores tóxicos, sin cenizas y sin necesidad de cañón de tiro, chimenea ni obras de ventilación. 100% apto y seguro para departamentos cerrados y terrazas. Autonomía de 3.5 a 5 horas continuas de combustión por litro de bioetanol al 96% con cobertura de 25 m² a 45 m². Incluye tapa obturadora de acero inoxidable para extinción instantánea del fuego. Diseño y forja de autor nacional.</g:description>
+      <g:link>https://metalcreativo.cl/fogon-bioetanol</g:link>
+      <g:image_link>https://metalcreativo.cl/images/fogon_bioetanol_madera.jpg</g:image_link>
+      <g:additional_image_link>https://metalcreativo.cl/images/fogon_terraza_noche.jpeg</g:additional_image_link>
+      <g:additional_image_link>https://metalcreativo.cl/images/fogon_bioetanol_studio.jpg</g:additional_image_link>
+      <g:additional_image_link>https://metalcreativo.cl/images/fogon_real_50.jpg</g:additional_image_link>
+      <g:condition>new</g:condition>
+      <g:availability>in_stock</g:availability>
+      <g:price>100000 CLP</g:price>
+      <g:brand>Metal Creativo Chile</g:brand>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:google_product_category>642</g:google_product_category>
+      <g:product_type>Hogar y Jardín &gt; Calefacción y Estufas &gt; Fogones a Bioetanol</g:product_type>
+      <g:shipping>
+        <g:country>CL</g:country>
+        <g:service>Starken Regional por Pagar / Express Santiago</g:service>
+        <g:price>0 CLP</g:price>
+      </g:shipping>
+    </item>
+  </channel>
+</rss>
