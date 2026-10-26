@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso Rápido Oficial | Barra de Remolque Metal Creativo Chile</title>
-    <meta name="description" content="Portal oficial de verificación, manual de usuario, soporte WhatsApp y garantía de la Barra de Remolque Desarmable 1.8m homologada MTT 55/2025.">
+    <title>Metal Creativo Chile | Portal Oficial</title>
+    <meta name="description" content="Portal oficial de verificación, canales de atención, manual técnico de usuario y garantía de Metal Creativo Chile.">
     <link rel="canonical" href="https://metalcreativo.cl/qr">
 
     <!-- Favicon -->
@@ -13,15 +13,15 @@
     <meta name="theme-color" content="#ea580c">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Metal Creativo Chile | Portal Oficial de la Barra de Remolque">
-    <meta property="og:description" content="Manual de usuario, homologación MTT 55/2025, soporte directo por WhatsApp y garantía oficial de taller.">
+    <meta property="og:title" content="Metal Creativo Chile | Portal Oficial">
+    <meta property="og:description" content="Canales oficiales, manual de armado Ley MTT 55/2025, soporte de taller y garantía.">
     <meta property="og:image" content="https://metalcreativo.cl/images/lanza_real_armada.jpeg">
     <meta property="og:url" content="https://metalcreativo.cl/qr">
 
-    <!-- Tipografía DM Sans -->
+    <!-- Tipografía DM Sans Oficial -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -35,7 +35,7 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-D0N2SXMF8Z');
-        gtag('event', 'qr_scan_opened', { event_category: 'Sticker_QR', event_label: 'Lanza_Remolque' });
+        gtag('event', 'qr_scan_opened', { event_category: 'Sticker_QR', event_label: 'Portal_Barra' });
     </script>
 
     <!-- Meta Pixel Code -->
@@ -50,164 +50,405 @@
         'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '1416637987347092');
         fbq('track', 'PageView');
-        fbq('trackCustom', 'QRScan', { product: 'Barra_Remolque_1.8m' });
+        fbq('trackCustom', 'QRScan', { portal: 'Barra_Metal_Creativo' });
     </script>
 
     <style>
+        :root {
+            --bg: #07080b;
+            --surface: #0e1117;
+            --surface-hover: #141822;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(234, 88, 12, 0.5);
+            --orange-forge: #c83c00;
+        }
+
         body {
-            background-color: #07080b;
+            background-color: var(--bg);
             color: #f1f5f9;
             font-family: 'DM Sans', sans-serif;
-            background-image: radial-gradient(circle at 50% 0%, rgba(200, 60, 0, 0.15) 0%, transparent 60%);
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
-        .btn-card {
-            background: linear-gradient(180deg, #12151c 0%, #0d0f14 100%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+        /* LIENZO DE BRASAS Y CHISPAS VIVAS DE TALLER */
+        #emberCanvas, #sparkCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
         }
-        .btn-card:hover {
-            border-color: #ea580c;
+
+        /* TEXTURA SUTIL INDUSTRIAL DE ACERO */
+        .steel-glow {
+            background: radial-gradient(circle at 50% -10%, rgba(200, 60, 0, 0.18) 0%, transparent 65%);
+        }
+
+        /* TARJETAS TÁCTILES PULIDAS (CERO EFECTO PLANTILLA IA) */
+        .portal-card {
+            background: linear-gradient(180deg, rgba(17, 21, 28, 0.92) 0%, rgba(12, 14, 19, 0.96) 100%);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+        }
+
+        .portal-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, transparent 80%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .portal-card:hover {
+            border-color: var(--border-hover);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px -6px rgba(234, 88, 12, 0.25);
+            box-shadow: 0 12px 28px -6px rgba(200, 60, 0, 0.22);
+        }
+
+        .portal-card:active {
+            transform: scale(0.985);
+        }
+
+        .icon-box {
+            background: #090b0f;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.2s ease;
+        }
+
+        .portal-card:hover .icon-box {
+            border-color: rgba(234, 88, 12, 0.4);
+            transform: scale(1.05);
         }
     </style>
 </head>
-<body class="flex flex-col items-center justify-between p-4 sm:p-6 text-center antialiased">
+<body class="flex flex-col items-center justify-between p-4 sm:p-6 text-center antialiased steel-glow">
 
-    <main class="w-full max-w-md mx-auto my-auto space-y-6">
+    <!-- CANVAS DE FUEGO, BRASAS Y CHISPAS VIVAS -->
+    <canvas id="emberCanvas"></canvas>
+    <canvas id="sparkCanvas"></canvas>
 
-        <!-- LOGO & BRAND IDENTITY -->
-        <div class="space-y-3 pt-4">
-            <a href="https://metalcreativo.cl" class="inline-block group">
-                <img src="/images/logo_official.png" alt="Metal Creativo Chile" class="h-16 mx-auto object-contain drop-shadow-[0_4px_16px_rgba(234,88,12,0.4)] group-hover:scale-105 transition-transform duration-300">
+    <!-- CONTENEDOR PRINCIPAL MOBILE FIRST -->
+    <main class="w-full max-w-[420px] mx-auto my-auto space-y-6 relative z-10 py-6">
+
+        <!-- CABECERA: LOGO CENTRADO Y NOMBRE LIMPIO (EXACTO A LO SOLICITADO) -->
+        <header class="space-y-4">
+            <a href="https://metalcreativo.cl" class="inline-block group focus:outline-none">
+                <img src="/images/logo_official.png" alt="Metal Creativo Chile" class="h-20 sm:h-24 mx-auto object-contain drop-shadow-[0_4px_24px_rgba(200,60,0,0.45)] group-hover:scale-105 transition-transform duration-300">
             </a>
-            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-950/40 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider">
-                <i class="fa-solid fa-certificate text-[10px]"></i>
-                Barra de Remolque Homologada
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">
+                    Metal Creativo Chile
+                </h1>
+                <p class="text-[11px] font-mono tracking-widest text-orange-400/90 uppercase pt-1">
+                    Fabricación en Acero Estructural
+                </p>
             </div>
-            <h1 class="text-2xl font-black text-white tracking-tight">
-                Metal Creativo Chile
-            </h1>
-            <p class="text-xs text-gray-400 max-w-xs mx-auto leading-relaxed">
-                Decreto Supremo MTT N° 55/2025 • Resistencia 3.500 kg • Fabricación Nacional
-            </p>
-        </div>
+        </header>
 
-        <!-- QUICK ACCESS HUB BUTTONS -->
-        <div class="space-y-3 pt-2">
+        <!-- PORTAL DE ACCESOS (ORDEN DE CANALES DE COMUNICACIÓN PRIMERO, RESEÑA Y LUEGO MANUAL) -->
+        <div class="space-y-3 pt-2 text-left">
 
-            <!-- 1. MANUAL DE USUARIO & SEGURIDAD -->
-            <a href="/manual-lanza" class="btn-card w-full p-4 rounded-xl flex items-center gap-4 text-left group">
-                <div class="w-12 h-12 rounded-lg bg-orange-600/20 text-orange-400 border border-orange-500/30 flex items-center justify-center text-xl shrink-0 group-hover:bg-[#c83c00] group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-book-open"></i>
+            <!-- 1. WHATSAPP METAL CREATIVO (INSTITUCIONAL, SIN NOMBRE PERSONAL) -->
+            <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo!%20Escane%C3%A9%20el%20c%C3%B3digo%20QR%20de%20mi%20Barra%20de%20Remolque%20y%20quisiera%20comunicarme%20con%20ustedes." target="_blank" rel="noopener noreferrer" class="portal-card w-full p-4 rounded-xl flex items-center gap-3.5 group cursor-pointer spark-trigger">
+                <div class="icon-box w-12 h-12 rounded-lg flex items-center justify-center text-xl text-emerald-400 shrink-0 group-hover:text-emerald-300">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
                 </div>
-                <div class="flex-grow">
+                <div class="flex-grow min-w-0">
                     <div class="flex items-center justify-between">
-                        <strong class="text-white text-sm font-bold group-hover:text-orange-400 transition-colors">
-                            Manual de Ensamble y Uso
+                        <strong class="text-white text-sm font-bold group-hover:text-emerald-400 transition-colors truncate">
+                            WhatsApp Metal Creativo
                         </strong>
-                        <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Oficial</span>
+                        <span class="text-[9px] font-mono uppercase font-bold px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 shrink-0 ml-1">
+                            Atención Directa
+                        </span>
                     </div>
-                    <p class="text-xs text-gray-400 line-clamp-1 mt-0.5">
-                        Instrucciones paso a paso, fotos de acople y protocolo MTT
+                    <p class="text-xs text-gray-400 truncate mt-0.5">
+                        Canal oficial de taller, dudas técnicas y pedidos
                     </p>
                 </div>
-                <i class="fa-solid fa-chevron-right text-gray-500 text-xs group-hover:text-orange-400 group-hover:translate-x-0.5 transition-all"></i>
+                <i class="fa-solid fa-chevron-right text-gray-500 text-xs group-hover:text-emerald-400 group-hover:translate-x-1 transition-all shrink-0"></i>
             </a>
 
-            <!-- 2. WHATSAPP DIRECTO DE TALLER -->
-            <a href="https://wa.me/56954922608?text=Hola%20Nacho!%20Acabo%20de%20escanear%20el%20c%C3%B3digo%20QR%20de%20mi%20Barra%20de%20Remolque.%20Tengo%20una%20consulta" target="_blank" rel="noopener" class="btn-card w-full p-4 rounded-xl flex items-center gap-4 text-left group">
-                <div class="w-12 h-12 rounded-lg bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-xl shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                    <i class="fa-brands fa-whatsapp"></i>
+            <!-- 2. INSTAGRAM OFICIAL -->
+            <a href="https://www.instagram.com/metalcreativo.cl" target="_blank" rel="noopener noreferrer" class="portal-card w-full p-4 rounded-xl flex items-center gap-3.5 group cursor-pointer spark-trigger">
+                <div class="icon-box w-12 h-12 rounded-lg flex items-center justify-center text-xl text-pink-400 shrink-0 group-hover:text-pink-300">
+                    <i class="fa-brands fa-instagram text-2xl"></i>
                 </div>
-                <div class="flex-grow">
+                <div class="flex-grow min-w-0">
                     <div class="flex items-center justify-between">
-                        <strong class="text-white text-sm font-bold group-hover:text-emerald-400 transition-colors">
-                            Soporte Técnico por WhatsApp
-                        </strong>
-                        <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Nacho</span>
-                    </div>
-                    <p class="text-xs text-gray-400 line-clamp-1 mt-0.5">
-                        Asistencia directa del fabricante y dudas de instalación
-                    </p>
-                </div>
-                <i class="fa-solid fa-chevron-right text-gray-500 text-xs group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all"></i>
-            </a>
-
-            <!-- 3. INSTAGRAM OFICIAL -->
-            <a href="https://www.instagram.com/metalcreativo.cl" target="_blank" rel="noopener" class="btn-card w-full p-4 rounded-xl flex items-center gap-4 text-left group">
-                <div class="w-12 h-12 rounded-lg bg-pink-600/20 text-pink-400 border border-pink-500/30 flex items-center justify-center text-xl shrink-0 group-hover:bg-gradient-to-tr group-hover:from-amber-500 group-hover:to-pink-600 group-hover:text-white transition-colors">
-                    <i class="fa-brands fa-instagram"></i>
-                </div>
-                <div class="flex-grow">
-                    <div class="flex items-center justify-between">
-                        <strong class="text-white text-sm font-bold group-hover:text-pink-400 transition-colors">
+                        <strong class="text-white text-sm font-bold group-hover:text-pink-400 transition-colors truncate">
                             Instagram Oficial
                         </strong>
-                        <span class="text-[10px] text-gray-400">@metalcreativo.cl</span>
+                        <span class="text-[10px] font-mono text-gray-400 shrink-0 ml-1">
+                            @metalcreativo.cl
+                        </span>
                     </div>
-                    <p class="text-xs text-gray-400 line-clamp-1 mt-0.5">
-                        Pruebas reales en ruta, rescates 4x4 y nuevos desarrollos
+                    <p class="text-xs text-gray-400 truncate mt-0.5">
+                        Videos de arrastre real, pruebas 4x4 y novedades
                     </p>
                 </div>
-                <i class="fa-solid fa-chevron-right text-gray-500 text-xs group-hover:text-pink-400 group-hover:translate-x-0.5 transition-all"></i>
+                <i class="fa-solid fa-chevron-right text-gray-500 text-xs group-hover:text-pink-400 group-hover:translate-x-1 transition-all shrink-0"></i>
             </a>
 
-            <!-- 4. GARANTÍA LEGAL 6 MESES SERNAC -->
-            <a href="/devoluciones-garantia" class="btn-card w-full p-4 rounded-xl flex items-center gap-4 text-left group">
-                <div class="w-12 h-12 rounded-lg bg-blue-600/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-xl shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-shield-halved"></i>
+            <!-- 3. DEJAR RESEÑA / CALIFICAR EXPERIENCIA (CANAL DE VALORACIÓN A WHATSAPP) -->
+            <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo!%20Quiero%20compartir%20mi%20rese%C3%B1a%20y%20fotograf%C3%ADa%20de%20la%20Barra%20de%20Remolque%20para%20la%20comunidad:" target="_blank" rel="noopener noreferrer" class="portal-card w-full p-4 rounded-xl flex items-center gap-3.5 group cursor-pointer spark-trigger border-amber-500/30">
+                <div class="icon-box w-12 h-12 rounded-lg flex items-center justify-center text-xl text-amber-400 shrink-0 group-hover:text-amber-300">
+                    <i class="fa-solid fa-star text-lg"></i>
                 </div>
-                <div class="flex-grow">
+                <div class="flex-grow min-w-0">
                     <div class="flex items-center justify-between">
-                        <strong class="text-white text-sm font-bold group-hover:text-blue-400 transition-colors">
+                        <strong class="text-white text-sm font-bold group-hover:text-amber-400 transition-colors truncate">
+                            Dejar Reseña & Experiencia
+                        </strong>
+                        <div class="flex text-amber-400 text-[10px] gap-0.5 shrink-0 ml-1">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400 truncate mt-0.5">
+                        Envía tu foto o testimonio y recibe soporte prioritario
+                    </p>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-500 text-xs group-hover:text-amber-400 group-hover:translate-x-1 transition-all shrink-0"></i>
+            </a>
+
+            <!-- 4. MANUAL DE ENSAMBLE Y PROTOCOLO LEY MTT 55/2025 -->
+            <a href="/manual-lanza" class="portal-card w-full p-4 rounded-xl flex items-center gap-3.5 group cursor-pointer spark-trigger border-orange-500/30">
+                <div class="icon-box w-12 h-12 rounded-lg flex items-center justify-center text-xl text-orange-400 shrink-0 group-hover:text-orange-300">
+                    <i class="fa-solid fa-book-open text-lg"></i>
+                </div>
+                <div class="flex-grow min-w-0">
+                    <div class="flex items-center justify-between">
+                        <strong class="text-white text-sm font-bold group-hover:text-orange-400 transition-colors truncate">
+                            Manual de Ensamble y Uso
+                        </strong>
+                        <span class="text-[9px] font-mono uppercase font-bold px-1.5 py-0.5 rounded bg-orange-600/20 text-orange-400 border border-orange-500/30 shrink-0 ml-1">
+                            Ley MTT
+                        </span>
+                    </div>
+                    <p class="text-xs text-gray-400 truncate mt-0.5">
+                        Instrucciones de acople, grilletes y protocolo de seguridad
+                    </p>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-500 text-xs group-hover:text-orange-400 group-hover:translate-x-1 transition-all shrink-0"></i>
+            </a>
+
+            <!-- 5. GARANTÍA LEGAL DE 6 MESES (SERNAC) -->
+            <a href="/devoluciones-garantia" class="portal-card w-full p-4 rounded-xl flex items-center gap-3.5 group cursor-pointer spark-trigger">
+                <div class="icon-box w-12 h-12 rounded-lg flex items-center justify-center text-xl text-sky-400 shrink-0 group-hover:text-sky-300">
+                    <i class="fa-solid fa-shield-halved text-lg"></i>
+                </div>
+                <div class="flex-grow min-w-0">
+                    <div class="flex items-center justify-between">
+                        <strong class="text-white text-sm font-bold group-hover:text-sky-400 transition-colors truncate">
                             Garantía Legal de 6 Meses
                         </strong>
-                        <span class="text-[10px] text-gray-400">SERNAC</span>
+                        <span class="text-[9px] font-mono text-gray-400 shrink-0 ml-1">
+                            SERNAC
+                        </span>
                     </div>
-                    <p class="text-xs text-gray-400 line-clamp-1 mt-0.5">
-                        Cobertura en soldaduras estructurales y pasadores
+                    <p class="text-xs text-gray-400 truncate mt-0.5">
+                        Respaldo oficial de taller en acero y soldaduras
                     </p>
                 </div>
-                <i class="fa-solid fa-chevron-right text-gray-500 text-xs group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all"></i>
+                <i class="fa-solid fa-chevron-right text-gray-500 text-xs group-hover:text-sky-400 group-hover:translate-x-1 transition-all shrink-0"></i>
             </a>
 
-            <!-- 5. SITIO WEB Y CATÁLOGO COMPLETO -->
-            <a href="https://metalcreativo.cl" class="btn-card w-full p-4 rounded-xl flex items-center gap-4 text-left group">
-                <div class="w-12 h-12 rounded-lg bg-amber-600/20 text-amber-400 border border-amber-500/30 flex items-center justify-center text-xl shrink-0 group-hover:bg-amber-600 group-hover:text-white transition-colors">
-                    <i class="fa-solid fa-globe"></i>
+            <!-- 6. SITIO WEB Y CATÁLOGO COMPLETO -->
+            <a href="https://metalcreativo.cl" class="portal-card w-full p-4 rounded-xl flex items-center gap-3.5 group cursor-pointer spark-trigger">
+                <div class="icon-box w-12 h-12 rounded-lg flex items-center justify-center text-xl text-gray-300 shrink-0 group-hover:text-white">
+                    <i class="fa-solid fa-globe text-lg"></i>
                 </div>
-                <div class="flex-grow">
+                <div class="flex-grow min-w-0">
                     <div class="flex items-center justify-between">
-                        <strong class="text-white text-sm font-bold group-hover:text-amber-400 transition-colors">
-                            Tienda y Catálogo Completo
+                        <strong class="text-white text-sm font-bold group-hover:text-white transition-colors truncate">
+                            Sitio Web & Catálogo Completo
                         </strong>
-                        <span class="text-[10px] text-gray-400">metalcreativo.cl</span>
+                        <span class="text-[10px] font-mono text-gray-500 shrink-0 ml-1">
+                            metalcreativo.cl
+                        </span>
                     </div>
-                    <p class="text-xs text-gray-400 line-clamp-1 mt-0.5">
-                        Fogones ecológicos a bioetanol y productos de taller
+                    <p class="text-xs text-gray-400 truncate mt-0.5">
+                        Barras de remolque, fogones a bioetanol y taller
                     </p>
                 </div>
-                <i class="fa-solid fa-chevron-right text-gray-500 text-xs group-hover:text-amber-400 group-hover:translate-x-0.5 transition-all"></i>
+                <i class="fa-solid fa-chevron-right text-gray-500 text-xs group-hover:text-white group-hover:translate-x-1 transition-all shrink-0"></i>
             </a>
 
         </div>
 
-        <!-- CONTACT INFO BADGE -->
-        <div class="pt-4 border-t border-white/10 text-xs text-gray-400 space-y-1">
-            <p class="font-bold text-gray-300">
-                Taller Metal Creativo Chile SpA
+        <!-- PIE DISCRETO -->
+        <footer class="pt-4 border-t border-white/5 text-[11px] text-gray-500 space-y-1">
+            <p class="font-medium text-gray-400">
+                Taller Metal Creativo Chile SpA • Quillota, Valparaíso
             </p>
             <p>
-                Quillota, Región de Valparaíso • Envíos a todo Chile
-            </p>
-            <p class="text-[11px] text-gray-500 pt-2">
                 &copy; 2026 Metal Creativo Chile. Todos los derechos reservados.
             </p>
-        </div>
+        </footer>
 
     </main>
 
+    <!-- SCRIPTS DE MOTOR DE CHISPAS Y BRASAS VIVAS (EXACTO AL HOME) -->
+    <script>
+        // 1. BRASAS ASCENDENTES DE TALLER
+        (function initEmbers() {
+            const canvas = document.getElementById('emberCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let embers = [];
+            const isMobile = window.innerWidth < 768;
+            const maxEmbers = isMobile ? 35 : 60;
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            function createEmber(initial = false) {
+                return {
+                    x: Math.random() * canvas.width,
+                    y: initial ? Math.random() * canvas.height : canvas.height + 15,
+                    size: Math.random() * 2.2 + 0.8,
+                    vy: -(Math.random() * 1.2 + 0.5),
+                    vx: (Math.random() - 0.5) * 0.6,
+                    alpha: Math.random() * 0.7 + 0.3,
+                    decay: Math.random() * 0.003 + 0.0015,
+                    oscSpeed: Math.random() * 0.02 + 0.01,
+                    oscOffset: Math.random() * Math.PI * 2,
+                    color: Math.random() > 0.35 ? '#c83c00' : (Math.random() > 0.5 ? '#ff7711' : '#ffb344')
+                };
+            }
+
+            for (let i = 0; i < maxEmbers; i++) {
+                embers.push(createEmber(true));
+            }
+
+            let frame = 0;
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                frame++;
+
+                for (let i = embers.length - 1; i >= 0; i--) {
+                    const e = embers[i];
+                    e.y += e.vy;
+                    e.x += e.vx + Math.sin(frame * e.oscSpeed + e.oscOffset) * 0.35;
+                    e.alpha -= e.decay;
+
+                    if (e.alpha <= 0 || e.y < -15) {
+                        embers[i] = createEmber(false);
+                        continue;
+                    }
+
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(0, e.alpha);
+                    ctx.fillStyle = e.color;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = e.color;
+                    ctx.beginPath();
+                    ctx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+        // 2. CHISPAS REACTIVAS AL MOUSE Y TOQUE
+        (function initMouseSparks() {
+            const canvas = document.getElementById('sparkCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let sparks = [];
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            function emitSparks(x, y, count = 10, speedMult = 1, isClick = false) {
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = (Math.random() * 4 + 1.5) * speedMult;
+                    sparks.push({
+                        x: x,
+                        y: y,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed - (isClick ? 1.8 : 0.5),
+                        size: Math.random() * 2.2 + 1,
+                        alpha: 1,
+                        decay: Math.random() * 0.04 + 0.02,
+                        color: Math.random() > 0.4 ? '#ff6a00' : (Math.random() > 0.5 ? '#ffb344' : '#ffffff')
+                    });
+                }
+            }
+
+            window.addEventListener('mousemove', (e) => {
+                if (Math.random() > 0.75) {
+                    emitSparks(e.clientX, e.clientY, 2, 0.6);
+                }
+            });
+
+            window.addEventListener('click', (e) => {
+                emitSparks(e.clientX, e.clientY, 16, 1.4, true);
+            });
+
+            document.querySelectorAll('.spark-trigger').forEach(el => {
+                el.addEventListener('mouseenter', (e) => {
+                    const rect = el.getBoundingClientRect();
+                    emitSparks(rect.left + rect.width / 2, rect.top + rect.height / 2, 8, 1);
+                });
+            });
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = sparks.length - 1; i >= 0; i--) {
+                    const s = sparks[i];
+                    s.x += s.vx;
+                    s.y += s.vy;
+                    s.vy += 0.08;
+                    s.alpha -= s.decay;
+
+                    if (s.alpha <= 0) {
+                        sparks.splice(i, 1);
+                        continue;
+                    }
+
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(0, s.alpha);
+                    ctx.fillStyle = s.color;
+                    ctx.shadowBlur = 6;
+                    ctx.shadowColor = s.color;
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+    </script>
 </body>
 </html>
