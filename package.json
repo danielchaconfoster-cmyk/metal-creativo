@@ -10,21 +10,22 @@
     "video:puro": "remotion render LanzaRealPuro out/lanza_video_puro.mp4 --gl=angle",
     "video:anuncio": "remotion render LanzaRealShowcase out/lanza_real_showcase.mp4 --gl=angle",
     "render:reel01": "remotion render Reel01Cinematico out/reels_listos_para_tiktok/Reel_01_Cinematico_Final.mp4 --concurrency=2 --gl=angle",
-    "render:reel02": "remotion render Reel02Cinematico out/reels_listos_para_tiktok/Reel_02_Cinematico_Final.mp4 --concurrency=2 --gl=angle"
+    "render:reel02": "remotion render Reel02Cinematico out/reels_listos_para_tiktok/Reel_02_Cinematico_Final.mp4 --concurrency=2 --gl=angle",
+    "test": "node --test tests/*.test.js tests/additional.test.cjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "mercadopago": "^2.0.15",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "puppeteer": "^25.9.0",
     "@remotion/cli": "^4.0.518",
     "@remotion/lottie": "^4.0.518",
     "@remotion/transitions": "^4.0.518",
-    "@supabase/supabase-js": "^2.49.1",
     "lottie-web": "^5.13.0",
-    "mercadopago": "^2.0.15",
-    "qrcode": "^1.5.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "remotion": "^4.0.518"
-  },
-  "devDependencies": {
-    "puppeteer": "^25.9.0"
   }
 }

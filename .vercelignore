@@ -2,10 +2,11 @@
 node_modules
 out
 *.mp4
-!public/videos/video_armado_lanza.mp4
+!public/videos/*.mp4
 *.raw
 *.docx
 *.pdf
+!public/*.pdf
 *.log
 asets videos imagenes reales/
 google_flow_assets/

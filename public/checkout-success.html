@@ -128,9 +128,11 @@
                     record.currency !== 'CLP' || !Number.isFinite(Number(record.total_amount)) || Number(record.total_amount) <= 0) {
                     throw new Error('No se pudo verificar el estado del pedido. Intenta nuevamente.');
                 }
+                const urlStatus = new URLSearchParams(window.location.search).get('status');
                 const paid = ['paid', 'preparing', 'shipped', 'delivered'].includes(record.status);
                 const transfer = record.status === 'pending' && record.payment_method === 'transferencia';
-                if (!paid && !transfer) {
+                const pendingMp = record.status === 'pending' && record.payment_method === 'mercadopago' && urlStatus === 'pending';
+                if (!paid && !transfer && !pendingMp) {
                     window.location.replace('checkout.html');
                     return;
                 }
@@ -144,6 +146,28 @@
                     try {
                         const attempt = JSON.parse(localStorage.getItem('mc_checkout_attempt') || 'null');
                         if (attempt && attempt.key === this.order.attemptKey) localStorage.removeItem('mc_checkout_attempt');
+                    } catch (_) {}
+
+                    try {
+                        const purchaseKey = 'mc_tracked_purchase_' + record.id;
+                        if (!sessionStorage.getItem(purchaseKey)) {
+                            if (typeof fbq === 'function') {
+                                fbq('track', 'Purchase', {
+                                    value: Number(record.total_amount),
+                                    currency: 'CLP',
+                                    content_type: 'product',
+                                    order_id: String(record.order_number || record.id)
+                                });
+                            }
+                            if (typeof gtag === 'function') {
+                                gtag('event', 'purchase', {
+                                    transaction_id: String(record.order_number || record.id),
+                                    value: Number(record.total_amount),
+                                    currency: 'CLP'
+                                });
+                            }
+                            sessionStorage.setItem(purchaseKey, '1');
+                        }
                     } catch (_) {}
                 }
                 this.verified = true;
@@ -165,13 +189,13 @@
             if (!this.verified || !this.isTransfer) return;
             const id = this.order.orderId || 'MC-2026';
             const total = this.formatPrice(this.order.total || 65000);
-            const text = `DATOS DE TRANSFERENCIA METAL CREATIVO CHILE:
+            const text = `DATOS DE TRANSFERENCIA METAL CREATIVO:
 Banco: BancoEstado
-Tipo: Cuenta Vista / Chequera Electrónica
-N° Cuenta: 00-76842190-5
-RUT: 76.842.190-5
-Titular: Metal Creativo Chile SpA
-Email: metalcreativo03@gmail.com
+Tipo: CuentaRUT (Cuenta Vista)
+N° Cuenta: 18513380
+RUT: 18.513.380-K
+Titular: Daniel Esteban Chacón Foster
+Email: daniel.chacon.foster@gmail.com
 Monto: $${total} CLP
 Asunto/Glosa obligatoria: ${id}`;
 
@@ -218,11 +242,11 @@ Asunto/Glosa obligatoria: ${id}`;
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-gray-300">
                         <p><strong class="text-gray-400">Banco:</strong> BancoEstado</p>
-                        <p><strong class="text-gray-400">Tipo de Cuenta:</strong> Cuenta Vista / Chequera Electrónica</p>
-                        <p><strong class="text-gray-400">N° de Cuenta:</strong> 00-76842190-5</p>
-                        <p><strong class="text-gray-400">RUT Titular:</strong> 76.842.190-5</p>
-                        <p class="sm:col-span-2"><strong class="text-gray-400">Nombre / Razón Social:</strong> Metal Creativo Chile SpA</p>
-                        <p class="sm:col-span-2"><strong class="text-gray-400">Correo Comprobantes:</strong> <span class="text-orange-400 font-bold">metalcreativo03@gmail.com</span></p>
+                        <p><strong class="text-gray-400">Tipo de Cuenta:</strong> CuentaRUT (Cuenta Vista)</p>
+                        <p><strong class="text-gray-400">N° de Cuenta:</strong> 18513380</p>
+                        <p><strong class="text-gray-400">RUT Titular:</strong> 18.513.380-K</p>
+                        <p class="sm:col-span-2"><strong class="text-gray-400">Nombre / Razón Social:</strong> Daniel Esteban Chacón Foster</p>
+                        <p class="sm:col-span-2"><strong class="text-gray-400">Correo Comprobantes:</strong> <span class="text-orange-400 font-bold">daniel.chacon.foster@gmail.com</span></p>
                     </div>
 
                     <div class="p-3 bg-amber-950/30 border border-amber-500/20 rounded-lg flex items-center justify-between">
@@ -313,7 +337,7 @@ Asunto/Glosa obligatoria: ${id}`;
                     </p>
                     <div class="space-y-1 text-gray-300 font-medium text-xs">
                         <p class="flex items-center gap-2">📍 Quillota, Quinta Región (Despachos a todo el país)</p>
-                        <p class="flex items-center gap-2 text-orange-400 font-bold">metalcreativo03@gmail.com</p>
+                        <p class="flex items-center gap-2 text-orange-400 font-bold">daniel.chacon.foster@gmail.com</p>
                     </div>
                     <div class="flex items-center gap-3 pt-2">
                         <!-- LOGO INSTAGRAM OFICIAL -->

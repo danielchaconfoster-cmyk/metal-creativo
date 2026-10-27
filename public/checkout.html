@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./css/checkout.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <style>
@@ -108,7 +108,7 @@
     <nav class="bg-[#050608] border-b border-white/10 py-4">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
             <a href="index.html" class="flex items-center gap-3">
-                <img src="./images/logo_official.png" alt="Metal Creativo Chile" class="h-10 sm:h-12 w-auto object-contain">
+                <img src="./images/logo_official.png" alt="Metal Creativo Chile" width="180" height="48" class="h-10 sm:h-12 w-auto object-contain">
             </a>
             <div class="flex items-center gap-3 text-xs text-gray-400">
                 <span class="text-emerald-400 font-bold flex items-center gap-1.5">
@@ -132,7 +132,7 @@
     </header>
 
     <main class="flex-grow py-10" x-data="{
-        cart: JSON.parse(localStorage.getItem('mc_cart') || '[]'),
+        cart: (() => { try { const raw = localStorage.getItem('mc_cart'); const parsed = JSON.parse(raw || '[]'); return Array.isArray(parsed) ? parsed : []; } catch (_) { return []; } })(),
         nombre: '',
         rut: '',
         email: '',
@@ -284,6 +284,11 @@
             const shippingMethod = this.tipoDespacho;
             const orderedItems = this.cart.map(item => ({ ...item }));
 
+            const streetMatch = (this.direccion || '').trim().match(/^(.*?)(?:\s+(\d+[\w-]*))?$/);
+            const hasNum = streetMatch && streetMatch[2];
+            const streetName = hasNum ? streetMatch[1].trim() : (this.direccion || '').trim();
+            const streetNumber = hasNum ? streetMatch[2].trim() : 'S/N';
+
             const customerPayload = {
                 full_name: this.nombre,
                 rut: this.rut,
@@ -291,8 +296,8 @@
                 phone: this.telefono,
                 region: this.region,
                 comuna: this.comuna,
-                address_street: this.direccion,
-                address_number: this.depto || 'S/N',
+                address_street: streetName || this.direccion,
+                address_number: streetNumber,
                 address_extra: this.depto
             };
             const cartSnapshot = JSON.stringify(orderedItems);
@@ -382,7 +387,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                                 <div>
                                     <label class="block font-bold text-gray-400 mb-1 uppercase">Nombre Completo *</label>
-                                    <input type="text" x-model="nombre" required placeholder="Carlos Muñoz" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
+                                    <input type="text" name="name" autocomplete="name" x-model="nombre" required placeholder="Carlos Muñoz" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
                                 </div>
                                 <div>
                                     <div class="flex items-center justify-between mb-1">
@@ -395,11 +400,11 @@
                                 </div>
                                 <div>
                                     <label class="block font-bold text-gray-400 mb-1 uppercase">Correo Electrónico *</label>
-                                    <input type="email" x-model="email" required placeholder="carlos@correo.cl" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
+                                    <input type="email" name="email" autocomplete="email" x-model="email" required placeholder="carlos@correo.cl" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
                                 </div>
                                 <div>
                                     <label class="block font-bold text-gray-400 mb-1 uppercase">Teléfono / WhatsApp *</label>
-                                    <input type="tel" x-model="telefono" required placeholder="+56 9 8765 4321" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
+                                    <input type="tel" name="tel" autocomplete="tel" x-model="telefono" required placeholder="+56 9 8765 4321" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
                                 </div>
                             </div>
                         </div>
@@ -463,11 +468,11 @@
                                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                     <div class="sm:col-span-2">
                                         <label class="block font-bold text-gray-400 mb-1 uppercase">Calle y Número *</label>
-                                        <input type="text" x-model="direccion" required placeholder="Av. Providencia 1234" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
+                                        <input type="text" name="address" autocomplete="street-address" x-model="direccion" required placeholder="Av. Providencia 1234" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
                                     </div>
                                     <div>
                                         <label class="block font-bold text-gray-400 mb-1 uppercase">Depto / Casa / Ref</label>
-                                        <input type="text" x-model="depto" placeholder="Depto 502" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
+                                        <input type="text" name="address-line2" autocomplete="address-line2" x-model="depto" placeholder="Depto 502" class="w-full px-3.5 py-2.5 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:border-orange-500">
                                     </div>
                                 </div>
 

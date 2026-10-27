@@ -102,31 +102,55 @@ function normalizeString(str) {
 
 function calculateShipping(communeOrRegion, productId = 'barra_remolque') {
   const norm = normalizeString(communeOrRegion);
+  const cleanNorm = norm.replace(/^region\s+(de\s+|del\s+|de\s+la\s+)?/, '').trim();
   let matchedRegion = null;
 
   // 1. Buscar en comunas directas
   if (COMMUNE_MAP[norm]) {
     matchedRegion = COMMUNE_MAP[norm];
+  } else if (COMMUNE_MAP[cleanNorm]) {
+    matchedRegion = COMMUNE_MAP[cleanNorm];
   } else {
-    // 2. Buscar por nombre de región
+    // 2. Buscar por nombre de región o alias limpio
     for (const [regionName, info] of Object.entries(REGIONAL_RATES)) {
-      if (normalizeString(regionName) === norm || normalizeString(info.code) === norm) {
+      const normRegion = normalizeString(regionName);
+      if (normRegion === norm || normRegion === cleanNorm || normalizeString(info.code) === norm || normalizeString(info.code) === cleanNorm) {
         matchedRegion = regionName;
         break;
       }
     }
   }
 
-  // Si no se encuentra, por defecto asignamos RM/Zona Centro
+  // Si no se encuentra, NO asumimos RM silenciosamente
   if (!matchedRegion) {
-    matchedRegion = 'Región Metropolitana';
+    return {
+      success: false,
+      input: communeOrRegion,
+      region: 'Destino por Cotizar',
+      estimatedDays: 'A coordinar',
+      couriers: {
+        starken: {
+          name: 'Starken (Por Pagar)',
+          cost: 0,
+          modality: 'por_pagar',
+          recommended: true
+        },
+        chilexpress: {
+          name: 'Chilexpress (Por Pagar)',
+          cost: 0,
+          modality: 'por_pagar',
+          recommended: false
+        }
+      },
+      message: `El destino "${communeOrRegion}" no fue reconocido automáticamente. Se despachará por pagar vía Starken o Chilexpress a coordinar.`
+    };
   }
 
   const rateInfo = REGIONAL_RATES[matchedRegion];
-  const isFogone = productId === 'fogon';
+  const isFogon = /fogon/i.test(productId);
   
   // Multiplicador por peso / volumen (Barra = 6kg, Fogón = 12kg)
-  const weightMultiplier = isFogone ? 1.6 : 1.0;
+  const weightMultiplier = isFogon ? 1.6 : 1.0;
   const estimatedStarken = Math.round((rateInfo.baseStarken * weightMultiplier) / 100) * 100;
   const estimatedChilexpress = Math.round(estimatedStarken * 1.18 / 100) * 100;
 
