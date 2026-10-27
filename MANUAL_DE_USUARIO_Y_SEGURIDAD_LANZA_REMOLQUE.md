@@ -66,7 +66,7 @@ La Barra Rígida de Remolque Metal Creativo Serie **MC-1800R** ha sido diseñada
 | **Soldadura** | Cordones continuos de penetración estructural mediante proceso MIG/MAG |
 | **Pasadores de Seguridad** | 2 pasadores de acero cincado Grado 5 de 1/2" con chaveta elástica tipo R |
 | **Cáncamos / Terminales** | Ojales forjados en fragua y soldados al núcleo del tubo |
-| **Grilletes de Acople** | 2 grilletes forjados tipo lira/omega de 1/2" galvanizados de alta resistencia |
+| **Grilletes de Acople** | 2 grilletes forjados tipo lira/omega de 5/8" galvanizados de alta resistencia |
 | **Señalización Reflectante** | Láminas reflectantes microprismáticas Grado DOT-C2 de alta intensidad (roja/blanca) |
 | **Tratamiento Superficial** | Desengrase mecánico/químico + imprimación anticorrosiva + esmalte horneado |
 
@@ -82,7 +82,7 @@ Al retirar la barra de su embalaje o maletero, verifique la presencia de todos l
        v                                                                               v
  +-----------+     ===================     ===================     ===================     +-----------+
  | Grillete  | === [   TRAMO FRONTAL ] === [   TRAMO CENTRAL ] === [  TRAMO TRASERO  ] === | Grillete  |
- | Lira 1/2" |     [  Ojal + Macho   ]  *  [ Reflectantes C2 ]  *  [  Ojal + Macho   ]     | Lira 1/2" |
+ | Lira 5/8" |     [  Ojal + Macho   ]  *  [ Reflectantes C2 ]  *  [  Ojal + Macho   ]     | Lira 5/8" |
  +-----------+     ===================  |  ===================  |  ===================     +-----------+
                                         v                       v
                                   [ Pasador 1/2" ]        [ Pasador 1/2" ]
@@ -132,7 +132,7 @@ Tome la barra por el tramo central con ambas manos y sacúdala vertical y horizo
 - **Vehículo Remolcado**: Localice el gancho de remolque delantero de fábrica (bajo la máscara o el cáncamo roscado de emergencia ubicado en el kit de rueda de repuesto).
 
 ### C. Conexión Mediante Grillete Forjado
-1. Desenrosque el perno pasador del grillete lira de 1/2".
+1. Desenrosque el perno pasador del grillete lira de 5/8".
 2. Pase el cuerpo curvo del grillete a través del gancho estructural del vehículo y del ojal de la barra de remolque.
 3. Enrosque el perno del grillete a fondo con la mano.
 4. **Regla de Oro de Seguridad de Grilletes**: Una vez apretado a tope con la mano, **gire el perno 1/4 de vuelta hacia atrás (en sentido antihorario)**. Esto evita que la tensión mecánica de tiro gripe o bloquee la rosca impidiendo su posterior retiro.

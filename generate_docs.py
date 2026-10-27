@@ -192,7 +192,7 @@ def build_manual_docx(output_path):
         ["Capacidad de Arrastre", "3.500 kg (3.5 Toneladas) en tracción directa horizontal"],
         ["Factor de Seguridad", "Rotura estática superior a 6.000 kg (Factor 2:1)"],
         ["Pasadores de Seguridad", "2 pasadores de 1/2\" cincados con chaveta elástica tipo R"],
-        ["Elementos de Conexión", "2 grilletes forjados tipo lira de 1/2\" galvanizados"],
+        ["Elementos de Conexión", "2 grilletes forjados tipo lira de 5/8\" galvanizados"],
         ["Señalización Reflectante", "Huincha reflectante microprismática roja/blanca grado DOT-C2"],
         ["Garantía de Fábrica", "6 Meses de garantía legal directa (Ley 19.496 SERNAC)"]
     ]
@@ -204,7 +204,7 @@ def build_manual_docx(output_path):
     add_bullet(doc, "Espiga macho receptora + ojal forjado de tiro hacia el vehículo averiado.", "3. Tramo Trasero (65 cm): ")
     add_bullet(doc, "Atraviesan rígidamente las uniones macho-hembra impidiendo desacoples axiales.", "4. Dos (2) Pasadores de 1/2\": ")
     add_bullet(doc, "Seguros de alambre acerado que garantizan que el pasador nunca se salga en ruta.", "5. Dos (2) Chavetas Elásticas Tipo R: ")
-    add_bullet(doc, "Con perno roscado para enlace rápido a los ganchos de chasis de cada automóvil.", "6. Dos (2) Grilletes Forjados de 1/2\": ")
+    add_bullet(doc, "Con perno roscado para enlace rápido a los ganchos de chasis de cada automóvil.", "6. Dos (2) Grilletes Forjados de 5/8\": ")
 
     add_heading1(doc, "3. Procedimiento de Montaje y Ensamble (Paso a Paso en 60 Segundos)")
     add_p(doc, "Ubique los 3 tramos sobre una superficie firme fuera de la calzada de tránsito rápido con su chaleco reflectante puesto.", "Paso 1 (Posicionamiento): ")
@@ -316,7 +316,7 @@ def build_cuestionario_docx(output_path):
         ["Peso Total del Kit", "7.0 kg a 7.5 kg aprox.", "[  ] Confirmado  /  Otro: _______"],
         ["Perfilería Tubo", "Acero al carbono 3 mm espesor", "[  ] Confirmado  /  Otro: _______"],
         ["Pasadores de Bloqueo", "Pernos cincados de 1/2\" con chaveta R", "[  ] Confirmado  /  Otro: _______"],
-        ["Grilletes de Tiro", "Grilletes galvanizados lira 1/2\"", "[  ] Confirmado  /  Otro: _______"],
+        ["Grilletes de Tiro", "Grilletes galvanizados lira 5/8\"", "[  ] Confirmado  /  Otro: _______"],
         ["Capacidad de Arrastre", "Hasta 3.500 kg (3.5 Toneladas)", "[  ] Confirmado  /  Otro: _______"],
         ["Pintura y Acabado", "Esmalte anticorrosivo negro mate", "[  ] Confirmado  /  Otro: _______"],
         ["Huincha Reflectante", "Grado DOT-C2 roja/blanca reglamentaria", "[  ] Confirmado  /  Otro: _______"],
@@ -326,7 +326,7 @@ def build_cuestionario_docx(output_path):
 
     add_heading1(doc, "Mensaje Breve para Enviar por WhatsApp a Nacho:")
     add_callout(doc, "COPIAR Y PEGAR EN EL CHAT",
-                "¡Hola Nacho! Te armé el cuestionario ultra rápido para que no pierdas tiempo. Casi todo ya está pre-llenado con los datos estándar de la barra de 1.8m y 3 tramos. Porfa solo confírmame si están OK o corrígeme algún número:\n\n1. ¿Largo 1.80m armada y tramos de 65cm?\n2. ¿Pesa aprox 7 kg?\n3. ¿Pasadores de 1/2\" con seguro tipo R?\n4. ¿Incluye los 2 grilletes lira de 1/2\"?\n5. ¿Aguante 3.500 kg y garantía de 6 meses?\n\nCon que me des el visto bueno de estos 5 puntos, el manual técnico queda 100% blindado para imprimir o mandar a los clientes en PDF. ¡Un abrazo!",
+                "¡Hola Nacho! Te armé el cuestionario ultra rápido para que no pierdas tiempo. Casi todo ya está pre-llenado con los datos estándar de la barra de 1.8m y 3 tramos. Porfa solo confírmame si están OK o corrígeme algún número:\n\n1. ¿Largo 1.80m armada y tramos de 65cm?\n2. ¿Pesa aprox 7 kg?\n3. ¿Pasadores de 1/2\" con seguro tipo R?\n4. ¿Incluye los 2 grilletes lira de 5/8\"?\n5. ¿Aguante 3.500 kg y garantía de 6 meses?\n\nCon que me des el visto bueno de estos 5 puntos, el manual técnico queda 100% blindado para imprimir o mandar a los clientes en PDF. ¡Un abrazo!",
                 bg_hex="F8FAFC", border_color="C83C00")
 
     doc.save(output_path)

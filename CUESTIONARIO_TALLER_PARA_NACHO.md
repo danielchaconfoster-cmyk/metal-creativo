@@ -18,7 +18,7 @@ Casi todo ya lo dejé pre-llenado con los datos que tenemos de la lanza. Porfa s
 2. PASADORES Y ACOPLE:
 - Pasadores de unión: ¿De qué medida son los pernos/pasadores (ej: 1/2 pulgada)?
 - Chaveta/traba: ¿Viene con pasador de seguridad tipo R con cadenita para que no se pierda?
-- Grilletes: ¿Qué grilletes incluye para amarrar al auto? (ej: Grilletes galvanizados tipo lira/corazón de 1/2" o 5/8").
+- Grilletes: ¿Qué grilletes incluye para amarrar al auto? (Grilletes galvanizados tipo lira/corazón forjados de 5/8").
 
 3. RESISTENCIA Y TERMINACIÓN:
 - Capacidad máxima recomendada: ¿Hasta 3.500 kg de arrastre?
@@ -47,7 +47,7 @@ Si el taller no tiene a mano los datos de catálogo, estos son los estándares d
 | **Peso Total** | 6.8 kg a 7.5 kg (ideal para manipulación manual por un solo operador). |
 | **Capacidad de Arrastre** | 3.500 kg en tiro recto horizontal (factor de seguridad 2.5:1). |
 | **Elementos de Traba** | 2 pasadores de acero cincado de 1/2" (12.7 mm) con seguro R (chaveta elástica) y cable de retención. |
-| **Terminales de Tiro** | Ojales forjados en acero soldado con proceso MIG/MAG de alta penetración + 2 grilletes forjados tipo lira galvanizados de 1/2" (Carga Límite de Trabajo 2.0 T c/u). |
+| **Terminales de Tiro** | Ojales forjados en acero soldado con proceso MIG/MAG de alta penetración + 2 grilletes forjados tipo lira galvanizados de 5/8" (Carga Límite de Trabajo 2.0 T c/u). |
 | **Señalización Visual** | 4 segmentos de lámina reflectante microprismática roja/blanca grado reglamentario DOT-C2. |
 | **Acabado Superficial** | Desengrase químico, base anticorrosiva epóxica y esmalte de terminación horneado negro mate o rojo/naranja seguridad de alta durabilidad a la intemperie. |
 | **Garantía** | 6 meses de garantía directa del fabricante sobre cordones de soldadura y estructura de acero. |
