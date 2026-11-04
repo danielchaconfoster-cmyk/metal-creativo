@@ -408,30 +408,31 @@ Asunto/Glosa obligatoria: ${id}`;
                     </div>
 
                     <!-- CUADRADO PRO ESTILO SANTA MÓNICA -->
-                    <div class="group relative block w-[170px] h-[170px] rounded-2xl overflow-hidden border border-white/10 bg-neutral-900 shadow-xl mx-auto md:mx-0">
+                    <div class="group relative block w-[170px] h-[170px] rounded-2xl overflow-hidden border border-white/10 bg-neutral-900 shadow-xl mx-auto md:mx-0" style="position: relative; width: 170px; height: 170px; border-radius: 1rem; overflow: hidden; display: block; border: 1px solid rgba(255,255,255,0.1); background-color: #171717;">
                         <!-- LINK OVERLAY INTERACTIVO -->
                         <a href="https://maps.app.goo.gl/sMtqyidVCVv1nLDM9" 
                            target="_blank" 
                            rel="noopener noreferrer" 
                            class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/50 group-hover:bg-black/20 transition-all duration-500 cursor-pointer"
+                           style="position: absolute; inset: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 20; background: rgba(0,0,0,0.45); text-decoration: none;"
                            title="Abrir ubicación exacta en Google Maps">
-                            <svg class="w-8 h-8 text-white group-hover:text-orange-500 group-hover:scale-110 transition-all duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg class="w-7 h-7 text-white group-hover:text-orange-500 group-hover:scale-110 transition-all duration-300" width="28" height="28" style="width: 28px !important; height: 28px !important; max-width: 28px !important; max-height: 28px !important; min-width: 28px !important; min-height: 28px !important; flex-shrink: 0; color: #ffffff; display: block; margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
                                 <circle cx="12" cy="9" r="2.5"/>
                             </svg>
-                            <span class="mt-2 text-[10px] text-white font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/70 px-2 py-0.5 rounded border border-white/10">
+                            <span class="mt-2 text-[10px] text-white font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/70 px-2 py-0.5 rounded border border-white/10" style="margin-top: 0.5rem; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #ffffff; background: rgba(0,0,0,0.7); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.15);">
                                 Ver Mapa &nearr;
                             </span>
                         </a>
 
                         <!-- IFRAME GOOGLE MAPS PRO (GRAYSCALE A COLOR ON HOVER) -->
-                        <div class="absolute inset-0 z-10 pointer-events-none">
+                        <div class="absolute inset-0 z-10 pointer-events-none" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none;">
                             <iframe 
                                 title="Ubicación Taller Metal Creativo Quillota"
                                 src="https://maps.google.com/maps?q=-32.8960437,-71.2683946&hl=es&z=17&output=embed" 
                                 width="100%" 
                                 height="100%" 
-                                style="border:0;" 
+                                style="border:0; width: 100%; height: 100%; pointer-events: none;" 
                                 allowfullscreen="" 
                                 loading="lazy" 
                                 referrerpolicy="no-referrer-when-downgrade" 
@@ -463,5 +464,32 @@ Asunto/Glosa obligatoria: ${id}`;
 
         </div>
     </footer>
+
+    <!-- Google Customer Reviews (Reseñas de Clientes en Google) -->
+    <script src="https://apis.google.com/js/platform.js?onload=renderOptIn" async defer></script>
+    <script>
+      window.renderOptIn = function() {
+        try {
+          var order = JSON.parse(sessionStorage.getItem('last_order') || '{}');
+          var orderId = new URLSearchParams(window.location.search).get('order_id') || order.orderId || order.orderNumber;
+          var email = (order.customer && order.customer.email) || sessionStorage.getItem('mc_order_email') || '';
+          if (!orderId || !email) return;
+
+          var estDelivery = new Date();
+          estDelivery.setDate(estDelivery.getDate() + 5);
+          var deliveryDate = estDelivery.toISOString().split('T')[0];
+
+          window.gapi.load('surveyoptin', function() {
+            window.gapi.surveyoptin.render({
+              "merchant_id": 5881393944,
+              "order_id": String(orderId),
+              "email": String(email),
+              "delivery_country": "CL",
+              "estimated_delivery_date": deliveryDate
+            });
+          });
+        } catch (_) {}
+      };
+    </script>
 </body>
 </html>

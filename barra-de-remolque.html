@@ -264,6 +264,32 @@
             padding: 0.25rem 0.65rem;
             border-radius: 3px;
         }
+    
+        /* LIENZOS DE EFECTOS ESPECIALES (CHISPAS Y BRASAS CONTINUAS) */
+        #emberCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        #sparkCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .spark-trigger {
+            cursor: pointer;
+        }
+
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D0N2SXMF8Z"></script>
@@ -298,35 +324,57 @@
 </head>
 <body x-data="cartStore()" class="min-h-screen flex flex-col justify-between selection:bg-orange-500 selection:text-white">
 
+    <!-- 1. LIENZO CONTINUO DE ASCOAS Y FUEGO ASCENDENTE -->
+    <canvas id="emberCanvas"></canvas>
+
+    <!-- 2. LIENZO EN VIVO DE CHISPAS REACTIVAS AL MOUSE Y CLIC -->
+    <canvas id="sparkCanvas"></canvas>
+
+
     <!-- NAVBAR OFICIAL -->
-    <header class="sticky top-0 z-40 bg-[#07080b]/90 backdrop-blur-md border-b border-white/10 py-3">
+    <!-- NAVBAR OFICIAL UNIFICADO -->
+    <header class="sticky top-0 z-40 bg-[#07080b]/95 backdrop-blur-md border-b border-white/10 py-3 shadow-xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-3">
-                <img src="/images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-10 sm:h-12 w-auto object-contain">
+            <a href="/" class="flex items-center gap-3 spark-trigger" title="Metal Creativo Chile - Inicio">
+                <img src="/images/logo_official.png" alt="Metal Creativo Chile" class="h-10 sm:h-12 w-auto object-contain">
             </a>
 
-            <nav class="hidden md:flex items-center gap-7 text-xs uppercase tracking-wider font-bold text-gray-300">
-                <a href="/" class="hover:text-orange-400 transition-colors">Inicio</a>
-                <a href="/barra-de-remolque" class="text-orange-400 border-b border-orange-400 pb-0.5">Barra Remolque</a>
-                <a href="/fogon-bioetanol" class="hover:text-orange-400 transition-colors">Fogón Bioetanol</a>
-                <a href="/contacto" class="hover:text-orange-400 transition-colors">Contacto</a>
+            <!-- NAVEGACIÓN GLOBAL COHERENTE -->
+            <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-xs uppercase tracking-wider font-bold text-gray-300">
+                <a href="/" class="hover:text-orange-400 transition-colors spark-trigger">Inicio</a>
+                <a href="/barra-de-remolque" class="hover:text-orange-400 transition-colors spark-trigger">Barra Remolque</a>
+                <a href="/fogon-bioetanol" class="hover:text-orange-400 transition-colors spark-trigger">Fogón Bioetanol</a>
+                <a href="/barra-de-remolque#envios-resenas" class="hover:text-orange-400 transition-colors spark-trigger">Envíos & Reseñas</a>
+                <a href="/barra-de-remolque#comparativa-legal" class="hover:text-orange-400 transition-colors spark-trigger">Ley MTT</a>
+                <a href="/contacto" class="hover:text-orange-400 transition-colors spark-trigger">Contacto</a>
             </nav>
 
-            <div class="flex items-center gap-3">
-                <!-- CARRITO -->
-                <button @click="cartOpen = true" class="relative p-2.5 rounded-[4px] bg-neutral-900 border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer" title="Ver Carrito">
-                    <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- LINK MERCADO LIBRE -->
+                <a href="https://articulo.mercadolibre.cl/MLC-4414859324?matt_tool=94515950" target="_blank" rel="noopener noreferrer" class="hidden lg:inline-flex items-center gap-2 px-3 py-1.5 rounded-[4px] bg-[#ffe600] text-neutral-950 font-extrabold text-xs hover:bg-yellow-300 transition-all shadow" title="Comprar en Mercado Libre">
+                    <img src="/images/logo_mercadolibre_handshake_official.png" alt="Mercado Libre" class="w-5 h-3.5 object-contain">
+                    <span>Mercado Libre</span>
+                </a>
+
+                <!-- LINK TIKTOK -->
+                <a href="https://www.tiktok.com/@metalcreativo.cl" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex p-2 rounded-[4px] bg-neutral-900/80 border border-white/10 hover:border-pink-500/50 text-white hover:text-pink-400 transition-all" title="TikTok Oficial @metalcreativo.cl">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64c.298 0 .592.046.87.136V9.41a6.33 6.33 0 00-.87-.06A6.34 6.34 0 003.11 15.7 6.34 6.34 0 009.45 22a6.33 6.33 0 006.34-6.33V9.58a8.16 8.16 0 004.8 1.56V7.7a4.85 4.85 0 01-1-.01z"/></svg>
+                </a>
+
+                <!-- BOTÓN CARRITO -->
+                <button @click="cartOpen = true" class="relative p-2.5 rounded-[4px] bg-neutral-900 border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer spark-trigger" title="Ver Carrito de Compras">
+                    <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
                     <span x-show="totalItems > 0" x-text="totalItems" class="absolute -top-1.5 -right-1.5 bg-[#c83c00] text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center border-2 border-[#07080b]"></span>
                 </button>
 
-                <!-- WHATSAPP -->
-                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quiero%20consultar%20por%20la%20Barra%20de%20Remolque%20de%20$65.000" target="_blank" rel="noopener" class="hidden sm:inline-flex btn-metal-orange !py-2 !px-3 !text-xs">
+                <!-- BOTÓN WHATSAPP OFICIAL -->
+                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quisiera%20hacer%20una%20consulta" target="_blank" rel="noopener" class="btn-metal-orange spark-trigger !py-2 !px-3.5 !text-xs">
                     <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                     </svg>
-                    <span>WhatsApp</span>
+                    <span class="hidden sm:inline">WhatsApp</span>
                 </a>
             </div>
         </div>
@@ -464,7 +512,7 @@
                                     </tr>
                                     <tr class="bg-white/[0.02]">
                                         <th class="py-2.5 px-4 font-semibold text-gray-400">Fijaciones y Acoples</th>
-                                        <td class="py-2.5 px-4 text-white font-medium">2 pasadores pasantes galvanizados con seguro tipo horquilla</td>
+                                        <td class="py-2.5 px-4 text-white font-medium">2 pasadores pasantes de 1/2" con chaveta tipo R + 2 grilletes forjados tipo lira de 5/8" galvanizados</td>
                                     </tr>
                                     <tr>
                                         <th class="py-2.5 px-4 font-semibold text-gray-400">Marco Legal</th>
@@ -481,22 +529,49 @@
 
             
             <!-- SECCIÓN DEMOSTRACIÓN DE ARMADO EN VIDEO (LINK ANCHOR #video-armado) -->
-            <section id="video-armado" class="mt-20 pt-16 border-t border-white/10 scroll-mt-24">
-                <div class="max-w-6xl mx-auto space-y-10">
+            
+            <!-- SECCIÓN DEMOSTRACIÓN DE ARMADO Y PRUEBA REAL EN PENDIENTE -->
+            <section id="videos-demostracion" class="mt-20 pt-16 border-t border-white/10 scroll-mt-24">
+                <div class="max-w-7xl mx-auto space-y-12">
                     <div class="text-center space-y-3">
-                        <span class="badge-metal">Demostración en Video Real</span>
+                        <span class="badge-metal">Evidencia en Video 100% Real</span>
                         <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
-                            ¿Cómo armar tu Barra de Remolque en Terreno?
+                            Comprobada en Terreno: Ensamble en 45s y Resistencia Extrema
                         </h2>
                         <p class="text-gray-400 text-sm max-w-2xl mx-auto leading-relaxed">
-                            Diseño modular de ensamblaje en menos de 45 segundos sin necesidad de herramientas mecánicas. Tres tramos de acero macizo estructural con pasadores de seguridad pasantes y chavetas de bloqueo.
+                            Sin maquetas ni renders 3D. Observa cómo se ensambla sin herramientas y cómo soporta la tracción directa de vehículos pesados en pendientes pronunciadas.
                         </p>
                     </div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                        <!-- VIDEO REPRODUCTOR RESPONSIVE -->
-                        <div class="lg:col-span-5 flex flex-col items-center">
-                            <div class="relative w-full max-w-[340px] rounded-2xl overflow-hidden border border-white/15 bg-black shadow-[0_20px_50px_rgba(0,0,0,0.8)] ring-1 ring-white/10">
+                    <!-- DUAL VIDEO GRID -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start max-w-5xl mx-auto">
+                        
+                        <!-- VIDEO 1: PRUEBA DE TIRO REAL AMAROK -->
+                        <div class="flex flex-col items-center space-y-4">
+                            <div class="relative w-full max-w-[320px] rounded-2xl overflow-hidden border-2 border-orange-500/40 bg-black shadow-[0_20px_50px_rgba(0,0,0,0.8)] ring-1 ring-white/10 group">
+                                <video 
+                                    controls 
+                                    playsinline 
+                                    preload="metadata" 
+                                    poster="/images/thumb_cliente_amarok.jpg"
+                                    class="w-full aspect-[9/16] object-cover bg-black"
+                                >
+                                    <source src="/videos/prueba_arrastre_amarok.mp4" type="video/mp4">
+                                    Tu navegador no soporta reproducción de video HTML5.
+                                </video>
+                                <div class="absolute top-3 left-3 bg-[#c83c00] text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded shadow pointer-events-none">
+                                    Prueba de Fuerza en Pendiente
+                                </div>
+                            </div>
+                            <div class="text-center space-y-1">
+                                <h3 class="text-sm font-bold text-white uppercase tracking-wider">Tracción Real sin Tirones Bruscos</h3>
+                                <p class="text-xs text-gray-400">Camioneta Amarok remolcando en subida sin deformación</p>
+                            </div>
+                        </div>
+
+                        <!-- VIDEO 2: ENSAMBLE EN 45 SEGUNDOS -->
+                        <div class="flex flex-col items-center space-y-4">
+                            <div class="relative w-full max-w-[320px] rounded-2xl overflow-hidden border-2 border-white/20 bg-black shadow-[0_20px_50px_rgba(0,0,0,0.8)] ring-1 ring-white/10 group">
                                 <video 
                                     controls 
                                     playsinline 
@@ -507,71 +582,116 @@
                                     <source src="/videos/video_armado_lanza.mp4" type="video/mp4">
                                     Tu navegador no soporta reproducción de video HTML5.
                                 </video>
+                                <div class="absolute top-3 left-3 bg-neutral-900/90 text-orange-400 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-orange-500/30 pointer-events-none">
+                                    Armado Paso a Paso
+                                </div>
                             </div>
-                            <div class="flex items-center gap-2 mt-3 text-xs text-gray-400 font-medium">
-                                <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                                <span>Demostración de ensamblaje y prueba real de tracción</span>
+                            <div class="text-center space-y-1">
+                                <h3 class="text-sm font-bold text-white uppercase tracking-wider">Montaje Modular en Terreno</h3>
+                                <p class="text-xs text-gray-400">3 tramos compactos con pasadores de seguridad y chavetas R</p>
                             </div>
                         </div>
 
-                        <!-- GUÍA PASO A PASO EN TERRENO -->
-                        <div class="lg:col-span-7 space-y-5">
-                            <div class="metal-card p-5 rounded-xl border border-white/10 space-y-2">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 font-black text-sm flex items-center justify-center shrink-0 border border-orange-500/30">1</span>
-                                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Despliegue de los 3 Tramos</h3>
-                                </div>
-                                <p class="text-xs text-gray-400 leading-relaxed pl-11">
-                                    Retira los 3 tramos (60 cm cada uno) de la maleta o del compartimento de la rueda de repuesto. Colócalos alineados en línea recta entre ambos vehículos.
-                                </p>
-                            </div>
+                    </div>
 
-                            <div class="metal-card p-5 rounded-xl border border-white/10 space-y-2">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 font-black text-sm flex items-center justify-center shrink-0 border border-orange-500/30">2</span>
-                                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Acople Macho-Hembra y Pasadores</h3>
-                                </div>
-                                <p class="text-xs text-gray-400 leading-relaxed pl-11">
-                                    Introduce el tramo central en los tubos extremos con calce de precisión milimétrica. Inserta los 2 pasadores pasantes galvanizados y bloquea con sus chavetas de horquilla de seguridad.
-                                </p>
+                    <!-- PASOS DE ARMADO RÁPIDO -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto pt-6">
+                        <div class="metal-card p-5 rounded-xl border border-white/10 space-y-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 font-black text-sm flex items-center justify-center shrink-0 border border-orange-500/30">1</span>
+                                <h4 class="text-sm font-bold text-white uppercase tracking-wider">Despliegue Rápido</h4>
                             </div>
+                            <p class="text-xs text-gray-400 leading-relaxed pl-11">
+                                Retira los 3 tramos (65 cm c/u) de tu maletero o de la rueda de repuesto y alinéalos en la berma de seguridad.
+                            </p>
+                        </div>
 
-                            <div class="metal-card p-5 rounded-xl border border-white/10 space-y-2">
-                                <div class="flex items-center gap-3">
-                                    <span class="w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 font-black text-sm flex items-center justify-center shrink-0 border border-orange-500/30">3</span>
-                                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Conexión a Argollas y Bandera</h3>
-                                </div>
-                                <p class="text-xs text-gray-400 leading-relaxed pl-11">
-                                    Conecta los ojales forjados a los ganchos o argollas de tiro de ambos autos. Ajusta los pernos o grilletes y fija la bandera reflectante en el centro de la barra según exige la Ley MTT 55/2025.
-                                </p>
+                        <div class="metal-card p-5 rounded-xl border border-white/10 space-y-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 font-black text-sm flex items-center justify-center shrink-0 border border-orange-500/30">2</span>
+                                <h4 class="text-sm font-bold text-white uppercase tracking-wider">Pasadores y Chavetas</h4>
                             </div>
+                            <p class="text-xs text-gray-400 leading-relaxed pl-11">
+                                Inserta las espigas en el tramo central, cruza los pasadores galvanizados y asegura con las chavetas tipo R.
+                            </p>
+                        </div>
 
-                            <!-- RESUMEN TÉCNICO DE SEGURIDAD -->
-                            <div class="p-4 rounded-xl bg-gradient-to-r from-orange-950/30 to-black border border-orange-500/30 flex flex-wrap items-center justify-between gap-4">
-                                <div class="flex items-center gap-6 text-xs text-gray-300">
-                                    <div>
-                                        <span class="block text-white font-extrabold text-sm">⏱️ 45 Segundos</span>
-                                        <span class="text-gray-400 text-[11px]">Armado sin herramientas</span>
-                                    </div>
-                                    <div class="border-l border-white/10 pl-6">
-                                        <span class="block text-white font-extrabold text-sm">🛡️ Acero 3.0 mm</span>
-                                        <span class="text-gray-400 text-[11px]">Resistencia 3.500 kg</span>
-                                    </div>
-                                    <div class="border-l border-white/10 pl-6 hidden sm:block">
-                                        <span class="block text-emerald-400 font-extrabold text-sm">⚖️ MTT 55/2025</span>
-                                        <span class="text-gray-400 text-[11px]">100% Homologada</span>
-                                    </div>
-                                </div>
-                                <button @click="buyNow('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, '/images/lanza_real_armada.jpeg')" class="btn-metal-orange !py-2.5 !px-4 !text-xs shrink-0">
-                                    Comprar por $65.000 &rarr;
-                                </button>
+                        <div class="metal-card p-5 rounded-xl border border-white/10 space-y-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 font-black text-sm flex items-center justify-center shrink-0 border border-orange-500/30">3</span>
+                                <h4 class="text-sm font-bold text-white uppercase tracking-wider">Conexión y Bandera</h4>
+                            </div>
+                            <p class="text-xs text-gray-400 leading-relaxed pl-11">
+                                Acopla los ojales forjados a los ganchos del auto y pon la bandera reflectante obligatoria por la Ley MTT 55/2025.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- BANNER CTA INTERMEDIO -->
+                    <div class="max-w-5xl mx-auto p-5 rounded-xl bg-gradient-to-r from-orange-950/40 via-black to-orange-950/20 border border-orange-500/30 flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                            <span class="text-white font-extrabold text-base block">¿Listo para viajar protegido y sin multas graves?</span>
+                            <span class="text-xs text-gray-300">Precio de taller: $65.000 CLP con despacho a todo Chile vía Starken y Chilexpress.</span>
+                        </div>
+                        <button @click="buyNow('barra_remolque', 'Barra de Remolque Desarmable 1.8m (Ley MTT 55/2025)', 65000, '/images/lanza_real_armada.jpeg')" class="btn-metal-orange spark-trigger !py-3 !px-6">
+                            Comprar Ahora por $65.000 &rarr;
+                        </button>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- SECCIÓN PRUEBAS EN RUTA Y TALLER (FOTOGRAFÍAS REALES) -->
+            <section id="fotos-reales" class="mt-20 pt-16 border-t border-white/10 scroll-mt-24">
+                <div class="max-w-7xl mx-auto space-y-10">
+                    <div class="text-center max-w-2xl mx-auto space-y-2">
+                        <span class="badge-metal">Pruebas en Ruta y Taller</span>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                            Fotografías Reales en Terreno
+                        </h2>
+                        <p class="text-gray-400 text-sm">
+                            Sin maquetas digitales ni ilustraciones artificiales. Fotografías auténticas de nuestros clientes y pruebas de taller.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="rounded-xl overflow-hidden bg-black border border-white/10 space-y-3 p-3 group">
+                            <img src="/images/prueba_remolque_pendiente_amarok.jpeg" alt="Prueba de tracción en pendiente Amarok" class="w-full h-56 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300">
+                            <div class="px-1 text-xs text-center md:text-left">
+                                <strong class="text-white block">Remolque en Subida</strong>
+                                <span class="text-gray-400 text-[11px]">Tracción directa de camioneta en cerro</span>
+                            </div>
+                        </div>
+
+                        <div class="rounded-xl overflow-hidden bg-black border border-white/10 space-y-3 p-3 group">
+                            <img src="/images/lanza_carretera_pro.jpg" alt="Barra armada en carretera" class="w-full h-56 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300">
+                            <div class="px-1 text-xs text-center md:text-left">
+                                <strong class="text-white block">Distancia Reglamentaria 1.8m</strong>
+                                <span class="text-gray-400 text-[11px]">Cero riesgo de impacto por frenado brusco</span>
+                            </div>
+                        </div>
+
+                        <div class="rounded-xl overflow-hidden bg-black border border-white/10 space-y-3 p-3 group">
+                            <img src="/images/lanza_3tramos_real.jpeg" alt="Despiece real de 3 tramos" class="w-full h-56 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300">
+                            <div class="px-1 text-xs text-center md:text-left">
+                                <strong class="text-white block">Despiece Compacto</strong>
+                                <span class="text-gray-400 text-[11px]">3 tramos de 65 cm con pasadores pasantes</span>
+                            </div>
+                        </div>
+
+                        <div class="rounded-xl overflow-hidden bg-black border border-white/10 space-y-3 p-3 group">
+                            <img src="/images/prueba_remolque_pendiente_fiat.jpeg" alt="Remolque de vehículo menor" class="w-full h-56 object-cover rounded-lg group-hover:scale-105 transition-transform duration-300">
+                            <div class="px-1 text-xs text-center md:text-left">
+                                <strong class="text-white block">Vehículo Urbano</strong>
+                                <span class="text-gray-400 text-[11px]">Control total de giro y alineación en curvas</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- SECCIÓN EDUCATIVA Y LEGAL (MARCO LEGAL CHILE Y SEGURIDAD) -->
+<!-- SECCIÓN EDUCATIVA Y LEGAL (MARCO LEGAL CHILE Y SEGURIDAD) -->
             <section class="mt-20 pt-16 border-t border-white/10">
                 <div class="max-w-4xl mx-auto space-y-10">
                     <div class="text-center space-y-3">
@@ -610,7 +730,97 @@
                 </div>
             </section>
 
-            <!-- SECCIÓN PREGUNTAS FRECUENTES FAQ (AEO & SNIPPETS) -->
+            
+            <!-- SECCIÓN: ENVÍOS DIARIOS A TODO CHILE Y RESEÑAS VERIFICADAS -->
+            <section id="envios-resenas" class="mt-20 pt-16 border-t border-white/10 scroll-mt-24">
+                <div class="max-w-7xl mx-auto space-y-12">
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-7 space-y-4">
+                            <span class="badge-metal">Logística y Despacho Express</span>
+                            <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                                Despachos Diarios por Starken y Chilexpress
+                            </h2>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                Embalaje de alta resistencia con protección termocontraíble y esquineros reforzados. Cada paquete viaja asegurado con número de orden y seguimiento en línea directo a tu WhatsApp y correo.
+                            </p>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-xs">
+                                <div class="p-3 rounded-lg bg-white/5 border border-white/10">
+                                    <span class="text-orange-400 font-bold block text-sm">📦 Embalaje</span>
+                                    <span class="text-gray-300 text-[11px]">Protección ultra resistente</span>
+                                </div>
+                                <div class="p-3 rounded-lg bg-white/5 border border-white/10">
+                                    <span class="text-emerald-400 font-bold block text-sm">🚚 24-48h</span>
+                                    <span class="text-gray-300 text-[11px]">Despacho express a courier</span>
+                                </div>
+                                <div class="p-3 rounded-lg bg-white/5 border border-white/10 col-span-2 sm:col-span-1">
+                                    <span class="text-sky-400 font-bold block text-sm">📍 Seguimiento</span>
+                                    <span class="text-gray-300 text-[11px]">Rastreo en tiempo real</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5 flex justify-center">
+                            <div class="rounded-2xl overflow-hidden border border-white/15 bg-black shadow-2xl relative max-w-sm w-full group">
+                                <img src="/images/envio_paquetes_embalados.jpeg" alt="Paquetes de barras listos para despacho" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300">
+                                <div class="absolute bottom-3 left-3 right-3 bg-black/80 backdrop-blur-md p-2.5 rounded-lg border border-white/10 text-xs flex items-center justify-between">
+                                    <span class="text-white font-bold">Lotes listos en taller</span>
+                                    <span class="text-emerald-400 font-semibold">Starken / Chilexpress</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TESTIMONIOS Y CALIFICACIONES REALES -->
+                    <div class="space-y-6 pt-6">
+                        <div class="text-center space-y-1">
+                            <div class="flex items-center justify-center gap-1 text-amber-400 text-lg">
+                                ★★★★★
+                            </div>
+                            <h3 class="text-lg font-bold text-white">4.9 / 5 Calificación de Conductores en Chile</h3>
+                            <p class="text-xs text-gray-400">Opiniones de compradores verificados en taller y Mercado Libre</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="metal-card p-5 rounded-xl border border-white/10 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-white text-xs">Rodrigo F. (Rancagua)</span>
+                                    <span class="text-amber-400 text-xs">★★★★★</span>
+                                </div>
+                                <p class="text-xs text-gray-400 leading-relaxed">
+                                    "Tuve que remolcar la camioneta de un colega en la Ruta 5 Sur. Con la barra rígida se siente firme, cero tirones y no vas con el miedo de chocarlo al frenar. Muy sólida la soldadura."
+                                </p>
+                                <span class="text-[10px] text-emerald-400 font-semibold block">✓ Compra verificada</span>
+                            </div>
+
+                            <div class="metal-card p-5 rounded-xl border border-white/10 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-white text-xs">Mauricio T. (Viña del Mar)</span>
+                                    <span class="text-amber-400 text-xs">★★★★★</span>
+                                </div>
+                                <p class="text-xs text-gray-400 leading-relaxed">
+                                    "La compré para cumplir con la nueva ley del MTT. Cabe perfecto al lado de la rueda de repuesto del auto y se arma en un minuto con los pasadores. Despacho rápido por Starken."
+                                </p>
+                                <span class="text-[10px] text-emerald-400 font-semibold block">✓ Compra verificada</span>
+                            </div>
+
+                            <div class="metal-card p-5 rounded-xl border border-white/10 space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-bold text-white text-xs">Esteban C. (Santiago)</span>
+                                    <span class="text-amber-400 text-xs">★★★★★</span>
+                                </div>
+                                <p class="text-xs text-gray-400 leading-relaxed">
+                                    "Excelente producto chileno. El acero es grueso y los ojales forjados dan muchísima confianza. Por $65.000 te ahorras una multa gravísima y un choque seguro."
+                                </p>
+                                <span class="text-[10px] text-emerald-400 font-semibold block">✓ Compra verificada</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+<!-- SECCIÓN PREGUNTAS FRECUENTES FAQ (AEO & SNIPPETS) -->
             <section class="mt-20 pt-16 border-t border-white/10 max-w-4xl mx-auto">
                 <div class="text-center space-y-3 mb-10">
                     <span class="badge-metal">Respuestas Directas</span>
@@ -666,44 +876,145 @@
     </main>
 
     <!-- FOOTER OFICIAL -->
-    <footer class="bg-[#040507] border-t border-white/10 py-12 mt-20 text-gray-400 text-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="space-y-3">
-                <img src="/images/logo_official.png" alt="Metal Creativo Chile" class="h-10 w-auto object-contain">
-                <p class="text-gray-500">Fabricación metalúrgica de precisión en acero macizo chileno y calefacción ecológica a bioetanol.</p>
-                <p class="text-orange-400 font-bold">metalcreativo03@gmail.com</p>
-            </div>
-            <div>
-                <h4 class="text-white font-bold uppercase tracking-wider mb-3">Productos</h4>
-                <ul class="space-y-2">
-                    <li><a href="/barra-de-remolque" class="text-orange-400">Barra de Remolque 1.8m ($65.000)</a></li>
-                    <li><a href="/fogon-bioetanol" class="hover:text-white transition-colors">Fogón a Bioetanol ($100.000)</a></li>
-                    <li><a href="/checkout" class="hover:text-white transition-colors">Carrito & Pasarela Segura</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-white font-bold uppercase tracking-wider mb-3">Legal & Garantía</h4>
-                <ul class="space-y-2">
-                    <li><a href="/devoluciones-garantia" class="hover:text-white transition-colors">Garantía Legal 6 Meses</a></li>
-                    <li><a href="/terminos-condiciones" class="hover:text-white transition-colors">Términos y Condiciones</a></li>
-                    <li><a href="/privacidad" class="hover:text-white transition-colors">Política de Privacidad</a></li>
-                    <li><a href="/preguntas-frecuentes" class="hover:text-white transition-colors">Preguntas Frecuentes</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-white font-bold uppercase tracking-wider mb-3">Contacto Directo</h4>
-                <p>Santiago, Chile. Despachos diarios a todo el país.</p>
-                <div class="pt-3">
-                    <a href="https://wa.me/56954922608" target="_blank" class="text-emerald-400 font-bold hover:underline">WhatsApp: +56 9 5492 2608</a>
+
+    <!-- FOOTER OFICIAL CON IDENTIDAD DE TALLER, ENLACES Y LOGOS -->
+    <footer class="bg-[#050608] border-t border-white/10 pt-14 pb-8 text-xs text-gray-400 mt-auto relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 items-start">
+                
+                <!-- COLUMNA 1: MARCA, UBICACIÓN Y REDES (TIKTOK, ML, INSTAGRAM, WHATSAPP) -->
+                <div class="space-y-4 flex flex-col items-center md:items-start text-center md:text-left">
+                    <a href="index.html" class="inline-block">
+                        <img src="./images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-11 w-auto object-contain mx-auto md:mx-0">
+                    </a>
+                    <p class="text-gray-400 text-xs leading-relaxed max-w-sm mx-auto md:mx-0">
+                        Taller chileno de diseño y fabricación en acero estructural. Barras de remolque homologadas MTT 55/2025 y fogones a bioetanol.
+                    </p>
+                    <div class="space-y-1.5 text-gray-300 font-medium text-xs flex flex-col items-center md:items-start">
+                        <a href="https://maps.app.goo.gl/sMtqyidVCVv1nLDM9" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center md:justify-start gap-2 text-white font-semibold hover:text-orange-400 transition-colors group" title="Abrir ubicación en Google Maps">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0 group-hover:scale-125 transition-transform"></span>
+                            <span>Pasaje La Vendimia 2222, Villa Alegre</span>
+                            <span class="text-[10px] text-orange-400 font-normal opacity-0 group-hover:opacity-100 transition-opacity">&nearr;</span>
+                        </a>
+                        <p class="text-gray-400 text-[11px] pl-0 md:pl-4">Quillota, Región de Valparaíso</p>
+                        <p class="flex items-center justify-center md:justify-start gap-2 text-orange-400 font-bold pl-0 md:pl-4">metalcreativo03@gmail.com</p>
+                    </div>
+                    <div class="flex items-center justify-center md:justify-start gap-2.5 pt-1">
+                        <!-- CANAL OFICIAL MERCADO LIBRE -->
+                        <a href="https://articulo.mercadolibre.cl/MLC-4414859324?matt_tool=94515950" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-[10px] overflow-hidden transition-transform hover:scale-110 shadow-md hover:shadow-yellow-500/20 flex items-center justify-center bg-[#FFE600] p-1" title="Mercado Libre Oficial - Compra Protegida">
+                            <img src="./images/logo_mercadolibre_handshake_official.png" alt="Mercado Libre Oficial" class="w-full h-full object-contain">
+                        </a>
+                        <!-- CANAL OFICIAL WHATSAPP -->
+                        <a href="https://wa.me/56954922608" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full overflow-hidden transition-transform hover:scale-110 shadow-md hover:shadow-emerald-500/20 flex items-center justify-center bg-[#25D366] p-1.5" title="WhatsApp Oficial">
+                            <img src="./images/icon_whatsapp_native.svg" alt="WhatsApp" class="w-full h-full object-contain">
+                        </a>
+                        <!-- CANAL OFICIAL INSTAGRAM -->
+                        <a href="https://www.instagram.com/metalcreativo.cl" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-[10px] overflow-hidden transition-transform hover:scale-110 shadow-md hover:shadow-pink-500/20 flex items-center justify-center p-1.5" title="Instagram Oficial @metalcreativo.cl">
+                            <img src="./images/icon_instagram_native.svg" alt="Instagram" class="w-full h-full object-contain">
+                        </a>
+                        <!-- CANAL OFICIAL TIKTOK -->
+                        <a href="https://www.tiktok.com/@metalcreativo.cl" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-[10px] overflow-hidden transition-transform hover:scale-110 shadow-md hover:shadow-cyan-500/20 flex items-center justify-center bg-black border border-white/10 p-1.5" title="TikTok Oficial @metalcreativo.cl">
+                            <img src="./images/icon_tiktok_native.svg" alt="TikTok" class="w-full h-full object-contain">
+                        </a>
+                    </div>
                 </div>
+
+                <!-- COLUMNA 2: CATÁLOGO OFICIAL -->
+                <div class="space-y-3 flex flex-col items-center md:items-start text-center md:text-left">
+                    <h3 class="text-white font-extrabold text-sm uppercase tracking-wider">
+                        Catálogo Oficial
+                    </h3>
+                    <ul class="space-y-2 text-xs flex flex-col items-center md:items-start">
+                        <li><a href="barra-de-remolque.html" class="hover:text-orange-400 transition-colors">Barra Remolque 1.8m ($65.000)</a></li>
+                        <li><a href="fogon-bioetanol.html" class="hover:text-orange-400 transition-colors">Fogón a Bioetanol ($100.000)</a></li>
+                        <li><a href="https://wa.me/56954922608?text=Hola%20Nacho,%20quisiera%20cotizar%20fabricaci%C3%B3n%20a%20medida" target="_blank" rel="noopener" class="hover:text-orange-400 transition-colors">Fabricación Especial en Acero</a></li>
+                    </ul>
+                </div>
+
+                <!-- COLUMNA 3: GARANTÍAS & LEGALIDAD -->
+                <div class="space-y-3 flex flex-col items-center md:items-start text-center md:text-left">
+                    <h3 class="text-white font-extrabold text-sm uppercase tracking-wider">
+                        Garantías & Legalidad
+                    </h3>
+                    <ul class="space-y-2 text-xs flex flex-col items-center md:items-start">
+                        <li><a href="index.html#comparativa-legal" class="hover:text-orange-400 transition-colors">Decreto Supremo MTT 55/2025</a></li>
+                        <li><a href="devoluciones-garantia.html" class="hover:text-orange-400 transition-colors">Garantía Legal 6 Meses</a></li>
+                        <li><a href="terminos-condiciones.html" class="hover:text-orange-400 transition-colors">Términos y Condiciones</a></li>
+                        <li><a href="preguntas-frecuentes.html" class="hover:text-orange-400 transition-colors">Preguntas Frecuentes (FAQ)</a></li>
+                        <li><a href="https://wa.me/56954922608?text=Hola%20Nacho,%20quisiera%20cotizar%20compras%20al%20por%20mayor" target="_blank" rel="noopener" class="hover:text-orange-400 transition-colors">Venta Mayorista & Facturación</a></li>
+                    </ul>
+                </div>
+
+                <!-- COLUMNA 4: MAPA TALLER MATRIZ PRO (ESTILO SANTA MÓNICA CUADRADO) -->
+                <div class="space-y-3 flex flex-col items-center md:items-start text-center md:text-left">
+                    <div class="space-y-1">
+                        <h3 class="text-white font-extrabold text-sm uppercase tracking-wider">
+                            Taller Matriz
+                        </h3>
+                        <p class="text-[11px] text-gray-400">
+                            Pje. La Vendimia 2222, Quillota
+                        </p>
+                    </div>
+
+                    <!-- CUADRADO PRO ESTILO SANTA MÓNICA -->
+                    <div class="group relative block w-[170px] h-[170px] rounded-2xl overflow-hidden border border-white/10 bg-neutral-900 shadow-xl mx-auto md:mx-0" style="position: relative; width: 170px; height: 170px; border-radius: 1rem; overflow: hidden; display: block; border: 1px solid rgba(255,255,255,0.1); background-color: #171717;">
+                        <!-- LINK OVERLAY INTERACTIVO -->
+                        <a href="https://maps.app.goo.gl/sMtqyidVCVv1nLDM9" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/50 group-hover:bg-black/20 transition-all duration-500 cursor-pointer"
+                           style="position: absolute; inset: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 20; background: rgba(0,0,0,0.45); text-decoration: none;"
+                           title="Abrir ubicación exacta en Google Maps">
+                            <svg class="w-7 h-7 text-white group-hover:text-orange-500 group-hover:scale-110 transition-all duration-300" width="28" height="28" style="width: 28px !important; height: 28px !important; max-width: 28px !important; max-height: 28px !important; min-width: 28px !important; min-height: 28px !important; flex-shrink: 0; color: #ffffff; display: block; margin: 0 auto;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                                <circle cx="12" cy="9" r="2.5"/>
+                            </svg>
+                            <span class="mt-2 text-[10px] text-white font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/70 px-2 py-0.5 rounded border border-white/10" style="margin-top: 0.5rem; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #ffffff; background: rgba(0,0,0,0.7); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.15);">
+                                Ver Mapa &nearr;
+                            </span>
+                        </a>
+
+                        <!-- IFRAME GOOGLE MAPS PRO (GRAYSCALE A COLOR ON HOVER) -->
+                        <div class="absolute inset-0 z-10 pointer-events-none" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none;">
+                            <iframe 
+                                title="Ubicación Taller Metal Creativo Quillota"
+                                src="https://maps.google.com/maps?q=-32.8960437,-71.2683946&hl=es&z=17&output=embed" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0; width: 100%; height: 100%; pointer-events: none;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade" 
+                                class="w-full h-full grayscale contrast-125 opacity-35 group-hover:opacity-90 group-hover:grayscale-0 transition-all duration-700 pointer-events-none">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 pt-6 border-t border-white/5 text-center text-gray-500 text-[11px]">
-            &copy; 2026 Metal Creativo Chile. Todos los derechos reservados.
+
+            <!-- LÍNEA DIVISORIA LIMPIA Y ZONA DE CIERRE INFERIOR -->
+            <div class="border-t border-white/10 pt-8 flex flex-col items-center justify-center gap-5">
+                
+                <!-- LOGOS OFICIALES TRANSPARENTES Y ALINEADOS -->
+                <div class="flex flex-wrap items-center justify-center gap-7 sm:gap-10 opacity-85 hover:opacity-100 transition-opacity">
+                    <img src="./images/logo_webpay.svg" alt="Webpay Plus" class="h-6 w-auto object-contain" title="Webpay Plus Transbank">
+                    <img src="./images/logo_mercadopago.svg" alt="Mercado Pago" class="h-6 w-auto object-contain" title="Mercado Pago Oficial">
+                    <img src="./images/logo_starken.png" alt="Starken" class="h-6 w-auto object-contain" title="Envíos Starken">
+                    <img src="./images/logo_chilexpress.png" alt="Chilexpress" class="h-5 w-auto object-contain" title="Envíos Chilexpress">
+                </div>
+
+                <!-- COPYRIGHT CENTRADO JUSTO ABAJO -->
+                <p class="text-gray-500 text-xs text-center">
+                    &copy; 2026 Metal Creativo Chile. Fabricación Chilena en Acero. Todos los derechos reservados.
+                </p>
+
+            </div>
+
         </div>
     </footer>
-
-    <!-- DRAWER DE CARRITO GLOBAL -->
+<!-- DRAWER DE CARRITO GLOBAL -->
     <div x-show="cartOpen" x-cloak class="fixed inset-0 z-50 overflow-hidden">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" @click="cartOpen = false"></div>
         <div class="fixed inset-y-0 right-0 max-w-md w-full bg-[#0a0c10] border-l border-white/10 z-50 p-6 flex flex-col justify-between">
@@ -807,6 +1118,151 @@
                 }
             };
         }
+
+
+        // 1. CHISPAS Y FUEGO ASCENDENTE CONTINUO
+        (function initEmbers() {
+            const canvas = document.getElementById('emberCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let embers = [];
+            const isMobile = window.innerWidth < 768;
+            const maxEmbers = isMobile ? 35 : 65;
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            function createEmber(initial = false) {
+                return {
+                    x: Math.random() * canvas.width,
+                    y: initial ? Math.random() * canvas.height : canvas.height + 15,
+                    size: Math.random() * 2.2 + 0.8,
+                    vy: -(Math.random() * 1.2 + 0.5),
+                    vx: (Math.random() - 0.5) * 0.6,
+                    alpha: Math.random() * 0.7 + 0.3,
+                    decay: Math.random() * 0.003 + 0.0015,
+                    oscSpeed: Math.random() * 0.02 + 0.01,
+                    oscOffset: Math.random() * Math.PI * 2,
+                    color: Math.random() > 0.35 ? '#c83c00' : (Math.random() > 0.5 ? '#ff7711' : '#ffb344')
+                };
+            }
+
+            for (let i = 0; i < maxEmbers; i++) {
+                embers.push(createEmber(true));
+            }
+
+            let frame = 0;
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                frame++;
+
+                for (let i = embers.length - 1; i >= 0; i--) {
+                    const e = embers[i];
+                    e.y += e.vy;
+                    e.x += e.vx + Math.sin(frame * e.oscSpeed + e.oscOffset) * 0.35;
+                    e.alpha -= e.decay;
+
+                    if (e.alpha <= 0 || e.y < -15) {
+                        embers[i] = createEmber(false);
+                        continue;
+                    }
+
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(0, e.alpha);
+                    ctx.fillStyle = e.color;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = e.color;
+                    ctx.beginPath();
+                    ctx.arc(e.x, e.y, e.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+        // 2. CHISPAS REACTIVAS AL MOUSE Y CLIC
+        (function initMouseSparks() {
+            const canvas = document.getElementById('sparkCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let sparks = [];
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            function emitSparks(x, y, count = 10, speedMult = 1, isClick = false) {
+                for (let i = 0; i < count; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = (Math.random() * 4 + 1.5) * speedMult;
+                    sparks.push({
+                        x: x,
+                        y: y,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed - (isClick ? 1.8 : 0.5),
+                        size: Math.random() * 2.2 + 1,
+                        alpha: 1,
+                        decay: Math.random() * 0.04 + 0.02,
+                        color: Math.random() > 0.4 ? '#ff6a00' : (Math.random() > 0.5 ? '#ffb344' : '#ffffff')
+                    });
+                }
+            }
+
+            window.addEventListener('mousemove', (e) => {
+                if (Math.random() > 0.7) {
+                    emitSparks(e.clientX, e.clientY, 2, 0.6);
+                }
+            });
+
+            window.addEventListener('click', (e) => {
+                emitSparks(e.clientX, e.clientY, 16, 1.4, true);
+            });
+
+            document.querySelectorAll('.spark-trigger').forEach(el => {
+                el.addEventListener('mouseenter', (e) => {
+                    const rect = el.getBoundingClientRect();
+                    emitSparks(rect.left + rect.width / 2, rect.top + rect.height / 2, 8, 1);
+                });
+            });
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = sparks.length - 1; i >= 0; i--) {
+                    const s = sparks[i];
+                    s.x += s.vx;
+                    s.y += s.vy;
+                    s.vy += 0.08; // Gravedad suave
+                    s.alpha -= s.decay;
+
+                    if (s.alpha <= 0) {
+                        sparks.splice(i, 1);
+                        continue;
+                    }
+
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(0, s.alpha);
+                    ctx.fillStyle = s.color;
+                    ctx.shadowBlur = 6;
+                    ctx.shadowColor = s.color;
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
     </script>
 </body>
 </html>

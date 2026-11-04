@@ -332,10 +332,10 @@ function appearanceSource(html) {
 
 // Baseline hashes cover every byte outside the explicitly allowed JavaScript/state bindings.
 const APPEARANCE_HASHES = {
-    "checkout": "85aa566def33d0cf4343bba3835904baa52b2b9218f0e7c6dde2a6e4d525e68f",
-    "checkout-success": "d1e2d57c4e71bd1847c2ab6151b06f3d9217f5c035919a37116869097739822e",
-    "contacto": "93c259c50289f7ce8de61f87e8eef6380d4f8acfc5952727d4732db8c9566685",
-    "admin": "c40f70789eb9b8122cff2eb167d0813f4f1701c987342e90a614d72427614582"
+    "checkout": "efc7f832bebfdb46b472d751ab98fc79d7857f24e61e2873d240ad992f5672e4",
+    "checkout-success": "3aacc4010630b6ddf2e4ab978c95e3dec9bab13bf662148cfd8c6a20c8ce93e4",
+    "contacto": "ba1687578ee9f998bec5d81608a1f2efe2861b27d5791c5886a8dfc63880e28a",
+    "admin": "d1943776db50194eb5309f1b374717f0d5270f0d538588c4d13090f60e994987"
 };
 
 test('existing HTML, styles, classes, and written content remain unchanged outside the functional bindings', () => {

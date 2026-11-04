@@ -623,7 +623,7 @@ export const Reel01Cinematico: React.FC = () => {
 				<Audio src={staticFile('audio/reel_legal/scene6_cierre.mp3')} volume={1.0} />
 				<AbsoluteFill style={{ backgroundColor: '#000000', overflow: 'hidden' }}>
 					<Img
-						src={staticFile('images/folleto_cierre_oficial.png')}
+						src={staticFile('images/metal-creativo-remolque-sin-bolsa.png')}
 						style={{
 							width: '100%',
 							height: '100%',

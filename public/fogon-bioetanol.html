@@ -15,13 +15,13 @@
     <meta name="theme-color" content="#ea580c">
 
     <title>Fogón Abierto a Bioetanol Ecológico sin Humo | Metal Creativo Chile</title>
-    <meta name="description" content="Fogón de mesa y terraza a bioetanol. Fuego 100% real sin humo, cenizas ni olores. Base de acero macizo con madera noble y quemador de acero inoxidable AISI 304. Despacho a todo Chile.">
+    <meta name="description" content="Fogón de mesa y terraza a bioetanol. Fuego 100% real sin humo, cenizas ni olores. Base de acero macizo con madera noble y quemador de acero estructural. Despacho a todo Chile.">
     <link rel="canonical" href="https://metalcreativo.cl/fogon-bioetanol">
     <meta name="google-site-verification" content="w_CZ6GzcWvHTe6x6hfDufOOZVPLfWoE0tl2seEseAxM">
     
     <!-- Open Graph / Meta Ads / Redes Sociales -->
     <meta property="og:title" content="Fogón Abierto a Bioetanol Ecológico | Metal Creativo Chile">
-    <meta property="og:description" content="Fuego real y calefacción limpia para departamentos y terrazas. Cero humo, cenizas ni ductos. Acero macizo y madera noble con quemador AISI 304. $100.000 CLP.">
+    <meta property="og:description" content="Fuego real y calefacción limpia para departamentos y terrazas. Cero humo, cenizas ni ductos. Acero macizo y madera noble con quemador en acero estructural. Desde $140.000 CLP.">
     <meta property="og:image" content="https://metalcreativo.cl/images/fogon_bioetanol_madera.jpg">
     <meta property="og:url" content="https://metalcreativo.cl/fogon-bioetanol">
     <meta property="og:type" content="product">
@@ -56,7 +56,7 @@
           "image": [
             "https://metalcreativo.cl/images/fogon_bioetanol_madera.jpg"
           ],
-          "description": "Fogón ecológico de sobremesa y terraza con combustión limpia a bioetanol. Genera fuego 100% real sin humo, sin olores tóxicos, sin cenizas y sin necesidad de chimenea o ductos. Estructura maciza en acero de alta resistencia combinada con bandeja de madera noble tratada e incrustaciones de piedra de cuarzo. Cuenta con quemador de acero inoxidable AISI 304 anti-derrame y fibra cerámica térmica de alta retención.",
+          "description": "Fogón ecológico de sobremesa y terraza con combustión limpia a bioetanol. Genera fuego 100% real sin humo, sin olores tóxicos, sin cenizas y sin necesidad de chimenea o ductos. Estructura maciza en acero de alta resistencia combinada con bandeja de madera noble tratada e incrustaciones de piedra de cuarzo. Cuenta con quemador de acero estructural anti-derrame y fibra cerámica térmica de alta retención.",
           "sku": "MC-FOG-01",
           "mpn": "FOGON-BIO-304",
           "brand": {
@@ -72,7 +72,7 @@
             "@type": "Offer",
             "url": "https://metalcreativo.cl/fogon-bioetanol",
             "priceCurrency": "CLP",
-            "price": "100000",
+            "price": "140000", "highPrice": "160000",
             "priceValidUntil": "2027-12-31",
             "itemCondition": "https://schema.org/NewCondition",
             "availability": "https://schema.org/InStock",
@@ -169,7 +169,7 @@
               "name": "¿De qué material está fabricado el quemador y la estructura?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "El quemador está fabricado en Acero Inoxidable Quirúrgico AISI 304 con cámara de fibra cerámica interna. La base estructural es de acero al carbono chileno con pintura ignífuga termoesmaltada, enmarcada con madera noble tratada e incrustaciones decorativas de cuarzo."
+                "text": "El quemador está fabricado en acero estructural estructural acero estructural con cámara de fibra cerámica interna. La base estructural es de acero al carbono chileno con pintura ignífuga acabado para alta temperatura, enmarcada con madera noble tratada e incrustaciones decorativas de cuarzo."
               }
             },
             {
@@ -177,7 +177,7 @@
               "name": "¿Qué incluye el fogón al momento de comprarlo?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Incluye el fogón completo armado: base en acero y madera noble, quemador de acero inoxidable AISI 304 con fibra cerámica, piedras decorativas de cuarzo seleccionadas, herramienta de apagado de seguridad en acero y guía ilustrada de uso."
+                "text": "Incluye el fogón completo armado: base en acero y madera noble, quemador de acero estructural con fibra cerámica, piedras decorativas de cuarzo seleccionadas, herramienta de apagado de seguridad en acero y guía ilustrada de uso."
               }
             }
           ]
@@ -296,34 +296,49 @@
 <body x-data="cartStore()" class="min-h-screen flex flex-col justify-between selection:bg-orange-500 selection:text-white">
 
     <!-- NAVBAR OFICIAL -->
-    <header class="sticky top-0 z-40 bg-[#07080b]/90 backdrop-blur-md border-b border-white/10 py-3">
+    <!-- NAVBAR OFICIAL UNIFICADO -->
+    <header class="sticky top-0 z-40 bg-[#07080b]/95 backdrop-blur-md border-b border-white/10 py-3 shadow-xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-3">
-                <img src="/images/logo_official.png" alt="Metal Creativo Chile Logo" class="h-10 sm:h-12 w-auto object-contain">
+            <a href="/" class="flex items-center gap-3 spark-trigger" title="Metal Creativo Chile - Inicio">
+                <img src="/images/logo_official.png" alt="Metal Creativo Chile" class="h-10 sm:h-12 w-auto object-contain">
             </a>
 
-            <nav class="hidden md:flex items-center gap-7 text-xs uppercase tracking-wider font-bold text-gray-300">
-                <a href="/" class="hover:text-orange-400 transition-colors">Inicio</a>
-                <a href="/barra-de-remolque" class="hover:text-orange-400 transition-colors">Barra Remolque</a>
-                <a href="/fogon-bioetanol" class="text-orange-400 border-b border-orange-400 pb-0.5">Fogón Bioetanol</a>
-                <a href="/contacto" class="hover:text-orange-400 transition-colors">Contacto</a>
+            <!-- NAVEGACIÓN GLOBAL COHERENTE -->
+            <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-xs uppercase tracking-wider font-bold text-gray-300">
+                <a href="/" class="hover:text-orange-400 transition-colors spark-trigger">Inicio</a>
+                <a href="/barra-de-remolque" class="hover:text-orange-400 transition-colors spark-trigger">Barra Remolque</a>
+                <a href="/fogon-bioetanol" class="hover:text-orange-400 transition-colors spark-trigger">Fogón Bioetanol</a>
+                <a href="/barra-de-remolque#envios-resenas" class="hover:text-orange-400 transition-colors spark-trigger">Envíos & Reseñas</a>
+                <a href="/barra-de-remolque#comparativa-legal" class="hover:text-orange-400 transition-colors spark-trigger">Ley MTT</a>
+                <a href="/contacto" class="hover:text-orange-400 transition-colors spark-trigger">Contacto</a>
             </nav>
 
-            <div class="flex items-center gap-3">
-                <!-- CARRITO -->
-                <button @click="cartOpen = true" class="relative p-2.5 rounded-[4px] bg-neutral-900 border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer" title="Ver Carrito">
-                    <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- LINK MERCADO LIBRE -->
+                <a href="https://articulo.mercadolibre.cl/MLC-4414859324?matt_tool=94515950" target="_blank" rel="noopener noreferrer" class="hidden lg:inline-flex items-center gap-2 px-3 py-1.5 rounded-[4px] bg-[#ffe600] text-neutral-950 font-extrabold text-xs hover:bg-yellow-300 transition-all shadow" title="Comprar en Mercado Libre">
+                    <img src="/images/logo_mercadolibre_handshake_official.png" alt="Mercado Libre" class="w-5 h-3.5 object-contain">
+                    <span>Mercado Libre</span>
+                </a>
+
+                <!-- LINK TIKTOK -->
+                <a href="https://www.tiktok.com/@metalcreativo.cl" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex p-2 rounded-[4px] bg-neutral-900/80 border border-white/10 hover:border-pink-500/50 text-white hover:text-pink-400 transition-all" title="TikTok Oficial @metalcreativo.cl">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64c.298 0 .592.046.87.136V9.41a6.33 6.33 0 00-.87-.06A6.34 6.34 0 003.11 15.7 6.34 6.34 0 009.45 22a6.33 6.33 0 006.34-6.33V9.58a8.16 8.16 0 004.8 1.56V7.7a4.85 4.85 0 01-1-.01z"/></svg>
+                </a>
+
+                <!-- BOTÓN CARRITO -->
+                <button @click="cartOpen = true" class="relative p-2.5 rounded-[4px] bg-neutral-900 border border-white/10 hover:border-orange-500/50 text-white transition-all cursor-pointer spark-trigger" title="Ver Carrito de Compras">
+                    <svg class="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
                     <span x-show="totalItems > 0" x-text="totalItems" class="absolute -top-1.5 -right-1.5 bg-[#c83c00] text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center border-2 border-[#07080b]"></span>
                 </button>
 
-                <!-- WHATSAPP -->
-                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quiero%20consultar%20por%20el%20Fog%C3%B3n%20a%20Bioetanol%20de%20$100.000" target="_blank" rel="noopener" class="hidden sm:inline-flex btn-metal-orange !py-2 !px-3 !text-xs">
+                <!-- BOTÓN WHATSAPP OFICIAL -->
+                <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quisiera%20hacer%20una%20consulta" target="_blank" rel="noopener" class="btn-metal-orange spark-trigger !py-2 !px-3.5 !text-xs">
                     <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                     </svg>
-                    <span>WhatsApp</span>
+                    <span class="hidden sm:inline">WhatsApp</span>
                 </a>
             </div>
         </div>
@@ -341,100 +356,90 @@
     </nav>
 
     <!-- MAIN PRODUCT SECTION -->
-    <main class="py-10 lg:py-16">
+    
+    <!-- MAIN PRODUCT SECTION (DOS MODELOS: MADERA $160.000 / ACERO $140.000) -->
+    <main class="py-10 lg:py-16" x-data="{
+        selectedModel: 'madera',
+        activeImg: '/images/fogon_bioetanol_madera.jpg',
+        get currentPrice() {
+            return this.selectedModel === 'madera' ? 160000 : 140000;
+        },
+        get currentName() {
+            return this.selectedModel === 'madera' ? 'Fogón Bioetanol Madera Noble & Acero' : 'Fogón Bioetanol Estructural Acero 50cm';
+        },
+        get currentImg() {
+            return this.selectedModel === 'madera' ? this.activeImg : '/images/fogon_real_50.jpg';
+        },
+        get currentSku() {
+            return this.selectedModel === 'madera' ? 'MC-FOG-MAD' : 'MC-FOG-ACE50';
+        },
+        selectModel(m) {
+            this.selectedModel = m;
+            if (m === 'madera') {
+                this.activeImg = '/images/fogon_bioetanol_madera.jpg';
+            } else {
+                this.activeImg = '/images/fogon_real_50.jpg';
+            }
+        }
+    }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
 
-                <!-- GALERÍA DE IMÁGENES INTERACTIVA -->
-                <div class="lg:col-span-6 space-y-4" x-data="{
-                    activeIdx: 0,
-                    images: [
-                        {
-                            src: '/images/fogon_bioetanol_madera.jpg',
-                            alt: 'Fogón Abierto a Bioetanol en Madera Noble y Acero Estructural',
-                            caption: 'Base en Madera Noble y Acero Estructural'
-                        },
-                        {
-                            src: '/images/fogon_terraza_noche.jpeg',
-                            alt: 'Fogón a Bioetanol encendido de noche en terraza',
-                            caption: 'Ambiente Cálido en Terraza Nocturna'
-                        },
-                        {
-                            src: '/images/fogon_bioetanol_studio.jpg',
-                            alt: 'Quemador de Acero Inoxidable Quirúrgico AISI 304 con Cuarzo',
-                            caption: 'Quemador Acero Inox AISI 304 y Cuarzo'
-                        },
-                        {
-                            src: '/images/fogon_real_50.jpg',
-                            alt: 'Terminación y Forja en Acero 50 cm de Longitud',
-                            caption: 'Formato Estructural 50 cm — Fabricación Nacional'
-                        }
-                    ]
-                }">
-                    <!-- VISOR PRINCIPAL CON TRANSICIONES SUAVES -->
+                <!-- GALERÍA DE IMÁGENES INTERACTIVA (SIN IMAGEN 3, CON IMAGEN 1, 2 Y 4) -->
+                <div class="lg:col-span-6 space-y-4">
+                    <!-- VISOR PRINCIPAL -->
                     <div class="rounded-xl overflow-hidden bg-black/60 border border-white/10 shadow-2xl relative aspect-[4/3] flex items-center justify-center group select-none">
-                        <template x-for="(img, idx) in images" :key="idx">
-                            <img 
-                                :src="img.src" 
-                                :alt="img.alt" 
-                                x-show="activeIdx === idx"
-                                x-transition:enter="transition ease-out duration-300"
-                                x-transition:enter-start="opacity-0 scale-95"
-                                x-transition:enter-end="opacity-100 scale-100"
-                                class="absolute inset-0 w-full h-full object-cover"
-                            >
-                        </template>
-                        
-                        <span class="absolute top-3 left-3 badge-metal z-10 pointer-events-none">Diseño y Forja de Autor</span>
-                        
-                        <!-- PIE DE FOTO DINÁMICO & CONTADOR -->
-                        <div class="absolute bottom-3 left-3 right-3 z-10 flex items-center justify-between pointer-events-none">
-                            <span class="bg-black/80 backdrop-blur-md text-gray-200 text-xs px-3 py-1 rounded-full border border-white/15" x-text="images[activeIdx].caption"></span>
-                            <span class="bg-black/80 backdrop-blur-md text-orange-400 font-mono text-xs px-2.5 py-1 rounded-full border border-white/15" x-text="`${activeIdx + 1} / ${images.length}`"></span>
+                        <img 
+                            :src="currentImg" 
+                            :alt="currentName" 
+                            class="w-full h-full object-cover transition-all duration-300"
+                        >
+                        <div class="absolute top-3 left-3 bg-[#c83c00] text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded shadow">
+                            <span x-text="selectedModel === 'madera' ? 'Modelo Madera Noble & Acero' : 'Modelo 100% Acero (50 cm)'"></span>
                         </div>
+                    </div>
 
-                        <!-- CONTROLES PREV / NEXT -->
+                    <!-- MINIATURAS INTERACTIVAS -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <!-- Miniatura 1: Madera Frontal -->
                         <button 
-                            type="button" 
-                            @click="activeIdx = (activeIdx === 0 ? images.length - 1 : activeIdx - 1)" 
-                            class="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 transition-all opacity-80 sm:opacity-0 sm:group-hover:opacity-100 z-10 cursor-pointer"
-                            aria-label="Foto anterior"
+                            @click="selectModel('madera'); activeImg = '/images/fogon_bioetanol_madera.jpg'" 
+                            class="rounded-lg overflow-hidden border focus:outline-none transition-all aspect-video bg-black/40 relative cursor-pointer"
+                            :class="selectedModel === 'madera' && activeImg === '/images/fogon_bioetanol_madera.jpg' ? 'border-orange-500 ring-2 ring-orange-500/30' : 'border-white/10 hover:border-orange-500/50'"
                         >
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                            <img src="/images/fogon_bioetanol_madera.jpg" alt="Madera Noble" class="w-full h-full object-cover">
+                            <span class="absolute bottom-1 left-1 bg-black/80 text-[9px] text-white px-1.5 py-0.5 rounded font-bold">Madera</span>
                         </button>
+
+                        <!-- Miniatura 2: Noche Terraza -->
                         <button 
-                            type="button" 
-                            @click="activeIdx = (activeIdx === images.length - 1 ? 0 : activeIdx + 1)" 
-                            class="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 transition-all opacity-80 sm:opacity-0 sm:group-hover:opacity-100 z-10 cursor-pointer"
-                            aria-label="Siguiente foto"
+                            @click="selectModel('madera'); activeImg = '/images/fogon_terraza_noche.jpeg'" 
+                            class="rounded-lg overflow-hidden border focus:outline-none transition-all aspect-video bg-black/40 relative cursor-pointer"
+                            :class="selectedModel === 'madera' && activeImg === '/images/fogon_terraza_noche.jpeg' ? 'border-orange-500 ring-2 ring-orange-500/30' : 'border-white/10 hover:border-orange-500/50'"
                         >
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                            <img src="/images/fogon_terraza_noche.jpeg" alt="Terraza Nocturna" class="w-full h-full object-cover">
+                            <span class="absolute bottom-1 left-1 bg-black/80 text-[9px] text-white px-1.5 py-0.5 rounded font-bold">Terraza</span>
+                        </button>
+
+                        <!-- Miniatura 3: Acero 50cm (Ex-cuarta imagen) -->
+                        <button 
+                            @click="selectModel('acero'); activeImg = '/images/fogon_real_50.jpg'" 
+                            class="rounded-lg overflow-hidden border focus:outline-none transition-all aspect-video bg-black/40 relative cursor-pointer"
+                            :class="selectedModel === 'acero' ? 'border-orange-500 ring-2 ring-orange-500/30' : 'border-white/10 hover:border-orange-500/50'"
+                        >
+                            <img src="/images/fogon_real_50.jpg" alt="Acero 50cm" class="w-full h-full object-cover">
+                            <span class="absolute bottom-1 left-1 bg-black/80 text-[9px] text-white px-1.5 py-0.5 rounded font-bold">Acero 50cm</span>
                         </button>
                     </div>
 
-                    <!-- MINIATURAS INTERACTIVAS (THUMBNAILS) -->
-                    <div class="grid grid-cols-4 gap-2.5 sm:gap-3">
-                        <template x-for="(img, idx) in images" :key="idx">
-                            <button 
-                                type="button" 
-                                @click="activeIdx = idx" 
-                                class="relative aspect-[4/3] rounded-lg overflow-hidden border transition-all cursor-pointer group"
-                                :class="activeIdx === idx ? 'border-orange-500 ring-2 ring-orange-500/50 scale-[1.02]' : 'border-white/10 hover:border-white/30 opacity-70 hover:opacity-100'"
-                                :aria-label="`Ver ${img.caption}`"
-                            >
-                                <img :src="img.src" :alt="img.alt" class="w-full h-full object-cover">
-                                <div x-show="activeIdx === idx" class="absolute inset-0 bg-orange-500/10 pointer-events-none"></div>
-                            </button>
-                        </template>
-                    </div>
-
-                    <div class="p-4 rounded-lg bg-orange-950/20 border border-orange-500/20 space-y-1">
-                        <div class="flex items-center gap-2 text-xs font-bold text-orange-400 uppercase tracking-wider">
-                            <span>🔥 Combustión Limpia Certificada</span>
+                    <div class="p-4 rounded-lg bg-orange-950/20 border border-orange-500/20 flex items-center justify-between gap-4">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">🔥</span>
+                            <div>
+                                <h4 class="text-xs font-bold text-white uppercase tracking-wider">Combustión Limpia & Sin Olores</h4>
+                                <p class="text-[11px] text-gray-400">Bioetanol vegetal. No emite humo ni hollín en living o terrazas.</p>
+                            </div>
                         </div>
-                        <p class="text-[11px] text-gray-400 leading-relaxed">
-                            Cero hollín, cero olores desagradables y cero emisiones nocivas. Apto tanto para departamentos en living como para terrazas al aire libre.
-                        </p>
                     </div>
                 </div>
 
@@ -444,21 +449,66 @@
                         <div class="flex flex-wrap items-center gap-2">
                             <span class="badge-metal">Fuego 100% Ecológico</span>
                             <span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">En Existencia (Fabricación Nacional)</span>
-                            <span class="text-gray-400 text-xs">SKU: MC-FOG-01</span>
+                            <span class="text-gray-400 text-xs" x-text="'SKU: ' + currentSku"></span>
                         </div>
                         <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
-                            Fogón Abierto a Bioetanol
+                            Fogón Ecológico a Bioetanol
                         </h1>
                         <p class="text-gray-400 text-sm leading-relaxed">
-                            Elegancia arquitectónica y calor envolvente. Combina base en acero estructural chileno de alta resistencia con bandeja de madera noble sellada, piedras decorativas de cuarzo y quemador quirúrgico en <strong class="text-white">Acero Inoxidable AISI 304</strong>.
+                            Calor real, diseño de taller y máxima calidez. Fabricado en acero estructural chileno de alta resistencia con quemador de combustión limpia y piedras decorativas de cuarzo natural.
                         </p>
+                    </div>
+
+                    <!-- SELECTOR DE MODELOS CLARO PARA EL CLIENTE -->
+                    <div class="space-y-2.5">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-orange-400">
+                            1. Selecciona tu Modelo de Fogón:
+                        </label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            
+                            <!-- MODELO 1: MADERA NOBLE ($160.000) -->
+                            <div 
+                                @click="selectModel('madera')" 
+                                class="p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between space-y-2"
+                                :class="selectedModel === 'madera' ? 'border-orange-500 bg-orange-500/10 ring-1 ring-orange-500/50' : 'border-white/10 bg-neutral-900/60 hover:border-white/20'"
+                            >
+                                <div class="flex items-center justify-between">
+                                    <strong class="text-white text-xs font-bold">Madera Noble & Acero</strong>
+                                    <span class="text-xs font-mono font-bold text-orange-400">$160.000</span>
+                                </div>
+                                <p class="text-[11px] text-gray-400 leading-tight">Bandeja de madera noble tratada combinada con acero estructural.</p>
+                                <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-semibold pt-1">
+                                    <span>✓ Piedras de Cuarzo</span>
+                                </div>
+                            </div>
+
+                            <!-- MODELO 2: 100% ACERO 50CM ($140.000) -->
+                            <div 
+                                @click="selectModel('acero')" 
+                                class="p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between space-y-2"
+                                :class="selectedModel === 'acero' ? 'border-orange-500 bg-orange-500/10 ring-1 ring-orange-500/50' : 'border-white/10 bg-neutral-900/60 hover:border-white/20'"
+                            >
+                                <div class="flex items-center justify-between">
+                                    <strong class="text-white text-xs font-bold">100% Acero Estructural</strong>
+                                    <span class="text-xs font-mono font-bold text-orange-400">$140.000</span>
+                                </div>
+                                <p class="text-[11px] text-gray-400 leading-tight">Perfil de 50 cm en acero chileno soldado, acabado alta temperatura.</p>
+                                <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 font-semibold pt-1">
+                                    <span>✓ Piedras de Cuarzo</span>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
 
                     <!-- PRECIO Y CONDICIONES -->
                     <div class="p-5 rounded-xl bg-[#0e1117] border border-white/10 space-y-3">
-                        <div class="flex items-baseline gap-3">
-                            <span class="text-4xl font-black text-white font-mono">$100.000</span>
-                            <span class="text-xs text-gray-400 uppercase tracking-widest font-bold">CLP (IVA Incluido)</span>
+                        <div class="flex items-baseline justify-between">
+                            <div class="flex items-baseline gap-3">
+                                <span class="text-4xl font-black text-white font-mono" x-text="'$' + formatPrice(currentPrice)"></span>
+                                <span class="text-xs text-gray-400 uppercase tracking-widest font-bold">CLP</span>
+                            </div>
+                            <span class="text-xs px-2.5 py-1 rounded bg-orange-500/20 text-orange-400 font-bold" x-text="selectedModel === 'madera' ? 'Madera Noble ($160.000)' : 'Acero 50 cm ($140.000)'"></span>
                         </div>
                         <div class="flex items-center gap-2 text-xs text-emerald-400 font-semibold">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
@@ -467,17 +517,23 @@
                             <span>Garantía Legal de 6 Meses directa conforme a Ley N° 19.496 (SERNAC)</span>
                         </div>
                         <p class="text-[11px] text-gray-400 border-t border-white/5 pt-2">
-                            Incluye quemador quirúrgico con fibra cerámica anti-derrame, herramienta apagadora en acero y piedras decorativas de cuarzo.
+                            Incluye quemador de combustión controlada, carga de piedras de cuarzo y tapa de apagado instantáneo por sofocación.
                         </p>
                     </div>
 
                     <!-- BOTONES DE COMPRA DIRECTA -->
                     <div class="space-y-3 pt-2">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <button @click="buyNow('fogon', 'Fogón Abierto a Bioetanol Ecológico', 100000, '/images/fogon_bioetanol_madera.jpg')" class="btn-metal-orange w-full !text-sm !py-3.5">
+                            <button 
+                                @click="buyNow(selectedModel === 'madera' ? 'fogon_madera' : 'fogon_acero', currentName, currentPrice, currentImg)" 
+                                class="btn-metal-orange w-full !text-sm !py-3.5 cursor-pointer spark-trigger"
+                            >
                                 <span>Comprar Ahora &rarr;</span>
                             </button>
-                            <button @click="addItem('fogon', 'Fogón Abierto a Bioetanol Ecológico', 100000, '/images/fogon_bioetanol_madera.jpg')" class="btn-metal-secondary w-full !text-sm !py-3.5">
+                            <button 
+                                @click="addItem(selectedModel === 'madera' ? 'fogon_madera' : 'fogon_acero', currentName, currentPrice, currentImg)" 
+                                class="btn-metal-secondary w-full !text-sm !py-3.5 cursor-pointer spark-trigger"
+                            >
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                                 </svg>
@@ -485,43 +541,43 @@
                             </button>
                         </div>
 
-                        <a href="https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quiero%20hacer%20el%20pedido%20directo%20del%20Fog%C3%B3n%20a%20Bioetanol%20de%20$100.000" target="_blank" rel="noopener" class="w-full py-3 px-4 rounded-[4px] bg-[#128C7E]/20 border border-[#25D366]/30 hover:border-[#25D366] text-emerald-400 hover:text-white flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider transition-all">
+                        <a :href="'https://wa.me/56954922608?text=Hola%20Metal%20Creativo,%20quiero%20hacer%20el%20pedido%20directo%20del%20' + encodeURIComponent(currentName) + '%20de%20$' + formatPrice(currentPrice)" target="_blank" rel="noopener" class="w-full py-3 px-4 rounded-[4px] bg-[#128C7E]/20 border border-[#25D366]/30 hover:border-[#25D366] text-emerald-400 hover:text-white flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-wider transition-all">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                             </svg>
-                            <span>Comprar directo por WhatsApp con asesor</span>
+                            <span>Comprar directo por WhatsApp con asesor humano</span>
                         </a>
                     </div>
 
-                    <!-- TABLA TÉCNICA MAESTRA (GEO / LLMS / GOOGLE) -->
+                    <!-- TABLA TÉCNICA HONESTA DE TALLER -->
                     <div class="pt-6 border-t border-white/10 space-y-3">
-                        <h3 class="text-xs uppercase tracking-widest font-extrabold text-orange-400">Ficha Técnica y Materiales</h3>
+                        <h3 class="text-xs uppercase tracking-widest font-extrabold text-orange-400">Especificaciones Técnicas del Fogón</h3>
                         <div class="overflow-hidden rounded-lg border border-white/10 text-xs">
                             <table class="w-full text-left">
                                 <tbody class="divide-y divide-white/5">
                                     <tr class="bg-white/[0.02]">
-                                        <th class="py-2.5 px-4 font-semibold text-gray-400 w-1/3">Quemador Principal</th>
-                                        <td class="py-2.5 px-4 text-white font-medium">Acero Inoxidable Quirúrgico AISI 304 anti-derrame</td>
+                                        <th class="py-2.5 px-4 font-semibold text-gray-400 w-1/3">Estructura Base</th>
+                                        <td class="py-2.5 px-4 text-white font-medium">Acero estructural chileno soldado en taller con terminación de alta temperatura</td>
                                     </tr>
                                     <tr>
+                                        <th class="py-2.5 px-4 font-semibold text-gray-400">Bandeja Superior</th>
+                                        <td class="py-2.5 px-4 text-white font-medium" x-text="selectedModel === 'madera' ? 'Madera noble tratada y sellada para intemperie' : 'Perfil y chapa de acero macizo 50 cm'"></td>
+                                    </tr>
+                                    <tr class="bg-white/[0.02]">
+                                        <th class="py-2.5 px-4 font-semibold text-gray-400">Piedras Decorativas</th>
+                                        <td class="py-2.5 px-4 text-white font-medium">Piedras de cuarzo natural de alta inercia térmica</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="py-2.5 px-4 font-semibold text-gray-400">Combustible</th>
+                                        <td class="py-2.5 px-4 text-white font-medium">Bioetanol / Alcohol vegetal desnaturalizado al 96° (Cero humo, cero olor)</td>
+                                    </tr>
+                                    <tr class="bg-white/[0.02]">
                                         <th class="py-2.5 px-4 font-semibold text-gray-400">Autonomía Térmica</th>
-                                        <td class="py-2.5 px-4 text-white font-medium">3.5 a 5.5 horas continuas de fuego por carga</td>
-                                    </tr>
-                                    <tr class="bg-white/[0.02]">
-                                        <th class="py-2.5 px-4 font-semibold text-gray-400">Área de Cobertura</th>
-                                        <td class="py-2.5 px-4 text-white font-medium">25 m² a 45 m² (Calefacción radiante directa)</td>
+                                        <td class="py-2.5 px-4 text-white font-medium">3.5 a 5 horas continuas de llama real por recarga de 1 litro</td>
                                     </tr>
                                     <tr>
-                                        <th class="py-2.5 px-4 font-semibold text-gray-400">Estructura Base</th>
-                                        <td class="py-2.5 px-4 text-white font-medium">Acero termoesmaltado con bandeja de madera noble tratada</td>
-                                    </tr>
-                                    <tr class="bg-white/[0.02]">
-                                        <th class="py-2.5 px-4 font-semibold text-gray-400">Combustible Requerido</th>
-                                        <td class="py-2.5 px-4 text-white font-medium">Bioetanol al 96% (Alcohol ecológico vegetal desnaturalizado)</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="py-2.5 px-4 font-semibold text-gray-400">Seguridad</th>
-                                        <td class="py-2.5 px-4 text-emerald-400 font-bold">Fibra cerámica térmica interna que absorbe el combustible</td>
+                                        <th class="py-2.5 px-4 font-semibold text-gray-400">Mecanismo de Apagado</th>
+                                        <td class="py-2.5 px-4 text-orange-400 font-bold">Tapa obturadora metálica para sofocación inmediata de oxígeno</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -531,8 +587,10 @@
                 </div>
 
             </div>
+        </div>
+    </main>
 
-            <!-- SECCIÓN VENTAJAS BIOETANOL VS LEÑA O GAS -->
+<!-- SECCIÓN VENTAJAS BIOETANOL VS LEÑA O GAS -->
             <section class="mt-20 pt-16 border-t border-white/10">
                 <div class="max-w-4xl mx-auto space-y-10">
                     <div class="text-center space-y-3">
