@@ -334,7 +334,7 @@ function appearanceSource(html) {
 const APPEARANCE_HASHES = {
     "checkout": "efc7f832bebfdb46b472d751ab98fc79d7857f24e61e2873d240ad992f5672e4",
     "checkout-success": "3aacc4010630b6ddf2e4ab978c95e3dec9bab13bf662148cfd8c6a20c8ce93e4",
-    "contacto": "ba1687578ee9f998bec5d81608a1f2efe2861b27d5791c5886a8dfc63880e28a",
+    "contacto": "cd3d28e741d5e0165436065b4d0baf28d5e42bfdf0cefa1699ec86bccdb66c2b",
     "admin": "d1943776db50194eb5309f1b374717f0d5270f0d538588c4d13090f60e994987"
 };
 
