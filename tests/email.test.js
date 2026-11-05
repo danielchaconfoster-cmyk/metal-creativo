@@ -68,6 +68,53 @@ test('email delivery: sendRawEmail safely returns null without network calls whe
   }
 });
 
+test('email delivery: sendRawEmail retries on 500 server error and succeeds on attempt 2', async () => {
+  const originalKey = process.env.RESEND_API_KEY;
+  const originalFetch = global.fetch;
+  let calls = 0;
+  try {
+    process.env.RESEND_API_KEY = 're_test_dummy_key';
+    global.fetch = async () => {
+      calls++;
+      if (calls === 1) {
+        return { ok: false, status: 500, json: async () => ({ message: 'Temporary Server Error' }) };
+      }
+      return { ok: true, status: 200, json: async () => ({ id: 'email-retry-success-123' }) };
+    };
+
+    const res = await sendRawEmail({ to: 'test@domain.cl', subject: 'Retry Test', html: '<b>Test</b>' });
+    assert.equal(calls, 2, 'Must have retried exactly once on 500 error');
+    assert.equal(res.ok, true, 'Result is ok after retry');
+    assert.equal(res.data.id, 'email-retry-success-123');
+  } finally {
+    global.fetch = originalFetch;
+    if (originalKey !== undefined) process.env.RESEND_API_KEY = originalKey;
+    else delete process.env.RESEND_API_KEY;
+  }
+});
+
+test('email delivery: sendRawEmail does NOT retry client 400 bad request error', async () => {
+  const originalKey = process.env.RESEND_API_KEY;
+  const originalFetch = global.fetch;
+  let calls = 0;
+  try {
+    process.env.RESEND_API_KEY = 're_test_dummy_key';
+    global.fetch = async () => {
+      calls++;
+      return { ok: false, status: 400, json: async () => ({ message: 'Invalid email' }) };
+    };
+
+    const res = await sendRawEmail({ to: 'invalid-email', subject: 'Bad Request', html: '<b>Test</b>' });
+    assert.equal(calls, 1, 'Must abort immediately without retry on 400 error');
+    assert.equal(res.ok, false);
+    assert.equal(res.status, 400);
+  } finally {
+    global.fetch = originalFetch;
+    if (originalKey !== undefined) process.env.RESEND_API_KEY = originalKey;
+    else delete process.env.RESEND_API_KEY;
+  }
+});
+
 test('email templates: renders shipping dispatch alert with carrier tracking button', () => {
   const html = renderShippingDispatchHtml({
     order: { order_number: 'MC-2026-5555' },
